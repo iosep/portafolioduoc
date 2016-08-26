@@ -1,0 +1,187 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="6BAD4160-9915-12B5-2C18-2B7A1A72D7C3" name="Competencias">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:02:49 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="C15C95EC-D839-0F83-2DC1-05FF1136BDA8">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:03:08 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>11</dataTypePrecision>
+<ownDataTypeParameters>,11,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="15C7A674-9E74-55A2-DEA9-96DEFF0B4A76">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:03:24 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="descripcion" id="74D64F4B-E394-80CB-0988-12E9C634ABDC">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:04:10 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="89A9CA2B-35BE-57B1-5A4C-029A7E949852">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:25:09 UTC</createdTime>
+<generatorID>C88C1737-0EC2-180E-182D-C477D4ADBE44</generatorID>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<referedAttribute>6367BED4-A65A-C49C-1D35-0993CB4CBDD4</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>11</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="sigla" id="8CE2CE46-A879-89AB-7A70-2BF058F1351E">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:27:58 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="estado" id="CDCB2DF5-BA2E-27C0-4BDC-0AF310F44771">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:28:18 UTC</createdTime>
+<comment>activa, obsoleta</comment>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha_ingreso" id="D97D7378-CD51-C9FA-2BB1-26573002F206">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:39:00 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha_modificacion" id="067C4B54-3611-E44C-1984-DC0EB9A65927">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:39:00 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha_eliminacion" id="106D43AA-49C4-ADAE-0F11-393C0F6D18E7">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:39:00 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ingresado_por" id="CCAC3BBA-E281-34D8-67F4-089394746EDC">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:39:44 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>11</dataTypePrecision>
+<ownDataTypeParameters>,11,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="modificado_por" id="07E0A3F4-5BDE-362E-C703-0FC09E4D9591">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:39:45 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>11</dataTypePrecision>
+<ownDataTypeParameters>,11,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="eliminado_por" id="5F08173F-E883-D9C1-BFDD-BE91EF0E3E36">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:39:45 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>11</dataTypePrecision>
+<ownDataTypeParameters>,11,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="EFA6354D-6269-0571-C2C0-C01A5056EF5A" name="Competencias PK">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:03:22 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>C15C95EC-D839-0F83-2DC1-05FF1136BDA8</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

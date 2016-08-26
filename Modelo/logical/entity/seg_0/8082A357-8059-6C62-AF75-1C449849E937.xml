@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="8082A357-8059-6C62-AF75-1C449849E937" name="Periodos">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:16:56 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="B1FDBB33-B6FC-F69A-55B2-770A4C9BF39A">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:16:56 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>11</dataTypePrecision>
+<ownDataTypeParameters>,11,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="1122C979-3AAC-B355-E07C-29C416332CAD">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:16:56 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha_inicio" id="989768B9-623C-8C53-018F-3C0516F5C34A">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:16:56 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha_fin" id="324093CD-6E34-24FB-4951-214198A82B8A">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:49:33 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="75E7B2AA-7FE1-C4FD-AD95-1E48464099C3" name="Competencias PK">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:16:56 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>B1FDBB33-B6FC-F69A-55B2-770A4C9BF39A</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
