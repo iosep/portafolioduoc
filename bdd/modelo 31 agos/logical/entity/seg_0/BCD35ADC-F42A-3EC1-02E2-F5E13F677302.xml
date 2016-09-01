@@ -1,0 +1,62 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="BCD35ADC-F42A-3EC1-02E2-F5E13F677302" name="Cargo User">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>E8A5C1EA-72B5-1D18-952C-55B2DAF3EF8E</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id usuario" id="EC037C42-1CA3-6ABB-D285-A27D13533491">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>0AC396E1-F589-3C5E-45AD-21EC43275B9E</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id cargo" id="599988F2-3DDE-96D1-63E0-1B622F39971F">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>79BF6B52-72CC-B003-4E28-8C2FC5A23A26</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="D79BBA5E-904C-A012-EF36-27EDB55D0E4A" name="Cargo Usuario PK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>1BFE760F-8DD2-2F8B-B2A9-20BBC8360D6F</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>EC037C42-1CA3-6ABB-D285-A27D13533491</attributeRef>
+<attributeRef>599988F2-3DDE-96D1-63E0-1B622F39971F</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,105 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="2FA51735-0A40-6E1A-6144-2F04F944D74F" name="Res AltPeri">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>6551AC36-B598-62B7-80C8-CE4DFFD86E81</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id respaltern" id="C3407B43-0DD6-83E8-558F-81E13F8FEF16">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>5FA6F47B-E2D8-93EB-C776-094E97BDBF7C</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id respperuser" id="0ECC8CA3-A86B-9B44-79DC-8ED752791D3A">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>A180EBA1-CC04-0F04-C95E-39E3738987BC</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id pregunta" id="FE26726A-1A53-126E-60C3-639C81697A6A">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>47F576D3-6CEB-BC4B-EBE3-DAB71DAE567F</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="alternativa escogida" id="C8FB04D0-904B-AAF6-FD17-DD8DBAB14EA2">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>8BF2B010-E61C-3931-9307-54ADA8A7814F</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Resp PUser id respuser" id="9956ABC8-29B1-8E0A-668F-46DE67244ADF">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>7702304E-090E-0703-6047-E4A98B04E5B1</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<referedAttribute>8867D64D-C965-8C0A-2547-EF85A0E62DFE</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="7DA8E18C-DB6B-A458-0788-501B92265DC9" name="Resp AltPeriodo PK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>8E760CE2-68A5-E3E2-D761-52B2009092F0</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>C3407B43-0DD6-83E8-558F-81E13F8FEF16</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

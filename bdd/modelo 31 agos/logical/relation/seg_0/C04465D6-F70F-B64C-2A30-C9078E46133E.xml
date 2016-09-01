@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Deta_Eval_Cargo_FK" directorySegmentName="seg_0" id="C04465D6-F70F-B64C-2A30-C9078E46133E">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>A7FA81A2-429B-15A9-3A69-D5C342DCF30B</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<sourcePk>6C514577-4F3E-1D4E-72A9-E3F8E35581BD</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>17686EBE-A1D3-8BC6-2F5E-320F8E9660C9</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>DA632610-437D-0B81-5DBC-8291AB429659</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

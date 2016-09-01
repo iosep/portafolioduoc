@@ -1,0 +1,145 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="17686EBE-A1D3-8BC6-2F5E-320F8E9660C9" name="Cargo">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>C374714F-5908-E650-3333-43EFEA76CBBC</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id cargo" id="EB10A4D4-D8CC-73D9-D137-F46FD3612A78">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>EC392F8E-5ABE-878F-C491-8A2E5CB7066B</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>3D361169-DC31-5D94-5E3D-113FDB6FBBBA</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre cargo" id="092EF2F9-B10B-A6D7-61BA-38E11D9028A8">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>C8CE6314-BE1E-2D53-3315-994C4F136C91</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>D0D39CAB-2C07-2DE6-9D90-1BD069168D6E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="descripcion cargo" id="C00546E5-C79D-82F8-F114-E3F65863C205">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>7324C091-2586-493E-A53E-2731F823F2E9</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>D0D39CAB-2C07-2DE6-9D90-1BD069168D6E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="activo" id="F0DEA02C-7706-D702-41E9-A4A18CE90291">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>13DC6407-DB2D-4958-0B34-7B9B81094B2B</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>3D361169-DC31-5D94-5E3D-113FDB6FBBBA</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Usuario id usuario" id="C669E433-AF1F-C67F-7B8F-970E3C29C4B1">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>66E6F019-F133-3E0A-9329-FE4F4B81D1FE</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>3D361169-DC31-5D94-5E3D-113FDB6FBBBA</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Cargo User id usuario" id="1DFDCB9B-E7CC-A237-E707-2E292089254B">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>9819E315-30F0-5F3C-53E3-6A2EC61BBF81</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<referedAttribute>EC037C42-1CA3-6ABB-D285-A27D13533491</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Cargo User id cargo" id="AB080E5C-00AF-5B75-985D-22DA39D746F0">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>9819E315-30F0-5F3C-53E3-6A2EC61BBF81</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<referedAttribute>599988F2-3DDE-96D1-63E0-1B622F39971F</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Encuenta Eval id eval" id="AF31F149-961C-E0CB-E6B6-16F6149EC454">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>F3469832-7076-3793-B4FB-7E52C131B90E</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<referedAttribute>81F5481E-721F-74C9-FAA2-591C8859CD02</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="6C514577-4F3E-1D4E-72A9-E3F8E35581BD" name="Cargo PK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>F07D6188-2841-7AE5-2DEA-27D87C6DDC32</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>EB10A4D4-D8CC-73D9-D137-F46FD3612A78</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

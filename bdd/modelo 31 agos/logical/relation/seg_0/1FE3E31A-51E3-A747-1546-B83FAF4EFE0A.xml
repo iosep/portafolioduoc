@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Peri_Eval_Resp_PUser_FK" directorySegmentName="seg_0" id="1FE3E31A-51E3-A747-1546-B83FAF4EFE0A">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>7FED1BF9-95C7-5848-B5A6-E8E219FC86AE</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<sourcePk>9A661C31-4CC1-DF42-4AAA-75784DD2D88D</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>3F34BDD5-F4F6-E45A-2390-EC1AAFF649E3</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>754C3086-EF5B-FCB4-DA58-A9108D8643E2</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

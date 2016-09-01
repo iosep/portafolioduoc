@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_26" directorySegmentName="seg_0" id="8315FA48-5E1B-413F-452F-96CBE5625AE6">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-01 00:04:07 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>*</sourceCardinality>
+<sourceEntity>17686EBE-A1D3-8BC6-2F5E-320F8E9660C9</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>46C93EB8-C643-5808-6A97-4BEC41D27A8B</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

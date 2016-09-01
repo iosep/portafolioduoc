@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="Perfil_Menu" directorySegmentName="seg_0" id="C06BA7A1-9A30-EF56-820D-3BC91F87D3DA">
+<createdBy>Felipe</createdBy>
+<createdTime>2016-08-31 02:58:07 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="Menu_id_menu" id="1D0FF17D-2ED3-2E17-3134-8EF9183540E1">
+<createdBy>Felipe</createdBy>
+<createdTime>2016-08-31 02:58:07 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="id_perfil" id="45E057D2-9BAF-B94D-8EAB-EF12F22F640B">
+<createdBy>Felipe</createdBy>
+<createdTime>2016-08-31 02:58:07 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="id_menu" id="74E5E214-04D0-B9F7-4128-8935FC8B58DE">
+<createdBy>Felipe</createdBy>
+<createdTime>2016-08-31 02:58:07 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Perfil_id_perfil" id="CC16BB7C-23B8-722F-DE3F-6F159E7D658C">
+<createdBy>Felipe</createdBy>
+<createdTime>2016-08-31 02:58:07 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="Perfil_Menu_Menu_FK" id="075BA623-608B-9FF2-4B4C-6EB3D9FAEB16">
+<createdBy>Felipe</createdBy>
+<createdTime>2016-08-31 02:58:07 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="Perfil_Menu_Perfil_FK" id="3FF545BA-8830-FAE2-AD07-38B953BC6095">
+<createdBy>Felipe</createdBy>
+<createdTime>2016-08-31 02:58:07 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="Perfil_Menu_PK" id="3C146242-C916-ACB1-8591-9D25C02751AB">
+<createdBy>Felipe</createdBy>
+<createdTime>2016-08-31 02:58:07 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

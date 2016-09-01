@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Pregunta_Competencia_FK" directorySegmentName="seg_0" id="4912A6B5-963B-CDC5-278B-E34BF5CA8C45">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>0F2D36A3-FECD-B292-ED1C-42BA6D6BC5DF</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<sourcePk>DF5062C8-4757-BEFA-C9E9-B08288E3D15C</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>46C93EB8-C643-5808-6A97-4BEC41D27A8B</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>1241ED18-CF74-35E1-F800-E04FC4C480EC</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
