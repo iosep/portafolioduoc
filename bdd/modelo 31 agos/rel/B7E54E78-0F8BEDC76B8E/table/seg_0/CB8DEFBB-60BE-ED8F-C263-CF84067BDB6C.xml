@@ -1,0 +1,114 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CB8DEFBB-60BE-ED8F-C263-CF84067BDB6C" name="Peri_Eval">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 19:57:50 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<ordsAlias>table_23</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_peval" id="42A7BA5C-2074-1AFA-8EF7-2B63F33B933A">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 20:00:02 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_inicio" id="20880651-8472-C741-CDBD-2C3443687241">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 20:00:02 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_termino" id="FFCE6113-7117-88D8-3B87-4B83659E23FC">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 20:00:02 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="porc_autoevaluacion" id="6F255CAF-3B52-B396-B76D-DBEB81BC845E">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 20:00:02 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT022</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="por_evaljefe" id="1FFD53B9-FABE-8E2B-8EBE-C4825CB463C6">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 20:00:02 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT022</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="activo" id="DABC5B47-0680-05C5-2A6C-71DDF8F32B68">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 20:00:02 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Resp_PUser_id_respuser" id="2B4A4581-0FEA-B6D4-3A48-06D4D2D836C0">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 20:50:50 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7FED1BF9-95C7-5848-B5A6-E8E219FC86AE" referredColumn="1DDB973B-D599-AE4C-9BC9-635E888F0141"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8792C728-E74B-5C47-2E61-0300D02CEC83" name="Periodo_Evaluacion_PK">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 20:00:02 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="42A7BA5C-2074-1AFA-8EF7-2B63F33B933A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="897A4067-04E2-0514-CF0B-900D3A7E6A56" name="Peri_Eval_Resp_PUser_FK">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 20:50:50 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2B4A4581-0FEA-B6D4-3A48-06D4D2D836C0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

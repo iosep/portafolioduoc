@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Competencia_Nivel_FK" directorySegmentName="seg_0" id="AC1B3352-78BF-1C16-B213-777E2CAA644C">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>CC2E0E2D-A203-587B-017A-FE844B06C83E</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<sourcePk>61E5634A-F62D-ABC2-AC3E-36AB86ED793F</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>C1C5858E-E030-D25A-4C99-15D6E2205522</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>46C93EB8-C643-5808-6A97-4BEC41D27A8B</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
