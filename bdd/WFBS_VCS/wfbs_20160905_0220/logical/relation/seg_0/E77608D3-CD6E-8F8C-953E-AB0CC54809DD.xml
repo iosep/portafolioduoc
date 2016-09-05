@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="evalua_parametros_evalua_FK" directorySegmentName="seg_0" id="E77608D3-CD6E-8F8C-953E-AB0CC54809DD">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:26:54 UTC</createdTime>
+<generatorID>7E7E400F-583D-166D-7C36-0E4AC6E0F6ED</generatorID>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<engineerTo>
+<item key="3C917980-8C49-7084-A8F0-7EA266EB48D2" value="true"/>
+</engineerTo>
+<sourcePk>1F7DC57A-C8A7-E5EF-F7DB-9E837A0204D2</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>7BFA7BA7-D651-FF21-5341-3372831D7C27</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>1E7A7000-6164-3D70-24B6-FCC4076F21FB</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

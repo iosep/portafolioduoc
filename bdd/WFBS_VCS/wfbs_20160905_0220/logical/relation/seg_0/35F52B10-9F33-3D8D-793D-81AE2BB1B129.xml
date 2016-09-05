@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="usuario_encuesta_detalle_encuesta_detalle_FK" directorySegmentName="seg_0" id="35F52B10-9F33-3D8D-793D-81AE2BB1B129">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:26:54 UTC</createdTime>
+<generatorID>080299DB-D488-0AEE-2AED-648A524879AF</generatorID>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<engineerTo>
+<item key="3C917980-8C49-7084-A8F0-7EA266EB48D2" value="true"/>
+</engineerTo>
+<sourcePk>BBD13521-523F-9AF7-B787-15E757879261</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>17BC9B37-E04E-B586-2CFE-A8DBD3E10B43</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>FDE294E8-0740-72D2-0D19-40F288895589</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

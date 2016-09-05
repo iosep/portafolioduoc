@@ -1,0 +1,181 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="76CF6CE1-358E-8613-3723-737C3A129EF3" name="evalua">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:41:24 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<ordsAlias>table_18</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="BD0EF273-CE55-D53A-41A6-826556F2617F">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:42:10 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="usuario_encuesta_id" id="667C4DC5-5361-8D3D-71BB-310171306106">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:43:29 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D00C2E5C-2A84-6B8D-12B7-6C93060C0E81" referredColumn="C058C225-A8A1-84D7-5D11-1588F36CC09E"/>
+</associations>
+</Column>
+<Column name="parametros_evalua_id" id="C584E18D-6DB9-D52D-CF65-B6E942BDC27D">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:50:26 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7E7E400F-583D-166D-7C36-0E4AC6E0F6ED" referredColumn="4AC649C4-E657-9365-2696-B6E0B7892E5D"/>
+</associations>
+</Column>
+<Column name="total_usuario" id="E6F8D1BE-2E05-E01C-36AE-C626C0687013">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 17:31:07 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="total_jefe" id="3F8079F5-1910-86FB-0C6C-0D05C2A46D4E">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 17:31:23 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="promedio_usuario" id="F50EB314-9F84-39EB-C323-26DBA334D24D">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 18:00:09 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="promedio_jefe" id="18E0FA84-733B-7A87-807D-CCA0838B63B0">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 18:00:21 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="total_evalua" id="4D994D76-A432-9172-4C0A-685E941E339F">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:02:33 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="activo" id="B781FEF7-B14D-085A-1480-1AFFA75E62BA">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:02:55 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>1 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="creado" id="EB2E0B02-AE73-54CA-5492-A928C1AC1280">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:02:55 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="modificado" id="39615D96-CDDD-8D53-7F3C-D2B116297978">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:02:55 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="desactivado" id="98FDC91B-7A6A-1D93-350D-63A37EC42C96">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:02:55 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3290F21E-99D6-423D-18AA-0089C2C2247D" name="evalua_PK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:42:10 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BD0EF273-CE55-D53A-41A6-826556F2617F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9F7FAE2B-15C8-ECA4-19FF-0DB4DEBE2815" name="evalua_usuario_encuesta_FK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:44:34 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="667C4DC5-5361-8D3D-71BB-310171306106"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="06B51757-9169-A7E3-28E2-7DF88ED91C27" name="evalua_parametros_evalua_FK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:58:44 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C584E18D-6DB9-D52D-CF65-B6E942BDC27D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
