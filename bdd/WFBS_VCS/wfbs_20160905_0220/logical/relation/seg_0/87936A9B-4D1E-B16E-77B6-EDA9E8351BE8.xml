@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="competencia_nivel_nivel_FK" directorySegmentName="seg_0" id="87936A9B-4D1E-B16E-77B6-EDA9E8351BE8">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:26:54 UTC</createdTime>
+<generatorID>9EA8CFA5-85A9-6538-2E51-D59DFF9DACA8</generatorID>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<engineerTo>
+<item key="3C917980-8C49-7084-A8F0-7EA266EB48D2" value="true"/>
+</engineerTo>
+<sourcePk>AE2AC25F-BFF8-84CD-3389-00860A519E4D</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>1D43C098-E4ED-B5FC-0276-DCA9985FFD8D</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>32F108A7-A6A9-5801-1330-3CA8E634F8C7</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
