@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 4.1.3.901
---   en:        2016-09-07 12:56:20 BRT
+--   en:        2016-09-07 13:05:59 BRT
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -146,7 +146,6 @@ CREATE TABLE evaluacion
   (
     id                   INTEGER NOT NULL ,
     encuesta_asignada_id INTEGER NOT NULL ,
-    parametros_evalua_id INTEGER NOT NULL ,
     total_usuario        INTEGER ,
     total_jefe           INTEGER ,
     promedio_usuario     INTEGER ,

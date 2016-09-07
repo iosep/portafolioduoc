@@ -32,16 +32,6 @@
 <colAssociation fkAssociation="D00C2E5C-2A84-6B8D-12B7-6C93060C0E81" referredColumn="C058C225-A8A1-84D7-5D11-1588F36CC09E"/>
 </associations>
 </Column>
-<Column name="parametros_evalua_id" id="C584E18D-6DB9-D52D-CF65-B6E942BDC27D">
-<createdBy>duoc</createdBy>
-<createdTime>2016-09-05 03:50:26 UTC</createdTime>
-<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 <Column name="total_usuario" id="E6F8D1BE-2E05-E01C-36AE-C626C0687013">
 <createdBy>duoc</createdBy>
 <createdTime>2016-09-05 17:31:07 UTC</createdTime>
