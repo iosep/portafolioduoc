@@ -24,8 +24,8 @@ public class LoginModel {
         ResultSet rs = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            con = DriverManager.getConnection("jdbc:oracle:thin:WFBS/wfbs@localhost");
-            stmt = con.prepareStatement("SELECT clave, id FROM usuario WHERE email = ?");
+            con = DriverManager.getConnection("jdbc:oracle:thin:dotnet/dotnet@localhost");
+            stmt = con.prepareStatement("SELECT password, id_usuario FROM usuario WHERE nombre = ?");
             stmt.setString(1, usuario);
             rs = stmt.executeQuery();
             if (!rs.next()) {
