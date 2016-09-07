@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 4.1.3.901
---   en:        2016-09-06 23:35:01 BRT
+--   en:        2016-09-07 07:13:55 BRT
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -230,7 +230,7 @@ CREATE TABLE usuario
     apaterno    VARCHAR2 (255 CHAR) ,
     amaterno    VARCHAR2 (255 CHAR) ,
     nombres     VARCHAR2 (255 CHAR) ,
-    sexo_id     INTEGER ,
+    sexo_id     INTEGER NOT NULL ,
     direccion   VARCHAR2 (255 CHAR) ,
     fonoa       INTEGER ,
     fonob       INTEGER ,
@@ -300,7 +300,7 @@ ALTER TABLE encuesta_asignada ADD CONSTRAINT usuario_encuesta_usuario_FK FOREIGN
 
 ALTER TABLE usuario ADD CONSTRAINT usuario_rol_FK FOREIGN KEY ( rol_id ) REFERENCES rol ( id ) ;
 
-ALTER TABLE usuario ADD CONSTRAINT usuario_sexol_FK FOREIGN KEY ( rut ) REFERENCES sexo ( id ) ;
+ALTER TABLE usuario ADD CONSTRAINT usuario_sexol_FK FOREIGN KEY ( sexo_id ) REFERENCES sexo ( id ) ;
 
 ALTER TABLE usuario ADD CONSTRAINT usuario_usuario_FK FOREIGN KEY ( jefe ) REFERENCES usuario ( id ) ;
 
