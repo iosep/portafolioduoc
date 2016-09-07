@@ -1,0 +1,162 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="EAA48108-7BFF-9A43-68B0-A1EAA4DD87B3" name="encuesta_asignada">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:54:13 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<ordsAlias>table_16</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="C058C225-A8A1-84D7-5D11-1588F36CC09E">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:54:32 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="usuario_id" id="58D8003E-BB7D-121A-F42E-95C633C26601">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:55:10 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0BA8A12E-A23A-73F2-95F1-5B3B64759C8C" referredColumn="1259B01B-DC68-5383-5794-9FBC6CE4E68B"/>
+</associations>
+</Column>
+<Column name="encuesta_id" id="41E5ED53-9CBA-F4A3-D0BD-EB8414B84BB9">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:55:24 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F7D52F6F-91C4-63DB-C1CF-C36F2FEB743C" referredColumn="7E9ACA34-24BD-BEAF-6487-40551F53EFCD"/>
+</associations>
+</Column>
+<Column name="vigente" id="FC109F7E-4F45-330E-A975-A7F41611C9C1">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:05:07 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1 BYTE</dataTypeSize>
+<ownDataTypeParameters>1 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="periodo_pondera_id" id="49D15777-36F2-0F8B-3231-B5884B5AEBD9">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-07 15:29:47 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.0</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8D1B4815-662D-BF18-7DB5-33537E91DE89" referredColumn="4AC649C4-E657-9365-2696-B6E0B7892E5D"/>
+</associations>
+</Column>
+<Column name="activo" id="C7B5D9C1-0BCA-7AA5-2F46-3A34993ED78D">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 06:00:01 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>1 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="creado" id="779C5AD4-77B3-58ED-50FB-9B680D92F1B8">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 06:00:01 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="modificado" id="40C35AC5-980B-9342-D526-6FE435F34173">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 06:00:01 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="desactivado" id="1C270945-B039-9E4E-9661-BDA3CE43FB9F">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 06:00:01 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="28162C99-6846-4016-4E67-68E1447D73B1" name="encuesta_asignada_PK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:54:32 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C058C225-A8A1-84D7-5D11-1588F36CC09E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C35146C8-401F-2868-2BDE-988EE0DBA7A1" name="encuesta_usuarios_FK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-31 15:47:14 UTC</createdTime>
+<ownerDesignName>modelo_20160829</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="58D8003E-BB7D-121A-F42E-95C633C26601"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5E169D3E-92D4-2CA9-E9AC-CF0FF0E99FB4" name="usuario_encuesta_FK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-31 15:47:26 UTC</createdTime>
+<ownerDesignName>modelo_20160829</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="41E5ED53-9CBA-F4A3-D0BD-EB8414B84BB9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F31ECA00-72B6-4858-0091-693B4B3EDED2" name="periodo_pondera_FK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-07 15:39:10 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.0</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="49D15777-36F2-0F8B-3231-B5884B5AEBD9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
