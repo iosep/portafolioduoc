@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package WFBSmodel;
+package Model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,26 +13,33 @@ import java.sql.SQLException;
 
 /**
  *
- * @author iosep
+ * @author GRUPO2
  */
-public class UsuarioModel {
+public class LoginModel {
 
-    @SuppressWarnings("null")
-    public boolean findUserPass(String un, String pass) {
-        boolean bul = false;
+    public int userLogin(String usuario, String password) {
+        int userId = 0;
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            con = DriverManager.getConnection("jdbc:oracle:thin:iosep/iosep@localhost");
-            stmt = con.prepareStatement("SELECT password FROM usuario WHERE username = ?");
-            stmt.setString(1, un);
+            con = DriverManager.getConnection("jdbc:oracle:thin:WFBS/wfbs@localhost");
+            stmt = con.prepareStatement("SELECT clave, id FROM usuario WHERE email = ?");
+            stmt.setString(1, usuario);
             rs = stmt.executeQuery();
-            while (rs.next()) {
-                System.out.println(rs.getString(1));
-                if (rs.getString(1).equals(pass)) {
-                    bul = true;
+            if (!rs.next()) {
+                System.out.println("No hay datos");
+                stmt.close();
+                con.close();
+                return userId;
+            } else {
+                rs = stmt.executeQuery();
+                while (rs.next()) {
+                    System.out.println(rs.getString(1));
+                    if (rs.getString(1).equals(password)) {
+                        userId = rs.getInt(2);
+                    }
                 }
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -46,6 +53,7 @@ public class UsuarioModel {
                 System.out.println(e.getMessage());
             }
         }
-        return bul;
+        return userId;
     }
+
 }
