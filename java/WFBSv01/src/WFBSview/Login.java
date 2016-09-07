@@ -8,6 +8,7 @@ package WFBSview;
 import WFBScontroller.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+
 /**
  *
  * @author iosep
@@ -15,6 +16,7 @@ import java.awt.Toolkit;
 public class Login extends javax.swing.JFrame {
 
     private final UsuarioController control;
+
     /**
      * Creates new form Login
      */
@@ -41,6 +43,8 @@ public class Login extends javax.swing.JFrame {
         password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("WFBS Evaluaciones");
+        setPreferredSize(new java.awt.Dimension(555, 333));
 
         jLabel1.setText("LOGIN");
 
@@ -121,8 +125,11 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here
         if (control.login(username.getText(), password.getText())) {
             mensaje.setText("Login Correcto");
-        }
-        else {
+            HomeAdmin admin = new HomeAdmin();
+            admin.setVisible(true);
+            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+            admin.setLocation(dim.width / 2 - admin.getSize().width / 2, dim.height / 2 - admin.getSize().height / 2);
+        } else {
             mensaje.setText("Login Incorrecto");
         }
         username.setText("");
