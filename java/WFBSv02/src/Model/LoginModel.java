@@ -29,16 +29,15 @@ public class LoginModel {
             stmt.setString(1, usuario);
             rs = stmt.executeQuery();
             if (!rs.next()) {
-                System.out.println("No hay datos");
+                System.out.println("Sin coincidencias");
                 stmt.close();
                 con.close();
                 return userId;
             } else {
                 rs = stmt.executeQuery();
                 while (rs.next()) {
-                    System.out.println(rs.getString(1));
-                    if (rs.getString(1).equals(password)) {
-                        userId = rs.getInt(2);
+                    if (rs.getString(1).equals(password)) {//password
+                        userId = rs.getInt(2);//id_usuario
                     }
                 }
             }
