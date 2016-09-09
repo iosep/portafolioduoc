@@ -65,7 +65,7 @@ public class AdminMainJFrame extends javax.swing.JFrame {
 
         jMenu2exit.setText("Exit");
 
-        jMenuItem1salir.setText("Cerrar Aplicación");
+        jMenuItem1salir.setText("Cerrar Sesión");
         jMenuItem1salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1salirActionPerformed(evt);
@@ -97,6 +97,9 @@ public class AdminMainJFrame extends javax.swing.JFrame {
 
     private void jMenuItem1salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1salirActionPerformed
         // TODO add your handling code here:
+        //dispose();
+        LoginJFrame login = new LoginJFrame();
+        login.setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem1salirActionPerformed
 
