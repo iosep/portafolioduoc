@@ -77,18 +77,16 @@
 <ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="sexo_id" id="9BAF23AA-71CC-7EE4-D089-B4B5836D63B9">
+<Column name="sexo" id="9BAF23AA-71CC-7EE4-D089-B4B5836D63B9">
 <createdBy>duoc</createdBy>
 <createdTime>2016-08-30 04:24:38 UTC</createdTime>
 <ownerDesignName>modelo_20160830</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>1 CHAR,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="AD1C4DFF-5A41-1FA8-335D-08D44D4B5995" referredColumn="128671ED-0193-69DF-4329-C95B84F46E35"/>
-</associations>
 </Column>
 <Column name="direccion" id="0E2FD4FE-845F-51D8-1714-6EEA308A4163">
 <createdBy>duoc</createdBy>
@@ -232,17 +230,7 @@
 <colUsage columnID="1259B01B-DC68-5383-5794-9FBC6CE4E68B"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="8E2D20EF-0193-D9E2-8394-70C206F81253" name="usuario_sexol_FK">
-<createdBy>duoc</createdBy>
-<createdTime>2016-08-30 04:38:02 UTC</createdTime>
-<ownerDesignName>modelo_20160830</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="9BAF23AA-71CC-7EE4-D089-B4B5836D63B9"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="50D943CD-EDE8-472A-09C5-BBAC14C31605" name="usuario_usuario_FK">
+<ind_PK_UK id="50D943CD-EDE8-472A-09C5-BBAC14C31605" name="usuario_sexol_FK">
 <createdBy>duoc</createdBy>
 <createdTime>2016-08-30 04:41:55 UTC</createdTime>
 <ownerDesignName>modelo_20160830</ownerDesignName>

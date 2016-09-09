@@ -1,0 +1,150 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B2EB2982-A016-0114-F812-50522F4EC3FD" name="competencia_nivel">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:05:47 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<ordsAlias>table_11</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="DF6FC909-AB64-5F89-2FAC-40887CC9BFD3">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:56:36 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="competencia_id" id="A9143F1C-C759-2C0A-733C-5BFDCCDD01CF">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:57:00 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="64FDAA3F-3D47-80D6-6156-148A6F2B0E7C" referredColumn="BCB881E4-41BB-0B98-8B24-A3EC6185D339"/>
+</associations>
+</Column>
+<Column name="nivel_id" id="C344AF08-2BFC-0ED3-FFEF-37FC37734E10">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:57:16 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9EA8CFA5-85A9-6538-2E51-D59DFF9DACA8" referredColumn="6A2BA735-B1C7-76B5-012A-9B55AA755FAE"/>
+</associations>
+</Column>
+<Column name="definicion_nivel" id="46B6BD08-61DA-3D34-9D52-DD6D673548ED">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 18:54:44 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="comentario" id="A6AFC1F1-24F7-0E45-AE90-35FA8CC5E646">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:10:59 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="activo" id="669A23CB-C9E1-D283-A77B-D6318BA168AB">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:57:23 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>1 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="creado" id="ABE64728-54A7-6E07-802B-92C5F76D34B8">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:57:23 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="modificado" id="B8B5BB1C-3F1D-5537-05E8-FD40625CEFBF">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:57:23 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="desactivado" id="FEFB8AF7-936E-80C1-AA8B-E23CE1E2AAB3">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:57:23 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="5E32CFB0-6F46-A6E7-D27A-7F7330EFFD27" name="competencia_nivel_PK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:56:36 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DF6FC909-AB64-5F89-2FAC-40887CC9BFD3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="854C1B73-B631-4EE2-8BF0-D7E7B7D7AFFE" name="competencia_nivel_FK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:57:38 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A9143F1C-C759-2C0A-733C-5BFDCCDD01CF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="715F51C2-5B32-0B6B-4F6B-160F1B4C5EA4" name="nivel_competencia_FK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:57:46 UTC</createdTime>
+<ownerDesignName>modelo_20160830</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C344AF08-2BFC-0ED3-FFEF-37FC37734E10"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

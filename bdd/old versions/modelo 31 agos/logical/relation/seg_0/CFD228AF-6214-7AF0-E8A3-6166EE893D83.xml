@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Pregunta_Res_AltPeri_FK" directorySegmentName="seg_0" id="CFD228AF-6214-7AF0-E8A3-6166EE893D83">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>2AF30334-3914-26B7-FCBE-18DABA236876</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<sourcePk>7DA8E18C-DB6B-A458-0788-501B92265DC9</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>2FA51735-0A40-6E1A-6144-2F04F944D74F</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>1241ED18-CF74-35E1-F800-E04FC4C480EC</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

@@ -1,0 +1,4 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.relational.RelationalDesign>
+   <object objectType="main_view" objectID="F66A72D5-9F7E-D3DC-667E-6CAC4B73B8CE" name="WFBS" visible="true"/>
+</oracle.dbtools.crest.model.design.relational.RelationalDesign>

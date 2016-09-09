@@ -1,0 +1,70 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="16DBD06F-CBC9-138B-77EC-7679EF185317" name="Encuesta_Detal">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 19:49:13 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<ordsAlias>table_22</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_eval" id="F295203B-4636-37B3-54A7-03731786B559">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 19:50:11 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_detaleval" id="C085A419-24D5-7C62-C96C-00AD0AD6339E">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 19:50:11 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Encues_Eval_id_eval" id="958C6710-4190-5EA2-4EEB-94EAD1D41334">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 20:48:52 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E715B8D0-5112-A177-639C-8C4257E98FC2" referredColumn="1E0D7B58-1F92-6398-6485-34970FAC3DD9"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2ED35B24-A8AD-77C7-4C1F-802A00810EDE" name="Encuesta_Detalle_PK">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 19:50:11 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F295203B-4636-37B3-54A7-03731786B559"/>
+<colUsage columnID="C085A419-24D5-7C62-C96C-00AD0AD6339E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5DD07AC5-6F1E-F6BB-B015-37065509E5BB" name="Encuesta_Detal_Encues_Eval_FK">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 20:48:52 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="958C6710-4190-5EA2-4EEB-94EAD1D41334"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

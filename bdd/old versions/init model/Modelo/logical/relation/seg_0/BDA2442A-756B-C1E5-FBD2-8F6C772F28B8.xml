@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Competencia_nivel" directorySegmentName="seg_0" id="BDA2442A-756B-C1E5-FBD2-8F6C772F28B8">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:14:06 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>*</sourceCardinality>
+<sourceEntity>97C1BB30-FCBA-6505-5E1E-70B1A3AF34F3</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>6BAD4160-9915-12B5-2C18-2B7A1A72D7C3</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

@@ -1,0 +1,70 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E8A5C1EA-72B5-1D18-952C-55B2DAF3EF8E" name="Cargo_User">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 19:23:05 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<ordsAlias>table_17</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_usuario" id="0AC396E1-F589-3C5E-45AD-21EC43275B9E">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 19:23:37 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_cargo" id="79BF6B52-72CC-B003-4E28-8C2FC5A23A26">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 19:23:37 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Usuario_id_usuario" id="17492F65-7E09-CF6E-CD1E-D929DADD09BA">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 20:36:04 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>3D361169-DC31-5D94-5E3D-113FDB6FBBBA</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="5F56ABE0-C3A7-0F8D-CD2E-05E263215506" referredColumn="2918512A-C870-27D4-E0CF-6CED741C6246"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1BFE760F-8DD2-2F8B-B2A9-20BBC8360D6F" name="Cargo_Usuario_PK">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 19:23:37 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0AC396E1-F589-3C5E-45AD-21EC43275B9E"/>
+<colUsage columnID="79BF6B52-72CC-B003-4E28-8C2FC5A23A26"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B86993D5-8513-88FB-A964-DCB022EAD818" name="Cargo_User_Usuario_FK">
+<createdBy>maria.arias</createdBy>
+<createdTime>2016-08-31 20:36:04 UTC</createdTime>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="17492F65-7E09-CF6E-CD1E-D929DADD09BA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

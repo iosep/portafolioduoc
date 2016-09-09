@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Usuario_Encuesta" directorySegmentName="seg_0" id="DE4ECAD0-7D82-2538-161A-324612E4ACD2">
+<createdBy>cetecom</createdBy>
+<createdTime>2016-08-16 23:48:04 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="FB7C77CF-B57D-5D64-EC65-946CC01C3528" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>*</sourceCardinality>
+<sourceEntity>4F7656AF-7491-B998-10AE-5FE0B5EBCE2C</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>0C8570EC-0479-BB3A-1321-DACC18C7B5DA</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

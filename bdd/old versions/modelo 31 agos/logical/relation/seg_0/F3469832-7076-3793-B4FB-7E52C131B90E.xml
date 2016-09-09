@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Cargo_Encuenta_Eval_FK" directorySegmentName="seg_0" id="F3469832-7076-3793-B4FB-7E52C131B90E">
+<createdBy>iosep</createdBy>
+<createdTime>2016-08-31 23:40:06 UTC</createdTime>
+<generatorID>D7052466-F727-DC63-CAE3-983561D7D999</generatorID>
+<ownerDesignName>modelo 31 agos</ownerDesignName>
+<engineerTo>
+<item key="B7E54E78-422C-60E3-C7B6-0F8BEDC76B8E" value="true"/>
+</engineerTo>
+<sourcePk>ADDB0752-6148-7C63-5BEB-1601F27E4EF4</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>A1795A81-0B95-D0F2-931F-253E097169DD</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>17686EBE-A1D3-8BC6-2F5E-320F8E9660C9</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

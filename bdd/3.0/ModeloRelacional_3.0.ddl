@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 4.1.3.901
---   en:        2016-09-07 13:05:59 BRT
+--   en:        2016-09-08 15:59:42 BRT
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -231,12 +231,6 @@ CREATE TABLE rol
 ALTER TABLE rol ADD CONSTRAINT rol_PK PRIMARY KEY ( id ) ;
 
 
-CREATE TABLE sexo
-  ( id INTEGER NOT NULL , sexo CHAR (1 CHAR)
-  ) ;
-ALTER TABLE sexo ADD CONSTRAINT sexo_PK PRIMARY KEY ( id ) ;
-
-
 CREATE TABLE usuario
   (
     id          INTEGER NOT NULL ,
@@ -245,7 +239,7 @@ CREATE TABLE usuario
     apaterno    VARCHAR2 (255 CHAR) ,
     amaterno    VARCHAR2 (255 CHAR) ,
     nombres     VARCHAR2 (255 CHAR) ,
-    sexo_id     INTEGER NOT NULL ,
+    sexo        CHAR (1 CHAR) NOT NULL ,
     direccion   VARCHAR2 (255 CHAR) ,
     fonoa       INTEGER ,
     fonob       INTEGER ,
@@ -301,9 +295,7 @@ ALTER TABLE encuesta_asignada ADD CONSTRAINT usuario_encuesta_FK FOREIGN KEY ( e
 
 ALTER TABLE usuario ADD CONSTRAINT usuario_rol_FK FOREIGN KEY ( rol_id ) REFERENCES rol ( id ) ;
 
-ALTER TABLE usuario ADD CONSTRAINT usuario_sexol_FK FOREIGN KEY ( sexo_id ) REFERENCES sexo ( id ) ;
-
-ALTER TABLE usuario ADD CONSTRAINT usuario_usuario_FK FOREIGN KEY ( jefe ) REFERENCES usuario ( id ) ;
+ALTER TABLE usuario ADD CONSTRAINT usuario_sexol_FK FOREIGN KEY ( jefe ) REFERENCES usuario ( id ) ;
 
 CREATE SEQUENCE area_id_SEQ START WITH 1 NOCACHE ORDER ;
 CREATE OR REPLACE TRIGGER area_id_TRG BEFORE
@@ -401,12 +393,6 @@ CREATE OR REPLACE TRIGGER rol_id_TRG BEFORE
 END;
 /
 
-CREATE SEQUENCE sexo_id_SEQ START WITH 1 NOCACHE ORDER ;
-CREATE OR REPLACE TRIGGER sexo_id_TRG BEFORE
-  INSERT ON sexo FOR EACH ROW WHEN (NEW.id IS NULL) BEGIN :NEW.id := sexo_id_SEQ.NEXTVAL;
-END;
-/
-
 CREATE SEQUENCE usuario_id_SEQ START WITH 1 NOCACHE ORDER ;
 CREATE OR REPLACE TRIGGER usuario_id_TRG BEFORE
   INSERT ON usuario FOR EACH ROW WHEN (NEW.id IS NULL) BEGIN :NEW.id := usuario_id_SEQ.NEXTVAL;
@@ -416,16 +402,16 @@ END;
 
 -- Informe de Resumen de Oracle SQL Developer Data Modeler: 
 -- 
--- CREATE TABLE                            18
+-- CREATE TABLE                            17
 -- CREATE INDEX                             0
--- ALTER TABLE                             40
+-- ALTER TABLE                             38
 -- CREATE VIEW                              0
 -- ALTER VIEW                               0
 -- CREATE PACKAGE                           0
 -- CREATE PACKAGE BODY                      0
 -- CREATE PROCEDURE                         0
 -- CREATE FUNCTION                          0
--- CREATE TRIGGER                          18
+-- CREATE TRIGGER                          17
 -- ALTER TRIGGER                            0
 -- CREATE COLLECTION TYPE                   0
 -- CREATE STRUCTURED TYPE                   0
@@ -438,7 +424,7 @@ END;
 -- CREATE DISK GROUP                        0
 -- CREATE ROLE                              0
 -- CREATE ROLLBACK SEGMENT                  0
--- CREATE SEQUENCE                         18
+-- CREATE SEQUENCE                         17
 -- CREATE MATERIALIZED VIEW                 0
 -- CREATE SYNONYM                           0
 -- CREATE TABLESPACE                        0

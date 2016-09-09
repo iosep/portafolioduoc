@@ -1,0 +1,126 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A8BB66AB-7434-F502-0164-35841BCE164F" name="cargo">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:01:20 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<ordsAlias>table_14</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="22C8EF75-0267-8F55-7802-C8791DDB89F2">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:01:36 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="usuario_id" id="07E3F5C2-8549-818F-6D19-2C00FDECCD5A">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:02:27 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D9477148-59E7-5D6A-23BD-712A2900E445" referredColumn="1259B01B-DC68-5383-5794-9FBC6CE4E68B"/>
+</associations>
+</Column>
+<Column name="area_id" id="E89BDC70-7696-1BE8-770E-BEE9A6CA8FBE">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:02:27 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9A32248C-652D-89B7-AE69-6E3033564C3C" referredColumn="59B4A32F-1E1C-725B-93F7-FE00423BF827"/>
+</associations>
+</Column>
+<Column name="activo" id="CB0BB65A-06B8-437D-4A8C-EB3071F9164D">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:04:58 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>1 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="creado" id="CD4F5E59-44FD-1735-0370-7BDAE745871F">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:04:58 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="modificado" id="0E8434B1-2605-B334-80AD-97BCE6FB7545">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:04:58 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="desactivado" id="1AC9E681-8200-BE87-D8ED-7D42470D4C05">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:04:58 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2F3BDFD9-E5DF-9F29-1F82-05F66915F124" name="cargo_PK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:01:49 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="22C8EF75-0267-8F55-7802-C8791DDB89F2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C5E61DBC-DFAE-4CC1-E7A5-487BAF8A1B5D" name="cargo_usuario_FK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:07:14 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="07E3F5C2-8549-818F-6D19-2C00FDECCD5A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C7EDE567-10E7-5795-9C4F-E6C3C7CCBDC4" name="cargo_area_FK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 03:07:32 UTC</createdTime>
+<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E89BDC70-7696-1BE8-770E-BEE9A6CA8FBE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
