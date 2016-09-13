@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 4.1.3.901
---   en:        2016-09-08 15:59:42 BRT
+--   en:        2016-09-13 00:53:15 BRT
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -12,7 +12,7 @@ CREATE TABLE area
     nombre      VARCHAR2 (255 CHAR) ,
     descripcion VARCHAR2 (255 CHAR) ,
     sigla       VARCHAR2 (255 CHAR) ,
-    activo      CHAR (1) ,
+    activo      CHAR (1) DEFAULT 'TRUE' ,
     creado      DATE ,
     modificado  DATE ,
     desactivado DATE
@@ -25,7 +25,7 @@ CREATE TABLE area_competencia
     id             INTEGER NOT NULL ,
     area_id        INTEGER NOT NULL ,
     competencia_id INTEGER NOT NULL ,
-    activo         CHAR (1) ,
+    activo         CHAR (1) DEFAULT 'TRUE' ,
     creado         DATE ,
     modificado     DATE ,
     desactivado    DATE
@@ -39,7 +39,7 @@ CREATE TABLE asignada_detalle
     asignada_id         INTEGER NOT NULL ,
     encuesta_detalle_id INTEGER NOT NULL ,
     respuesta_id        INTEGER NOT NULL ,
-    activo              CHAR (1) ,
+    activo              CHAR (1) DEFAULT 'TRUE' ,
     creado_usuario      DATE ,
     creado_jefe         DATE ,
     desactivado         DATE
@@ -52,7 +52,7 @@ CREATE TABLE cargo
     id          INTEGER NOT NULL ,
     usuario_id  INTEGER NOT NULL ,
     area_id     INTEGER NOT NULL ,
-    activo      CHAR (1) ,
+    activo      CHAR (1) DEFAULT 'TRUE' ,
     creado      DATE ,
     modificado  DATE ,
     desactivado DATE
@@ -66,7 +66,7 @@ CREATE TABLE competencia
     nombre      VARCHAR2 (255 CHAR) ,
     descripcion VARCHAR2 (255 CHAR) ,
     sigla       VARCHAR2 (255 CHAR) ,
-    activo      CHAR (1) ,
+    activo      CHAR (1) DEFAULT 'TRUE' ,
     creado      DATE ,
     modificado  DATE ,
     desactivado DATE
@@ -81,7 +81,7 @@ CREATE TABLE competencia_nivel
     nivel_id         INTEGER NOT NULL ,
     definicion_nivel VARCHAR2 (255 CHAR) ,
     comentario       VARCHAR2 (255 CHAR) ,
-    activo           CHAR (1) ,
+    activo           CHAR (1) DEFAULT 'TRUE' ,
     creado           DATE ,
     modificado       DATE ,
     desactivado      DATE
@@ -94,7 +94,7 @@ CREATE TABLE encuesta
     id          INTEGER NOT NULL ,
     nombre      VARCHAR2 (255 CHAR) ,
     detalle     VARCHAR2 (255 CHAR) ,
-    activo      CHAR (1) ,
+    activo      CHAR (1) DEFAULT 'TRUE' ,
     autor       INTEGER NOT NULL ,
     creado      DATE ,
     modificado  DATE ,
@@ -108,9 +108,9 @@ CREATE TABLE encuesta_asignada
     id                 INTEGER NOT NULL ,
     usuario_id         INTEGER NOT NULL ,
     encuesta_id        INTEGER NOT NULL ,
-    vigente            CHAR (1) ,
+    vigente            CHAR (1) DEFAULT 'TRUE' ,
     periodo_pondera_id INTEGER NOT NULL ,
-    activo             CHAR (1) ,
+    activo             CHAR (1) DEFAULT 'TRUE' ,
     creado             DATE ,
     modificado         DATE ,
     desactivado        DATE
@@ -124,7 +124,7 @@ CREATE TABLE encuesta_detalle
     encuesta_id INTEGER NOT NULL ,
     orden       INTEGER ,
     pregunta_id INTEGER NOT NULL ,
-    activo      CHAR (1) ,
+    activo      CHAR (1) DEFAULT 'TRUE' ,
     creado      DATE ,
     modificado  DATE ,
     desactivado DATE
@@ -152,7 +152,7 @@ CREATE TABLE evaluacion
     promedio_jefe        INTEGER ,
     total_evalua         INTEGER ,
     brecha               INTEGER ,
-    activo               CHAR (1) ,
+    activo               CHAR (1) DEFAULT 'TRUE' ,
     creado               DATE ,
     modificado           DATE ,
     desactivado          DATE
@@ -165,7 +165,7 @@ CREATE TABLE nivel
     id          INTEGER NOT NULL ,
     nombre      VARCHAR2 (255 CHAR) ,
     nota        INTEGER ,
-    activo      CHAR (1) ,
+    activo      CHAR (1) DEFAULT 'TRUE' ,
     creado      DATE ,
     modificado  DATE ,
     desactivado DATE
@@ -180,7 +180,7 @@ CREATE TABLE periodo_pondera
     pondera_jefe    INTEGER ,
     fecha_inicio    DATE ,
     fecha_termino   DATE ,
-    activo          CHAR (1) ,
+    activo          CHAR (1) DEFAULT 'TRUE' ,
     creado          DATE ,
     modificado      DATE ,
     desactivado     DATE
@@ -193,7 +193,7 @@ CREATE TABLE pregunta
     id             INTEGER NOT NULL ,
     pregunta       VARCHAR2 (255 CHAR) ,
     competencia_id INTEGER NOT NULL ,
-    activo         CHAR (1) ,
+    activo         CHAR (1) DEFAULT 'TRUE' ,
     creado         DATE ,
     modificado     DATE ,
     desactivado    DATE
@@ -211,7 +211,7 @@ CREATE TABLE respuesta
     respuesta   VARCHAR2 (255 CHAR) ,
     letra       CHAR (1 CHAR) ,
     puntos      INTEGER ,
-    activo      CHAR (1) ,
+    activo      CHAR (1) DEFAULT 'TRUE' ,
     creado      DATE ,
     modificado  DATE ,
     desactivado DATE
@@ -223,7 +223,7 @@ CREATE TABLE rol
   (
     id          INTEGER NOT NULL ,
     nombre      VARCHAR2 (100 CHAR) ,
-    activo      CHAR (1) ,
+    activo      CHAR (1) DEFAULT 'TRUE' ,
     creado      DATE ,
     modificado  DATE ,
     desactivado DATE
@@ -241,13 +241,12 @@ CREATE TABLE usuario
     nombres     VARCHAR2 (255 CHAR) ,
     sexo        CHAR (1 CHAR) NOT NULL ,
     direccion   VARCHAR2 (255 CHAR) ,
-    fonoa       INTEGER ,
-    fonob       INTEGER ,
+    fono        INTEGER ,
     email       VARCHAR2 (255 CHAR) ,
     clave       VARCHAR2 (255 CHAR) ,
-    jefe        INTEGER NOT NULL ,
+    jefe        INTEGER DEFAULT 1 NOT NULL ,
     rol_id      INTEGER NOT NULL ,
-    activo      CHAR (1) ,
+    activo      CHAR (1) DEFAULT 'TRUE' ,
     creado      DATE ,
     modificado  DATE ,
     desactivado DATE

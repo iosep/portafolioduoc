@@ -100,20 +100,9 @@
 <ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="fonoa" id="1050C3C2-BA39-2078-D77F-DECB83B716E1">
+<Column name="fono" id="1050C3C2-BA39-2078-D77F-DECB83B716E1">
 <createdBy>duoc</createdBy>
 <createdTime>2016-08-30 04:24:56 UTC</createdTime>
-<ownerDesignName>modelo_20160830</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT027</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="fonob" id="0430FDA7-25BE-E7CC-0CD4-899F9B2343F7">
-<createdBy>duoc</createdBy>
-<createdTime>2016-08-30 04:25:00 UTC</createdTime>
 <ownerDesignName>modelo_20160830</ownerDesignName>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
@@ -153,6 +142,8 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
+<usesDefaultValue>true</usesDefaultValue>
+<defaultValue>1</defaultValue>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
@@ -180,8 +171,9 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT006</logicalDatatype>
-<dataTypeSize>1 BYTE</dataTypeSize>
-<ownDataTypeParameters>1 BYTE,,</ownDataTypeParameters>
+<usesDefaultValue>true</usesDefaultValue>
+<defaultValue>TRUE</defaultValue>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="creado" id="B0E1B7EE-C1F7-3D09-235B-69B038F28D26">
