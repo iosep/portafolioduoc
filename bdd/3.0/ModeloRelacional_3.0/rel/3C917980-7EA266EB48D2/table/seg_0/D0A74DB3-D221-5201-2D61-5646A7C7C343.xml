@@ -63,10 +63,11 @@
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT006</logicalDatatype>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
 <usesDefaultValue>true</usesDefaultValue>
-<defaultValue>TRUE</defaultValue>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<defaultValue>1</defaultValue>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="creado" id="0B8703F2-CE4C-F30C-CA6C-2B26CCD0822C">
