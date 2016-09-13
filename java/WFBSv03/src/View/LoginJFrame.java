@@ -7,7 +7,6 @@ package View;
 
 import Controller.LoginController;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.DEFAULT_OPTION;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 /**
@@ -23,7 +22,6 @@ public class LoginJFrame extends javax.swing.JFrame {
      */
     public LoginJFrame() {
         initComponents();
-
     }
 
     /**
@@ -137,17 +135,26 @@ public class LoginJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String rut = jTextField1username.getText().replace(".", "");
-        if (lc.usuarioLogin(rut, jPasswordField1.getText())) {
-            AdminMainJFrame amjf = new AdminMainJFrame();
-            amjf.setVisible(true);
-            dispose();
+        String rut = jTextField1username.getText();
+        if (lc.validarRut(rut)) {
+            rut = rut.replace(".", "");
+            if (lc.usuarioLogin(rut, jPasswordField1.getText())) {
+                AdminMainJFrame amjf = new AdminMainJFrame();
+                amjf.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Login incorrecto", "ERROR", INFORMATION_MESSAGE);
+                jTextField1username.requestFocus();
+                jTextField1username.setText("");
+                jPasswordField1.setText("");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Login incorrecto", "ERROR", INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "RUT no válido", "ERROR", INFORMATION_MESSAGE);
             jTextField1username.requestFocus();
             jTextField1username.setText("");
             jPasswordField1.setText("");
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

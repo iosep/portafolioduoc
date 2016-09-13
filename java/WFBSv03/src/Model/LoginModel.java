@@ -56,11 +56,9 @@ public class LoginModel {
     }
 
     /**
-     * Método para obtener el RUT del usuario en sesión, retorna 0 si no
-     * encuentra coincidencias.
-     *
+     * GetRUT method
      * @param userId
-     * @return
+     * @return RUT
      */
     public String getRut(int userId) {
         String rut = "";
@@ -77,7 +75,6 @@ public class LoginModel {
                 System.out.println("Sin coincidencias");
                 stmt.close();
                 con.close();
-                return 0;
             } else {
                 rs = stmt.executeQuery();
                 while (rs.next()) {
