@@ -1,0 +1,45 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="Log" directorySegmentName="seg_0" id="530775CE-2026-8D04-2772-0954D0086B13">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="id_usuario" id="067470F1-30EA-CE99-BF84-781D28297DE6">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="id_log" id="09A221A2-D872-8F31-CF16-70A8BE318DA2">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="fecha_conexion" id="11894FAE-D7C1-6B68-DD27-34FD973CA50A">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ip_user" id="939F5658-7FFA-D7E6-96F2-99EF581756AC">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Usuario_id_usuario" id="C016CFE6-663F-D9A8-EADD-9B1D8764D0E5">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="Log_PK" id="223570D5-C02A-D529-73FB-1D3DD924E44D">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

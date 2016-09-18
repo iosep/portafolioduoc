@@ -1,0 +1,104 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="64CF9520-2015-1FC5-0994-00DDC2316693" name="Competencia">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>DFAF40E8-A9E3-3E7C-4A19-64B88F6A6919</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_competencia" id="35CA060C-608D-5029-79FC-2581BDE50451">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>D03154BB-9509-D698-3400-F109F9B92391</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre_competencia" id="9C9C82AA-A440-BA36-2DEB-08A46A87FAE3">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>E44D5495-48BF-A64E-B1D3-BF4B2F81E37D</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>BBE28C3C-8E27-C6C3-EFAC-63121D6CF3BD</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="desc_competencia" id="6210642B-66DB-1ACC-1E19-5B6FE4431991">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>C22E4530-38A6-2C79-A288-475ABBC30292</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>BBE28C3C-8E27-C6C3-EFAC-63121D6CF3BD</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="sigla_competencia" id="F78203AD-EA94-E341-59AF-739C27AD6BD9">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>ED5EAA89-3E4E-0F01-7F80-45799C8BBD8B</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<domain>13EBB6C5-1946-6FA8-758A-312E2BF7FEF6</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="activo" id="E8272202-7E9C-7924-3077-4164C499CEE1">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>1624F345-AAC0-C0BE-BEAA-A865AF85EA40</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<domain>86C804B7-045A-C9D1-E646-E1ECB38BF5FE</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Eval_Histo_id_eval" id="E7B7D8DB-B5D7-4C1F-FD85-7C68343E4CC0">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>A96CA825-8483-E1B5-E249-F0C11231A8C4</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1F628004-8C67-6035-00B5-982C79A73B26" name="Competencia_PK">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>089CEC4F-7416-12CE-8463-88FDC65D6C16</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="35CA060C-608D-5029-79FC-2581BDE50451"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

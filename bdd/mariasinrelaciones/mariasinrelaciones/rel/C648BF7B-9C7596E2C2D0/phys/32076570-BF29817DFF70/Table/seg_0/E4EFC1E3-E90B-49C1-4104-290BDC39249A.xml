@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="Menu" directorySegmentName="seg_0" id="E4EFC1E3-E90B-49C1-4104-290BDC39249A">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="prioridad" id="02CD8624-AF50-0C7F-C87A-2947C3C34986">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="tipo" id="3ADFB9D4-7A85-8DFE-C56F-6EDA80157D54">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="nom_app" id="3B787650-5D20-C90B-68CD-269788D6B27C">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="id_app" id="4FF5BA1B-E939-9B4D-BB19-93892CB298BD">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="activo" id="54577865-1548-FC3C-94E4-1E6F46BF2253">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="url" id="72B844B1-DB7A-9C9E-1CD1-D8CC1E1FC0A0">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="id_padre" id="AE86058D-EF6E-7065-CD96-A0892DECF196">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="app" id="D87605B8-0ECC-B8F4-FFDD-E643E4152A94">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="Menu_PK" id="DFFC0E68-C357-A384-D025-7A3E27928E98">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

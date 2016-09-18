@@ -1,0 +1,92 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="BAEFBD82-BF92-E8B8-BC4B-047B169C4419" name="Cargo_User">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>DCF3BCC5-B337-EAAD-A8E0-D34EEB58452D</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_usuario" id="C01E8FC6-FDEB-F75A-2A0A-7C48B837EBF8">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>7BD0B84D-9090-1091-754B-6E4E35A67E60</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_cargo" id="A4D93E2A-A1BD-58A2-64BE-694A5428492D">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>17B61633-1E1C-3A5E-ABC5-AD21D5F7CDD9</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Usuario_id_usuario" id="CB17EB66-D0D7-B89E-63B0-D381E2A789D8">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>C3DC99EC-ACF3-F927-9F61-B0D93C9498A7</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Cargo_id_cargo" id="211B4F9B-21CB-B2DE-E408-B8227A4E7DD3">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>5DB01594-6ACC-D13E-1257-AB5BDD298BE2</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Cargo_id_eval" id="07E727AD-D84E-5824-AF08-2CEC54F9DD72">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>2F8A5EC7-3CE9-F2B2-0B4B-F0619B97D1A2</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4FFF6223-D693-49F5-BF7A-A4AAAE82F10F" name="Cargo_User_PK">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>1EE034C8-8192-131D-BB22-FA37FA577E5B</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C01E8FC6-FDEB-F75A-2A0A-7C48B837EBF8"/>
+<colUsage columnID="A4D93E2A-A1BD-58A2-64BE-694A5428492D"/>
+<colUsage columnID="CB17EB66-D0D7-B89E-63B0-D381E2A789D8"/>
+<colUsage columnID="211B4F9B-21CB-B2DE-E408-B8227A4E7DD3"/>
+<colUsage columnID="07E727AD-D84E-5824-AF08-2CEC54F9DD72"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

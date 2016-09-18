@@ -1,0 +1,79 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="30F6ED51-594F-F1D6-A8C5-AC2FCAF288EB" name="Perfil_Menu">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>4ACF415F-F1CF-6D94-2F85-83069250FA0B</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_perfil" id="089D59C4-FD80-0B00-858C-E2E15F1D325B">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>CE1DB7C0-50D8-A5E2-1592-27CB0223E657</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_menu" id="7213EAD0-8AA6-1785-0CAA-283E854477E0">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>09933D49-25EF-5560-C527-C190E7B4CDA5</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Perfil_id_perfil" id="72A7BEC8-E3B3-F4CE-7399-05CD48137856">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>745165C4-272D-0F1E-D098-5F15461CE293</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Menu_id_app" id="14ED6F3B-28BE-AC7F-165F-62DA3E1F84BF">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>5FD3974F-4DFC-EE80-F176-BA510DFE0AFC</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="DF9276A4-A938-C949-82DE-344D602A8F5D" name="Perfil_Menu_PK">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>067844DA-69DC-625C-71DA-F31808FA5916</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="089D59C4-FD80-0B00-858C-E2E15F1D325B"/>
+<colUsage columnID="7213EAD0-8AA6-1785-0CAA-283E854477E0"/>
+<colUsage columnID="72A7BEC8-E3B3-F4CE-7399-05CD48137856"/>
+<colUsage columnID="14ED6F3B-28BE-AC7F-165F-62DA3E1F84BF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

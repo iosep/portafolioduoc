@@ -1,0 +1,193 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CD9F5DFB-0790-ACF1-6E34-15FA0B509FF9" name="Eval_Histo">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>30C09FB5-A5E4-5CD1-2328-385547295D98</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_eval" id="C666F314-B41D-558B-F5F0-DB614C7C741B">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>0CC898B2-690A-596C-8A84-AE45751FBA8F</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="rut_evaluado" id="2C83AAE5-3706-C8DA-F899-99C720587AED">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>68CEA3A2-FA0B-15BD-B4B8-0A9F2C38C3B5</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>BBE28C3C-8E27-C6C3-EFAC-63121D6CF3BD</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="rut_evaluador" id="33C2C7D2-3932-430A-B5E8-F5DF6A35EB9A">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>1574C91D-25AB-6AFE-E495-6AF85271F2AA</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>BBE28C3C-8E27-C6C3-EFAC-63121D6CF3BD</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_cargo" id="A65DF4CF-93F2-EDCB-C4D5-DF9DCD3B6103">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>58B9A94F-B8F4-87B0-5053-47E8540CA4AA</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_competencia" id="06B62452-E5C5-C827-96E6-D1C4228086B2">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>082587BF-6824-2491-DD5A-95DEA778FDAF</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_nivel" id="269FFBED-CF6E-5476-725D-A2C5E18ADBF9">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>950DFEC9-A013-9500-FE13-2A467F9B2117</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tipo_evaluacion" id="4BB33BD5-628B-368B-FE7E-2AA1BD91665B">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>CC776C59-37C4-2F9A-BF51-4557B9C7FE27</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_evaluacion" id="43899C27-E21F-531E-1A0E-D903FC1FFA7E">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>78905173-1F48-88C6-7844-23EC92A5F89D</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>62EA5E13-E14E-85C3-247F-3057C64CE01F</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nota" id="CCA569BE-E99B-0FC8-3D29-068E2A834AE5">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>F340B533-599C-A711-086F-93894C33CDEA</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT022</logicalDatatype>
+<domain>06139C62-140B-218D-F0C0-F78E9B26D53F</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_periodo" id="60117BAB-CDE1-CE63-9556-526A6D8E3259">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>C4873C02-4136-448C-5139-862558E22AB9</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Peri_Eval_id_peval" id="FCCA3D3F-71D5-7EC3-4E68-5C071A44BE18">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>0571BDD0-BFA3-95E0-A6E2-4726860A8BBA</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Usuario_id_usuario" id="7EFBF566-F962-560A-3F29-C442FB0E6411">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>6FAF6261-F39D-A270-2CE9-73A09A872E92</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>C5C1DEDA-60E4-6355-2CCC-90F2EC1A6EEF</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="CD852DCA-5E6D-974E-90B2-AD7FDB3991C6" name="Eval_Histo_PK">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>69ADB2B4-A00E-0983-2E27-6EB9A7E52A4B</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C666F314-B41D-558B-F5F0-DB614C7C741B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2E987964-41C1-E47D-EFA3-D33EAA0E7E59" name="Eval_Histo__IDX">
+<sourceDDLFile>Script_BD.ddl</sourceDDLFile>
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<importedID>A2CB9FC9-BBC3-A63F-F46C-0EB14C92E5EF</importedID>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FCCA3D3F-71D5-7EC3-4E68-5C071A44BE18"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

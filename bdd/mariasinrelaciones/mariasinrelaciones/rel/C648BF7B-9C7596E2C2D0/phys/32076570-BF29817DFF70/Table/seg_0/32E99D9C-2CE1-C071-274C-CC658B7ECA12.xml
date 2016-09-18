@@ -1,0 +1,85 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="Deta_Eval" directorySegmentName="seg_0" id="32E99D9C-2CE1-C071-274C-CC658B7ECA12">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="Cargo_Eval_Histo_id_eval" id="0E4D745A-0DD5-2855-0D1F-13E9051A4BDF">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="rut_evaluado" id="0FB21A71-4153-4A03-47C7-2B0D728C8C4D">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="id_competencia" id="13AB9AB9-08CF-80E6-A643-A36A4C88562D">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="id_detaeval" id="2CF977B6-3F27-FAFE-25F8-BBD50ADC317B">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="nota_autoevaluacion" id="3F3CDE5B-E603-D0EE-AB3A-48AA4EC29664">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="nota_jefe" id="409D5781-0957-35B4-D27C-F06DC41B62B9">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="id_periodo" id="4B2F90B6-8388-7DD3-2B62-DDA2BE7BFACF">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="rut_evaluador" id="631597B4-858B-92BB-1AB2-A80DB90FEEDD">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="nota_final" id="7E0FB2A4-128B-C23E-4976-A2D9192E79C5">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="brecha_nota" id="86B66CCC-49A1-60E4-139A-3EF24C278F08">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="id_cargo" id="ABDF91DA-078A-5211-E0EC-38CBCA82447A">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Cargo_id_cargo" id="E1C117BC-7482-9D12-987D-43A0FF373D92">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Peri_Eval_id_peval" id="EA1BAF3D-FC66-2E24-9225-32B124BE9ADE">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="Deta_Eval_PK" id="DA82779E-8CD5-4FC6-25D4-7CFC8195D82E">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-17 14:52:18 UTC</createdTime>
+<ownerDesignName>mariasinrelaciones</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>
