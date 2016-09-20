@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A8BB66AB-7434-F502-0164-35841BCE164F" name="cargo">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A8BB66AB-7434-F502-0164-35841BCE164F" name="usuario_cargo">
 <createdBy>duoc</createdBy>
 <createdTime>2016-09-05 03:01:20 UTC</createdTime>
 <ownerDesignName>wfbs_20160905_0220</ownerDesignName>
@@ -32,7 +32,7 @@
 <colAssociation fkAssociation="D9477148-59E7-5D6A-23BD-712A2900E445" referredColumn="1259B01B-DC68-5383-5794-9FBC6CE4E68B"/>
 </associations>
 </Column>
-<Column name="area_id" id="E89BDC70-7696-1BE8-770E-BEE9A6CA8FBE">
+<Column name="cargo_id" id="E89BDC70-7696-1BE8-770E-BEE9A6CA8FBE">
 <createdBy>duoc</createdBy>
 <createdTime>2016-09-05 03:02:27 UTC</createdTime>
 <ownerDesignName>wfbs_20160905_0220</ownerDesignName>
@@ -42,7 +42,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="9A32248C-652D-89B7-AE69-6E3033564C3C" referredColumn="59B4A32F-1E1C-725B-93F7-FE00423BF827"/>
+<colAssociation fkAssociation="3A098A09-AEED-09E5-9774-268A69D0333C" referredColumn="59B4A32F-1E1C-725B-93F7-FE00423BF827"/>
 </associations>
 </Column>
 <Column name="activo" id="CB0BB65A-06B8-437D-4A8C-EB3071F9164D">
@@ -105,7 +105,7 @@
 <colUsage columnID="22C8EF75-0267-8F55-7802-C8791DDB89F2"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="C5E61DBC-DFAE-4CC1-E7A5-487BAF8A1B5D" name="cargo_usuario_FK">
+<ind_PK_UK id="C5E61DBC-DFAE-4CC1-E7A5-487BAF8A1B5D" name="usuario_cargo_FK">
 <createdBy>duoc</createdBy>
 <createdTime>2016-09-05 03:07:14 UTC</createdTime>
 <ownerDesignName>wfbs_20160905_0220</ownerDesignName>
@@ -115,10 +115,10 @@
 <colUsage columnID="07E3F5C2-8549-818F-6D19-2C00FDECCD5A"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="C7EDE567-10E7-5795-9C4F-E6C3C7CCBDC4" name="cargo_area_FK">
+<ind_PK_UK id="591A63FE-559C-0A6C-5475-999CDD5C136F" name="cargo_usuario_FK">
 <createdBy>duoc</createdBy>
-<createdTime>2016-09-05 03:07:32 UTC</createdTime>
-<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
+<createdTime>2016-09-20 22:48:29 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.0</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>

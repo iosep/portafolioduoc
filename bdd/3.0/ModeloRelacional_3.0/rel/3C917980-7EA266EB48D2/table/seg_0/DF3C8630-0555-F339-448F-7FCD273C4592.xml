@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="DF3C8630-0555-F339-448F-7FCD273C4592" name="area_competencia">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="DF3C8630-0555-F339-448F-7FCD273C4592" name="cargo_competencia">
 <createdBy>duoc</createdBy>
 <createdTime>2016-09-05 03:12:21 UTC</createdTime>
 <ownerDesignName>wfbs_20160905_0220</ownerDesignName>
@@ -19,7 +19,7 @@
 <autoIncrementColumn>true</autoIncrementColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="area_id" id="985B8BE1-88C8-65BA-6109-8BE1089C7491">
+<Column name="cargo_id" id="985B8BE1-88C8-65BA-6109-8BE1089C7491">
 <createdBy>duoc</createdBy>
 <createdTime>2016-09-05 03:13:07 UTC</createdTime>
 <ownerDesignName>wfbs_20160905_0220</ownerDesignName>
@@ -29,7 +29,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="7E425837-4745-CBED-8942-38C5C1CA8A5F" referredColumn="59B4A32F-1E1C-725B-93F7-FE00423BF827"/>
+<colAssociation fkAssociation="BBA3BCEB-EB01-D6FA-B7CB-7C3C54E48304" referredColumn="59B4A32F-1E1C-725B-93F7-FE00423BF827"/>
 </associations>
 </Column>
 <Column name="competencia_id" id="88025054-2709-57F2-C34F-35FA438F0772">
@@ -94,7 +94,7 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="F5AD1121-03E7-D76E-FF51-BD53C45E7024" name="area_competencia_PK">
+<ind_PK_UK id="F5AD1121-03E7-D76E-FF51-BD53C45E7024" name="cargo_competencia_PK">
 <createdBy>duoc</createdBy>
 <createdTime>2016-09-05 03:12:49 UTC</createdTime>
 <ownerDesignName>wfbs_20160905_0220</ownerDesignName>
@@ -105,17 +105,7 @@
 <colUsage columnID="B9587513-13F7-76B5-F7C3-E8C42215597F"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="9B411639-8227-D2A7-5FF9-680AC44F3B7F" name="competencia_area_FK">
-<createdBy>duoc</createdBy>
-<createdTime>2016-09-05 03:13:40 UTC</createdTime>
-<ownerDesignName>wfbs_20160905_0220</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="985B8BE1-88C8-65BA-6109-8BE1089C7491"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="E78F74ED-F66B-26F5-4F96-A73F2766A578" name="area_competencia_FK">
+<ind_PK_UK id="E78F74ED-F66B-26F5-4F96-A73F2766A578" name="competencia_cargo_FK">
 <createdBy>duoc</createdBy>
 <createdTime>2016-09-05 03:13:48 UTC</createdTime>
 <ownerDesignName>wfbs_20160905_0220</ownerDesignName>
@@ -123,6 +113,16 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="88025054-2709-57F2-C34F-35FA438F0772"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="02A44C53-AC42-55A2-CAB4-26401CF282FC" name="cargo_competencia_FK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-20 22:49:20 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.0</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="985B8BE1-88C8-65BA-6109-8BE1089C7491"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

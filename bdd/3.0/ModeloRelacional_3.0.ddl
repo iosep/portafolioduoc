@@ -1,36 +1,9 @@
 -- Generado por Oracle SQL Developer Data Modeler 4.1.3.901
---   en:        2016-09-13 02:03:41 BRT
+--   en:        2016-09-20 20:05:29 BRT
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
 
-
-
-CREATE TABLE area
-  (
-    id          INTEGER NOT NULL ,
-    nombre      VARCHAR2 (255 CHAR) ,
-    descripcion VARCHAR2 (255 CHAR) ,
-    sigla       VARCHAR2 (255 CHAR) ,
-    activo      NUMBER (1) DEFAULT 1 ,
-    creado      DATE ,
-    modificado  DATE ,
-    desactivado DATE
-  ) ;
-ALTER TABLE area ADD CONSTRAINT area_PK PRIMARY KEY ( id ) ;
-
-
-CREATE TABLE area_competencia
-  (
-    id             INTEGER NOT NULL ,
-    area_id        INTEGER NOT NULL ,
-    competencia_id INTEGER NOT NULL ,
-    activo         NUMBER (1) DEFAULT 1 ,
-    creado         DATE ,
-    modificado     DATE ,
-    desactivado    DATE
-  ) ;
-ALTER TABLE area_competencia ADD CONSTRAINT area_competencia_PK PRIMARY KEY ( id ) ;
 
 
 CREATE TABLE asignada_detalle
@@ -50,14 +23,28 @@ ALTER TABLE asignada_detalle ADD CONSTRAINT asignada_detalle_PK PRIMARY KEY ( id
 CREATE TABLE cargo
   (
     id          INTEGER NOT NULL ,
-    usuario_id  INTEGER NOT NULL ,
-    area_id     INTEGER NOT NULL ,
+    nombre      VARCHAR2 (255 CHAR) ,
+    descripcion VARCHAR2 (255 CHAR) ,
+    sigla       VARCHAR2 (255 CHAR) ,
     activo      NUMBER (1) DEFAULT 1 ,
     creado      DATE ,
     modificado  DATE ,
     desactivado DATE
   ) ;
-ALTER TABLE cargo ADD CONSTRAINT cargo_PK PRIMARY KEY ( id ) ;
+ALTER TABLE cargo ADD CONSTRAINT cargo_PKv2 PRIMARY KEY ( id ) ;
+
+
+CREATE TABLE cargo_competencia
+  (
+    id             INTEGER NOT NULL ,
+    cargo_id       INTEGER NOT NULL ,
+    competencia_id INTEGER NOT NULL ,
+    activo         NUMBER (1) DEFAULT 1 ,
+    creado         DATE ,
+    modificado     DATE ,
+    desactivado    DATE
+  ) ;
+ALTER TABLE cargo_competencia ADD CONSTRAINT cargo_competencia_PK PRIMARY KEY ( id ) ;
 
 
 CREATE TABLE competencia
@@ -254,17 +241,28 @@ CREATE TABLE usuario
 ALTER TABLE usuario ADD CONSTRAINT usuario_PK PRIMARY KEY ( id ) ;
 
 
-ALTER TABLE area_competencia ADD CONSTRAINT area_competencia_FK FOREIGN KEY ( competencia_id ) REFERENCES competencia ( id ) ;
+CREATE TABLE usuario_cargo
+  (
+    id          INTEGER NOT NULL ,
+    usuario_id  INTEGER NOT NULL ,
+    cargo_id    INTEGER NOT NULL ,
+    activo      NUMBER (1) DEFAULT 1 ,
+    creado      DATE ,
+    modificado  DATE ,
+    desactivado DATE
+  ) ;
+ALTER TABLE usuario_cargo ADD CONSTRAINT cargo_PK PRIMARY KEY ( id ) ;
+
 
 ALTER TABLE asignada_detalle ADD CONSTRAINT asignada_detalle_FK FOREIGN KEY ( encuesta_detalle_id ) REFERENCES encuesta_detalle ( id ) ;
 
 ALTER TABLE asignada_detalle ADD CONSTRAINT asignada_respuesta_FK FOREIGN KEY ( respuesta_id ) REFERENCES respuesta ( id ) ;
 
-ALTER TABLE cargo ADD CONSTRAINT cargo_area_FK FOREIGN KEY ( area_id ) REFERENCES area ( id ) ;
+ALTER TABLE cargo_competencia ADD CONSTRAINT cargo_competencia_FK FOREIGN KEY ( cargo_id ) REFERENCES cargo ( id ) ;
 
-ALTER TABLE cargo ADD CONSTRAINT cargo_usuario_FK FOREIGN KEY ( usuario_id ) REFERENCES usuario ( id ) ;
+ALTER TABLE usuario_cargo ADD CONSTRAINT cargo_usuario_FK FOREIGN KEY ( cargo_id ) REFERENCES cargo ( id ) ;
 
-ALTER TABLE area_competencia ADD CONSTRAINT competencia_area_FK FOREIGN KEY ( area_id ) REFERENCES area ( id ) ;
+ALTER TABLE cargo_competencia ADD CONSTRAINT competencia_cargo_FK FOREIGN KEY ( competencia_id ) REFERENCES competencia ( id ) ;
 
 ALTER TABLE competencia_nivel ADD CONSTRAINT competencia_nivel_FK FOREIGN KEY ( competencia_id ) REFERENCES competencia ( id ) ;
 
@@ -290,23 +288,13 @@ ALTER TABLE pregunta ADD CONSTRAINT pregunta_competencia_FK FOREIGN KEY ( compet
 
 ALTER TABLE respuesta ADD CONSTRAINT respuesta_pregunta_FK FOREIGN KEY ( pregunta_id ) REFERENCES pregunta ( id ) ;
 
+ALTER TABLE usuario_cargo ADD CONSTRAINT usuario_cargo_FK FOREIGN KEY ( usuario_id ) REFERENCES usuario ( id ) ;
+
 ALTER TABLE encuesta_asignada ADD CONSTRAINT usuario_encuesta_FK FOREIGN KEY ( encuesta_id ) REFERENCES encuesta ( id ) ;
 
 ALTER TABLE usuario ADD CONSTRAINT usuario_rol_FK FOREIGN KEY ( rol_id ) REFERENCES rol ( id ) ;
 
 ALTER TABLE usuario ADD CONSTRAINT usuario_sexol_FK FOREIGN KEY ( jefe ) REFERENCES usuario ( id ) ;
-
-CREATE SEQUENCE area_id_SEQ START WITH 1 NOCACHE ORDER ;
-CREATE OR REPLACE TRIGGER area_id_TRG BEFORE
-  INSERT ON area FOR EACH ROW WHEN (NEW.id IS NULL) BEGIN :NEW.id := area_id_SEQ.NEXTVAL;
-END;
-/
-
-CREATE SEQUENCE area_competencia_id_SEQ START WITH 1 NOCACHE ORDER ;
-CREATE OR REPLACE TRIGGER area_competencia_id_TRG BEFORE
-  INSERT ON area_competencia FOR EACH ROW WHEN (NEW.id IS NULL) BEGIN :NEW.id := area_competencia_id_SEQ.NEXTVAL;
-END;
-/
 
 CREATE SEQUENCE asignada_detalle_id_SEQ START WITH 1 NOCACHE ORDER ;
 CREATE OR REPLACE TRIGGER asignada_detalle_id_TRG BEFORE
@@ -317,6 +305,12 @@ END;
 CREATE SEQUENCE cargo_id_SEQ START WITH 1 NOCACHE ORDER ;
 CREATE OR REPLACE TRIGGER cargo_id_TRG BEFORE
   INSERT ON cargo FOR EACH ROW WHEN (NEW.id IS NULL) BEGIN :NEW.id := cargo_id_SEQ.NEXTVAL;
+END;
+/
+
+CREATE SEQUENCE cargo_competencia_id_SEQ START WITH 1 NOCACHE ORDER ;
+CREATE OR REPLACE TRIGGER cargo_competencia_id_TRG BEFORE
+  INSERT ON cargo_competencia FOR EACH ROW WHEN (NEW.id IS NULL) BEGIN :NEW.id := cargo_competencia_id_SEQ.NEXTVAL;
 END;
 /
 
@@ -395,6 +389,12 @@ END;
 CREATE SEQUENCE usuario_id_SEQ START WITH 1 NOCACHE ORDER ;
 CREATE OR REPLACE TRIGGER usuario_id_TRG BEFORE
   INSERT ON usuario FOR EACH ROW WHEN (NEW.id IS NULL) BEGIN :NEW.id := usuario_id_SEQ.NEXTVAL;
+END;
+/
+
+CREATE SEQUENCE usuario_cargo_id_SEQ START WITH 1 NOCACHE ORDER ;
+CREATE OR REPLACE TRIGGER usuario_cargo_id_TRG BEFORE
+  INSERT ON usuario_cargo FOR EACH ROW WHEN (NEW.id IS NULL) BEGIN :NEW.id := usuario_cargo_id_SEQ.NEXTVAL;
 END;
 /
 

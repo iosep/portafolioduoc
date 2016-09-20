@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="BDB194EB-0F19-434C-402D-54719B101936" name="area">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="BDB194EB-0F19-434C-402D-54719B101936" name="cargo">
 <createdBy>duoc</createdBy>
 <createdTime>2016-08-30 04:03:59 UTC</createdTime>
 <ownerDesignName>modelo_20160830</ownerDesignName>
@@ -104,7 +104,7 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="8657C55C-49A3-6F49-D897-3B0B70CE68B0" name="area_PK">
+<ind_PK_UK id="8657C55C-49A3-6F49-D897-3B0B70CE68B0" name="cargo_PKv2">
 <createdBy>duoc</createdBy>
 <createdTime>2016-08-30 05:17:12 UTC</createdTime>
 <ownerDesignName>modelo_20160830</ownerDesignName>
