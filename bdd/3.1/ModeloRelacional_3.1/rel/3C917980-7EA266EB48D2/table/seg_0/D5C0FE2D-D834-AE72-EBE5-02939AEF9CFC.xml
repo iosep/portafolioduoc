@@ -1,0 +1,141 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D5C0FE2D-D834-AE72-EBE5-02939AEF9CFC" name="respuesta">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:38:50 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<ordsAlias>table_14</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="37216BDD-7389-18F0-51F2-BEB6F72DCA2C">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:39:08 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="pregunta_id" id="F630329C-D5CE-7255-61D9-788B4DDB798F">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:40:19 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FF68A3BC-51CB-683A-77D3-CED4EAB26F00" referredColumn="BCAA70D1-E6C3-15E3-43DC-EB5A3793B8F0"/>
+</associations>
+</Column>
+<Column name="respuesta" id="D1FB50E5-CBAA-E9F4-4093-C2E639C96EFF">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:47:52 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="letra" id="7F5F8C25-9240-F6F1-1AAC-8F9FFF02C3FC">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:50:27 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>1 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="puntos" id="1DACA98E-D9F4-D797-9299-88DFF0AFBA97">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:50:57 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="activo" id="676E12D7-4E3C-CB0B-7045-A1A42148D8F4">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:51:03 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<usesDefaultValue>true</usesDefaultValue>
+<defaultValue>1</defaultValue>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="creado" id="440167EC-DDBE-9497-8B1D-0E052E90DA96">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:51:03 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="modificado" id="C68A03EE-EF96-D355-A377-E7B1313B4C7F">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:51:03 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="desactivado" id="CCF7A27C-7EA3-4561-1717-4ABF910A32CD">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:51:03 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="AFABEF48-1B67-0E72-0578-8B845B227B0B" name="respuesta_PK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:39:26 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="37216BDD-7389-18F0-51F2-BEB6F72DCA2C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F4C6AC52-0272-DA5F-D45A-ABD335F61447" name="respuesta_pregunta_FK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 05:46:54 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F630329C-D5CE-7255-61D9-788B4DDB798F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
