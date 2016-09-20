@@ -1,0 +1,94 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="8A0ED187-C968-D98F-965F-FD1326704F25" name="rol">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:03:36 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<ordsAlias>table_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="A0313769-5E8F-8249-23D7-2558EB75861E">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:22:16 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="E308A6F0-AEA4-A20C-1EB2-0F6780480E70">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:22:24 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="activo" id="C6DD9350-A4CE-0816-7300-D23753376B70">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:23:08 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<defaultValue>1</defaultValue>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="creado" id="88DEC97B-8B75-A8BA-AEBA-3E998B82F0D2">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:23:08 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="modificado" id="A76BB7A8-1D69-E0FF-46D0-03DA7AD201B7">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:23:08 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="desactivado" id="13E764E6-0A65-A241-C0C7-71C0C5A4F259">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-05 19:23:08 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0E687A20-4620-642D-8BD0-48E0CE673149" name="rol_PK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-08-30 04:22:16 UTC</createdTime>
+<ownerDesignName>ModeloRelacional_3.1</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A0313769-5E8F-8249-23D7-2558EB75861E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
