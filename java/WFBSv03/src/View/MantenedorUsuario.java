@@ -5,6 +5,9 @@
  */
 package View;
 
+import Controller.Jefes;
+import Controller.LoginController;
+import Controller.Usuario;
 import Controller.UsuarioController;
 
 /**
@@ -14,6 +17,7 @@ import Controller.UsuarioController;
 public class MantenedorUsuario extends javax.swing.JInternalFrame {
 
     private static UsuarioController uc;
+    private static LoginController lc;
 
     /**
      * Creates new form MantenedorUsuario
@@ -21,12 +25,8 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
     public MantenedorUsuario() {
         initComponents();
         uc = new UsuarioController();
-        /*
-        uc.listaJefesController().forEach((String jefe) -> {
-            jComboBox1jefes.addItem(jefe);
-        });*/
-        for (String jefe : uc.listaJefesController()) {
-            jComboBox1jefes.addItem(jefe);
+        for (Jefes jefe : uc.listaJefesController()) {
+            jComboBox1jefes.addItem(jefe.toString());
         }
     }
 
@@ -281,7 +281,7 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -289,6 +289,27 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
 
     private void jButton1buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1buscarActionPerformed
         // TODO add your handling code here:
+        lc = new LoginController();
+        if (lc.validarRut(jTextField1rutBuscar.getText())) {
+            String rut = jTextField1rutBuscar.getText();
+            rut = rut.replace(".", "");
+            rut = rut.replace("-", "");
+            rut = rut.substring(0, rut.length() - 1);
+            int irut = Integer.parseInt(rut);
+            uc = new UsuarioController();
+            Usuario userFound = uc.findUserController(irut);
+            if (userFound != null) {
+                rut = userFound.getRut() + "-" + userFound.getDv();
+                jTextField1rut.setText(rut);
+                jTextField2nombres.setText(userFound.getNombres());
+                jTextField4apaterno.setText(userFound.getApaterno());
+                jTextField3amaterno.setText(userFound.getAmaterno());
+                jTextField5direccion.setText(userFound.getDireccion());
+                String fono = "" + userFound.getFono();
+                jTextField6fono.setText(fono);
+                jTextField7email.setText(userFound.getEmail());
+            }
+        }
     }//GEN-LAST:event_jButton1buscarActionPerformed
 
     private void jTextField1rutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1rutActionPerformed

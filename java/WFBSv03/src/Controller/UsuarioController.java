@@ -5,7 +5,6 @@
  */
 package Controller;
 
-import Model.Jefes;
 import Model.UsuarioModel;
 import java.util.ArrayList;
 
@@ -17,13 +16,9 @@ public class UsuarioController {
 
     private static UsuarioModel um;
 
-    public ArrayList<String> listaJefesController() {
+    public ArrayList<Jefes> listaJefesController() {
         um = new UsuarioModel();
-        ArrayList<String> jefes = new ArrayList<>();
-        um.listaJefes().forEach((jefe) -> {
-            jefes.add(jefe.getNombre());
-        });
-        return jefes;
+        return um.listaJefes();
     }
 
     public int getIdJefe(String nombre) {
@@ -34,5 +29,10 @@ public class UsuarioController {
             }
         }
         return id;
+    }
+
+    public Usuario findUserController(int rut) {
+        um = new UsuarioModel();
+        return um.findUser(rut);
     }
 }
