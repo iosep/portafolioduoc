@@ -17,16 +17,16 @@ import java.sql.SQLException;
  */
 public class LoginModel {
 
-    public int userLogin(String usuario, String password) {
+    public int userLogin(int rut, String password) {
         int userId = 0;
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            con = DriverManager.getConnection("jdbc:oracle:thin:dotnet/dotnet@localhost");
-            stmt = con.prepareStatement("SELECT password, id_usuario FROM usuario WHERE nombre = ?");
-            stmt.setString(1, usuario);
+            con = DriverManager.getConnection("jdbc:oracle:thin:WFBS/wfbs@localhost");
+            stmt = con.prepareStatement("SELECT clave, id FROM usuario WHERE rut = ?");
+            stmt.setInt(1, rut);
             rs = stmt.executeQuery();
             if (!rs.next()) {
                 System.out.println("Sin coincidencias");

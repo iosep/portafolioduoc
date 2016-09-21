@@ -138,7 +138,10 @@ public class LoginJFrame extends javax.swing.JFrame {
         String rut = jTextField1username.getText();
         if (lc.validarRut(rut)) {
             rut = rut.replace(".", "");
-            if (lc.usuarioLogin(rut, jPasswordField1.getText())) {
+            rut = rut.replace("-", "");
+            rut = rut.substring(0, rut.length() - 1);
+            int irut = Integer.parseInt(rut);
+            if (lc.usuarioLogin(irut, jPasswordField1.getText())) {
                 AdminMainJFrame amjf = new AdminMainJFrame();
                 amjf.setVisible(true);
                 dispose();

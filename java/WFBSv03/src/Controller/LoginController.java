@@ -15,10 +15,10 @@ public class LoginController {
 
     private static int userId = 0;
 
-    public boolean usuarioLogin(String email, String clave) {
+    public boolean usuarioLogin(int rut, String clave) {
         boolean vb = false;
         LoginModel lm = new LoginModel();
-        userId = lm.userLogin(email, clave);
+        userId = lm.userLogin(rut, clave);
         if (userId != 0) {
             vb = true;
         }
