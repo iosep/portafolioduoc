@@ -39,6 +39,7 @@ public class AdminMainJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WFBS - Home Admin");
         setLocationByPlatform(true);
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(700, 500));
 

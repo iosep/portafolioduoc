@@ -17,6 +17,12 @@ import java.sql.SQLException;
  */
 public class LoginModel {
 
+    /**Login Model Method
+     * 
+     * @param rut
+     * @param password
+     * @return userId
+     */
     public int userLogin(int rut, String password) {
         int userId = 0;
         Connection con = null;
@@ -55,8 +61,8 @@ public class LoginModel {
         return userId;
     }
 
-    /**
-     * GetRUT method
+    /**GetRUT method
+     * 
      * @param userId
      * @return RUT
      */
