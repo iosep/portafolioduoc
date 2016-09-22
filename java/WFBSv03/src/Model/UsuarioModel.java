@@ -68,8 +68,8 @@ public class UsuarioModel {
         return jefes;
     }
 
-    public ArrayList<Usuario> findUser(int rut) {
-        ArrayList<Usuario> foundUsers = new ArrayList<>();
+    public Usuario findUser(int rut) {
+        Usuario userFound = null;
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -87,13 +87,13 @@ public class UsuarioModel {
                 con.close();
             } else {
                 rs = stmt.executeQuery();
-                while (rs.next()) {
-                    Usuario userFound = new Usuario(rs.getInt(1), rs.getInt(2), rs.getString(3).charAt(0),
-                            rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7).charAt(0),
-                            rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getInt(12),
-                            rs.getInt(13), rs.getInt(14));
-                    foundUsers.add(userFound);
-                }
+                //while (rs.next()) {
+                rs.next();
+                userFound = new Usuario(rs.getInt(1), rs.getInt(2), rs.getString(3).charAt(0),
+                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7).charAt(0),
+                        rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getInt(12),
+                        rs.getInt(13), rs.getInt(14));
+                //}
             }
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("findUser catch: " + e.getMessage());
@@ -106,7 +106,7 @@ public class UsuarioModel {
                 System.out.println("findUser finally: " + e.getMessage());
             }
         }
-        return foundUsers;
+        return userFound;
     }
 
     public boolean crearUsuario(int rut, String dv, String sexo, String clave) {

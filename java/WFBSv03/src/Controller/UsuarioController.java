@@ -33,13 +33,7 @@ public class UsuarioController {
 
     public Usuario findUserController(int rut) {
         um = new UsuarioModel();
-        ArrayList<Usuario> users = um.findUser(rut);
-        Usuario foundUser = null;
-        for (Usuario user : users) {
-            if (user.getRol() == 1) {
-                foundUser = user;
-            }
-        }
+        Usuario foundUser = um.findUser(rut);
         return foundUser;
     }
 

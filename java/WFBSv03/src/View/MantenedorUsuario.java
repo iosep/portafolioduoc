@@ -45,6 +45,7 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1sexo = new javax.swing.ButtonGroup();
+        buttonGroup1estado = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jTextField1rutBuscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -73,6 +74,9 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
         jPasswordField2 = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1jefes = new javax.swing.JComboBox<>();
+        jRadioButton2Inactivo = new javax.swing.JRadioButton();
+        jRadioButton1Activo = new javax.swing.JRadioButton();
+        jLabel12 = new javax.swing.JLabel();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
@@ -146,7 +150,7 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
         jRadioButton1hombre.setName("H"); // NOI18N
 
         jButton2guardar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2guardar.setText("GUARDAR");
+        jButton2guardar.setText("MODIFICAR");
         jButton2guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2guardarActionPerformed(evt);
@@ -160,6 +164,16 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
                 jComboBox1jefesActionPerformed(evt);
             }
         });
+
+        buttonGroup1estado.add(jRadioButton2Inactivo);
+        jRadioButton2Inactivo.setText("Inactivo");
+        jRadioButton2Inactivo.setName("M"); // NOI18N
+
+        buttonGroup1estado.add(jRadioButton1Activo);
+        jRadioButton1Activo.setText("Activo");
+        jRadioButton1Activo.setName("H"); // NOI18N
+
+        jLabel12.setText("Estado:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -180,48 +194,55 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
                             .addComponent(jPasswordField1)
                             .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(40, 40, 40)
-                                .addComponent(jTextField1rut, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(jLabel12)
+                                .addGap(36, 36, 36)
+                                .addComponent(jRadioButton1Activo)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField2nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(18, 18, 18))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(36, 36, 36)))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jTextField4apaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField3amaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jRadioButton1hombre)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jRadioButton2mujer))))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField7email, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField6fono, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField5direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton2guardar)
-                                    .addComponent(jComboBox1jefes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jRadioButton2Inactivo))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(40, 40, 40)
+                                    .addComponent(jTextField1rut, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jTextField2nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addGap(18, 18, 18))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addGap(36, 36, 36)))
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(jTextField4apaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jTextField3amaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(jRadioButton1hombre)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jRadioButton2mujer))))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel9))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField7email, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField6fono, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField5direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton2guardar)
+                                        .addComponent(jComboBox1jefes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -270,6 +291,11 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jComboBox1jefes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jRadioButton1Activo)
+                    .addComponent(jRadioButton2Inactivo))
                 .addGap(18, 18, 18)
                 .addComponent(jButton2guardar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -291,9 +317,11 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 282, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -346,6 +374,18 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
                             }
                         }
                 }
+                switch (userFound.getActivo()) {
+                    case 0:
+                        jRadioButton2Inactivo.setSelected(true);
+                        break;
+                    case 1:
+                        jRadioButton1Activo.setSelected(true);
+                        break;
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "USUARIO no encontrado", "ERROR", INFORMATION_MESSAGE);
+                jTextField1rutBuscar.setText("");
+                jTextField1rutBuscar.requestFocus();
             }
         } else {
             JOptionPane.showMessageDialog(this, "RUT no válido", "ERROR", INFORMATION_MESSAGE);
@@ -405,6 +445,7 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1estado;
     private javax.swing.ButtonGroup buttonGroup1sexo;
     private javax.swing.JButton jButton1buscar;
     private javax.swing.JButton jButton2guardar;
@@ -412,6 +453,7 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -424,7 +466,9 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JRadioButton jRadioButton1Activo;
     private javax.swing.JRadioButton jRadioButton1hombre;
+    private javax.swing.JRadioButton jRadioButton2Inactivo;
     private javax.swing.JRadioButton jRadioButton2mujer;
     private javax.swing.JTextField jTextField1rut;
     private javax.swing.JTextField jTextField1rutBuscar;

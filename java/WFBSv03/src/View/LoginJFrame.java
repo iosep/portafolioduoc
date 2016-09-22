@@ -144,26 +144,9 @@ public class LoginJFrame extends javax.swing.JFrame {
             if (lc.usuarioLogin(irut, jPasswordField1.getText())) {
                 switch (lc.activeUserRol()) {
                     case 1:
-                        Object[] options = {"Administrador", "Jefe/a"};
-                        int n = JOptionPane.showOptionDialog(this,
-                                "¿Con que ROL quieres ingresar?",
-                                "ELEGIR ROL",
-                                JOptionPane.YES_NO_OPTION,
-                                JOptionPane.QUESTION_MESSAGE,
-                                null,
-                                options,
-                                options[0]);
-                        System.out.println("opcion panel login admin: " + n);
-                        switch (n) {
-                            case 0:
-                                AdminMainJFrame amjf = new AdminMainJFrame();
-                                amjf.setVisible(true);
-                                dispose();
-                                break;
-                            case 1:
-                                JOptionPane.showMessageDialog(this, "Jefe/a logeado", "LOGIN CORRECTO", INFORMATION_MESSAGE);
-                                break;
-                        }
+                        AdminMainJFrame amjf = new AdminMainJFrame();
+                        amjf.setVisible(true);
+                        dispose();
                         break;
                     case 2:
                         JOptionPane.showMessageDialog(this, "Jefe/a logeado", "LOGIN CORRECTO", INFORMATION_MESSAGE);
