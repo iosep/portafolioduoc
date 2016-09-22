@@ -44,7 +44,13 @@ public class UsuarioModel {
                 rs = stmt.executeQuery();
                 while (rs.next()) {
                     String[] nombres = rs.getString(1).split(" ");
-                    Jefes jefe = new Jefes(rs.getInt(4), nombres[0] + " " + rs.getString(2) + " " + rs.getString(3));
+                    Jefes jefe = null;
+                    if (rs.getString(3) != null) {
+                        jefe = new Jefes(rs.getInt(4), nombres[0] + " " + rs.getString(2) + " " + rs.getString(3));
+                    } else {
+                        jefe = new Jefes(rs.getInt(4), nombres[0] + " " + rs.getString(2));
+                    }
+
                     jefes.add(jefe);
                 }
             }
@@ -61,7 +67,7 @@ public class UsuarioModel {
         }
         return jefes;
     }
-    
+
     public Usuario findUser(int rut) {
         Usuario userFound = null;
         Connection con = null;
@@ -69,10 +75,10 @@ public class UsuarioModel {
         ResultSet rs = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            con = DriverManager.getConnection("jdbc:oracle:thin:dotnet/dotnet@localhost");
+            con = DriverManager.getConnection("jdbc:oracle:thin:WFBS/wfbs@localhost");
             stmt = con.prepareStatement(
                     "SELECT id, rut, dv, nombres, apaterno, amaterno, sexo, direccion, fono, email, clave, jefe, rol_id, activo "
-                        + "FROM usuario WHERE rut = ? AND rol_id != 1");
+                    + "FROM usuario WHERE rut = ? AND rol_id != 1");
             stmt.setInt(1, rut);
             rs = stmt.executeQuery();
             if (!rs.next()) {
@@ -82,10 +88,10 @@ public class UsuarioModel {
             } else {
                 rs = stmt.executeQuery();
                 while (rs.next()) {
-                    userFound = new Usuario(rs.getInt(1),rs.getInt(2),rs.getString(3).charAt(0),
-                        rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7).charAt(0),
-                        rs.getString(8),rs.getInt(9),rs.getString(10),rs.getString(11),rs.getInt(12),
-                        rs.getInt(13),rs.getInt(14));
+                    userFound = new Usuario(rs.getInt(1), rs.getInt(2), rs.getString(3).charAt(0),
+                            rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7).charAt(0),
+                            rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getInt(12),
+                            rs.getInt(13), rs.getInt(14));
                 }
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -101,5 +107,5 @@ public class UsuarioModel {
         }
         return userFound;
     }
-    
+
 }

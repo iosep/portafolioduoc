@@ -9,6 +9,9 @@ import Controller.Jefes;
 import Controller.LoginController;
 import Controller.Usuario;
 import Controller.UsuarioController;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 /**
  *
@@ -308,7 +311,37 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
                 String fono = "" + userFound.getFono();
                 jTextField6fono.setText(fono);
                 jTextField7email.setText(userFound.getEmail());
+                switch (userFound.getSexo()) {
+                    case 'H':
+                        buttonGroup1sexo.setSelected(jRadioButton1hombre.getModel(), true);
+                        break;
+                    case 'M':
+                        buttonGroup1sexo.setSelected(jRadioButton2mujer.getModel(), true);
+                        break;
+                }
+                switch (userFound.getRol()) {
+                    case 2:
+                        jComboBox1jefes.removeAllItems();
+                        jComboBox1jefes.addItem("Es Jefe/a");
+                        break;
+                    case 3:
+                        jComboBox1jefes.removeAllItems();
+                        uc = new UsuarioController();
+                        ArrayList<Jefes> jefeslist = uc.listaJefesController();
+                        for (Jefes jefe : jefeslist) {
+                            jComboBox1jefes.addItem(jefe.toString());
+                        }
+                        for (Jefes jefe : jefeslist) {
+                            if (jefe.getId() == userFound.getIdjefe()) {
+                                jComboBox1jefes.setSelectedItem(jefe.getNombre());
+                            }
+                        }
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "RUT no válido", "ERROR", INFORMATION_MESSAGE);
+            jTextField1rutBuscar.setText("");
+            jTextField1rutBuscar.requestFocus();
         }
     }//GEN-LAST:event_jButton1buscarActionPerformed
 
