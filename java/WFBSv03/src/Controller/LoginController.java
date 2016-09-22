@@ -5,33 +5,43 @@
  */
 package Controller;
 
-import Model.LoginModel;
-
 /**
  *
  * @author GRUPO2
  */
 public class LoginController {
 
-    private static int userId = 0;
+    private static int userRUT = 0;
+    private static int userRol = 0;
     private final UsuarioController uc = new UsuarioController();
     private final ShaSalt ss = new ShaSalt();
 
     public boolean usuarioLogin(int rut, String clave) {
         boolean vb = false;
-        userId = ss.validatePass(rut, clave);
-        if (userId != 0) {
+        userRUT = ss.validatePass(rut, clave);
+        if (userRUT != 0) {
             vb = true;
         }
         return vb;
     }
 
-    public int activeUser() {
-        return userId;
+    public int activeUserRUT() {
+        return userRUT;
+    }
+
+    public int activeUserRol() {
+        Usuario activeUser = uc.findUserController(userRUT);
+        userRol = activeUser.getRol();
+        return userRol;
+    }
+
+    public void setActiveUserRol(int ur) {
+        userRol = ur;
     }
 
     public void logOut() {
-        userId = 0;
+        userRUT = 0;
+        userRol = 0;
     }
 
     public boolean validarRut(String rut) {

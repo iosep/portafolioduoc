@@ -142,9 +142,37 @@ public class LoginJFrame extends javax.swing.JFrame {
             rut = rut.substring(0, rut.length() - 1);
             int irut = Integer.parseInt(rut);
             if (lc.usuarioLogin(irut, jPasswordField1.getText())) {
-                AdminMainJFrame amjf = new AdminMainJFrame();
-                amjf.setVisible(true);
-                dispose();
+                switch (lc.activeUserRol()) {
+                    case 1:
+                        Object[] options = {"Administrador", "Jefe/a"};
+                        int n = JOptionPane.showOptionDialog(this,
+                                "¿Con que ROL quieres ingresar?",
+                                "ELEGIR ROL",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE,
+                                null,
+                                options,
+                                options[0]);
+                        System.out.println("opcion panel login admin: " + n);
+                        switch (n) {
+                            case 0:
+                                AdminMainJFrame amjf = new AdminMainJFrame();
+                                amjf.setVisible(true);
+                                dispose();
+                                break;
+                            case 1:
+                                JOptionPane.showMessageDialog(this, "Jefe/a logeado", "LOGIN CORRECTO", INFORMATION_MESSAGE);
+                                break;
+                        }
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(this, "Jefe/a logeado", "LOGIN CORRECTO", INFORMATION_MESSAGE);
+                        break;
+                    case 3:
+                        JOptionPane.showMessageDialog(this, "Funcionario/a logeado", "LOGIN CORRECTO", INFORMATION_MESSAGE);
+                        break;
+                }
+
             } else {
                 JOptionPane.showMessageDialog(this, "Login incorrecto", "ERROR", INFORMATION_MESSAGE);
                 jTextField1username.requestFocus();

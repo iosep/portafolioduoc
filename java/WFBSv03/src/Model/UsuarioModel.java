@@ -68,8 +68,8 @@ public class UsuarioModel {
         return jefes;
     }
 
-    public Usuario findUser(int rut) {
-        Usuario userFound = null;
+    public ArrayList<Usuario> findUser(int rut) {
+        ArrayList<Usuario> foundUsers = new ArrayList<>();
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -78,7 +78,7 @@ public class UsuarioModel {
             con = DriverManager.getConnection("jdbc:oracle:thin:WFBS/wfbs@localhost");
             stmt = con.prepareStatement(
                     "SELECT id, rut, dv, nombres, apaterno, amaterno, sexo, direccion, fono, email, clave, jefe, rol_id, activo "
-                    + "FROM usuario WHERE rut = ? AND rol_id != 1");
+                    + "FROM usuario WHERE rut = ?");// AND rol_id != 1
             stmt.setInt(1, rut);
             rs = stmt.executeQuery();
             if (!rs.next()) {
@@ -88,24 +88,25 @@ public class UsuarioModel {
             } else {
                 rs = stmt.executeQuery();
                 while (rs.next()) {
-                    userFound = new Usuario(rs.getInt(1), rs.getInt(2), rs.getString(3).charAt(0),
+                    Usuario userFound = new Usuario(rs.getInt(1), rs.getInt(2), rs.getString(3).charAt(0),
                             rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7).charAt(0),
                             rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getInt(12),
                             rs.getInt(13), rs.getInt(14));
+                    foundUsers.add(userFound);
                 }
             }
         } catch (ClassNotFoundException | SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("findUser catch: " + e.getMessage());
         } finally {
             try {
                 rs.close();
                 stmt.close();
                 con.close();
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                System.out.println("findUser finally: " + e.getMessage());
             }
         }
-        return userFound;
+        return foundUsers;
     }
 
     public boolean crearUsuario(int rut, String dv, String sexo, String clave) {

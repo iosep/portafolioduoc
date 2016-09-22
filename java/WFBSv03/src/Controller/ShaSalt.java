@@ -35,10 +35,10 @@ public class ShaSalt {
                 System.out.println("Password no corresponde");
                 return 0;
             } else {
-                return user.getId();
+                return user.getRut();
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("validatePass catch: " + e.getMessage());
         }
         return 0;
     }

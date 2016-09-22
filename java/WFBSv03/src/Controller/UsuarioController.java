@@ -33,7 +33,14 @@ public class UsuarioController {
 
     public Usuario findUserController(int rut) {
         um = new UsuarioModel();
-        return um.findUser(rut);
+        ArrayList<Usuario> users = um.findUser(rut);
+        Usuario foundUser = null;
+        for (Usuario user : users) {
+            if (user.getRol() == 1) {
+                foundUser = user;
+            }
+        }
+        return foundUser;
     }
 
     public boolean crearUsuarioController(int rut, String dv, String sexo, String clave) {
