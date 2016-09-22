@@ -14,11 +14,12 @@ import Model.LoginModel;
 public class LoginController {
 
     private static int userId = 0;
+    private final UsuarioController uc = new UsuarioController();
+    private final ShaSalt ss = new ShaSalt();
 
     public boolean usuarioLogin(int rut, String clave) {
         boolean vb = false;
-        LoginModel lm = new LoginModel();
-        userId = lm.userLogin(rut, clave);
+        userId = ss.validatePass(rut, clave);
         if (userId != 0) {
             vb = true;
         }

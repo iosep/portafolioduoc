@@ -316,6 +316,7 @@
               <ComponentRef name="buttonGroup1sexo"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Mujer"/>
+            <Property name="name" type="java.lang.String" value="M" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField7email">
@@ -345,6 +346,7 @@
               <ComponentRef name="buttonGroup1sexo"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Hombre"/>
+            <Property name="name" type="java.lang.String" value="H" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton2guardar">
@@ -354,6 +356,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="GUARDAR"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2guardarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="jPasswordField1">
         </Component>

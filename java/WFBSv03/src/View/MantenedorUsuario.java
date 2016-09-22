@@ -7,9 +7,11 @@ package View;
 
 import Controller.Jefes;
 import Controller.LoginController;
+import Controller.ShaSalt;
 import Controller.Usuario;
 import Controller.UsuarioController;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
@@ -127,6 +129,7 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
 
         buttonGroup1sexo.add(jRadioButton2mujer);
         jRadioButton2mujer.setText("Mujer");
+        jRadioButton2mujer.setName("M"); // NOI18N
 
         jLabel11.setText("Confirmar Contraseña:");
 
@@ -140,9 +143,15 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
 
         buttonGroup1sexo.add(jRadioButton1hombre);
         jRadioButton1hombre.setText("Hombre");
+        jRadioButton1hombre.setName("H"); // NOI18N
 
         jButton2guardar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton2guardar.setText("GUARDAR");
+        jButton2guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2guardarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Jefe/a:");
 
@@ -352,6 +361,47 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
     private void jComboBox1jefesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1jefesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1jefesActionPerformed
+
+    private void jButton2guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2guardarActionPerformed
+        // TODO add your handling code here:
+        lc = new LoginController();
+        if (lc.validarRut(jTextField1rut.getText())) {
+            String rut = jTextField1rut.getText();
+            rut = rut.replace(".", "");
+            rut = rut.replace("-", "");
+            rut = rut.substring(0, rut.length() - 1);
+            String dv = rut.substring(rut.length());
+            System.out.println(dv);
+            int irut = Integer.parseInt(rut);
+            uc = new UsuarioController();
+            if (buttonGroup1sexo.getSelection() != null) {
+                String sexo = "";
+                if (jRadioButton1hombre.isSelected()) {
+                    sexo = "H";
+                } else if (jRadioButton2mujer.isSelected()) {
+                    sexo = "M";
+                }
+                if (Arrays.equals(jPasswordField1.getPassword(), jPasswordField2.getPassword())) {
+                    ShaSalt ss = new ShaSalt();
+                    String pass = ss.hashPassword(jPasswordField1.getText());
+                    uc.crearUsuarioController(irut, dv, sexo, pass);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Contraseñas no coinciden", "ERROR", INFORMATION_MESSAGE);
+                    jPasswordField1.setText("");
+                    jPasswordField2.setText("");
+                    jPasswordField1.requestFocus();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Seleccione sexo", "ERROR", INFORMATION_MESSAGE);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "RUT no válido", "ERROR", INFORMATION_MESSAGE);
+            jTextField1rut.setText("");
+            jTextField1rut.requestFocus();
+        }
+
+    }//GEN-LAST:event_jButton2guardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

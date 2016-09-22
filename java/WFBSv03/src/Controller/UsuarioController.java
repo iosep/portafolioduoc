@@ -35,4 +35,9 @@ public class UsuarioController {
         um = new UsuarioModel();
         return um.findUser(rut);
     }
+
+    public boolean crearUsuarioController(int rut, String dv, String sexo, String clave) {
+        um = new UsuarioModel();
+        return um.crearUsuario(rut, dv, sexo, clave);
+    }
 }

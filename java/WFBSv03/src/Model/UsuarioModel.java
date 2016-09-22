@@ -108,4 +108,45 @@ public class UsuarioModel {
         return userFound;
     }
 
+    public boolean crearUsuario(int rut, String dv, String sexo, String clave) {
+        boolean vb = false;
+        Connection con = null;
+        PreparedStatement stmt = null;
+        //ResultSet rs = null;
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            con = DriverManager.getConnection("jdbc:oracle:thin:WFBS/wfbs@localhost");
+            stmt = con.prepareStatement("INSERT INTO usuario(rut,dv,sexo,clave,rol_id) VALUES(?,?,?,?,3)");
+            stmt.setInt(1, rut);
+            stmt.setString(2, dv);
+            stmt.setString(3, sexo);
+            stmt.setString(4, clave);
+            stmt.executeUpdate();
+            vb = true;
+            /*
+            rs = stmt.executeQuery();
+            if (!rs.next()) {
+                System.out.println("Sin coincidencias");
+                stmt.close();
+                con.close();
+            } else {
+                rs = stmt.executeQuery();
+                while (rs.next()) {
+                    vb = true;
+                }
+            }*/
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                //rs.close();
+                stmt.close();
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return vb;
+    }
+
 }
