@@ -1,4 +1,0 @@
-https://netbeans.org/kb/docs/ide/oracle-db.html
-
-https://www.mkyong.com/jdbc/connect-to-oracle-db-via-jdbc-driver-java/
-
