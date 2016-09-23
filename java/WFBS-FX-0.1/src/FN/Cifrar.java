@@ -20,12 +20,12 @@ import javax.xml.bind.DatatypeConverter;
 public class Cifrar {
 
     private final ThreadLocal<Random> random = new ThreadLocal<>();
-    private final UsuarioCTL ub = new UsuarioCTL();
+    private final UsuarioCTL uc = new UsuarioCTL();
 
     public boolean validatePassword(int rut, String password) {
         boolean vb = false;
         try {
-            UsuarioO uo = ub.getUsuarioByRut(rut);
+            UsuarioO uo = uc.getUsuarioByRut(rut);
             String hashedAndSalted = uo.getClave();
             String salt = hashedAndSalted.split(",")[1];
 

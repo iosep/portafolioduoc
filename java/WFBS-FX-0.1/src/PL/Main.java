@@ -5,6 +5,7 @@
  */
 package PL;
 
+import DAL.CargarDatos;
 import FN.Cifrar;
 import FN.Validar;
 import javafx.application.Application;
@@ -45,7 +46,7 @@ public class Main extends Application {
         subtitle.setId("subtitle");
         grid.add(subtitle, 0, 1, 4, 2);
 
-        Label userName = new Label("RUN:");
+        Label userName = new Label("RUT:");
         grid.add(userName, 0, 4);
 
         TextField txtRun = new TextField();
@@ -71,15 +72,22 @@ public class Main extends Application {
             actiontarget.setId("actiontarget");
             Validar v = new Validar();
             if (v.validarRut(txtRun.getText())) {
+                String rut = txtRun.getText();
+                rut = rut.toUpperCase();
+                rut = rut.replace(".", "");
+                rut = rut.replace("-", "");
+                rut = rut.substring(0, rut.length() - 1);
                 Cifrar c = new Cifrar();
-                int rut = Integer.parseInt(txtRun.getText());
-                if (c.validatePassword(rut, pwBox.getText())) {
+                int irut = Integer.parseInt(rut);
+                if (c.validatePassword(irut, pwBox.getText())) {
                     actiontarget.setText("Login Correcto");
+                    Admin a = new Admin();
+                    a.start(primaryStage);
                 } else {
                     actiontarget.setText("Login Incorrecto");
                 }
             } else {
-                actiontarget.setText("RUN No Válido");
+                actiontarget.setText("RUT No Válido");
             }
         });
 
