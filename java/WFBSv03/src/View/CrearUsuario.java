@@ -8,9 +8,7 @@ package View;
 import Controller.Jefes;
 import Controller.LoginController;
 import Controller.ShaSalt;
-import Controller.Usuario;
 import Controller.UsuarioController;
-import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -19,20 +17,20 @@ import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
  *
  * @author iosep
  */
-public class MantenedorUsuario extends javax.swing.JInternalFrame {
+public class CrearUsuario extends javax.swing.JInternalFrame {
 
-    private static UsuarioController uc;
-    private static LoginController lc;
+    private final LoginController lc = new LoginController();
+    private final UsuarioController uc = new UsuarioController();
+    private final ShaSalt ss = new ShaSalt();
 
     /**
-     * Creates new form MantenedorUsuario
+     * Creates new form CrearUsuario
      */
-    public MantenedorUsuario() {
+    public CrearUsuario() {
         initComponents();
-        uc = new UsuarioController();
-        for (Jefes jefe : uc.listaJefesController()) {
+        uc.listaJefesController().stream().forEach((jefe) -> {
             jComboBox1jefes.addItem(jefe.toString());
-        }
+        });
     }
 
     /**
@@ -45,11 +43,7 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1sexo = new javax.swing.ButtonGroup();
-        buttonGroup1estado = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jTextField1rutBuscar = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1buscar = new javax.swing.JButton();
+        buttonGroup2estado = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jTextField3amaterno = new javax.swing.JTextField();
         jTextField5direccion = new javax.swing.JTextField();
@@ -77,48 +71,9 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
         jRadioButton2Inactivo = new javax.swing.JRadioButton();
         jRadioButton1Activo = new javax.swing.JRadioButton();
         jLabel12 = new javax.swing.JLabel();
-        buttonCrearUsuario = new javax.swing.JButton();
+        jCheckBox1esjefe = new javax.swing.JCheckBox();
 
-        setTitle("Buscar - Modificar Usuario");
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-
-        jLabel2.setText("RUT:");
-
-        jButton1buscar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1buscar.setText("BUSCAR");
-        jButton1buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1buscarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1buscar)
-                    .addComponent(jTextField1rutBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1rutBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1buscar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modificar Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Info Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         jLabel6.setText("Sexo:");
 
@@ -153,7 +108,7 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
         jRadioButton1hombre.setName("H"); // NOI18N
 
         jButton2guardar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2guardar.setText("MODIFICAR");
+        jButton2guardar.setText("CREAR");
         jButton2guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2guardarActionPerformed(evt);
@@ -168,15 +123,17 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
             }
         });
 
-        buttonGroup1estado.add(jRadioButton2Inactivo);
+        buttonGroup2estado.add(jRadioButton2Inactivo);
         jRadioButton2Inactivo.setText("Inactivo");
         jRadioButton2Inactivo.setName("M"); // NOI18N
 
-        buttonGroup1estado.add(jRadioButton1Activo);
+        buttonGroup2estado.add(jRadioButton1Activo);
         jRadioButton1Activo.setText("Activo");
         jRadioButton1Activo.setName("H"); // NOI18N
 
         jLabel12.setText("Estado:");
+
+        jCheckBox1esjefe.setText("Es Jefe/a");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -199,53 +156,55 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton2guardar)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jComboBox1jefes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jCheckBox1esjefe))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(36, 36, 36)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jTextField4apaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField3amaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jRadioButton1hombre)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jRadioButton2mujer))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField7email, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField6fono, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField5direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField1rut, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField2nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addGap(36, 36, 36)
                                 .addComponent(jRadioButton1Activo)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton2Inactivo))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(40, 40, 40)
-                                    .addComponent(jTextField1rut, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jTextField2nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
-                                            .addGap(18, 18, 18))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jLabel6)
-                                            .addGap(36, 36, 36)))
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jTextField4apaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jTextField3amaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jRadioButton1hombre)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jRadioButton2mujer))))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel8)
-                                        .addComponent(jLabel9))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField7email, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField6fono, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField5direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(18, 18, 18)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton2guardar)
-                                        .addComponent(jComboBox1jefes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jRadioButton2Inactivo)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -293,7 +252,8 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1jefes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1jefes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox1esjefe))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -301,128 +261,35 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
                     .addComponent(jRadioButton2Inactivo))
                 .addGap(18, 18, 18)
                 .addComponent(jButton2guardar)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
-
-        buttonCrearUsuario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        buttonCrearUsuario.setText("CREAR USUARIO");
-        buttonCrearUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCrearUsuarioActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(buttonCrearUsuario)))
-                .addGap(18, 18, 18)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)
-                        .addComponent(buttonCrearUsuario)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1buscarActionPerformed
-        // TODO add your handling code here:
-        lc = new LoginController();
-        if (lc.validarRut(jTextField1rutBuscar.getText())) {
-            String rut = jTextField1rutBuscar.getText();
-            rut = rut.replace(".", "");
-            rut = rut.replace("-", "");
-            rut = rut.substring(0, rut.length() - 1);
-            int irut = Integer.parseInt(rut);
-            uc = new UsuarioController();
-            Usuario userFound = uc.findUserController(irut);
-            if (userFound != null) {
-                rut = userFound.getRut() + "-" + userFound.getDv();
-                jTextField1rut.setText(rut);
-                jTextField2nombres.setText(userFound.getNombres());
-                jTextField4apaterno.setText(userFound.getApaterno());
-                jTextField3amaterno.setText(userFound.getAmaterno());
-                jTextField5direccion.setText(userFound.getDireccion());
-                String fono = "" + userFound.getFono();
-                jTextField6fono.setText(fono);
-                jTextField7email.setText(userFound.getEmail());
-                switch (userFound.getSexo()) {
-                    case 'H':
-                        buttonGroup1sexo.setSelected(jRadioButton1hombre.getModel(), true);
-                        break;
-                    case 'M':
-                        buttonGroup1sexo.setSelected(jRadioButton2mujer.getModel(), true);
-                        break;
-                }
-                switch (userFound.getRol()) {
-                    case 2:
-                        jComboBox1jefes.removeAllItems();
-                        jComboBox1jefes.addItem("Es Jefe/a");
-                        break;
-                    case 3:
-                        jComboBox1jefes.removeAllItems();
-                        uc = new UsuarioController();
-                        ArrayList<Jefes> jefeslist = uc.listaJefesController();
-                        for (Jefes jefe : jefeslist) {
-                            jComboBox1jefes.addItem(jefe.toString());
-                        }
-                        for (Jefes jefe : jefeslist) {
-                            if (jefe.getId() == userFound.getIdjefe()) {
-                                jComboBox1jefes.setSelectedItem(jefe.getNombre());
-                            }
-                        }
-                }
-                switch (userFound.getActivo()) {
-                    case 0:
-                        jRadioButton2Inactivo.setSelected(true);
-                        break;
-                    case 1:
-                        jRadioButton1Activo.setSelected(true);
-                        break;
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "USUARIO no encontrado", "ERROR", INFORMATION_MESSAGE);
-                jTextField1rutBuscar.setText("");
-                jTextField1rutBuscar.requestFocus();
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "RUT no válido", "ERROR", INFORMATION_MESSAGE);
-            jTextField1rutBuscar.setText("");
-            jTextField1rutBuscar.requestFocus();
-        }
-    }//GEN-LAST:event_jButton1buscarActionPerformed
-
     private void jTextField1rutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1rutActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1rutActionPerformed
 
-    private void jComboBox1jefesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1jefesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1jefesActionPerformed
-
     private void jButton2guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2guardarActionPerformed
         // TODO add your handling code here:
-        lc = new LoginController();
         if (lc.validarRut(jTextField1rut.getText())) {
             String rut = jTextField1rut.getText();
             rut = rut.replace(".", "");
@@ -431,7 +298,6 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
             String dv = rut.substring(rut.length());
             System.out.println(dv);
             int irut = Integer.parseInt(rut);
-            uc = new UsuarioController();
             if (buttonGroup1sexo.getSelection() != null) {
                 String sexo = "";
                 if (jRadioButton1hombre.isSelected()) {
@@ -440,8 +306,47 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
                     sexo = "M";
                 }
                 if (Arrays.equals(jPasswordField1.getPassword(), jPasswordField2.getPassword())) {
-                    ShaSalt ss = new ShaSalt();
                     String pass = ss.hashPassword(jPasswordField1.getText());
+                    if (uc.validateEmail(jTextField7email.getText())) {
+                        int rol = 0;
+                        int idjefe = 0;
+                        if (jCheckBox1esjefe.isSelected()) {
+                            rol = 2;
+                        } else {
+                            rol = 3;
+                            idjefe = uc.getIdJefe(jComboBox1jefes.getSelectedItem().toString());
+                        }
+                        if (buttonGroup2estado.getSelection() != null) {
+                            int estado = -1;
+                            if (jRadioButton1Activo.isSelected()) {
+                                estado = 1;
+                            } else if (jRadioButton2Inactivo.isSelected()) {
+                                estado = 0;
+                            }
+                            if (!(jTextField2nombres.getText().isEmpty() && jTextField3amaterno.equals("") && jTextField4apaterno.equals("")
+                                    && jTextField5direccion.equals("") && jTextField6fono.equals(""))) {
+                                int fono = 0;
+                                try {
+                                    fono = Integer.parseInt(jTextField6fono.getText());
+                                } catch (Exception e) {
+                                    JOptionPane.showMessageDialog(this, "Fono solo números", "ERROR", INFORMATION_MESSAGE);
+                                }
+                                if (uc.crearUsuarioController(irut, dv, jTextField2nombres.getText(), jTextField4apaterno.getText(),
+                                        jTextField3amaterno.getText(), sexo, jTextField5direccion.getText(), fono, jTextField7email.getText(),
+                                        pass, idjefe, rol, estado)) {
+                                    JOptionPane.showMessageDialog(this, "Usuario Creado", "EXITO", INFORMATION_MESSAGE);
+                                    //LISTAR USUARIOS
+                                }
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Seleccione estado", "ERROR", INFORMATION_MESSAGE);
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Email no válido", "ERROR", INFORMATION_MESSAGE);
+                        jTextField7email.setText("");
+                        jTextField7email.requestFocus();
+                    }
                     //uc.crearUsuarioController(irut, dv, sexo, pass);
                 } else {
                     JOptionPane.showMessageDialog(this, "Contraseñas no coinciden", "ERROR", INFORMATION_MESSAGE);
@@ -458,30 +363,23 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
             jTextField1rut.setText("");
             jTextField1rut.requestFocus();
         }
-
     }//GEN-LAST:event_jButton2guardarActionPerformed
 
-    private void buttonCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrearUsuarioActionPerformed
+    private void jComboBox1jefesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1jefesActionPerformed
         // TODO add your handling code here:
-        CrearUsuario cu = new CrearUsuario();
-        cu.setVisible(true);
-        getParent().add(cu);
-        cu.toFront();
-    }//GEN-LAST:event_buttonCrearUsuarioActionPerformed
+    }//GEN-LAST:event_jComboBox1jefesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonCrearUsuario;
-    private javax.swing.ButtonGroup buttonGroup1estado;
     private javax.swing.ButtonGroup buttonGroup1sexo;
-    private javax.swing.JButton jButton1buscar;
+    private javax.swing.ButtonGroup buttonGroup2estado;
     private javax.swing.JButton jButton2guardar;
+    private javax.swing.JCheckBox jCheckBox1esjefe;
     private javax.swing.JComboBox<String> jComboBox1jefes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -489,7 +387,6 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
@@ -498,7 +395,6 @@ public class MantenedorUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRadioButton2Inactivo;
     private javax.swing.JRadioButton jRadioButton2mujer;
     private javax.swing.JTextField jTextField1rut;
-    private javax.swing.JTextField jTextField1rutBuscar;
     private javax.swing.JTextField jTextField2nombres;
     private javax.swing.JTextField jTextField3amaterno;
     private javax.swing.JTextField jTextField4apaterno;

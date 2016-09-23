@@ -109,7 +109,9 @@ public class UsuarioModel {
         return userFound;
     }
 
-    public boolean crearUsuario(int rut, String dv, String sexo, String clave) {
+    public boolean crearUsuario(int rut, String dv, String nombres, String apaterno, String amaterno,
+            String sexo, String direccion, int fono, String email, String clave, int idjefe, int rol,
+            int activo) {
         boolean vb = false;
         Connection con = null;
         PreparedStatement stmt = null;
@@ -117,11 +119,21 @@ public class UsuarioModel {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             con = DriverManager.getConnection("jdbc:oracle:thin:WFBS/wfbs@localhost");
-            stmt = con.prepareStatement("INSERT INTO usuario(rut,dv,sexo,clave,rol_id) VALUES(?,?,?,?,3)");
+            stmt = con.prepareStatement("INSERT INTO usuario(rut,dv,nombres,apaterno,amaterno,sexo,direccion,fono,"
+                    + "email,clave,jefe,rol_id,activo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
             stmt.setInt(1, rut);
             stmt.setString(2, dv);
-            stmt.setString(3, sexo);
-            stmt.setString(4, clave);
+            stmt.setString(3, nombres);
+            stmt.setString(4, apaterno);
+            stmt.setString(5, amaterno);
+            stmt.setString(6, sexo);
+            stmt.setString(7, direccion);
+            stmt.setInt(8, fono);
+            stmt.setString(9, email);
+            stmt.setString(10, clave);
+            stmt.setInt(11, idjefe);
+            stmt.setInt(12, rol);
+            stmt.setInt(13, activo);
             stmt.executeUpdate();
             vb = true;
             /*

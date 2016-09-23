@@ -16,7 +16,7 @@ public class AdminMainJFrame extends javax.swing.JFrame {
      */
     public AdminMainJFrame() {
         initComponents();
-        mantenedorUsuario1.setVisible(false);
+//        mantenedorUsuario1.setVisible(false);
     }
 
     /**
@@ -29,7 +29,6 @@ public class AdminMainJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        mantenedorUsuario1 = new View.MantenedorUsuario();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1usuario = new javax.swing.JMenuItem();
@@ -39,35 +38,26 @@ public class AdminMainJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WFBS - Home Admin");
         setLocationByPlatform(true);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(700, 500));
-
-        mantenedorUsuario1.setClosable(true);
-        mantenedorUsuario1.setIconifiable(true);
-        mantenedorUsuario1.setTitle("Mantenedor Usuarios");
-        mantenedorUsuario1.setVisible(true);
-
-        jDesktopPane1.setLayer(mantenedorUsuario1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mantenedorUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+            .addGap(0, 700, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mantenedorUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+            .addGap(0, 480, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Mantenedores");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         jMenuItem1usuario.setText("Usuarios");
         jMenuItem1usuario.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +99,10 @@ public class AdminMainJFrame extends javax.swing.JFrame {
 
     private void jMenuItem1usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1usuarioActionPerformed
         // TODO add your handling code here:
-        mantenedorUsuario1.setVisible(true);
+        //mantenedorUsuario1.setVisible(true);
+        MantenedorUsuario mu = new MantenedorUsuario();
+        mu.setVisible(true);
+        this.jDesktopPane1.add(mu);
     }//GEN-LAST:event_jMenuItem1usuarioActionPerformed
 
     private void jMenuItem1salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1salirActionPerformed
@@ -119,6 +112,10 @@ public class AdminMainJFrame extends javax.swing.JFrame {
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem1salirActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,6 +159,5 @@ public class AdminMainJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1salir;
     private javax.swing.JMenuItem jMenuItem1usuario;
-    private View.MantenedorUsuario mantenedorUsuario1;
     // End of variables declaration//GEN-END:variables
 }
