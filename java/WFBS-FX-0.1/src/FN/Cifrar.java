@@ -22,7 +22,8 @@ public class Cifrar {
     private final ThreadLocal<Random> random = new ThreadLocal<>();
     private final UsuarioBLL ub = new UsuarioBLL();
 
-    public int validatePassword(int rut, String password) {
+    public boolean validatePassword(int rut, String password) {
+        boolean vb = false;
         try {
             UsuarioO uo = ub.getUsuarioByRut(rut);
             String hashedAndSalted = uo.getClave();
@@ -30,14 +31,13 @@ public class Cifrar {
 
             if (!hashedAndSalted.equals(makePasswordHash(password, salt))) {
                 System.out.println("Password no corresponde");
-                return 0;
             } else {
-                return uo.getRut();
+                vb = true;
             }
         } catch (Exception e) {
             System.out.println("validatePassword catch: " + e.getMessage());
         }
-        return 0;
+        return vb;
     }
 
     public String hashPassword(String password) {

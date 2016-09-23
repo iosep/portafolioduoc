@@ -25,6 +25,13 @@ and open the template in the editor.
     -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
 
+#subtitle {
+    -fx-font-size: 22px;
+    -fx-font-family: "Arial Narrow";
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
 #actiontarget {
     -fx-font-size: 13px;
     -fx-fill: FIREBRICK;

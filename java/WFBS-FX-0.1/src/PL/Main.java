@@ -5,6 +5,7 @@
  */
 package PL;
 
+import FN.Cifrar;
 import FN.Validar;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -24,11 +25,11 @@ import javafx.stage.Stage;
  *
  * @author iosep
  */
-public class NewFXMain extends Application {
-    
+public class Main extends Application {
+
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Investigadores Privados WFBS");
+        primaryStage.setTitle("SEC - Login");
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -36,9 +37,13 @@ public class NewFXMain extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text scenetitle = new Text("Bienvenido");
+        Text scenetitle = new Text("SEC");
         scenetitle.setId("welcome-text");
         grid.add(scenetitle, 0, 0, 2, 1);
+
+        Label subtitle = new Label("Sistema de Encuestas por Competencia");
+        subtitle.setId("subtitle");
+        grid.add(subtitle, 0, 1, 4, 2);
 
         Label userName = new Label("RUN:");
         grid.add(userName, 0, 4);
@@ -66,18 +71,21 @@ public class NewFXMain extends Application {
             actiontarget.setId("actiontarget");
             Validar v = new Validar();
             if (v.validarRut(txtRun.getText())) {
-                actiontarget.setText("RUN valido");
-                Login l = new Login();
-                l.start(primaryStage);
+                Cifrar c = new Cifrar();
+                int rut = Integer.parseInt(txtRun.getText());
+                if (c.validatePassword(rut, pwBox.getText())) {
+                    actiontarget.setText("Login Correcto");
+                } else {
+                    actiontarget.setText("Login Incorrecto");
+                }
             } else {
-                actiontarget.setText("RUN no valido");
+                actiontarget.setText("RUN No Válido");
             }
         });
 
-        Scene scene = new Scene(grid);
-        primaryStage.setScene(scene);
-        scene.getStylesheets().add(Login.class.getResource("Style.css").toExternalForm());
-        primaryStage.setMaximized(true);
+        Scene main = new Scene(grid, 800, 600);
+        primaryStage.setScene(main);
+        main.getStylesheets().add(Main.class.getResource("Style.css").toExternalForm());
         primaryStage.show();
 
     }
@@ -88,5 +96,5 @@ public class NewFXMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

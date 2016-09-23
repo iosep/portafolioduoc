@@ -1,6 +1,6 @@
 - CRUD de los mantenedores: 
   - usuario, *
-  - cargo, *
+  - cargo/area/perfil, *
   - preguntas, *
   - competencia, *
   - nivel, *

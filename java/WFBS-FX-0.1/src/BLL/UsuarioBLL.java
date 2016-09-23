@@ -7,6 +7,7 @@ package BLL;
 
 import DAL.UsuarioDAO;
 import O.UsuarioO;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -23,7 +24,9 @@ public class UsuarioBLL {
     }
 
     public UsuarioO getUsuarioByRut(int rut) {
-        UsuarioO uo = new UsuarioO();
+        Date d = new Date(2016, 9, 1);
+        UsuarioO uo = new UsuarioO(15424261, "9", "Oñate", "Yáñez", "José A.", "H", "Calle 123, Comuna", 99887766, "ono@ono.com",
+                "77+9Qe+/vUdm77+9X1MQZe+/vV0177+9aGfvv70677+9cu+/ve+/ve+/vT/vv73vv70677+977+9De+/vSQ=,-576102074", 1, 1, 1, d, null, null);
         return uo;
     }
 

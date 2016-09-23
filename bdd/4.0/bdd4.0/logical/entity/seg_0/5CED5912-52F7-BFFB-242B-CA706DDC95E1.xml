@@ -1,0 +1,137 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="5CED5912-52F7-BFFB-242B-CA706DDC95E1" name="detalle">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 15:28:27 UTC</createdTime>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="9A28157D-3F70-FEF7-AC25-F9B6183B7BBD">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 15:28:34 UTC</createdTime>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="rut" id="41232128-90FA-D67F-5144-58D17F1282FA">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 15:28:50 UTC</createdTime>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="rut_jefe" id="31CE3BF9-AB2A-009A-5D93-BD59A4288899">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 15:29:30 UTC</createdTime>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nota_auto" id="CEB761EA-F86B-6771-333F-B75806ED9129">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 15:31:01 UTC</createdTime>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nota_jefe" id="1383B3BE-D0C2-C642-49E4-D70D9ED7CFEB">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 15:31:06 UTC</createdTime>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nota" id="C266B52D-EC4A-A097-9B16-D8895151D8E4">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 15:31:26 UTC</createdTime>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="brecha" id="87CE45FB-C62F-CDE6-90FF-9342DCB5BBE6">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 15:31:33 UTC</createdTime>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="CF3BD9F8-E9A7-F8F0-E5E2-FF448AFD424F">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:21:46 UTC</createdTime>
+<generatorID>CD1F9762-5B1D-C448-69C5-1F2FEC7D83D4</generatorID>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<referedAttribute>D38294F5-57B5-91D6-D821-61F6FA86484D</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="E31A936C-9226-4F3D-254A-8736A1B05D50" name="detalle PK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 15:28:41 UTC</createdTime>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>9A28157D-3F70-FEF7-AC25-F9B6183B7BBD</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

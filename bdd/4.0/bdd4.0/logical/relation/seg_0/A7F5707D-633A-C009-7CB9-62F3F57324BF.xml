@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="area_competencia" directorySegmentName="seg_0" id="A7F5707D-633A-C009-7CB9-62F3F57324BF">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:18:53 UTC</createdTime>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<sourcePk>129AFE88-6217-634A-C6C2-72280977A62B</sourcePk>
+<targetPk>960DE9A6-C6BC-8832-C739-C16E6A215A53</targetPk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>*</sourceCardinality>
+<sourceEntity>F2011B3E-1C6B-9BDA-792F-0AD172835BE1</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>6C34C9AB-9B94-2BDC-127E-349C6B7EBC6B</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
