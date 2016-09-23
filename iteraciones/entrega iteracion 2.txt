@@ -1,9 +1,9 @@
 - CRUD de los mantenedores: 
-  - usuario, 
-  - cargo, 
-  - preguntas, 
-  - competencia, 
-  - nivel, 
+  - usuario, *
+  - cargo, *
+  - preguntas, *
+  - competencia, *
+  - nivel, *
   - periodo
 
 - Encuesta, que constara básicamente de la presentación de que sera la encuesta y la encuesta misma que se aplica a un funcionario en donde se podrá ir contestando.

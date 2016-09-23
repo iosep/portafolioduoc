@@ -5,7 +5,6 @@
  */
 package View;
 
-import Controller.Jefes;
 import Controller.LoginController;
 import Controller.ShaSalt;
 import Controller.UsuarioController;
@@ -294,9 +293,8 @@ public class CrearUsuario extends javax.swing.JInternalFrame {
             String rut = jTextField1rut.getText();
             rut = rut.replace(".", "");
             rut = rut.replace("-", "");
+            String dv = rut.substring(rut.length() - 1);
             rut = rut.substring(0, rut.length() - 1);
-            String dv = rut.substring(rut.length());
-            System.out.println(dv);
             int irut = Integer.parseInt(rut);
             if (buttonGroup1sexo.getSelection() != null) {
                 String sexo = "";
@@ -309,7 +307,7 @@ public class CrearUsuario extends javax.swing.JInternalFrame {
                     String pass = ss.hashPassword(jPasswordField1.getText());
                     if (uc.validateEmail(jTextField7email.getText())) {
                         int rol = 0;
-                        int idjefe = 0;
+                        int idjefe = 1;
                         if (jCheckBox1esjefe.isSelected()) {
                             rol = 2;
                         } else {
@@ -323,20 +321,28 @@ public class CrearUsuario extends javax.swing.JInternalFrame {
                             } else if (jRadioButton2Inactivo.isSelected()) {
                                 estado = 0;
                             }
-                            if (!(jTextField2nombres.getText().isEmpty() && jTextField3amaterno.equals("") && jTextField4apaterno.equals("")
-                                    && jTextField5direccion.equals("") && jTextField6fono.equals(""))) {
+                            if (!jTextField2nombres.getText().isEmpty() && !jTextField3amaterno.getText().isEmpty()
+                                    && !jTextField4apaterno.getText().isEmpty() && !jTextField5direccion.getText().isEmpty()
+                                    && !jTextField6fono.getText().isEmpty()) {
                                 int fono = 0;
+                                boolean bf = false;
                                 try {
                                     fono = Integer.parseInt(jTextField6fono.getText());
+                                    bf = true;
                                 } catch (Exception e) {
                                     JOptionPane.showMessageDialog(this, "Fono solo números", "ERROR", INFORMATION_MESSAGE);
+                                    bf = false;
                                 }
-                                if (uc.crearUsuarioController(irut, dv, jTextField2nombres.getText(), jTextField4apaterno.getText(),
-                                        jTextField3amaterno.getText(), sexo, jTextField5direccion.getText(), fono, jTextField7email.getText(),
-                                        pass, idjefe, rol, estado)) {
-                                    JOptionPane.showMessageDialog(this, "Usuario Creado", "EXITO", INFORMATION_MESSAGE);
-                                    //LISTAR USUARIOS
+                                if (bf) {
+                                    if (uc.crearUsuarioController(irut, dv, jTextField2nombres.getText(), jTextField4apaterno.getText(),
+                                            jTextField3amaterno.getText(), sexo, jTextField5direccion.getText(), fono, jTextField7email.getText(),
+                                            pass, idjefe, rol, estado)) {
+                                        JOptionPane.showMessageDialog(this, "Usuario Creado", "EXITO", INFORMATION_MESSAGE);
+                                        //LISTAR USUARIOS
+                                    }
                                 }
+                            } else {
+                                JOptionPane.showMessageDialog(this, "No pueden existir campos vacíos", "ERROR", INFORMATION_MESSAGE);
                             }
                         } else {
                             JOptionPane.showMessageDialog(this, "Seleccione estado", "ERROR", INFORMATION_MESSAGE);
@@ -344,10 +350,9 @@ public class CrearUsuario extends javax.swing.JInternalFrame {
 
                     } else {
                         JOptionPane.showMessageDialog(this, "Email no válido", "ERROR", INFORMATION_MESSAGE);
-                        jTextField7email.setText("");
+                        //jTextField7email.setText("");
                         jTextField7email.requestFocus();
                     }
-                    //uc.crearUsuarioController(irut, dv, sexo, pass);
                 } else {
                     JOptionPane.showMessageDialog(this, "Contraseñas no coinciden", "ERROR", INFORMATION_MESSAGE);
                     jPasswordField1.setText("");
@@ -360,7 +365,7 @@ public class CrearUsuario extends javax.swing.JInternalFrame {
 
         } else {
             JOptionPane.showMessageDialog(this, "RUT no válido", "ERROR", INFORMATION_MESSAGE);
-            jTextField1rut.setText("");
+            //jTextField1rut.setText("");
             jTextField1rut.requestFocus();
         }
     }//GEN-LAST:event_jButton2guardarActionPerformed
