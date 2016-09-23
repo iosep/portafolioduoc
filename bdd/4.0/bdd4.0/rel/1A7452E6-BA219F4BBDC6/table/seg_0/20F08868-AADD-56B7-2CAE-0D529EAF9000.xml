@@ -144,6 +144,17 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="clave" id="3901EB8E-CD28-159E-A3CC-D3412BFF393B">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 18:07:36 UTC</createdTime>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="4BF024BE-14D5-1334-B1F9-A9F854677711" name="usuario_PK">

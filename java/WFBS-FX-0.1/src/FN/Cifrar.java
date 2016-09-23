@@ -5,7 +5,7 @@
  */
 package FN;
 
-import BLL.UsuarioBLL;
+import CTL.UsuarioCTL;
 import O.UsuarioO;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -20,7 +20,7 @@ import javax.xml.bind.DatatypeConverter;
 public class Cifrar {
 
     private final ThreadLocal<Random> random = new ThreadLocal<>();
-    private final UsuarioBLL ub = new UsuarioBLL();
+    private final UsuarioCTL ub = new UsuarioCTL();
 
     public boolean validatePassword(int rut, String password) {
         boolean vb = false;

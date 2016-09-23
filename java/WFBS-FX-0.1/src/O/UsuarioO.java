@@ -5,7 +5,7 @@
  */
 package O;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
@@ -14,43 +14,33 @@ import java.sql.Date;
 public class UsuarioO {
 
     private int id;
+    private int jefe_id;
     private int rut;
     private String dv;
-    private String apaterno;
-    private String amaterno;
-    private String nombres;
-    private String sexo;
-    private String direccion;
+    private String clave;
+    private String nombre;
+    private String apellido;
     private int fono;
     private String email;
-    private String clave;
-    private int jefe_id;
+    private String sexo;
     private int rol_id;
-    private int activo;
     private Date creado;
-    private Date modificado;
-    private Date desactivado;
 
     public UsuarioO() {
     }
 
-    public UsuarioO(int rut, String dv, String apaterno, String amaterno, String nombres, String sexo, String direccion, int fono, String email, String clave, int jefe_id, int rol_id, int activo, Date creado, Date modificado, Date desactivado) {
+    public UsuarioO(int jefe_id, int rut, String dv, String clave, String nombre, String apellido, int fono, String email, String sexo, int rol_id, Date creado) {
+        this.jefe_id = jefe_id;
         this.rut = rut;
         this.dv = dv;
-        this.apaterno = apaterno;
-        this.amaterno = amaterno;
-        this.nombres = nombres;
-        this.sexo = sexo;
-        this.direccion = direccion;
+        this.clave = clave;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.fono = fono;
         this.email = email;
-        this.clave = clave;
-        this.jefe_id = jefe_id;
+        this.sexo = sexo;
         this.rol_id = rol_id;
-        this.activo = activo;
         this.creado = creado;
-        this.modificado = modificado;
-        this.desactivado = desactivado;
     }
 
     public int getId() {
@@ -59,6 +49,14 @@ public class UsuarioO {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getJefe_id() {
+        return jefe_id;
+    }
+
+    public void setJefe_id(int jefe_id) {
+        this.jefe_id = jefe_id;
     }
 
     public int getRut() {
@@ -77,44 +75,28 @@ public class UsuarioO {
         this.dv = dv;
     }
 
-    public String getApaterno() {
-        return apaterno;
+    public String getClave() {
+        return clave;
     }
 
-    public void setApaterno(String apaterno) {
-        this.apaterno = apaterno;
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
-    public String getAmaterno() {
-        return amaterno;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setAmaterno(String amaterno) {
-        this.amaterno = amaterno;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public int getFono() {
@@ -133,20 +115,12 @@ public class UsuarioO {
         this.email = email;
     }
 
-    public String getClave() {
-        return clave;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
-
-    public int getJefe_id() {
-        return jefe_id;
-    }
-
-    public void setJefe_id(int jefe_id) {
-        this.jefe_id = jefe_id;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public int getRol_id() {
@@ -157,36 +131,12 @@ public class UsuarioO {
         this.rol_id = rol_id;
     }
 
-    public int getActivo() {
-        return activo;
-    }
-
-    public void setActivo(int activo) {
-        this.activo = activo;
-    }
-
     public Date getCreado() {
         return creado;
     }
 
     public void setCreado(Date creado) {
         this.creado = creado;
-    }
-
-    public Date getModificado() {
-        return modificado;
-    }
-
-    public void setModificado(Date modificado) {
-        this.modificado = modificado;
-    }
-
-    public Date getDesactivado() {
-        return desactivado;
-    }
-
-    public void setDesactivado(Date desactivado) {
-        this.desactivado = desactivado;
     }
 
 }

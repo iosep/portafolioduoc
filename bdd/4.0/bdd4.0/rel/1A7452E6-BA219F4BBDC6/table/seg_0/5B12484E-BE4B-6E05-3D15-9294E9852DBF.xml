@@ -33,27 +33,19 @@
 <colAssociation fkAssociation="62B6E1AF-B913-1FAF-7494-8A5D6561B19C" referredColumn="A3B83C4B-D4B7-2D71-F1F5-6285F8BA614E"/>
 </associations>
 </Column>
-<Column name="id_pregunta" id="52B79C6A-3105-26C0-68BB-A0E590F84791">
+<Column name="respuesta_id" id="9ECA5CBC-30FB-EF09-714B-1A1DB9DE8A82">
 <createdBy>iosep</createdBy>
-<createdTime>2016-09-23 16:57:45 UTC</createdTime>
+<createdTime>2016-09-23 18:04:21 UTC</createdTime>
 <ownerDesignName>bdd4.0</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="id_respuesta" id="8BB7A111-F375-E371-08AC-BF7F81E3689C">
-<createdBy>iosep</createdBy>
-<createdTime>2016-09-23 16:58:09 UTC</createdTime>
-<ownerDesignName>bdd4.0</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4849965C-4E68-AE33-A674-C8588B459519" referredColumn="9C7455D9-0ABA-8154-6B45-96096F6F9A6E"/>
+</associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
@@ -76,6 +68,17 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="749E4BB9-9510-55E5-3489-8EA1DC1F28ED"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8EC63FDA-904D-41FA-30E3-63CFE67D25B7" name="seleccion_respuesta_FK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 18:04:21 UTC</createdTime>
+<generatorID>A3C3F5FB-2579-D068-67ED-033D19CC8F1E</generatorID>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9ECA5CBC-30FB-EF09-714B-1A1DB9DE8A82"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

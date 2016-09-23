@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BLL;
+package CTL;
 
 import DAL.UsuarioDAO;
 import O.UsuarioO;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author iosep
  */
-public class UsuarioBLL {
+public class UsuarioCTL {
 
     private UsuarioDAO ud;//add final
 
