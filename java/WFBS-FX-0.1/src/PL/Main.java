@@ -5,7 +5,6 @@
  */
 package PL;
 
-import DAL.CargarDatos;
 import FN.Cifrar;
 import FN.Validar;
 import javafx.application.Application;

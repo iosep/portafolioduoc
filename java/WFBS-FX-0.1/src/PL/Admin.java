@@ -6,10 +6,10 @@
 package PL;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -21,24 +21,21 @@ public class Admin extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
+        HBox topMenu = new HBox();
+        Button btnUsuario = new Button("Mantenedor Usuario");
+        Button btnArea = new Button("Mantenedor Area");
+        topMenu.getChildren().addAll(btnUsuario, btnArea);
+        topMenu.getStyleClass().add("hbox");
 
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        BorderPane bp = new BorderPane();
+        bp.setTop(topMenu);
 
-        Scene scene = new Scene(root, 300, 250);
+        Scene admin = new Scene(bp, 800, 600);
 
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
+        primaryStage.setTitle("SEC - Mantenedores");
+        primaryStage.setScene(admin);
+        admin.getStylesheets().add(Admin.class.getResource("Style.css").toExternalForm());
         primaryStage.show();
     }
 
