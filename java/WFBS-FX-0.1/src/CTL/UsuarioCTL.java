@@ -8,6 +8,8 @@ package CTL;
 import DAL.UsuarioDAO;
 import O.UsuarioO;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -24,6 +26,14 @@ public class UsuarioCTL {
 
     public UsuarioO getUsuarioByRut(int rut) {
         return ud.getUsuarioByRut(rut);
+    }
+
+    public ObservableList<UsuarioO> getUsuariosFX() {
+        ObservableList<UsuarioO> users = FXCollections.observableArrayList();
+        ud.getUsuarios().stream().forEach((user) -> {
+            users.add(user);
+        });
+        return users;
     }
 
 }

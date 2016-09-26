@@ -38,11 +38,11 @@ public class Main extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
 
         Text scenetitle = new Text("SEC");
-        scenetitle.setId("welcome-text");
+        scenetitle.getStyleClass().add("title");
         grid.add(scenetitle, 0, 0, 2, 1);
 
         Label subtitle = new Label("Sistema de Encuestas por Competencia");
-        subtitle.setId("subtitle");
+        subtitle.getStyleClass().add("subtitle");
         grid.add(subtitle, 0, 1, 4, 2);
 
         Label userName = new Label("RUT:");
@@ -68,7 +68,7 @@ public class Main extends Application {
         grid.add(actiontarget, 1, 11);
 
         btn.setOnAction((ActionEvent e) -> {
-            actiontarget.setId("actiontarget");
+            actiontarget.getStyleClass().add("action");
             Validar v = new Validar();
             if (v.validarRut(txtRun.getText())) {
                 String rut = txtRun.getText();
