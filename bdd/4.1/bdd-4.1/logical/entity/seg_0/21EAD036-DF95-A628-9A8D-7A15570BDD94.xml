@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="21EAD036-DF95-A628-9A8D-7A15570BDD94" name="pregunta">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 15:48:12 UTC</createdTime>
+<ownerDesignName>bdd-4.1</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="FBCF2F04-46EA-6EE8-6D75-DC51AE3EF5A7">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 15:48:22 UTC</createdTime>
+<ownerDesignName>bdd-4.1</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="pregunta" id="ABC6A3F5-E1EC-2C3F-A98D-A91703C6463A">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 15:48:31 UTC</createdTime>
+<ownerDesignName>bdd-4.1</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="E61D23ED-6355-2EE4-3974-C9D800985776">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:22:33 UTC</createdTime>
+<generatorID>C18305D6-7285-D6CD-4D70-1CF1BDE25374</generatorID>
+<ownerDesignName>bdd-4.1</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<referedAttribute>DEC3E40E-783E-F087-0AF0-32B969F878C7</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="4AD529B9-C7D2-C6B9-B73D-B6CF0FFEE23A" name="pregunta PK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 15:48:30 UTC</createdTime>
+<ownerDesignName>bdd-4.1</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>FBCF2F04-46EA-6EE8-6D75-DC51AE3EF5A7</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
