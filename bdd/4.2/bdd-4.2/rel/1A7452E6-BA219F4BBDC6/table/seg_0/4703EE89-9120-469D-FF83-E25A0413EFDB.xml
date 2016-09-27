@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="4703EE89-9120-469D-FF83-E25A0413EFDB" name="competencia_nivel">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="competencia_id" id="B75EAEE1-6571-1FF7-9218-5CF745ABB3B6">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C932F87A-395B-DDE5-38BB-C9E158267EB6" referredColumn="AEE6F505-652A-D154-FE9C-DFFCD2369FB1"/>
+</associations>
+</Column>
+<Column name="nivel_id" id="094E4164-BEA2-1EBC-5191-B248B5A0DEA3">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="1FAE2848-D071-1ED3-08ED-C0F6EAE3A514" referredColumn="575CF796-90A0-BA26-E744-37C65F83B6D1"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2C6B22BA-E3E1-CB3C-4380-397BF054D293" name="competencia_nivel_PK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B75EAEE1-6571-1FF7-9218-5CF745ABB3B6"/>
+<colUsage columnID="094E4164-BEA2-1EBC-5191-B248B5A0DEA3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6AD32F9D-DA0E-5C4C-54D0-A4CCECEE7A7A" name="nivel_competencia_FK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>A0D0F802-1D7B-0AF6-316A-9F0676437EAF</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B75EAEE1-6571-1FF7-9218-5CF745ABB3B6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="183FE14D-7446-63D5-3DF4-5EDC4E4632DB" name="competencia_nivel_FK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>A0D0F802-1D7B-0AF6-316A-9F0676437EAF</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="094E4164-BEA2-1EBC-5191-B248B5A0DEA3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="bdd-4.2" id="81EB273B-3FFE-8480-4A87-52FC56299592" version="3.5">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 14:16:11 UTC</createdTime>
+<ownerDesignName>bdd4.0</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>81EB273B-3FFE-8480-4A87-52FC56299592</designId>
+</OSDM_Design>

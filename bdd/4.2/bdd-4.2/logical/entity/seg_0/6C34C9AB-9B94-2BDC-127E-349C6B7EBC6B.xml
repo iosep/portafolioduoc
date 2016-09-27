@@ -1,0 +1,99 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="6C34C9AB-9B94-2BDC-127E-349C6B7EBC6B" name="competencia">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 14:40:00 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="DEC3E40E-783E-F087-0AF0-32B969F878C7">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 14:40:06 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="8379A249-A61C-7382-48DC-05DF074AE953">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 14:40:24 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="descripcion" id="36B34638-61FD-2ED3-A9D6-5612CE030765">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 14:46:23 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="sigla" id="2D7E9E2A-728C-2308-46F6-6B0ED89B8D87">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 14:47:54 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="activa" id="98F08C83-431E-D5E4-F377-661CDCAF2447">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 14:48:16 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="960DE9A6-C6BC-8832-C739-C16E6A215A53" name="competencia PK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 14:40:22 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>DEC3E40E-783E-F087-0AF0-32B969F878C7</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

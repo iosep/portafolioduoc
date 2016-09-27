@@ -1,0 +1,134 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2C478BDE-2D89-5F6E-8E05-7EFB9C2BA3F1" name="respuesta">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>B48844AC-1524-0460-0A37-AFCB89328D07</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="9C7455D9-0ABA-8154-6B45-96096F6F9A6E">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>2092DAC1-95E5-0081-D133-0B7834362A56</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="respuesta" id="A2F1E537-E144-4FFF-95F9-7C1091564270">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>67812DCC-8ECF-DA31-E2F8-6F341BAB749E</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="puntos" id="009E3B1E-72D1-C69F-2112-BAE210237F97">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>B77B6563-7A35-FAAB-9B12-5FAD86EC2DED</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="pregunta_id" id="1D0BEB45-F49B-6654-3E40-2291216F4475">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>90C8BD62-0448-C958-703D-2720DBE14B99</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2547328A-FFF0-1986-3672-C54F73BB13DA" referredColumn="1C5D5D29-7C56-25E6-D33F-34B8314E856D"/>
+</associations>
+</Column>
+<Column name="creado" id="CBB90890-BBD7-1487-E881-E3D3FA95FFEF">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-26 15:38:52 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="modificado" id="26C87004-DA85-7C4D-F341-EE4BB02D29FF">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-26 15:39:06 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="desactivado" id="F823101D-D235-DEC5-1424-9EF4048A697F">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-26 15:39:06 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="activo" id="4404BAC7-D3DB-72AE-8DB7-5FA9225CE765">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-27 15:08:17 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A043A0AA-589F-2E82-A494-B9D023ABCF08" name="respuesta_PK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>A3C3F5FB-2579-D068-67ED-033D19CC8F1E</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9C7455D9-0ABA-8154-6B45-96096F6F9A6E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A04F62BD-6BDD-DD06-6FA1-3221FD1EFDBF" name="respuesta_pregunta_FK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>5BD76E31-E18B-4A5B-57AD-A067E47DB4C8</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1D0BEB45-F49B-6654-3E40-2291216F4475"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

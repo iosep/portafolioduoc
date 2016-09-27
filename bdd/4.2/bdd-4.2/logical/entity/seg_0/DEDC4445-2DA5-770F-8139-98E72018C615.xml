@@ -1,0 +1,58 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="DEDC4445-2DA5-770F-8139-98E72018C615" name="rol">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 14:34:22 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="448F79FA-F7D5-6999-0837-A0E347E09A32">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 14:53:14 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="3C258001-8FA3-A4D1-2DA3-962404F98AD8">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 14:53:24 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="B964ED19-894F-7B85-23DC-B65F01FB8778" name="perfil PK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 14:53:52 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<engineerTo>
+<item key="1A7452E6-670D-3711-34B0-BA219F4BBDC6" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>448F79FA-F7D5-6999-0837-A0E347E09A32</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
