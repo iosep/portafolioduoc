@@ -5,6 +5,7 @@
  */
 package PL;
 
+import DAL.CargarDatos;
 import FN.Cifrar;
 import FN.Validar;
 import javafx.application.Application;
@@ -29,6 +30,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+//carga de datos de prueba
+        CargarDatos cd = new CargarDatos();
+        cd.cargarUsuarios();
+
         primaryStage.setTitle("SEC - Login");
 
         GridPane grid = new GridPane();
@@ -84,7 +90,7 @@ public class Main extends Application {
             }
         });
 
-        Scene main = new Scene(grid, 800, 600);
+        Scene main = new Scene(grid, 1040, 640);
         primaryStage.setScene(main);
         main.getStylesheets().add(Main.class.getResource("Style.css").toExternalForm());
         primaryStage.show();

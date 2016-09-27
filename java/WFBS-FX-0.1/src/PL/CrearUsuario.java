@@ -135,7 +135,7 @@ public class CrearUsuario {
                         int fono = Integer.parseInt(txtFono.getText());
                         Date now = new Date();
                         if (uctl.addUsuarioCTL(new UsuarioO(txtRun.getText(), clave, txtRol.getText(), txtJefa.getText(),
-                                txtNombre.getText(), txtApellido.getText(), txtEmail.getText(), txtSexo.getText(), fono, now))) {
+                                txtNombre.getText(), txtApellido.getText(), txtEmail.getText(), txtSexo.getText(), fono, 1, now, null, null))) {
                             actiontarget.setText("Usuario Creado Con Éxito!");
                             txtRun.clear();
                             pwBox.clear();

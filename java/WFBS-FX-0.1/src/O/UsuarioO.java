@@ -22,12 +22,15 @@ public class UsuarioO {
     private String email;
     private String sexo;
     private int fono;
+    private int activo;
     private Date creado;
+    private Date modificado;
+    private Date desactivado;
 
     public UsuarioO() {
     }
 
-    public UsuarioO(String rut, String clave, String rol, String rut_jefe, String nombre, String apellido, String email, String sexo, int fono, Date creado) {
+    public UsuarioO(String rut, String clave, String rol, String rut_jefe, String nombre, String apellido, String email, String sexo, int fono, int activo, Date creado, Date modificado, Date desactivado) {
         this.rut = rut;
         this.clave = clave;
         this.rol = rol;
@@ -37,7 +40,10 @@ public class UsuarioO {
         this.email = email;
         this.sexo = sexo;
         this.fono = fono;
+        this.activo = activo;
         this.creado = creado;
+        this.modificado = modificado;
+        this.desactivado = desactivado;
     }
 
     public String getRut() {
@@ -112,12 +118,36 @@ public class UsuarioO {
         this.fono = fono;
     }
 
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
+    }
+
     public Date getCreado() {
         return creado;
     }
 
     public void setCreado(Date creado) {
         this.creado = creado;
+    }
+
+    public Date getModificado() {
+        return modificado;
+    }
+
+    public void setModificado(Date modificado) {
+        this.modificado = modificado;
+    }
+
+    public Date getDesactivado() {
+        return desactivado;
+    }
+
+    public void setDesactivado(Date desactivado) {
+        this.desactivado = desactivado;
     }
 
 }

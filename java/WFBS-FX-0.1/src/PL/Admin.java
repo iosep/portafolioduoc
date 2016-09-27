@@ -53,7 +53,10 @@ public class Admin extends Application {
     private TableColumn<UsuarioO, String> sexoColumn;
     private TableColumn<UsuarioO, String> rolColumn;
     private TableColumn<UsuarioO, String> jefeColumn;
+    private TableColumn<UsuarioO, String> activoColumn;
     private TableColumn<UsuarioO, String> creadoColumn;
+    private TableColumn<UsuarioO, String> modificadoColumn;
+    private TableColumn<UsuarioO, String> desactivadoColumn;
 
     @Override
     public void start(Stage primaryStage) {
@@ -76,8 +79,8 @@ public class Admin extends Application {
 
             tableUsers.getColumns().clear();
             tableUsers.setItems(uc.getUsuariosFX());
-            tableUsers.getColumns().addAll(rutColumn, nombreColumn, apellidoColumn,
-                    fonoColumn, emailColumn, sexoColumn, rolColumn, jefeColumn, creadoColumn);
+            tableUsers.getColumns().addAll(rutColumn, nombreColumn, apellidoColumn, fonoColumn, emailColumn, sexoColumn,
+                    rolColumn, jefeColumn, activoColumn, creadoColumn, modificadoColumn, desactivadoColumn);
             //filtrar por nombre, apellido o rut
             // 1. Wrap the ObservableList in a FilteredList (initially display all data).
             FilteredList<UsuarioO> filteredData = new FilteredList<>(uc.getUsuariosFX(), p -> true);
@@ -113,7 +116,7 @@ public class Admin extends Application {
                 CrearUsuario cuw = new CrearUsuario();
                 boolean crearVB = cuw.display();
                 if (crearVB) {
-                    tableUsers.refresh();
+                    tableUsers.setItems(uc.getUsuariosFX());
                     System.out.println("llega la respuesta de creacion de usuario al main admin");
                 }
             });
@@ -131,15 +134,15 @@ public class Admin extends Application {
             final TableRow<UsuarioO> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
-            final MenuItem eliminarMenuItem = new MenuItem("Eliminar");
+            final MenuItem eliminarMenuItem = new MenuItem("Desactivar");
             //modificar            
             modificarMenuItem.setOnAction((ActionEvent event) -> {
                 System.out.println("Modificar usuario rut: " + row.getItem().getRut());
             });
-            //eliminar            
+            //desactivar
             eliminarMenuItem.setOnAction((ActionEvent event) -> {
                 //tableUsers.getItems().remove(row.getItem());
-                System.out.println("Eliminar usuario rut: " + row.getItem().getRut());
+                System.out.println("Desactivar usuario rut: " + row.getItem().getRut());
             });
             contextMenu.getItems().add(modificarMenuItem);
             contextMenu.getItems().add(eliminarMenuItem);
@@ -178,14 +181,23 @@ public class Admin extends Application {
         jefeColumn = new TableColumn<>("Jefa");
         jefeColumn.setCellValueFactory(new PropertyValueFactory<>("rut_jefe"));
 
+        activoColumn = new TableColumn<>("Activo");
+        activoColumn.setCellValueFactory(new PropertyValueFactory<>("activo"));
+
         creadoColumn = new TableColumn<>("Creado");
         creadoColumn.setCellValueFactory(new PropertyValueFactory<>("creado"));
+
+        modificadoColumn = new TableColumn<>("Modificado");
+        modificadoColumn.setCellValueFactory(new PropertyValueFactory<>("modificado"));
+
+        desactivadoColumn = new TableColumn<>("Desactivado");
+        desactivadoColumn.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
 
 //load display in center border pane
         bp.setCenter(display);
 
 //setting scene
-        Scene admin = new Scene(bp, 800, 600);
+        Scene admin = new Scene(bp, 1040, 640);
 
         primaryStage.setTitle("SEC - Mantenedores");
         primaryStage.setScene(admin);
