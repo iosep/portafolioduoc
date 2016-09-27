@@ -5,6 +5,8 @@
  */
 package DAL;
 
+import O.AreaO;
+import O.CompetenciaO;
 import O.UsuarioO;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +15,7 @@ import java.util.Date;
  *
  * @author iosep
  */
-public class CargarDatos {
+public class AaaInitialLoad {
 
     private static UsuarioO user1;
     private static UsuarioO user2;
@@ -21,9 +23,13 @@ public class CargarDatos {
     private static UsuarioO user4;
     private static UsuarioO user5;
     private static ArrayList<UsuarioO> users;
+    private static ArrayList<AreaO> areas;
+    private static ArrayList<CompetenciaO> competencias;
 
-    public void cargarUsuarios() {
+    public void cargar() {
         users = new ArrayList<>();
+        areas = new ArrayList<>();
+        competencias = new ArrayList<>();
 
         Date fecha = new Date();
         user1 = new UsuarioO("15424261-9",
@@ -56,4 +62,21 @@ public class CargarDatos {
     public boolean agregarUsuario(UsuarioO ufx) {
         return users.add(ufx);
     }
+
+    public ArrayList<AreaO> mostrarAreas() {
+        return areas;
+    }
+
+    public boolean agregarArea(AreaO a) {
+        return areas.add(a);
+    }
+
+    public ArrayList<CompetenciaO> mostrarCompetencias() {
+        return competencias;
+    }
+
+    public boolean agregarCompetencia(CompetenciaO c) {
+        return competencias.add(c);
+    }
+
 }

@@ -12,9 +12,9 @@ import java.util.ArrayList;
  *
  * @author iosep
  */
-public class UsuarioDAO {
+public class UsuarioDAL {
 
-    private final CargarDatos cd = new CargarDatos();
+    private final AaaInitialLoad cd = new AaaInitialLoad();
     private static UsuarioO uo;
 
     public ArrayList<UsuarioO> getUsuarios() {

@@ -5,11 +5,10 @@
  */
 package PL;
 
-import DAL.CargarDatos;
+import DAL.AaaInitialLoad;
 import FN.Cifrar;
 import FN.Validar;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,14 +25,14 @@ import javafx.stage.Stage;
  *
  * @author iosep
  */
-public class Main extends Application {
+public class Login extends Application {
 
     @Override
     public void start(Stage primaryStage) {
 
 //carga de datos de prueba
-        CargarDatos cd = new CargarDatos();
-        cd.cargarUsuarios();
+        AaaInitialLoad aaa = new AaaInitialLoad();
+        aaa.cargar();
 
         primaryStage.setTitle("SEC - Login");
 
@@ -73,7 +72,7 @@ public class Main extends Application {
         final Text actiontarget = new Text();
         grid.add(actiontarget, 1, 11);
 
-        btn.setOnAction((ActionEvent e) -> {
+        btn.setOnAction(e -> {
             actiontarget.getStyleClass().add("action");
             Validar v = new Validar();
             if (v.validarRut(txtRun.getText())) {
@@ -90,9 +89,9 @@ public class Main extends Application {
             }
         });
 
-        Scene main = new Scene(grid, 1040, 640);
-        primaryStage.setScene(main);
-        main.getStylesheets().add(Main.class.getResource("Style.css").toExternalForm());
+        Scene display = new Scene(grid, 1040, 640);
+        primaryStage.setScene(display);
+        display.getStylesheets().add(Login.class.getResource("Style.css").toExternalForm());
         primaryStage.show();
 
     }

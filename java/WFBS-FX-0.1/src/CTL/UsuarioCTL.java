@@ -5,7 +5,7 @@
  */
 package CTL;
 
-import DAL.UsuarioDAO;
+import DAL.UsuarioDAL;
 import O.UsuarioO;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
@@ -17,7 +17,7 @@ import javafx.collections.ObservableList;
  */
 public class UsuarioCTL {
 
-    private final UsuarioDAO ud = new UsuarioDAO();
+    private final UsuarioDAL ud = new UsuarioDAL();
 
     public ArrayList<UsuarioO> getUsuarios() {
         ArrayList<UsuarioO> alu = new ArrayList<>();

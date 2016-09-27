@@ -136,7 +136,7 @@ public class CrearUsuario {
                         Date now = new Date();
                         if (uctl.addUsuarioCTL(new UsuarioO(txtRun.getText(), clave, txtRol.getText(), txtJefa.getText(),
                                 txtNombre.getText(), txtApellido.getText(), txtEmail.getText(), txtSexo.getText(), fono, 1, now, null, null))) {
-                            actiontarget.setText("Usuario Creado Con Éxito!");
+                            actiontarget.setText("Usuario Creado Exitosamente");
                             txtRun.clear();
                             pwBox.clear();
                             pwBox2.clear();
@@ -149,7 +149,7 @@ public class CrearUsuario {
                             txtFono.clear();
                             vb = true;
                         } else {
-                            actiontarget.setText("Ha Ocurrido Un Error");
+                            actiontarget.setText("Error Al Crear Usuario");
                         }
                     }
                 } else {

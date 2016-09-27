@@ -5,34 +5,31 @@
  */
 package O;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
  * @author iosep
  */
-public class CompetenciaO {
+public class AreaO {
 
     private static int fakeId = 0;
 
     private int id;
     private String nombre;
-    private String descripcion;
     private String sigla;
     private int activo;
     private Date creado;
     private Date modificado;
     private Date desactivado;
 
-    public CompetenciaO() {
+    public AreaO() {
     }
 
-    public CompetenciaO(String nombre, String descripcion, String sigla, int activo, Date creado, Date modificado, Date desactivado) {
-//fake ID
+    public AreaO(String nombre, String sigla, int activo, Date creado, Date modificado, Date desactivado) {
+//fake area id
         this.id = ++fakeId;
-
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.sigla = sigla;
         this.activo = activo;
         this.creado = creado;
@@ -54,14 +51,6 @@ public class CompetenciaO {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public String getSigla() {
