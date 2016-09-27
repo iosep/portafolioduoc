@@ -43,7 +43,7 @@ public class Main extends Application {
 
         Label subtitle = new Label("Sistema de Encuestas por Competencia");
         subtitle.getStyleClass().add("subtitle");
-        grid.add(subtitle, 0, 1, 4, 2);
+        grid.add(subtitle, 0, 1, 4, 1);
 
         Label userName = new Label("RUT:");
         grid.add(userName, 0, 4);
@@ -59,7 +59,7 @@ public class Main extends Application {
 
         //grid.setGridLinesVisible(true);
         Button btn = new Button("Ingresar");
-        HBox hbBtn = new HBox(10);
+        HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 1, 9);
@@ -71,14 +71,8 @@ public class Main extends Application {
             actiontarget.getStyleClass().add("action");
             Validar v = new Validar();
             if (v.validarRut(txtRun.getText())) {
-                String rut = txtRun.getText();
-                rut = rut.toUpperCase();
-                rut = rut.replace(".", "");
-                rut = rut.replace("-", "");
-                rut = rut.substring(0, rut.length() - 1);
                 Cifrar c = new Cifrar();
-                int irut = Integer.parseInt(rut);
-                if (c.validatePassword(irut, pwBox.getText())) {
+                if (c.validatePassword(txtRun.getText(), pwBox.getText())) {
                     actiontarget.setText("Login Correcto");
                     Admin a = new Admin();
                     a.start(primaryStage);

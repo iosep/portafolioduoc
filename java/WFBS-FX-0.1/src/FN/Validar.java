@@ -33,7 +33,7 @@ public class Validar {
 
     /**
      * Validate given rut with algorithm
-     * 
+     *
      * @param rut rut for validation
      * @return true valid, otherwise false
      */
@@ -56,6 +56,17 @@ public class Validar {
             System.out.println("validarRut catch: " + e.getMessage());
         }
         return validacion;
+    }
+
+    public boolean validarInteger(String entero) {
+        boolean vb = false;
+        try {
+            int x = Integer.parseInt(entero);
+            vb = true;
+        } catch (Exception e) {
+            System.out.println("validarInteger catch: " + e.getMessage());
+        }
+        return vb;
     }
 
 }

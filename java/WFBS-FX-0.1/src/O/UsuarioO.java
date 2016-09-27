@@ -13,66 +13,39 @@ import java.util.Date;
  */
 public class UsuarioO {
 
-    private int id;
-    private int jefe_id;
-    private int rut;
-    private String dv;
+    private String rut;
     private String clave;
+    private String rol;
+    private String rut_jefe;
     private String nombre;
     private String apellido;
-    private int fono;
     private String email;
     private String sexo;
-    private int rol_id;
+    private int fono;
     private Date creado;
 
     public UsuarioO() {
     }
 
-    public UsuarioO(int jefe_id, int rut, String dv, String clave, String nombre, String apellido, int fono, String email, String sexo, int rol_id, Date creado) {
-        this.jefe_id = jefe_id;
+    public UsuarioO(String rut, String clave, String rol, String rut_jefe, String nombre, String apellido, String email, String sexo, int fono, Date creado) {
         this.rut = rut;
-        this.dv = dv;
         this.clave = clave;
+        this.rol = rol;
+        this.rut_jefe = rut_jefe;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.fono = fono;
         this.email = email;
         this.sexo = sexo;
-        this.rol_id = rol_id;
+        this.fono = fono;
         this.creado = creado;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getJefe_id() {
-        return jefe_id;
-    }
-
-    public void setJefe_id(int jefe_id) {
-        this.jefe_id = jefe_id;
-    }
-
-    public int getRut() {
+    public String getRut() {
         return rut;
     }
 
-    public void setRut(int rut) {
+    public void setRut(String rut) {
         this.rut = rut;
-    }
-
-    public String getDv() {
-        return dv;
-    }
-
-    public void setDv(String dv) {
-        this.dv = dv;
     }
 
     public String getClave() {
@@ -81,6 +54,22 @@ public class UsuarioO {
 
     public void setClave(String clave) {
         this.clave = clave;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public String getRut_jefe() {
+        return rut_jefe;
+    }
+
+    public void setRut_jefe(String rut_jefe) {
+        this.rut_jefe = rut_jefe;
     }
 
     public String getNombre() {
@@ -99,14 +88,6 @@ public class UsuarioO {
         this.apellido = apellido;
     }
 
-    public int getFono() {
-        return fono;
-    }
-
-    public void setFono(int fono) {
-        this.fono = fono;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -123,12 +104,12 @@ public class UsuarioO {
         this.sexo = sexo;
     }
 
-    public int getRol_id() {
-        return rol_id;
+    public int getFono() {
+        return fono;
     }
 
-    public void setRol_id(int rol_id) {
-        this.rol_id = rol_id;
+    public void setFono(int fono) {
+        this.fono = fono;
     }
 
     public Date getCreado() {

@@ -24,7 +24,7 @@ public class UsuarioCTL {
         return alu;
     }
 
-    public UsuarioO getUsuarioByRut(int rut) {
+    public UsuarioO getUsuarioByRut(String rut) {
         return ud.getUsuarioByRut(rut);
     }
 
@@ -36,4 +36,7 @@ public class UsuarioCTL {
         return users;
     }
 
+    public boolean addUsuarioCTL(UsuarioO ufx) {
+        return ud.addUsuario(ufx);
+    }
 }

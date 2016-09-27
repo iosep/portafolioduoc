@@ -21,12 +21,16 @@ public class UsuarioDAO {
         return cd.mostrarUsuarios();
     }
 
-    public UsuarioO getUsuarioByRut(int rut) {
+    public UsuarioO getUsuarioByRut(String rut) {
         cd.mostrarUsuarios().stream().forEach((u) -> {
-            if (u.getRut() == rut) {
+            if (u.getRut().equals(rut)) {
                 uo = u;
             }
         });
         return uo;
+    }
+
+    public boolean addUsuario(UsuarioO ufx) {
+        return cd.agregarUsuario(ufx);
     }
 }

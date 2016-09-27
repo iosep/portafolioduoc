@@ -22,9 +22,15 @@ public class Cifrar {
     private final ThreadLocal<Random> random = new ThreadLocal<>();
     private final UsuarioCTL uc = new UsuarioCTL();
 
-    public boolean validatePassword(int rut, String password) {
+    public boolean validatePassword(String rut, String password) {
         boolean vb = false;
         try {
+            rut = rut.trim();
+            rut = rut.replace(".", "");
+            rut = rut.replace("-", "");
+            String dv = rut.substring(rut.length() - 1);
+            rut = rut.substring(0, rut.length() - 1);
+            rut = rut + "-" + dv;
             UsuarioO uo = uc.getUsuarioByRut(rut);
             String hashedAndSalted = uo.getClave();
             String salt = hashedAndSalted.split(",")[1];

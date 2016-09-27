@@ -32,6 +32,11 @@ and open the template in the editor.
     -fx-background-image: url("background-texture.jpg");
 }
 
+.vbox{
+    -fx-padding: 20;
+    -fx-spacing: 20;
+}
+
 .title {
     -fx-font-size: 44px;
     -fx-font-family: "Arial Black";
