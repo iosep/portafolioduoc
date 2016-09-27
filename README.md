@@ -1,6 +1,7 @@
 # portafolioduoc
 
-portafolio de titulo ingenieria informatica duoc 2016
+portafolio de titulo ingenieria informatica duoc 
+working folder /
 
 java : { javafx + netbeans }
 
