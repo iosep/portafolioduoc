@@ -5,9 +5,9 @@
  */
 package PL;
 
-import CTL.AreaCTL;
+import CTL.CompetenciaCTL;
 import FN.Validar;
-import O.AreaO;
+import O.CompetenciaO;
 import java.util.Date;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -27,13 +27,13 @@ import javafx.stage.Stage;
  */
 public class CrearCompetencia {
 
-    private final AreaCTL actl = new AreaCTL();
+    private final CompetenciaCTL compCtl = new CompetenciaCTL();
     static boolean vb = false;
 
     public boolean display() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("SEC - Crear Nueva Area");
+        window.setTitle("SEC - Crear Nueva Competencia");
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -44,19 +44,24 @@ public class CrearCompetencia {
         Text scenetitle = new Text("SEC");
         scenetitle.getStyleClass().add("title");
         grid.add(scenetitle, 0, 0, 2, 1);
-        Label subtitle = new Label("Crear Nueva Area");
+        Label subtitle = new Label("Crear Nueva Competencia");
         subtitle.getStyleClass().add("subtitle");
         grid.add(subtitle, 0, 1, 2, 1);
 
         Label nombreLbl = new Label("Nombre:");
-        grid.add(nombreLbl, 0, 5);
+        grid.add(nombreLbl, 0, 4);
         TextField nombreTxt = new TextField();
-        grid.add(nombreTxt, 1, 5);
+        grid.add(nombreTxt, 1, 4);
 
         Label siglaLbl = new Label("Sigla:");
-        grid.add(siglaLbl, 0, 6);
+        grid.add(siglaLbl, 0, 5);
         TextField siglaTxt = new TextField();
-        grid.add(siglaTxt, 1, 6);
+        grid.add(siglaTxt, 1, 5);
+
+        Label descLbl = new Label("Descripción:");
+        grid.add(descLbl, 0, 6);
+        TextField descTxt = new TextField();
+        grid.add(descTxt, 1, 6);
 
         Button btn = new Button("CREAR");
         HBox hbBtn = new HBox();
@@ -74,15 +79,18 @@ public class CrearCompetencia {
                 msj.setText("Ingrese Nombre");
             } else if (siglaTxt.getText().isEmpty()) {
                 msj.setText("Ingrese Sigla");
+            } else if (descTxt.getText().isEmpty()) {
+                msj.setText("Ingrese Descripción");
             } else {
                 Date now = new Date();
-                vb = actl.addAreaCTL(new AreaO(nombreTxt.getText(), siglaTxt.getText(), 1, now, null, null));
+                vb = compCtl.addCompetenciaCTL(new CompetenciaO(nombreTxt.getText(), descTxt.getText(), siglaTxt.getText(), 1, now, null, null));
                 if (vb) {
                     nombreTxt.clear();
+                    descTxt.clear();
                     siglaTxt.clear();
-                    msj.setText("Area Creada Exitosamente");
+                    msj.setText("Competencia Creada Exitosamente");
                 } else {
-                    msj.setText("Error Al Crear Area");
+                    msj.setText("Error Al Crear Competencia");
                 }
             }
         });

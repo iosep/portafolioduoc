@@ -6,8 +6,10 @@
 package PL;
 
 import CTL.AreaCTL;
+import CTL.CompetenciaCTL;
 import CTL.UsuarioCTL;
 import O.AreaO;
+import O.CompetenciaO;
 import O.UsuarioO;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -34,15 +36,14 @@ import javafx.stage.Stage;
  * @author iosep
  */
 public class Admin extends Application {
-
 //variables reutilizables
+
     private final VBox display = new VBox();
     private final Text displayTitle = new Text();
     private final TextField filterField = new TextField();
     private final Label filterLabel = new Label();
     private final HBox bottomBox = new HBox();
     private final Button crearBtn = new Button();
-
 //variables mantenedor usuarios
     private final UsuarioCTL usersCtl = new UsuarioCTL();
     private final TableView<UsuarioO> usersTable = new TableView<>();
@@ -58,7 +59,6 @@ public class Admin extends Application {
     private TableColumn<UsuarioO, String> creadoColumn;
     private TableColumn<UsuarioO, String> modificadoColumn;
     private TableColumn<UsuarioO, String> desactivadoColumn;
-
 //variables mantenedor areas
     private final AreaCTL areasCtl = new AreaCTL();
     private final TableView<AreaO> areasTable = new TableView<>();
@@ -69,10 +69,20 @@ public class Admin extends Application {
     private TableColumn<AreaO, String> areaCreadoColumn;
     private TableColumn<AreaO, String> areaModificadoColumn;
     private TableColumn<AreaO, String> areaDesactivadoColumn;
+//variables mantenedor COMPETENCIAS
+    private final CompetenciaCTL compCtl = new CompetenciaCTL();
+    private final TableView<CompetenciaO> compTable = new TableView<>();
+    private TableColumn<CompetenciaO, String> compIdCol;
+    private TableColumn<CompetenciaO, String> compNombreCol;
+    private TableColumn<CompetenciaO, String> compDescCol;
+    private TableColumn<CompetenciaO, String> compSiglaCol;
+    private TableColumn<CompetenciaO, String> compActivoCol;
+    private TableColumn<CompetenciaO, String> compCreadoCol;
+    private TableColumn<CompetenciaO, String> compModificadoCol;
+    private TableColumn<CompetenciaO, String> compDesactivadoCol;
 
     @Override
     public void start(Stage primaryStage) {
-
 //
 //GENERAL SETTINGS
 //
@@ -286,34 +296,37 @@ public class Admin extends Application {
 //MANTENEDOR COMPETENCIAS
 //
 //display mantenedor COMPETENCIAS button
-        btnArea.setOnAction(e -> {
-            displayTitle.setText("SEC - Mantenedor Area");
-            areasTable.setItems(areasCtl.getAreasFX());
+        btnCompetencia.setOnAction(e -> {
+            displayTitle.setText("SEC - Mantenedor Competencia");
+            compTable.setItems(compCtl.getCompetenciasFX());
             //filtrar por nombre o sigla
-            FilteredList<AreaO> filteredData = new FilteredList<>(areasCtl.getAreasFX(), p -> true);
+            FilteredList<CompetenciaO> filteredData = new FilteredList<>(compCtl.getCompetenciasFX(), p -> true);
             filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-                filteredData.setPredicate(filterUser -> {
+                filteredData.setPredicate(filter -> {
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
                     }
                     String lowerCaseFilter = newValue.toLowerCase();
-                    if (filterUser.getNombre().toLowerCase().contains(lowerCaseFilter)) {
-                    } else if (filterUser.getSigla().toLowerCase().contains(lowerCaseFilter)) {
+                    if (filter.getNombre().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (filter.getSigla().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (filter.getDescripcion().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
                     }
                     return false;
                 });
             });
-            SortedList<AreaO> sortedData = new SortedList<>(filteredData);
-            sortedData.comparatorProperty().bind(areasTable.comparatorProperty());
-            areasTable.setItems(sortedData);
+            SortedList<CompetenciaO> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(compTable.comparatorProperty());
+            compTable.setItems(sortedData);
             //filter hbox
             filterLabel.setText("Filtrar: ");
-            crearBtn.setText("Crear Nueva Area");
+            crearBtn.setText("Crear Nueva Competencia");
             crearBtn.setOnAction(ev -> {
-                CrearArea caw = new CrearArea();
-                if (caw.display()) {
-                    areasTable.setItems(areasCtl.getAreasFX());
-                    System.out.println("llega la respuesta de creacion de area al main admin");
+                CrearCompetencia ccw = new CrearCompetencia();
+                if (ccw.display()) {
+                    compTable.setItems(compCtl.getCompetenciasFX());
                 }
             });
             bottomBox.getStyleClass().add("vbox");
@@ -321,27 +334,25 @@ public class Admin extends Application {
             bottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
             //load vbox display
             display.getChildren().clear();
-            display.getChildren().addAll(displayTitle, areasTable, bottomBox);
+            display.getChildren().addAll(displayTitle, compTable, bottomBox);
         });
 //setting table COMPETENCIAS context menu
-        areasTable.setEditable(true);
-        areasTable.setRowFactory((TableView<AreaO> tableView) -> {
-            final TableRow<AreaO> row = new TableRow<>();
+        compTable.setEditable(true);
+        compTable.setRowFactory((TableView<CompetenciaO> tableView) -> {
+            final TableRow<CompetenciaO> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
             final MenuItem eliminarMenuItem = new MenuItem("Desactivar");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
-                System.out.println("Modificar area id: " + row.getItem().getId());
+                System.out.println("Modificar Competencia Id: " + row.getItem().getId());
             });
             //desactivar
             eliminarMenuItem.setOnAction(event -> {
-                //tableUsers.getItems().remove(row.getItem());
-                System.out.println("Desactivar area id: " + row.getItem().getId());
+                System.out.println("Desactivar Competencia Id: " + row.getItem().getId());
             });
             contextMenu.getItems().add(modificarMenuItem);
             contextMenu.getItems().add(eliminarMenuItem);
-            // Set context menu on row, but use a binding to make it only show for non-empty rows:
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                     .then((ContextMenu) null)
@@ -350,24 +361,26 @@ public class Admin extends Application {
             return row;
         });
 //setting COMPETENCIAS table columns data and headers
-        areaIdColumn = new TableColumn<>("Id");
-        areaIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        areaNombreColumn = new TableColumn<>("Nombre");
-        areaNombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        areaSiglaColumn = new TableColumn<>("Sigla");
-        areaSiglaColumn.setCellValueFactory(new PropertyValueFactory<>("sigla"));
-        areaActivoColumn = new TableColumn<>("Activo");
-        areaActivoColumn.setCellValueFactory(new PropertyValueFactory<>("activo"));
-        areaCreadoColumn = new TableColumn<>("Creado");
-        areaCreadoColumn.setCellValueFactory(new PropertyValueFactory<>("creado"));
-        areaModificadoColumn = new TableColumn<>("Modificado");
-        areaModificadoColumn.setCellValueFactory(new PropertyValueFactory<>("modificado"));
-        areaDesactivadoColumn = new TableColumn<>("Desactivado");
-        areaDesactivadoColumn.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
+        compIdCol = new TableColumn<>("Id");
+        compIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        compNombreCol = new TableColumn<>("Nombre");
+        compNombreCol.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        compSiglaCol = new TableColumn<>("Sigla");
+        compSiglaCol.setCellValueFactory(new PropertyValueFactory<>("sigla"));
+        compDescCol = new TableColumn<>("Descripción");
+        compDescCol.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        compActivoCol = new TableColumn<>("Activo");
+        compActivoCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
+        compCreadoCol = new TableColumn<>("Creado");
+        compCreadoCol.setCellValueFactory(new PropertyValueFactory<>("creado"));
+        compModificadoCol = new TableColumn<>("Modificado");
+        compModificadoCol.setCellValueFactory(new PropertyValueFactory<>("modificado"));
+        compDesactivadoCol = new TableColumn<>("Desactivado");
+        compDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
 //load COMPETENCIAS columns
-        areasTable.getColumns().addAll(areaIdColumn, areaNombreColumn, areaSiglaColumn, areaActivoColumn,
-                areaCreadoColumn, areaModificadoColumn, areaDesactivadoColumn);
-        
+        compTable.getColumns().addAll(compIdCol, compNombreCol, compSiglaCol, compDescCol, compActivoCol,
+                compCreadoCol, compModificadoCol, compDesactivadoCol);
+
 //
 //GENERAL LOAD
 //

@@ -13,6 +13,8 @@ import java.sql.Date;
  */
 public class NivelO {
 
+    private static int fakeId = 0;
+
     private int id;
     private String nombre;
     private int nota;
@@ -25,6 +27,8 @@ public class NivelO {
     }
 
     public NivelO(String nombre, int nota, int activo, Date creado, Date modificado, Date desactivado) {
+        this.id = ++fakeId;
+
         this.nombre = nombre;
         this.nota = nota;
         this.activo = activo;
