@@ -21,9 +21,11 @@ import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -31,8 +33,11 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -123,25 +128,40 @@ public class Admin extends Application {
 //
 //GENERAL SETTINGS
 //
-        HBox topMenu = new HBox();
-        Button btnUsuario = new Button("Mantenedor Usuario");
-        Button btnArea = new Button("Mantenedor Area");
-        Button btnCompetencia = new Button("Mantenedor Competencia");
-        Button btnNivel = new Button("Mantenedor Nivel");
-        Button btnPregunta = new Button("Mantenedor Pregunta");
-        Button btnRespuesta = new Button("Mantenedor Respuesta");
-        topMenu.getChildren().addAll(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta, btnRespuesta);
-        topMenu.getStyleClass().add("hbox");
+        VBox topOrder = new VBox();
+        HBox topBox = new HBox();
+        Text titleMantenedores = new Text("SEC - Mantenedores");
+        StackPane logOut = stackPaneLogOut();
+        topBox.getChildren().addAll(titleMantenedores, logOut);
+        HBox.setHgrow(logOut, Priority.ALWAYS);
+        titleMantenedores.getStyleClass().add("title");
+        HBox topButtons = new HBox();
+        Button btnUsuario = new Button("Usuario");
+        btnUsuario.getStyleClass().add("topbutton");
+        Button btnArea = new Button("Area");
+        btnArea.getStyleClass().add("topbutton");
+        Button btnCompetencia = new Button("Competencia");
+        btnCompetencia.getStyleClass().add("topbutton");
+        Button btnNivel = new Button("Nivel");
+        btnNivel.getStyleClass().add("topbutton");
+        Button btnPregunta = new Button("Pregunta");
+        btnPregunta.getStyleClass().add("topbutton");
+        Button btnRespuesta = new Button("Respuesta");
+        btnRespuesta.getStyleClass().add("topbutton");
+        topButtons.getChildren().addAll(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta, btnRespuesta);
+        topButtons.getStyleClass().add("hbox");
+        topOrder.getChildren().addAll(topBox, topButtons);
+        topOrder.getStyleClass().add("topbox");
         displayTitle.getStyleClass().add("title");
         display.getStyleClass().add("vbox");
         BorderPane bp = new BorderPane();
-        bp.setTop(topMenu);
+        bp.setTop(topOrder);
 //
 //MANTENEDOR USUARIOS //Users's System Manager
 //
 //display mantenedor usuario button
         btnUsuario.setOnAction(e -> {
-            displayTitle.setText("SEC - Mantenedor Usuario");
+            displayTitle.setText("Usuario");
             usersTable.setItems(usersCtl.getUsuariosFX());
             //filtrar por nombre, apellido o rut
             // 1. Wrap the ObservableList in a FilteredList (initially display all data).
@@ -249,7 +269,7 @@ public class Admin extends Application {
 //
 //display mantenedor AREAS button
         btnArea.setOnAction(e -> {
-            displayTitle.setText("SEC - Mantenedor Area");
+            displayTitle.setText("Area");
             areasTable.setItems(areasCtl.getAreasFX());
             //filtrar por nombre o sigla
             FilteredList<AreaO> filteredData = new FilteredList<>(areasCtl.getAreasFX(), p -> true);
@@ -334,7 +354,7 @@ public class Admin extends Application {
 //
 //display mantenedor COMPETENCIAS button
         btnCompetencia.setOnAction(e -> {
-            displayTitle.setText("SEC - Mantenedor Competencia");
+            displayTitle.setText("Competencia");
             compTable.setItems(compCtl.getCompetenciasFX());
             //filtrar por nombre o sigla
             FilteredList<CompetenciaO> filteredData = new FilteredList<>(compCtl.getCompetenciasFX(), p -> true);
@@ -429,7 +449,7 @@ public class Admin extends Application {
 //
 //display mantenedor NIVEL button
         btnNivel.setOnAction(e -> {
-            displayTitle.setText("SEC - Mantenedor Nivel");
+            displayTitle.setText("Nivel");
             nivelTable.setItems(nivelCtl.getNivelesFX());
             //filtrar por nombre o sigla
             FilteredList<NivelO> filteredData = new FilteredList<>(nivelCtl.getNivelesFX(), p -> true);
@@ -509,7 +529,7 @@ public class Admin extends Application {
 //
 //display mantenedor PREGUNTA button
         btnPregunta.setOnAction(e -> {
-            displayTitle.setText("SEC - Mantenedor Pregunta");
+            displayTitle.setText("Pregunta");
             preguntaTable.setItems(preguntaCtl.getPreguntasFX());
             //filtrar por nombre o sigla
             FilteredList<PreguntaO> filteredData = new FilteredList<>(preguntaCtl.getPreguntasFX(), p -> true);
@@ -541,6 +561,7 @@ public class Admin extends Application {
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
             final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
+            final MenuItem crearRespuestaMenu = new MenuItem("Crear Respuesta");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
                 System.out.println("Modificar Pregunta Id: " + row.getItem().getId());
@@ -549,8 +570,15 @@ public class Admin extends Application {
             desactivarMenuItem.setOnAction(event -> {
                 System.out.println("Desactivar Pregunta Id: " + row.getItem().getId());
             });
-            contextMenu.getItems().add(modificarMenuItem);
-            contextMenu.getItems().add(desactivarMenuItem);
+            //crear respuesta
+            crearRespuestaMenu.setOnAction(event -> {
+                int id_pregunta = row.getItem().getId();
+                CrearRespuesta cpw = new CrearRespuesta();
+                if (cpw.display(id_pregunta)) {
+                    btnPregunta.fire();
+                }
+            });
+            contextMenu.getItems().addAll(modificarMenuItem, desactivarMenuItem, crearRespuestaMenu);
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                     .then((ContextMenu) null)
@@ -581,7 +609,7 @@ public class Admin extends Application {
 //
 //display mantenedor RESPUESTA button
         btnRespuesta.setOnAction(e -> {
-            displayTitle.setText("SEC - Mantenedor Respuesta");
+            displayTitle.setText("Respuesta");
             answerTable.setItems(answerCtl.getRespuestasFX());
             //filtrar por nombre o sigla
             FilteredList<RespuestaO> filteredData = new FilteredList<>(answerCtl.getRespuestasFX(), p -> true);
@@ -665,4 +693,14 @@ public class Admin extends Application {
         primaryStage.show();
     }
 
+    public StackPane stackPaneLogOut() {
+        StackPane stack = new StackPane();
+        Hyperlink cerrarSesion = new Hyperlink("Cerrar Sesión");
+        cerrarSesion.setBorder(Border.EMPTY);
+        cerrarSesion.getStyleClass().add("subtitle");
+        //cerrarSesion.setOnAction();
+        stack.getChildren().add(cerrarSesion);
+        stack.setAlignment(Pos.CENTER_RIGHT);
+        return stack;
+    }
 }

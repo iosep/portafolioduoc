@@ -5,9 +5,9 @@
  */
 package PL;
 
-import CTL.PreguntaCTL;
+import CTL.RespuestaCTL;
 import FN.Validar;
-import O.PreguntaO;
+import O.RespuestaO;
 import java.util.Date;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,15 +25,15 @@ import javafx.stage.Stage;
  *
  * @author iosep
  */
-public class CrearPregunta {
+public class CrearRespuesta {
 
-    private final PreguntaCTL preguntaCtl = new PreguntaCTL();
+    private final RespuestaCTL respuestaCtl = new RespuestaCTL();
     static boolean vb = false;
 
-    public boolean display(int id_competencia) {
+    public boolean display(int id_pregunta) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("SEC - Crear Nueva Pregunta");
+        window.setTitle("SEC - Crear Nueva Respuesta");
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -44,14 +44,19 @@ public class CrearPregunta {
         Text scenetitle = new Text("SEC");
         scenetitle.getStyleClass().add("title");
         grid.add(scenetitle, 0, 0, 2, 1);
-        Label subtitle = new Label("Crear Nueva Pregunta");
+        Label subtitle = new Label("Crear Nueva Respuesta");
         subtitle.getStyleClass().add("subtitle");
         grid.add(subtitle, 0, 1, 2, 1);
 
-        Label lblPregunta = new Label("Pregunta:");
-        grid.add(lblPregunta, 0, 4);
-        TextField txtPregunta = new TextField();
-        grid.add(txtPregunta, 1, 4);
+        Label lblRespuesta = new Label("Respuesta:");
+        grid.add(lblRespuesta, 0, 4);
+        TextField txtRespuesta = new TextField();
+        grid.add(txtRespuesta, 1, 4);
+
+        Label lblPuntos = new Label("Puntos:");
+        grid.add(lblPuntos, 0, 5);
+        TextField txtPuntos = new TextField();
+        grid.add(txtPuntos, 1, 5);
 
         Button btn = new Button("CREAR");
         HBox hbBtn = new HBox();
@@ -65,23 +70,28 @@ public class CrearPregunta {
         btn.setOnAction(e -> {
             msj.getStyleClass().add("action");
             Validar v = new Validar();
-            if (txtPregunta.getText().isEmpty()) {
-                msj.setText("Ingrese Pregunta");
-            } else {
+            if (txtRespuesta.getText().isEmpty()) {
+                msj.setText("Ingrese Respuesta");
+            } else if (txtPuntos.getText().isEmpty()) {
+                msj.setText("Ingrese Puntos");
+            } else if (v.validarInteger(txtPuntos.getText())) {
                 Date now = new Date();
-                vb = preguntaCtl.addPreguntaCTL(new PreguntaO(txtPregunta.getText(), id_competencia, 1, now, null, null));
+                vb = respuestaCtl.addRespuestaCTL(new RespuestaO(txtRespuesta.getText(), Integer.parseInt(txtPuntos.getText()), id_pregunta, 1, now, null, null));
                 if (vb) {
-                    txtPregunta.clear();
-                    msj.setText("Pregunta Creada Exitosamente");
+                    txtRespuesta.clear();
+                    txtPuntos.clear();
+                    msj.setText("Respuesta Creada Exitosamente");
                 } else {
-                    msj.setText("Error Al Crear Pregunta");
+                    msj.setText("Error Al Crear Respuesta");
                 }
+            } else {
+                msj.setText("Puntos Ingrese Solo Números");
             }
         });
 
         Scene display = new Scene(grid);
         window.setScene(display);
-        display.getStylesheets().add(CrearPregunta.class.getResource("Style.css").toExternalForm());
+        display.getStylesheets().add(CrearRespuesta.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
         return vb;
