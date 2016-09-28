@@ -5,13 +5,15 @@
  */
 package O;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
  * @author iosep
  */
 public class PreguntaO {
+
+    private static int fakeId = 0;
 
     private int id;
     private String pregunta;
@@ -25,6 +27,9 @@ public class PreguntaO {
     }
 
     public PreguntaO(String pregunta, int competencia_id, int activo, Date creado, Date modificado, Date desactivado) {
+
+        this.id = ++fakeId;
+
         this.pregunta = pregunta;
         this.competencia_id = competencia_id;
         this.activo = activo;

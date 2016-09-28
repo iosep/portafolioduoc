@@ -7,9 +7,13 @@ package PL;
 
 import CTL.AreaCTL;
 import CTL.CompetenciaCTL;
+import CTL.NivelCTL;
+import CTL.PreguntaCTL;
 import CTL.UsuarioCTL;
 import O.AreaO;
 import O.CompetenciaO;
+import O.NivelO;
+import O.PreguntaO;
 import O.UsuarioO;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -80,6 +84,26 @@ public class Admin extends Application {
     private TableColumn<CompetenciaO, String> compCreadoCol;
     private TableColumn<CompetenciaO, String> compModificadoCol;
     private TableColumn<CompetenciaO, String> compDesactivadoCol;
+//variables mantenedor NIVEL //system manager variables LEVEL
+    private final NivelCTL nivelCtl = new NivelCTL();
+    private final TableView<NivelO> nivelTable = new TableView<>();
+    private TableColumn<NivelO, String> idNivelCol;
+    private TableColumn<NivelO, String> nombreNivelCol;
+    private TableColumn<NivelO, String> notaNivelCol;
+    private TableColumn<NivelO, String> activoNivelCol;
+    private TableColumn<NivelO, String> creadoNivelCol;
+    private TableColumn<NivelO, String> modificadoNivelCol;
+    private TableColumn<NivelO, String> desactivadoNivelCol;
+//variables mantenedor PREGUNTA //system manager variables QUESTION
+    private final PreguntaCTL preguntaCtl = new PreguntaCTL();
+    private final TableView<PreguntaO> preguntaTable = new TableView<>();
+    private TableColumn<PreguntaO, String> qstIdCol;
+    private TableColumn<PreguntaO, String> qstPreguntaCol;
+    private TableColumn<PreguntaO, String> qstCompetenciaCol;
+    private TableColumn<PreguntaO, String> qstActivoCol;
+    private TableColumn<PreguntaO, String> qstCreadoCol;
+    private TableColumn<PreguntaO, String> qstModificadoCol;
+    private TableColumn<PreguntaO, String> qstDesactivadoCol;
 
     @Override
     public void start(Stage primaryStage) {
@@ -90,14 +114,16 @@ public class Admin extends Application {
         Button btnUsuario = new Button("Mantenedor Usuario");
         Button btnArea = new Button("Mantenedor Area");
         Button btnCompetencia = new Button("Mantenedor Competencia");
-        topMenu.getChildren().addAll(btnUsuario, btnArea, btnCompetencia);
+        Button btnPregunta = new Button("Mantenedor Pregunta");
+        Button btnNivel = new Button("Mantenedor Nivel");
+        topMenu.getChildren().addAll(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta);
         topMenu.getStyleClass().add("hbox");
         displayTitle.getStyleClass().add("title");
         display.getStyleClass().add("vbox");
         BorderPane bp = new BorderPane();
         bp.setTop(topMenu);
 //
-//MANTENEDOR USUARIOS
+//MANTENEDOR USUARIOS //Users's System Manager
 //
 //display mantenedor usuario button
         btnUsuario.setOnAction(e -> {
@@ -340,6 +366,7 @@ public class Admin extends Application {
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
             final MenuItem eliminarMenuItem = new MenuItem("Desactivar");
+            final MenuItem crearPreguntaMenu = new MenuItem("Crear Pregunta");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
                 System.out.println("Modificar Competencia Id: " + row.getItem().getId());
@@ -348,8 +375,14 @@ public class Admin extends Application {
             eliminarMenuItem.setOnAction(event -> {
                 System.out.println("Desactivar Competencia Id: " + row.getItem().getId());
             });
-            contextMenu.getItems().add(modificarMenuItem);
-            contextMenu.getItems().add(eliminarMenuItem);
+            crearPreguntaMenu.setOnAction(event -> {
+                int id_competencia = row.getItem().getId();
+                CrearPregunta cpw = new CrearPregunta();
+                if (cpw.display(id_competencia)) {
+                    btnPregunta.fire();
+                }
+            });
+            contextMenu.getItems().addAll(modificarMenuItem, eliminarMenuItem, crearPreguntaMenu);
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                     .then((ContextMenu) null)
@@ -377,6 +410,157 @@ public class Admin extends Application {
 //load COMPETENCIAS columns
         compTable.getColumns().addAll(compIdCol, compNombreCol, compSiglaCol, compDescCol, compActivoCol,
                 compCreadoCol, compModificadoCol, compDesactivadoCol);
+//
+//MANTENEDOR NIVEL
+//
+//display mantenedor NIVEL button
+        btnNivel.setOnAction(e -> {
+            displayTitle.setText("SEC - Mantenedor Nivel");
+            nivelTable.setItems(nivelCtl.getNivelesFX());
+            //filtrar por nombre o sigla
+            FilteredList<NivelO> filteredData = new FilteredList<>(nivelCtl.getNivelesFX(), p -> true);
+            filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(filter -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    return filter.getNombre().toLowerCase().contains(lowerCaseFilter);
+                    //agregar getNota() : integer.parseint
+                });
+            });
+            SortedList<NivelO> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(nivelTable.comparatorProperty());
+            nivelTable.setItems(sortedData);
+            //filter hbox
+            filterLabel.setText("Filtrar: ");
+            crearBtn.setText("Crear Nuevo Nivel");
+            crearBtn.setOnAction(ev -> {
+                CrearNivel cnw = new CrearNivel();
+                if (cnw.display()) {
+                    nivelTable.setItems(nivelCtl.getNivelesFX());
+                }
+            });
+            bottomBox.getStyleClass().add("vbox");
+            bottomBox.getChildren().clear();
+            bottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
+            //load vbox display
+            display.getChildren().clear();
+            display.getChildren().addAll(displayTitle, nivelTable, bottomBox);
+        });
+//setting table NIVEL context menu
+        nivelTable.setEditable(true);
+        nivelTable.setRowFactory((TableView<NivelO> tableView) -> {
+            final TableRow<NivelO> row = new TableRow<>();
+            final ContextMenu contextMenu = new ContextMenu();
+            final MenuItem modificarMenuItem = new MenuItem("Modificar");
+            final MenuItem eliminarMenuItem = new MenuItem("Desactivar");
+            //modificar            
+            modificarMenuItem.setOnAction(event -> {
+                System.out.println("Modificar Nivel Id: " + row.getItem().getId());
+            });
+            //desactivar
+            eliminarMenuItem.setOnAction(event -> {
+                System.out.println("Desactivar Nivel Id: " + row.getItem().getId());
+            });
+            contextMenu.getItems().add(modificarMenuItem);
+            contextMenu.getItems().add(eliminarMenuItem);
+            row.contextMenuProperty().bind(
+                    Bindings.when(row.emptyProperty())
+                    .then((ContextMenu) null)
+                    .otherwise(contextMenu)
+            );
+            return row;
+        });
+//setting NIVEL table columns data and headers
+        idNivelCol = new TableColumn<>("Id");
+        idNivelCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nombreNivelCol = new TableColumn<>("Nombre");
+        nombreNivelCol.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        notaNivelCol = new TableColumn<>("Nota");
+        notaNivelCol.setCellValueFactory(new PropertyValueFactory<>("nota"));
+        activoNivelCol = new TableColumn<>("Activo");
+        activoNivelCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
+        creadoNivelCol = new TableColumn<>("Creado");
+        creadoNivelCol.setCellValueFactory(new PropertyValueFactory<>("creado"));
+        modificadoNivelCol = new TableColumn<>("Modificado");
+        modificadoNivelCol.setCellValueFactory(new PropertyValueFactory<>("modificado"));
+        desactivadoNivelCol = new TableColumn<>("Desactivado");
+        desactivadoNivelCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
+//load NIVEL columns
+        nivelTable.getColumns().addAll(idNivelCol, nombreNivelCol, notaNivelCol, activoNivelCol, creadoNivelCol, modificadoNivelCol, desactivadoNivelCol);
+
+//
+//MANTENEDOR PREGUNTA
+//
+//display mantenedor PREGUNTA button
+        btnPregunta.setOnAction(e -> {
+            displayTitle.setText("SEC - Mantenedor Pregunta");
+            preguntaTable.setItems(preguntaCtl.getPreguntasFX());
+            //filtrar por nombre o sigla
+            FilteredList<PreguntaO> filteredData = new FilteredList<>(preguntaCtl.getPreguntasFX(), p -> true);
+            filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(filter -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    return filter.getPregunta().toLowerCase().contains(lowerCaseFilter);
+                });
+            });
+            SortedList<PreguntaO> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(preguntaTable.comparatorProperty());
+            preguntaTable.setItems(sortedData);
+            //filter hbox
+            filterLabel.setText("Filtrar: ");
+            bottomBox.getStyleClass().add("vbox");
+            bottomBox.getChildren().clear();
+            bottomBox.getChildren().addAll(filterLabel, filterField);
+            //load vbox display
+            display.getChildren().clear();
+            display.getChildren().addAll(displayTitle, preguntaTable, bottomBox);
+        });
+//setting table PREGUNTA context menu
+        preguntaTable.setEditable(true);
+        preguntaTable.setRowFactory((TableView<PreguntaO> tableView) -> {
+            final TableRow<PreguntaO> row = new TableRow<>();
+            final ContextMenu contextMenu = new ContextMenu();
+            final MenuItem modificarMenuItem = new MenuItem("Modificar");
+            final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
+            //modificar            
+            modificarMenuItem.setOnAction(event -> {
+                System.out.println("Modificar Pregunta Id: " + row.getItem().getId());
+            });
+            //desactivar
+            desactivarMenuItem.setOnAction(event -> {
+                System.out.println("Desactivar Pregunta Id: " + row.getItem().getId());
+            });
+            contextMenu.getItems().add(modificarMenuItem);
+            contextMenu.getItems().add(desactivarMenuItem);
+            row.contextMenuProperty().bind(
+                    Bindings.when(row.emptyProperty())
+                    .then((ContextMenu) null)
+                    .otherwise(contextMenu)
+            );
+            return row;
+        });
+//setting PREGUNTA table columns data and headers
+        qstIdCol = new TableColumn<>("Id");
+        qstIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        qstPreguntaCol = new TableColumn<>("Pregunta");
+        qstPreguntaCol.setCellValueFactory(new PropertyValueFactory<>("pregunta"));
+        qstCompetenciaCol = new TableColumn<>("Competencia");
+        qstCompetenciaCol.setCellValueFactory(new PropertyValueFactory<>("competencia_id"));
+        qstActivoCol = new TableColumn<>("Activo");
+        qstActivoCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
+        qstCreadoCol = new TableColumn<>("Creado");
+        qstCreadoCol.setCellValueFactory(new PropertyValueFactory<>("creado"));
+        qstModificadoCol = new TableColumn<>("Modificado");
+        qstModificadoCol.setCellValueFactory(new PropertyValueFactory<>("modificado"));
+        qstDesactivadoCol = new TableColumn<>("Desactivado");
+        qstDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
+//load PREGUNTA columns
+        preguntaTable.getColumns().addAll(qstIdCol, qstPreguntaCol, qstCompetenciaCol, qstActivoCol, qstCreadoCol, qstModificadoCol, qstDesactivadoCol);
 
 //
 //GENERAL LOAD

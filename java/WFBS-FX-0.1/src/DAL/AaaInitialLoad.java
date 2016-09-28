@@ -8,6 +8,7 @@ package DAL;
 import O.AreaO;
 import O.CompetenciaO;
 import O.NivelO;
+import O.PreguntaO;
 import O.UsuarioO;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,12 +28,14 @@ public class AaaInitialLoad {
     private static ArrayList<AreaO> areas;
     private static ArrayList<CompetenciaO> competencias;
     private static ArrayList<NivelO> niveles;
+    private static ArrayList<PreguntaO> preguntas;
 
     public void cargar() {
         users = new ArrayList<>();
         areas = new ArrayList<>();
         competencias = new ArrayList<>();
         niveles = new ArrayList<>();
+        preguntas = new ArrayList<>();
 
         Date fecha = new Date();
         user1 = new UsuarioO("1-9",
@@ -88,6 +91,14 @@ public class AaaInitialLoad {
 
     public boolean agregarNivel(NivelO obj) {
         return niveles.add(obj);
+    }
+
+    public ArrayList<PreguntaO> mostrarPreguntas() {
+        return preguntas;
+    }
+
+    public boolean agregarPregunta(PreguntaO obj) {
+        return preguntas.add(obj);
     }
 
 }
