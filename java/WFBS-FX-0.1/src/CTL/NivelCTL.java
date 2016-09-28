@@ -6,7 +6,6 @@
 package CTL;
 
 import DAL.NivelDAL;
-import O.CompetenciaO;
 import O.NivelO;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;

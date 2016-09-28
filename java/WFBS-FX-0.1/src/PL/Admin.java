@@ -36,8 +36,8 @@ import javafx.stage.Stage;
  * @author iosep
  */
 public class Admin extends Application {
-//variables reutilizables
 
+//variables reutilizables
     private final VBox display = new VBox();
     private final Text displayTitle = new Text();
     private final TextField filterField = new TextField();
@@ -96,7 +96,6 @@ public class Admin extends Application {
         display.getStyleClass().add("vbox");
         BorderPane bp = new BorderPane();
         bp.setTop(topMenu);
-
 //
 //MANTENEDOR USUARIOS
 //
@@ -205,7 +204,6 @@ public class Admin extends Application {
 //load USERS columns
         usersTable.getColumns().addAll(rutColumn, nombreColumn, apellidoColumn, fonoColumn, emailColumn, sexoColumn,
                 rolColumn, jefeColumn, activoColumn, creadoColumn, modificadoColumn, desactivadoColumn);
-
 //
 //MANTENEDOR AREAS
 //
@@ -291,7 +289,6 @@ public class Admin extends Application {
 //load AREAS columns
         areasTable.getColumns().addAll(areaIdColumn, areaNombreColumn, areaSiglaColumn, areaActivoColumn,
                 areaCreadoColumn, areaModificadoColumn, areaDesactivadoColumn);
-
 //
 //MANTENEDOR COMPETENCIAS
 //
