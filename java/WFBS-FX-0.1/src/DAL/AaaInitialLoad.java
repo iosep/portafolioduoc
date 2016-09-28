@@ -9,6 +9,7 @@ import O.AreaO;
 import O.CompetenciaO;
 import O.NivelO;
 import O.PreguntaO;
+import O.RespuestaO;
 import O.UsuarioO;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,6 +30,7 @@ public class AaaInitialLoad {
     private static ArrayList<CompetenciaO> competencias;
     private static ArrayList<NivelO> niveles;
     private static ArrayList<PreguntaO> preguntas;
+    private static ArrayList<RespuestaO> respuestas;
 
     public void cargar() {
         users = new ArrayList<>();
@@ -36,6 +38,7 @@ public class AaaInitialLoad {
         competencias = new ArrayList<>();
         niveles = new ArrayList<>();
         preguntas = new ArrayList<>();
+        respuestas = new ArrayList<>();
 
         Date fecha = new Date();
         user1 = new UsuarioO("1-9",
@@ -99,6 +102,14 @@ public class AaaInitialLoad {
 
     public boolean agregarPregunta(PreguntaO obj) {
         return preguntas.add(obj);
+    }
+
+    public ArrayList<RespuestaO> mostrarRespuestas() {
+        return respuestas;
+    }
+
+    public boolean agregarRespuesta(RespuestaO obj) {
+        return respuestas.add(obj);
     }
 
 }

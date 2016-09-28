@@ -9,11 +9,13 @@ import CTL.AreaCTL;
 import CTL.CompetenciaCTL;
 import CTL.NivelCTL;
 import CTL.PreguntaCTL;
+import CTL.RespuestaCTL;
 import CTL.UsuarioCTL;
 import O.AreaO;
 import O.CompetenciaO;
 import O.NivelO;
 import O.PreguntaO;
+import O.RespuestaO;
 import O.UsuarioO;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -104,6 +106,17 @@ public class Admin extends Application {
     private TableColumn<PreguntaO, String> qstCreadoCol;
     private TableColumn<PreguntaO, String> qstModificadoCol;
     private TableColumn<PreguntaO, String> qstDesactivadoCol;
+//variables mantenedor RESPUESTA //system manager variables ANSWER
+    private final RespuestaCTL answerCtl = new RespuestaCTL();
+    private final TableView<RespuestaO> answerTable = new TableView<>();
+    private TableColumn<RespuestaO, String> answerIdCol;
+    private TableColumn<RespuestaO, String> answerRespuestaCol;
+    private TableColumn<RespuestaO, String> answerPuntosCol;
+    private TableColumn<RespuestaO, String> answerPreguntaCol;
+    private TableColumn<RespuestaO, String> answerActivoCol;
+    private TableColumn<RespuestaO, String> answerCreadoCol;
+    private TableColumn<RespuestaO, String> answerModificadoCol;
+    private TableColumn<RespuestaO, String> answerDesactivadoCol;
 
     @Override
     public void start(Stage primaryStage) {
@@ -114,9 +127,10 @@ public class Admin extends Application {
         Button btnUsuario = new Button("Mantenedor Usuario");
         Button btnArea = new Button("Mantenedor Area");
         Button btnCompetencia = new Button("Mantenedor Competencia");
-        Button btnPregunta = new Button("Mantenedor Pregunta");
         Button btnNivel = new Button("Mantenedor Nivel");
-        topMenu.getChildren().addAll(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta);
+        Button btnPregunta = new Button("Mantenedor Pregunta");
+        Button btnRespuesta = new Button("Mantenedor Respuesta");
+        topMenu.getChildren().addAll(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta, btnRespuesta);
         topMenu.getStyleClass().add("hbox");
         displayTitle.getStyleClass().add("title");
         display.getStyleClass().add("vbox");
@@ -561,6 +575,81 @@ public class Admin extends Application {
         qstDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
 //load PREGUNTA columns
         preguntaTable.getColumns().addAll(qstIdCol, qstPreguntaCol, qstCompetenciaCol, qstActivoCol, qstCreadoCol, qstModificadoCol, qstDesactivadoCol);
+
+//
+//MANTENEDOR RESPUESTA
+//
+//display mantenedor RESPUESTA button
+        btnRespuesta.setOnAction(e -> {
+            displayTitle.setText("SEC - Mantenedor Respuesta");
+            answerTable.setItems(answerCtl.getRespuestasFX());
+            //filtrar por nombre o sigla
+            FilteredList<RespuestaO> filteredData = new FilteredList<>(answerCtl.getRespuestasFX(), p -> true);
+            filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(filter -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    return filter.getRespuesta().toLowerCase().contains(lowerCaseFilter);
+                });
+            });
+            SortedList<RespuestaO> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(answerTable.comparatorProperty());
+            answerTable.setItems(sortedData);
+            //filter hbox
+            filterLabel.setText("Filtrar: ");
+            bottomBox.getStyleClass().add("vbox");
+            bottomBox.getChildren().clear();
+            bottomBox.getChildren().addAll(filterLabel, filterField);
+            //load vbox display
+            display.getChildren().clear();
+            display.getChildren().addAll(displayTitle, answerTable, bottomBox);
+        });
+//setting table RESPUESTA context menu
+        answerTable.setEditable(true);
+        answerTable.setRowFactory((TableView<RespuestaO> tableView) -> {
+            final TableRow<RespuestaO> row = new TableRow<>();
+            final ContextMenu contextMenu = new ContextMenu();
+            final MenuItem modificarMenuItem = new MenuItem("Modificar");
+            final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
+            //modificar            
+            modificarMenuItem.setOnAction(event -> {
+                System.out.println("Modificar Respuesta Id: " + row.getItem().getId());
+            });
+            //desactivar
+            desactivarMenuItem.setOnAction(event -> {
+                System.out.println("Desactivar Respuesta Id: " + row.getItem().getId());
+            });
+            contextMenu.getItems().add(modificarMenuItem);
+            contextMenu.getItems().add(desactivarMenuItem);
+            row.contextMenuProperty().bind(
+                    Bindings.when(row.emptyProperty())
+                    .then((ContextMenu) null)
+                    .otherwise(contextMenu)
+            );
+            return row;
+        });
+//setting RESPUESTA table columns data and headers
+        answerIdCol = new TableColumn<>("Id");
+        answerIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        answerRespuestaCol = new TableColumn<>("Respuesta");
+        answerRespuestaCol.setCellValueFactory(new PropertyValueFactory<>("respuesta"));
+        answerPuntosCol = new TableColumn<>("Puntos");
+        answerPuntosCol.setCellValueFactory(new PropertyValueFactory<>("puntos"));
+        answerPreguntaCol = new TableColumn<>("Pregunta");
+        answerPreguntaCol.setCellValueFactory(new PropertyValueFactory<>("pregunta_id"));
+        answerActivoCol = new TableColumn<>("Activo");
+        answerActivoCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
+        answerCreadoCol = new TableColumn<>("Creado");
+        answerCreadoCol.setCellValueFactory(new PropertyValueFactory<>("creado"));
+        answerModificadoCol = new TableColumn<>("Modificado");
+        answerModificadoCol.setCellValueFactory(new PropertyValueFactory<>("modificado"));
+        answerDesactivadoCol = new TableColumn<>("Desactivado");
+        answerDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
+//load RESPUESTA columns
+        answerTable.getColumns().addAll(answerIdCol, answerRespuestaCol, answerPuntosCol, answerPreguntaCol, answerActivoCol,
+                answerCreadoCol, answerModificadoCol, answerDesactivadoCol);
 
 //
 //GENERAL LOAD
