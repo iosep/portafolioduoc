@@ -9,6 +9,7 @@ import CTL.AreaCTL;
 import CTL.CompetenciaCTL;
 import CTL.NivelCTL;
 import CTL.ObservacionCTL;
+import CTL.PeriodoCTL;
 import CTL.PreguntaCTL;
 import CTL.RespuestaCTL;
 import CTL.UsuarioCTL;
@@ -16,6 +17,7 @@ import O.AreaO;
 import O.CompetenciaO;
 import O.NivelO;
 import O.ObservacionO;
+import O.PeriodoO;
 import O.PreguntaO;
 import O.RespuestaO;
 import O.UsuarioO;
@@ -124,7 +126,6 @@ public class Admin extends Application {
     private TableColumn<RespuestaO, String> answerCreadoCol;
     private TableColumn<RespuestaO, String> answerModificadoCol;
     private TableColumn<RespuestaO, String> answerDesactivadoCol;
-
 //variables mantenedor OBSERVACION //maintainer variables COMMENT
     private final ObservacionCTL commentCtl = new ObservacionCTL();
     private final TableView<ObservacionO> commentTable = new TableView<>();
@@ -138,6 +139,18 @@ public class Admin extends Application {
     private TableColumn<ObservacionO, String> commentCreadoCol;
     private TableColumn<ObservacionO, String> commentModificadoCol;
     private TableColumn<ObservacionO, String> commentDesactivadoCol;
+//variables mantenedor PERIODO
+    private final PeriodoCTL periodoCtl = new PeriodoCTL();
+    private final TableView<PeriodoO> periodoTable = new TableView<>();
+    private TableColumn<PeriodoO, String> periodoIdCol;
+    private TableColumn<PeriodoO, String> periodoInicioCol;
+    private TableColumn<PeriodoO, String> periodoFinCol;
+    private TableColumn<PeriodoO, String> periodoPorcJefeCol;
+    private TableColumn<PeriodoO, String> periodoPorcAutoCol;
+    private TableColumn<PeriodoO, String> periodoActivoCol;
+    private TableColumn<PeriodoO, String> periodoCreadoCol;
+    private TableColumn<PeriodoO, String> periodoModificadoCol;
+    private TableColumn<PeriodoO, String> periodoDesactivadoCol;
 
     @Override
     public void start(Stage primaryStage) {
@@ -168,7 +181,8 @@ public class Admin extends Application {
         Button btnPregunta = new Button("Preguntas");
         Button btnRespuesta = new Button("Respuestas");
         Button btnComment = new Button("Observaciones");
-        topButtons.getChildren().addAll(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta, btnRespuesta, btnComment);
+        Button btnPeriodo = new Button("Periodos");
+        topButtons.getChildren().addAll(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta, btnRespuesta, btnComment, btnPeriodo);
         topButtons.getStyleClass().add("hboxtop");
         topOrder.getChildren().addAll(topBox, topButtons);
         topOrder.getStyleClass().add("vbox");
@@ -597,7 +611,7 @@ public class Admin extends Application {
                 int id_pregunta = row.getItem().getId();
                 CrearRespuesta cpw = new CrearRespuesta();
                 if (cpw.display(id_pregunta)) {
-                    btnPregunta.fire();
+                    btnRespuesta.fire();
                 }
             });
             contextMenu.getItems().addAll(modificarMenuItem, desactivarMenuItem, crearRespuestaMenu);
@@ -778,6 +792,89 @@ public class Admin extends Application {
 //load COMMENT columns
         commentTable.getColumns().addAll(commentIdCol, commentNivelInfCol, commentNivelSupCol, commentMsjInfCol, commentMsjSupCol,
                 commentCompetenciaCol, commentActivoCol, commentCreadoCol, commentModificadoCol, commentDesactivadoCol);
+//
+//MANTENEDOR PERIODO
+//
+//display mantenedor PERIODO button
+        btnPeriodo.setOnAction(e -> {
+            titleMantenedores.setText("SEC - Mantenedor Periodos");
+            periodoTable.setItems(periodoCtl.getPeriodosFX());
+            //filtrar por nombre o sigla
+            FilteredList<PeriodoO> filteredData = new FilteredList<>(periodoCtl.getPeriodosFX(), p -> true);
+            filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(filter -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    return false;
+                });
+            });
+            SortedList<PeriodoO> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(periodoTable.comparatorProperty());
+            periodoTable.setItems(sortedData);
+            //filter hbox
+            filterLabel.setText("Filtrar: ");
+            crearBtn.setText("Crear Nuevo Periodo");
+            crearBtn.setOnAction(ev -> {
+                CrearPeriodo cpw = new CrearPeriodo();
+                if (cpw.display()) {
+                    periodoTable.setItems(periodoCtl.getPeriodosFX());
+                }
+            });
+            bottomBox.getStyleClass().add("hbox");
+            bottomBox.getChildren().clear();
+            bottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
+            //load vbox display
+            display.getChildren().clear();
+            display.getChildren().addAll(periodoTable, bottomBox);
+        });
+//setting table PERIODO context menu
+        periodoTable.setEditable(true);
+        periodoTable.setRowFactory((TableView<PeriodoO> tableView) -> {
+            final TableRow<PeriodoO> row = new TableRow<>();
+            final ContextMenu contextMenu = new ContextMenu();
+            final MenuItem modificarMenuItem = new MenuItem("Modificar");
+            final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
+            //modificar            
+            modificarMenuItem.setOnAction(event -> {
+                System.out.println("Modificar Periodo Id: " + row.getItem().getId());
+            });
+            //desactivar
+            desactivarMenuItem.setOnAction(event -> {
+                System.out.println("Desactivar Periodo Id: " + row.getItem().getId());
+            });
+            contextMenu.getItems().add(modificarMenuItem);
+            contextMenu.getItems().add(desactivarMenuItem);
+            row.contextMenuProperty().bind(
+                    Bindings.when(row.emptyProperty())
+                    .then((ContextMenu) null)
+                    .otherwise(contextMenu)
+            );
+            return row;
+        });
+//setting PERIODO table columns data and headers
+        periodoIdCol = new TableColumn<>("Id");
+        periodoIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        periodoInicioCol = new TableColumn<>("Fecha Inicio");
+        periodoInicioCol.setCellValueFactory(new PropertyValueFactory<>("inicio"));
+        periodoFinCol = new TableColumn<>("Fecha Final");
+        periodoFinCol.setCellValueFactory(new PropertyValueFactory<>("fin"));
+        periodoPorcJefeCol = new TableColumn<>("Porcentaje Evaluación Jefe");
+        periodoPorcJefeCol.setCellValueFactory(new PropertyValueFactory<>("jefe_porc"));
+        periodoPorcAutoCol = new TableColumn<>("Porcentaje Autoevaluación");
+        periodoPorcAutoCol.setCellValueFactory(new PropertyValueFactory<>("auto_porc"));
+        periodoActivoCol = new TableColumn<>("Activo");
+        periodoActivoCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
+        periodoCreadoCol = new TableColumn<>("Creado");
+        periodoCreadoCol.setCellValueFactory(new PropertyValueFactory<>("creado"));
+        periodoModificadoCol = new TableColumn<>("Modificado");
+        periodoModificadoCol.setCellValueFactory(new PropertyValueFactory<>("modificado"));
+        periodoDesactivadoCol = new TableColumn<>("Desactivado");
+        periodoDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
+//load PERIODO columns
+        periodoTable.getColumns().addAll(periodoIdCol, periodoInicioCol, periodoFinCol, periodoPorcJefeCol, periodoPorcAutoCol,
+                periodoActivoCol, periodoCreadoCol, periodoModificadoCol, periodoDesactivadoCol);
 
 //
 //GENERAL LOAD

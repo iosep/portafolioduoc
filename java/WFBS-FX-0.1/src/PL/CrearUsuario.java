@@ -105,10 +105,10 @@ public class CrearUsuario {
         HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 15);
+        grid.add(hbBtn, 1, 16, 1, 4);
 
         final Text actiontarget = new Text();
-        grid.add(actiontarget, 0, 16, 2, 1);
+        grid.add(actiontarget, 0, 15, 2, 1);
 
         btn.setOnAction(e -> {
             actiontarget.getStyleClass().add("action");

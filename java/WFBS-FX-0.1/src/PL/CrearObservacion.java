@@ -72,10 +72,10 @@ public class CrearObservacion {
         HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 9);
+        grid.add(hbBtn, 1, 10, 1, 4);
 
         final Text msj = new Text();
-        grid.add(msj, 0, 10, 2, 1);
+        grid.add(msj, 0, 9, 2, 1);
 
         btn.setOnAction(e -> {
             msj.getStyleClass().add("action");

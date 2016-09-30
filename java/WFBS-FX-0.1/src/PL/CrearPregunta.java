@@ -57,10 +57,10 @@ public class CrearPregunta {
         HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 7);
+        grid.add(hbBtn, 1, 7, 1, 4);
 
         final Text msj = new Text();
-        grid.add(msj, 0, 8, 2, 1);
+        grid.add(msj, 0, 6, 2, 1);
 
         btn.setOnAction(e -> {
             msj.getStyleClass().add("action");

@@ -62,10 +62,10 @@ public class CrearArea {
         HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 8);
+        grid.add(hbBtn, 1, 9, 1, 4);
 
         final Text msj = new Text();
-        grid.add(msj, 0, 9, 2, 1);
+        grid.add(msj, 0, 8, 2, 1);
 
         btn.setOnAction(e -> {
             msj.getStyleClass().add("action");
@@ -80,9 +80,9 @@ public class CrearArea {
                 if (vb) {
                     nombreTxt.clear();
                     siglaTxt.clear();
-                    msj.setText("Area Creada Exitosamente");
+                    msj.setText("Área Creada Exitosamente");
                 } else {
-                    msj.setText("Error Al Crear Area");
+                    msj.setText("Error Al Crear Área");
                 }
             }
         });
