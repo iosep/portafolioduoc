@@ -85,7 +85,7 @@ public class Login extends Application {
                 if (c.validatePassword(txtRun.getText(), pwBox.getText())) {
                     logUser = userCtl.getUsuarioByRut(txtRun.getText());
                     switch (logUser.getRol()) {
-                        case "Admin":
+                        case 1:
                             Admin a = new Admin() {
                                 @Override
                                 public void start(Stage primaryStage) throws Exception {
@@ -94,10 +94,10 @@ public class Login extends Application {
                             };
                             a.start(primaryStage, logUser.getRut());
                             break;
-                        case "Jefa":
+                        case 2:
                             System.out.println("Jefa logeada");
                             break;
-                        case "Funcionaria":
+                        case 3:
                             System.out.println("Funcionaria logeada");
                             break;
                         default:

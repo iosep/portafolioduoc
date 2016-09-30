@@ -28,6 +28,10 @@ public class UsuarioCTL {
         return ud.getUsuarioByRut(rut);
     }
 
+    public ObservableList<UsuarioO> getUsuariosByRol(int rol) {
+        return ud.getUsuariosByRol(rol);
+    }
+
     public ObservableList<UsuarioO> getUsuariosFX() {
         ObservableList<UsuarioO> users = FXCollections.observableArrayList();
         ud.getUsuarios().stream().forEach((user) -> {

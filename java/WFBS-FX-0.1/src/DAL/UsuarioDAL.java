@@ -7,6 +7,8 @@ package DAL;
 
 import O.UsuarioO;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -28,6 +30,16 @@ public class UsuarioDAL {
             }
         });
         return uo;
+    }
+
+    public ObservableList<UsuarioO> getUsuariosByRol(int rol) {
+        ObservableList<UsuarioO> usuariosRol = FXCollections.observableArrayList();
+        cd.mostrarUsuarios().stream().forEach((u) -> {
+            if (u.getRol() == rol) {
+                usuariosRol.add(u);
+            }
+        });
+        return usuariosRol;
     }
 
     public boolean addUsuario(UsuarioO ufx) {

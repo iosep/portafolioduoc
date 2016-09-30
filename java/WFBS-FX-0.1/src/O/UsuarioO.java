@@ -15,7 +15,7 @@ public class UsuarioO {
 
     private String rut;
     private String clave;
-    private String rol;
+    private int rol;
     private String rut_jefe;
     private String nombre;
     private String apellido;
@@ -26,11 +26,12 @@ public class UsuarioO {
     private Date creado;
     private Date modificado;
     private Date desactivado;
+    private String rolString;
 
     public UsuarioO() {
     }
 
-    public UsuarioO(String rut, String clave, String rol, String rut_jefe, String nombre, String apellido, String email, String sexo, int fono, int activo, Date creado, Date modificado, Date desactivado) {
+    public UsuarioO(String rut, String clave, int rol, String rut_jefe, String nombre, String apellido, String email, String sexo, int fono, int activo, Date creado, Date modificado, Date desactivado) {
         this.rut = rut;
         this.clave = clave;
         this.rol = rol;
@@ -44,6 +45,19 @@ public class UsuarioO {
         this.creado = creado;
         this.modificado = modificado;
         this.desactivado = desactivado;
+        switch (rol) {
+            case 1:
+                this.rolString = "Admin";
+                break;
+            case 2:
+                this.rolString = "Jefa";
+                break;
+            case 3:
+                this.rolString = "Funcionaria";
+                break;
+            default:
+                break;
+        }
     }
 
     public String getRut() {
@@ -62,11 +76,11 @@ public class UsuarioO {
         this.clave = clave;
     }
 
-    public String getRol() {
+    public int getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(int rol) {
         this.rol = rol;
     }
 
@@ -150,4 +164,16 @@ public class UsuarioO {
         this.desactivado = desactivado;
     }
 
+    public String getRolString() {
+        return rolString;
+    }
+
+    public void setRolString(String rolString) {
+        this.rolString = rolString;
+    }
+
+    @Override
+    public String toString() {
+        return rut;
+    }
 }
