@@ -5,9 +5,11 @@
  */
 package PL;
 
+import CTL.UsuarioCTL;
 import DAL.AaaInitialLoad;
 import FN.Cifrar;
 import FN.Validar;
+import O.UsuarioO;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,6 +28,9 @@ import javafx.stage.Stage;
  * @author iosep
  */
 public class Login extends Application {
+
+    private final UsuarioCTL userCtl = new UsuarioCTL();
+    private static UsuarioO logUser;
 
     @Override
     public void start(Stage primaryStage) {
@@ -78,9 +83,26 @@ public class Login extends Application {
             if (v.validarRut(txtRun.getText())) {
                 Cifrar c = new Cifrar();
                 if (c.validatePassword(txtRun.getText(), pwBox.getText())) {
-                    actiontarget.setText("Login Correcto");
-                    Admin a = new Admin();
-                    a.start(primaryStage);
+                    logUser = userCtl.getUsuarioByRut(txtRun.getText());
+                    switch (logUser.getRol()) {
+                        case "Admin":
+                            Admin a = new Admin() {
+                                @Override
+                                public void start(Stage primaryStage) throws Exception {
+                                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                                }
+                            };
+                            a.start(primaryStage, logUser.getRut());
+                            break;
+                        case "Jefa":
+                            System.out.println("Jefa logeada");
+                            break;
+                        case "Funcionaria":
+                            System.out.println("Funcionaria logeada");
+                            break;
+                        default:
+                            break;
+                    }
                 } else {
                     actiontarget.setText("Login Incorrecto");
                 }

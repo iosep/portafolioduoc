@@ -39,9 +39,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -50,14 +50,14 @@ import javafx.stage.Stage;
  *
  * @author iosep
  */
-public class Admin extends Application {
+public abstract class Admin extends Application {
 
 //variables reutilizables
-    private final VBox display = new VBox();
+    private final VBox vbDisplay = new VBox();
 //    private final Text displayTitle = new Text();
     private final TextField filterField = new TextField();
     private final Label filterLabel = new Label();
-    private final HBox bottomBox = new HBox();
+    private final HBox hbBottomBox = new HBox();
     private final Button crearBtn = new Button();
 //variables mantenedor usuarios
     private final UsuarioCTL usersCtl = new UsuarioCTL();
@@ -152,28 +152,31 @@ public class Admin extends Application {
     private TableColumn<PeriodoO, String> periodoModificadoCol;
     private TableColumn<PeriodoO, String> periodoDesactivadoCol;
 
-    @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage, String logRut) {
 //
 //GENERAL SETTINGS
 //
-        VBox topOrder = new VBox();
-        HBox topBox = new HBox();
         Text titleMantenedores = new Text("SEC - Mantenedores");
         titleMantenedores.getStyleClass().add("title");
-        StackPane logOut = new StackPane();
-        Hyperlink cerrarSesion = new Hyperlink("Cerrar Sesión");
-        cerrarSesion.setBorder(Border.EMPTY);
-        cerrarSesion.getStyleClass().add("subtitle");
-        cerrarSesion.setOnAction(e -> {
+        Label lblActiveUser = new Label("Usuario Activo:");
+        Label lblLogRutUser = new Label("  " + logRut);
+        Hyperlink hlCerrarSesion = new Hyperlink("Cerrar Sesión");
+        hlCerrarSesion.setBorder(Border.EMPTY);
+        hlCerrarSesion.setOnAction(e -> {
             Login login = new Login();
             login.start(primaryStage);
         });
-        logOut.getChildren().add(cerrarSesion);
-        logOut.setAlignment(Pos.CENTER_RIGHT);
-        HBox.setHgrow(logOut, Priority.ALWAYS);
-        topBox.getChildren().addAll(titleMantenedores, logOut);
-        HBox topButtons = new HBox();
+        GridPane gridSesion = new GridPane();
+        gridSesion.setAlignment(Pos.TOP_RIGHT);
+        gridSesion.add(lblActiveUser, 0, 0);
+        gridSesion.add(lblLogRutUser, 1, 0);
+        gridSesion.add(hlCerrarSesion, 1, 1);
+        gridSesion.getStyleClass().add("logout");
+        HBox hbTopBox = new HBox();
+        hbTopBox.getChildren().addAll(titleMantenedores, gridSesion);
+        HBox.setHgrow(gridSesion, Priority.ALWAYS);
+//botones
+        HBox hbTopButtons = new HBox();
         Button btnUsuario = new Button("Usuarios");
         Button btnArea = new Button("Áreas");
         Button btnCompetencia = new Button("Competencias");
@@ -182,13 +185,14 @@ public class Admin extends Application {
         Button btnRespuesta = new Button("Respuestas");
         Button btnComment = new Button("Observaciones");
         Button btnPeriodo = new Button("Periodos");
-        topButtons.getChildren().addAll(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta, btnRespuesta, btnComment, btnPeriodo);
-        topButtons.getStyleClass().add("hboxtop");
-        topOrder.getChildren().addAll(topBox, topButtons);
-        topOrder.getStyleClass().add("vbox");
-        display.getStyleClass().add("vbox");
+        hbTopButtons.getChildren().addAll(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta, btnRespuesta, btnComment, btnPeriodo);
+        hbTopButtons.getStyleClass().add("hboxtop");
+        VBox vbTopOrder = new VBox();
+        vbTopOrder.getChildren().addAll(hbTopBox, hbTopButtons);
+        vbTopOrder.getStyleClass().add("vbox");
+        vbDisplay.getStyleClass().add("vbox");
         BorderPane bp = new BorderPane();
-        bp.setTop(topOrder);
+        bp.setTop(vbTopOrder);
 //
 //MANTENEDOR USUARIOS //USER MAINTAINER
 //
@@ -236,12 +240,12 @@ public class Admin extends Application {
                     System.out.println("llega la respuesta de creacion de usuario al main admin");
                 }
             });
-            bottomBox.getStyleClass().add("hbox");
-            bottomBox.getChildren().clear();
-            bottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
+            hbBottomBox.getStyleClass().add("hbox");
+            hbBottomBox.getChildren().clear();
+            hbBottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
             //load vbox display
-            display.getChildren().clear();
-            display.getChildren().addAll(usersTable, bottomBox);
+            vbDisplay.getChildren().clear();
+            vbDisplay.getChildren().addAll(usersTable, hbBottomBox);
         });
 //setting table users context menu
         usersTable.setEditable(true);
@@ -333,12 +337,12 @@ public class Admin extends Application {
                     areasTable.setItems(areasCtl.getAreasFX());
                 }
             });
-            bottomBox.getStyleClass().add("hbox");
-            bottomBox.getChildren().clear();
-            bottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
+            hbBottomBox.getStyleClass().add("hbox");
+            hbBottomBox.getChildren().clear();
+            hbBottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
             //load vbox display
-            display.getChildren().clear();
-            display.getChildren().addAll(areasTable, bottomBox);
+            vbDisplay.getChildren().clear();
+            vbDisplay.getChildren().addAll(areasTable, hbBottomBox);
         });
 //setting table AREAS context menu
         areasTable.setEditable(true);
@@ -415,12 +419,12 @@ public class Admin extends Application {
                     compTable.setItems(compCtl.getCompetenciasFX());
                 }
             });
-            bottomBox.getStyleClass().add("hbox");
-            bottomBox.getChildren().clear();
-            bottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
+            hbBottomBox.getStyleClass().add("hbox");
+            hbBottomBox.getChildren().clear();
+            hbBottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
             //load vbox display
-            display.getChildren().clear();
-            display.getChildren().addAll(compTable, bottomBox);
+            vbDisplay.getChildren().clear();
+            vbDisplay.getChildren().addAll(compTable, hbBottomBox);
         });
 //setting table COMPETENCIAS context menu
         compTable.setEditable(true);
@@ -512,12 +516,12 @@ public class Admin extends Application {
                     nivelTable.setItems(nivelCtl.getNivelesFX());
                 }
             });
-            bottomBox.getStyleClass().add("hbox");
-            bottomBox.getChildren().clear();
-            bottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
+            hbBottomBox.getStyleClass().add("hbox");
+            hbBottomBox.getChildren().clear();
+            hbBottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
             //load vbox display
-            display.getChildren().clear();
-            display.getChildren().addAll(nivelTable, bottomBox);
+            vbDisplay.getChildren().clear();
+            vbDisplay.getChildren().addAll(nivelTable, hbBottomBox);
         });
 //setting table NIVEL context menu
         nivelTable.setEditable(true);
@@ -583,12 +587,12 @@ public class Admin extends Application {
             questionTable.setItems(sortedData);
             //filter hbox
             filterLabel.setText("Filtrar: ");
-            bottomBox.getStyleClass().add("hbox");
-            bottomBox.getChildren().clear();
-            bottomBox.getChildren().addAll(filterLabel, filterField);
+            hbBottomBox.getStyleClass().add("hbox");
+            hbBottomBox.getChildren().clear();
+            hbBottomBox.getChildren().addAll(filterLabel, filterField);
             //load vbox display
-            display.getChildren().clear();
-            display.getChildren().addAll(questionTable, bottomBox);
+            vbDisplay.getChildren().clear();
+            vbDisplay.getChildren().addAll(questionTable, hbBottomBox);
         });
 //setting table PREGUNTA context menu
         questionTable.setEditable(true);
@@ -663,12 +667,12 @@ public class Admin extends Application {
             answerTable.setItems(sortedData);
             //filter hbox
             filterLabel.setText("Filtrar: ");
-            bottomBox.getStyleClass().add("hbox");
-            bottomBox.getChildren().clear();
-            bottomBox.getChildren().addAll(filterLabel, filterField);
+            hbBottomBox.getStyleClass().add("hbox");
+            hbBottomBox.getChildren().clear();
+            hbBottomBox.getChildren().addAll(filterLabel, filterField);
             //load vbox display
-            display.getChildren().clear();
-            display.getChildren().addAll(answerTable, bottomBox);
+            vbDisplay.getChildren().clear();
+            vbDisplay.getChildren().addAll(answerTable, hbBottomBox);
         });
 //setting table RESPUESTA context menu
         answerTable.setEditable(true);
@@ -737,12 +741,12 @@ public class Admin extends Application {
             commentTable.setItems(sortedData);
             //filter hbox
             filterLabel.setText("Filtrar: ");
-            bottomBox.getStyleClass().add("hbox");
-            bottomBox.getChildren().clear();
-            bottomBox.getChildren().addAll(filterLabel, filterField);
+            hbBottomBox.getStyleClass().add("hbox");
+            hbBottomBox.getChildren().clear();
+            hbBottomBox.getChildren().addAll(filterLabel, filterField);
             //load vbox display
-            display.getChildren().clear();
-            display.getChildren().addAll(commentTable, bottomBox);
+            vbDisplay.getChildren().clear();
+            vbDisplay.getChildren().addAll(commentTable, hbBottomBox);
         });
 //setting table COMMENT context menu
         commentTable.setEditable(true);
@@ -822,12 +826,12 @@ public class Admin extends Application {
                     periodoTable.setItems(periodoCtl.getPeriodosFX());
                 }
             });
-            bottomBox.getStyleClass().add("hbox");
-            bottomBox.getChildren().clear();
-            bottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
+            hbBottomBox.getStyleClass().add("hbox");
+            hbBottomBox.getChildren().clear();
+            hbBottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
             //load vbox display
-            display.getChildren().clear();
-            display.getChildren().addAll(periodoTable, bottomBox);
+            vbDisplay.getChildren().clear();
+            vbDisplay.getChildren().addAll(periodoTable, hbBottomBox);
         });
 //setting table PERIODO context menu
         periodoTable.setEditable(true);
@@ -880,7 +884,7 @@ public class Admin extends Application {
 //GENERAL LOAD
 //
 //load display in center border pane
-        bp.setCenter(display);
+        bp.setCenter(vbDisplay);
 //setting scene
         Scene admin = new Scene(bp, 1040, 640);
 //loading stage scene and style

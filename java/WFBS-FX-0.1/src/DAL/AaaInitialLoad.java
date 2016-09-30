@@ -47,7 +47,7 @@ public class AaaInitialLoad {
         periodos = new ArrayList<>();
 
         Date fecha = new Date();
-        user1 = new UsuarioO("1-9",
+        user1 = new UsuarioO("98765432-5",
                 "77+9Qe+/vUdm77+9X1MQZe+/vV0177+9aGfvv70677+9cu+/ve+/ve+/vT/vv73vv70677+977+9De+/vSQ=,-576102074",
                 "Admin", "", "José", "Feliz", "ono@ono.com", "H", 99887766, 1, fecha, null, null);
         user2 = new UsuarioO("12312312-3",
