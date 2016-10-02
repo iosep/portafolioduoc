@@ -70,6 +70,20 @@ public class CrearPeriodo {
         TextField txtPorcAuto = new TextField();
         grid.add(txtPorcAuto, 1, 7);
 
+        Validar v = new Validar();
+        txtPorcJefe.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (v.validarInteger(newValue)) {
+                int auto = 100 - Integer.parseInt(newValue);
+                txtPorcAuto.setText("" + auto);
+            }
+        });
+        txtPorcAuto.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (v.validarInteger(newValue)) {
+                int jefe = 100 - Integer.parseInt(newValue);
+                txtPorcJefe.setText("" + jefe);
+            }
+        });
+
         Button btn = new Button("CREAR");
         HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
@@ -81,7 +95,6 @@ public class CrearPeriodo {
 
         btn.setOnAction(e -> {
             msj.getStyleClass().add("action");
-            Validar v = new Validar();
             if (dpFechaInicio.getValue() == null) {
                 msj.setText("Seleccione Fecha Inicio");
             } else if (dpFechaFinal.getValue() == null) {

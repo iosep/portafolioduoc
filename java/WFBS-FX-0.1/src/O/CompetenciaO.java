@@ -19,6 +19,7 @@ public class CompetenciaO {
     private String nombre;
     private String descripcion;
     private String sigla;
+    private int nivelOptimo;
     private int activo;
     private Date creado;
     private Date modificado;
@@ -27,13 +28,14 @@ public class CompetenciaO {
     public CompetenciaO() {
     }
 
-    public CompetenciaO(String nombre, String descripcion, String sigla, int activo, Date creado, Date modificado, Date desactivado) {
-//fake ID
+    public CompetenciaO(String nombre, String descripcion, String sigla, int nivelOptimo, int activo, Date creado, Date modificado, Date desactivado) {
+
         this.id = ++fakeId;
 
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.sigla = sigla;
+        this.nivelOptimo = nivelOptimo;
         this.activo = activo;
         this.creado = creado;
         this.modificado = modificado;
@@ -70,6 +72,14 @@ public class CompetenciaO {
 
     public void setSigla(String sigla) {
         this.sigla = sigla;
+    }
+
+    public int getNivelOptimo() {
+        return nivelOptimo;
+    }
+
+    public void setNivelOptimo(int nivelOptimo) {
+        this.nivelOptimo = nivelOptimo;
     }
 
     public int getActivo() {

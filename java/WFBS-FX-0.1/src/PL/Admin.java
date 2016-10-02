@@ -13,6 +13,7 @@ import CTL.PeriodoCTL;
 import CTL.PreguntaCTL;
 import CTL.RespuestaCTL;
 import CTL.UsuarioCTL;
+import FN.Validar;
 import O.AreaO;
 import O.CompetenciaO;
 import O.NivelO;
@@ -54,11 +55,10 @@ public abstract class Admin extends Application {
 
 //variables reutilizables
     private final VBox vbDisplay = new VBox();
-//    private final Text displayTitle = new Text();
     private final TextField filterField = new TextField();
     private final Label filterLabel = new Label();
     private final HBox hbBottomBox = new HBox();
-    private final Button crearBtn = new Button();
+    private final Button btCrear = new Button();
 //variables mantenedor usuarios
     private final UsuarioCTL usersCtl = new UsuarioCTL();
     private final TableView<UsuarioO> usersTable = new TableView<>();
@@ -91,6 +91,7 @@ public abstract class Admin extends Application {
     private TableColumn<CompetenciaO, String> compNombreCol;
     private TableColumn<CompetenciaO, String> compDescCol;
     private TableColumn<CompetenciaO, String> compSiglaCol;
+    private TableColumn<CompetenciaO, String> compNiOpCol;
     private TableColumn<CompetenciaO, String> compActivoCol;
     private TableColumn<CompetenciaO, String> compCreadoCol;
     private TableColumn<CompetenciaO, String> compModificadoCol;
@@ -152,6 +153,12 @@ public abstract class Admin extends Application {
     private TableColumn<PeriodoO, String> periodoModificadoCol;
     private TableColumn<PeriodoO, String> periodoDesactivadoCol;
 
+    /**
+     * starts primary stage ADMIN
+     *
+     * @param primaryStage
+     * @param logRut
+     */
     public void start(Stage primaryStage, String logRut) {
 //
 //GENERAL SETTINGS
@@ -198,7 +205,7 @@ public abstract class Admin extends Application {
 //
 //display mantenedor usuario button
         btnUsuario.setOnAction(e -> {
-//            displayTitle.setText("Usuario");
+            filterField.clear();
             titleMantenedores.setText("SEC - Mantenedor Usuarios");
             usersTable.setItems(usersCtl.getUsuariosFX());
             //filtrar por nombre, apellido o rut
@@ -214,9 +221,9 @@ public abstract class Admin extends Application {
                     // Compare first name and last name of every person with filter text.
                     String lowerCaseFilter = newValue.toLowerCase();
                     if (filterUser.getRut().toLowerCase().contains(lowerCaseFilter)) {
-                        return true; // Filter matches first name.
+                        return true; // Filter matches rut
                     } else if (filterUser.getNombre().toLowerCase().contains(lowerCaseFilter)) {
-                        return true; // Filter matches last name.
+                        return true; // Filter matches first name.
                     } else if (filterUser.getApellido().toLowerCase().contains(lowerCaseFilter)) {
                         return true; // Filter matches last name.
                     }
@@ -231,18 +238,17 @@ public abstract class Admin extends Application {
             usersTable.setItems(sortedData);
             //filter hbox
             filterLabel.setText("Filtrar: ");
-            crearBtn.setText("Crear Nuevo Usuario");
-            crearBtn.setOnAction(ev -> {
+            btCrear.setText("Crear Nuevo Usuario");
+            btCrear.setOnAction(ev -> {
                 CrearUsuario cuw = new CrearUsuario();
                 boolean crearVB = cuw.display();
                 if (crearVB) {
-                    usersTable.setItems(usersCtl.getUsuariosFX());
-                    System.out.println("llega la respuesta de creacion de usuario al main admin");
+                    btnUsuario.fire();
                 }
             });
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
-            hbBottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
+            hbBottomBox.getChildren().addAll(filterLabel, filterField, btCrear);
             //load vbox display
             vbDisplay.getChildren().clear();
             vbDisplay.getChildren().addAll(usersTable, hbBottomBox);
@@ -288,7 +294,7 @@ public abstract class Admin extends Application {
         sexoColumn = new TableColumn<>("Sexo");
         sexoColumn.setCellValueFactory(new PropertyValueFactory<>("sexo"));
         rolColumn = new TableColumn<>("Rol");
-        rolColumn.setCellValueFactory(new PropertyValueFactory<>("rol"));
+        rolColumn.setCellValueFactory(new PropertyValueFactory<>("rolString"));
         jefeColumn = new TableColumn<>("Jefa");
         jefeColumn.setCellValueFactory(new PropertyValueFactory<>("rut_jefe"));
         activoColumn = new TableColumn<>("Activo");
@@ -307,22 +313,18 @@ public abstract class Admin extends Application {
 //
 //display mantenedor AREAS button
         btnArea.setOnAction(e -> {
+            filterField.clear();
             titleMantenedores.setText("SEC - Mantenedor Áreas");
             areasTable.setItems(areasCtl.getAreasFX());
             //filtrar por nombre o sigla
             FilteredList<AreaO> filteredData = new FilteredList<>(areasCtl.getAreasFX(), p -> true);
             filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-                filteredData.setPredicate(filterUser -> {
+                filteredData.setPredicate(filterArea -> {
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
                     }
-                    String lowerCaseFilter = newValue.toLowerCase();
-                    if (filterUser.getNombre().toLowerCase().contains(lowerCaseFilter)) {
-                        return true;
-                    } else if (filterUser.getSigla().toLowerCase().contains(lowerCaseFilter)) {
-                        return true;
-                    }
-                    return false;
+                    return filterArea.getNombre().toLowerCase().contains(newValue.toLowerCase())
+                            || filterArea.getSigla().toLowerCase().contains(newValue.toLowerCase());
                 });
             });
             SortedList<AreaO> sortedData = new SortedList<>(filteredData);
@@ -330,16 +332,16 @@ public abstract class Admin extends Application {
             areasTable.setItems(sortedData);
             //filter hbox
             filterLabel.setText("Filtrar: ");
-            crearBtn.setText("Crear Nueva Área");
-            crearBtn.setOnAction(ev -> {
+            btCrear.setText("Crear Nueva Área");
+            btCrear.setOnAction(ev -> {
                 CrearArea caw = new CrearArea();
                 if (caw.display()) {
-                    areasTable.setItems(areasCtl.getAreasFX());
+                    btnArea.fire();
                 }
             });
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
-            hbBottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
+            hbBottomBox.getChildren().addAll(filterLabel, filterField, btCrear);
             //load vbox display
             vbDisplay.getChildren().clear();
             vbDisplay.getChildren().addAll(areasTable, hbBottomBox);
@@ -393,9 +395,10 @@ public abstract class Admin extends Application {
 //
 //display mantenedor COMPETENCIAS button
         btnCompetencia.setOnAction(e -> {
+            filterField.clear();
             titleMantenedores.setText("SEC - Mantenedor Competencias");
             compTable.setItems(compCtl.getCompetenciasFX());
-            //filtrar por nombre o sigla
+            //filtrar por nombre o sigla o descripción
             FilteredList<CompetenciaO> filteredData = new FilteredList<>(compCtl.getCompetenciasFX(), p -> true);
             filterField.textProperty().addListener((observable, oldValue, newValue) -> {
                 filteredData.setPredicate(filter -> {
@@ -403,7 +406,8 @@ public abstract class Admin extends Application {
                         return true;
                     }
                     String lowerCaseFilter = newValue.toLowerCase();
-                    return filter.getNombre().toLowerCase().contains(lowerCaseFilter) || filter.getSigla().toLowerCase().contains(lowerCaseFilter)
+                    return filter.getNombre().toLowerCase().contains(lowerCaseFilter)
+                            || filter.getSigla().toLowerCase().contains(lowerCaseFilter)
                             || filter.getDescripcion().toLowerCase().contains(lowerCaseFilter);
                 });
             });
@@ -412,16 +416,16 @@ public abstract class Admin extends Application {
             compTable.setItems(sortedData);
             //filter hbox
             filterLabel.setText("Filtrar: ");
-            crearBtn.setText("Crear Nueva Competencia");
-            crearBtn.setOnAction(ev -> {
+            btCrear.setText("Crear Nueva Competencia");
+            btCrear.setOnAction(ev -> {
                 CrearCompetencia ccw = new CrearCompetencia();
                 if (ccw.display()) {
-                    compTable.setItems(compCtl.getCompetenciasFX());
+                    btnCompetencia.fire();
                 }
             });
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
-            hbBottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
+            hbBottomBox.getChildren().addAll(filterLabel, filterField, btCrear);
             //load vbox display
             vbDisplay.getChildren().clear();
             vbDisplay.getChildren().addAll(compTable, hbBottomBox);
@@ -474,6 +478,8 @@ public abstract class Admin extends Application {
         compSiglaCol.setCellValueFactory(new PropertyValueFactory<>("sigla"));
         compDescCol = new TableColumn<>("Descripción");
         compDescCol.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        compNiOpCol = new TableColumn<>("Nivel Óptimo");
+        compNiOpCol.setCellValueFactory(new PropertyValueFactory<>("nivelOptimo"));
         compActivoCol = new TableColumn<>("Activo");
         compActivoCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
         compCreadoCol = new TableColumn<>("Creado");
@@ -483,25 +489,28 @@ public abstract class Admin extends Application {
         compDesactivadoCol = new TableColumn<>("Desactivado");
         compDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
 //load COMPETENCIAS columns
-        compTable.getColumns().addAll(compIdCol, compNombreCol, compSiglaCol, compDescCol, compActivoCol,
+        compTable.getColumns().addAll(compIdCol, compNombreCol, compSiglaCol, compDescCol, compNiOpCol, compActivoCol,
                 compCreadoCol, compModificadoCol, compDesactivadoCol);
 //
-//MANTENEDOR NIVEL //LEVERL MAINTAINER
+//MANTENEDOR NIVEL //LEVEL MAINTAINER
 //
 //display mantenedor NIVEL button
         btnNivel.setOnAction(e -> {
+            filterField.clear();
             titleMantenedores.setText("SEC - Mantenedor Niveles");
             nivelTable.setItems(nivelCtl.getNivelesFX());
-            //filtrar por nombre o sigla
+            //filtrar por nombre o nota
             FilteredList<NivelO> filteredData = new FilteredList<>(nivelCtl.getNivelesFX(), p -> true);
             filterField.textProperty().addListener((observable, oldValue, newValue) -> {
                 filteredData.setPredicate(filter -> {
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
                     }
-                    String lowerCaseFilter = newValue.toLowerCase();
-                    return filter.getNombre().toLowerCase().contains(lowerCaseFilter);
-                    //agregar getNota() : integer.parseint
+                    Validar v = new Validar();
+                    if (v.validarInteger(newValue) && filter.getNota() == Integer.parseInt(newValue)) {
+                        return true;
+                    }
+                    return filter.getNombre().toLowerCase().contains(newValue.toLowerCase());
                 });
             });
             SortedList<NivelO> sortedData = new SortedList<>(filteredData);
@@ -509,16 +518,16 @@ public abstract class Admin extends Application {
             nivelTable.setItems(sortedData);
             //filter hbox
             filterLabel.setText("Filtrar: ");
-            crearBtn.setText("Crear Nuevo Nivel");
-            crearBtn.setOnAction(ev -> {
+            btCrear.setText("Crear Nuevo Nivel");
+            btCrear.setOnAction(ev -> {
                 CrearNivel cnw = new CrearNivel();
                 if (cnw.display()) {
-                    nivelTable.setItems(nivelCtl.getNivelesFX());
+                    btnNivel.fire();
                 }
             });
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
-            hbBottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
+            hbBottomBox.getChildren().addAll(filterLabel, filterField, btCrear);
             //load vbox display
             vbDisplay.getChildren().clear();
             vbDisplay.getChildren().addAll(nivelTable, hbBottomBox);
@@ -569,17 +578,17 @@ public abstract class Admin extends Application {
 //
 //display mantenedor PREGUNTA button
         btnPregunta.setOnAction(e -> {
+            filterField.clear();
             titleMantenedores.setText("SEC - Mantenedor Preguntas");
             questionTable.setItems(questionCtl.getPreguntasFX());
-            //filtrar por nombre o sigla
+            //filtrar por pregunta
             FilteredList<PreguntaO> filteredData = new FilteredList<>(questionCtl.getPreguntasFX(), p -> true);
             filterField.textProperty().addListener((observable, oldValue, newValue) -> {
                 filteredData.setPredicate(filter -> {
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
                     }
-                    String lowerCaseFilter = newValue.toLowerCase();
-                    return filter.getPregunta().toLowerCase().contains(lowerCaseFilter);
+                    return filter.getPregunta().toLowerCase().contains(newValue.toLowerCase());
                 });
             });
             SortedList<PreguntaO> sortedData = new SortedList<>(filteredData);
@@ -649,17 +658,17 @@ public abstract class Admin extends Application {
 //
 //display mantenedor RESPUESTA button
         btnRespuesta.setOnAction(e -> {
+            filterField.clear();
             titleMantenedores.setText("SEC - Mantenedor Respuestas");
             answerTable.setItems(answerCtl.getRespuestasFX());
-            //filtrar por nombre o sigla
+            //filtrar por respuesta
             FilteredList<RespuestaO> filteredData = new FilteredList<>(answerCtl.getRespuestasFX(), p -> true);
             filterField.textProperty().addListener((observable, oldValue, newValue) -> {
                 filteredData.setPredicate(filter -> {
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
                     }
-                    String lowerCaseFilter = newValue.toLowerCase();
-                    return filter.getRespuesta().toLowerCase().contains(lowerCaseFilter);
+                    return filter.getRespuesta().toLowerCase().contains(newValue.toLowerCase());
                 });
             });
             SortedList<RespuestaO> sortedData = new SortedList<>(filteredData);
@@ -723,9 +732,10 @@ public abstract class Admin extends Application {
 //
 //display mantenedor COMMENT button
         btnComment.setOnAction(e -> {
+            filterField.clear();
             titleMantenedores.setText("SEC - Mantenedor Observaciones");
             commentTable.setItems(commentCtl.getObservacionesFX());
-            //filtrar por nombre o sigla
+            //filtrar por msj inferior y superior
             FilteredList<ObservacionO> filteredData = new FilteredList<>(commentCtl.getObservacionesFX(), p -> true);
             filterField.textProperty().addListener((observable, oldValue, newValue) -> {
                 filteredData.setPredicate(filter -> {
@@ -733,7 +743,8 @@ public abstract class Admin extends Application {
                         return true;
                     }
                     String lowerCaseFilter = newValue.toLowerCase();
-                    return filter.getMsj_inf().toLowerCase().contains(lowerCaseFilter) || filter.getMsj_sup().toLowerCase().contains(lowerCaseFilter);
+                    return filter.getMsj_inf().toLowerCase().contains(lowerCaseFilter)
+                            || filter.getMsj_sup().toLowerCase().contains(lowerCaseFilter);
                 });
             });
             SortedList<ObservacionO> sortedData = new SortedList<>(filteredData);
@@ -801,16 +812,21 @@ public abstract class Admin extends Application {
 //
 //display mantenedor PERIODO button
         btnPeriodo.setOnAction(e -> {
+            filterField.clear();
             titleMantenedores.setText("SEC - Mantenedor Periodos");
             periodoTable.setItems(periodoCtl.getPeriodosFX());
-            //filtrar por nombre o sigla
+            //filtro por porcentaje
             FilteredList<PeriodoO> filteredData = new FilteredList<>(periodoCtl.getPeriodosFX(), p -> true);
             filterField.textProperty().addListener((observable, oldValue, newValue) -> {
                 filteredData.setPredicate(filter -> {
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
                     }
-                    String lowerCaseFilter = newValue.toLowerCase();
+                    Validar v = new Validar();
+                    if (v.validarInteger(newValue)) {
+                        return filter.getJefe_porc() == Integer.parseInt(newValue)
+                                || filter.getAuto_porc() == Integer.parseInt(newValue);
+                    }
                     return false;
                 });
             });
@@ -819,16 +835,16 @@ public abstract class Admin extends Application {
             periodoTable.setItems(sortedData);
             //filter hbox
             filterLabel.setText("Filtrar: ");
-            crearBtn.setText("Crear Nuevo Periodo");
-            crearBtn.setOnAction(ev -> {
+            btCrear.setText("Crear Nuevo Periodo");
+            btCrear.setOnAction(ev -> {
                 CrearPeriodo cpw = new CrearPeriodo();
                 if (cpw.display()) {
-                    periodoTable.setItems(periodoCtl.getPeriodosFX());
+                    btnPeriodo.fire();
                 }
             });
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
-            hbBottomBox.getChildren().addAll(filterLabel, filterField, crearBtn);
+            hbBottomBox.getChildren().addAll(filterLabel, filterField, btCrear);
             //load vbox display
             vbDisplay.getChildren().clear();
             vbDisplay.getChildren().addAll(periodoTable, hbBottomBox);

@@ -47,21 +47,21 @@ public class AaaInitialLoad {
         periodos = new ArrayList<>();
 
         Date fecha = new Date();
-        user1 = new UsuarioO("98765432-5",
+        user1 = new UsuarioO("1-9",
                 "77+9Qe+/vUdm77+9X1MQZe+/vV0177+9aGfvv70677+9cu+/ve+/ve+/vT/vv73vv70677+977+9De+/vSQ=,-576102074",
-                1, "", "José", "Feliz", "ono@ono.com", "H", 99887766, 1, fecha, null, null);
+                1, "", "José", "Feliz", "ono@ono.com", "H", 999887766, 1, fecha, null, null);
         user2 = new UsuarioO("12312312-3",
                 "77+9Qe+/vUdm77+9X1MQZe+/vV0177+9aGfvv70677+9cu+/ve+/ve+/vT/vv73vv70677+977+9De+/vSQ=,-576102074",
-                2, "", "Andrés", "Piano", "ono@ono.com", "H", 88776655, 1, fecha, null, null);
+                2, "", "Andrés", "Piano", "ono@ono.com", "H", 988776655, 1, fecha, null, null);
         user3 = new UsuarioO("11111111-1",
                 "77+9Qe+/vUdm77+9X1MQZe+/vV0177+9aGfvv70677+9cu+/ve+/ve+/vT/vv73vv70677+977+9De+/vSQ=,-576102074",
-                2, "", "Amelia", "López", "ono@ono.com", "M", 77665544, 1, fecha, null, null);
+                2, "", "Amelia", "López", "ono@ono.com", "M", 977665544, 1, fecha, null, null);
         user4 = new UsuarioO("13131313-6",
                 "77+9Qe+/vUdm77+9X1MQZe+/vV0177+9aGfvv70677+9cu+/ve+/ve+/vT/vv73vv70677+977+9De+/vSQ=,-576102074",
-                3, "12312312-3", "Ana", "Zar", "ono@ono.com", "M", 77665544, 1, fecha, null, null);
+                3, "12312312-3", "Ana", "Zar", "ono@ono.com", "M", 977665544, 1, fecha, null, null);
         user5 = new UsuarioO("77777777-7",
                 "77+9Qe+/vUdm77+9X1MQZe+/vV0177+9aGfvv70677+9cu+/ve+/ve+/vT/vv73vv70677+977+9De+/vSQ=,-576102074",
-                3, "11111111-1", "Thor", "Aven", "ono@ono.com", "H", 77665544, 1, fecha, null, null);
+                3, "11111111-1", "Thor", "Aven", "ono@ono.com", "H", 977665544, 1, fecha, null, null);
 
         users.add(user1);
         users.add(user2);

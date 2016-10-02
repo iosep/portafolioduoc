@@ -63,14 +63,19 @@ public class CrearCompetencia {
         TextField descTxt = new TextField();
         grid.add(descTxt, 1, 6);
 
+        Label lblNivelOptimo = new Label("Nivel Óptimo:");
+        grid.add(lblNivelOptimo, 0, 7);
+        TextField txtNivelOptimo = new TextField();
+        grid.add(txtNivelOptimo, 1, 7);
+
         Button btn = new Button("CREAR");
         HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 9, 1, 4);
+        grid.add(hbBtn, 1, 10, 1, 4);
 
         final Text msj = new Text();
-        grid.add(msj, 0, 8, 2, 1);
+        grid.add(msj, 0, 9, 3, 1);
 
         btn.setOnAction(e -> {
             msj.getStyleClass().add("action");
@@ -81,21 +86,29 @@ public class CrearCompetencia {
                 msj.setText("Ingrese Sigla");
             } else if (descTxt.getText().isEmpty()) {
                 msj.setText("Ingrese Descripción");
+            } else if (!v.validarInteger(txtNivelOptimo.getText())) {
+                msj.setText("Nivel Óptimo ingrese sólo números entre 0 y 5");
             } else {
-                Date now = new Date();
-                vb = compCtl.addCompetenciaCTL(new CompetenciaO(nombreTxt.getText(), descTxt.getText(), siglaTxt.getText(), 1, now, null, null));
-                if (vb) {
-                    nombreTxt.clear();
-                    descTxt.clear();
-                    siglaTxt.clear();
-                    msj.setText("Competencia Creada Exitosamente");
+                int no = Integer.parseInt(txtNivelOptimo.getText());
+                if (no >= 0 && no <= 5) {
+                    Date now = new Date();
+                    vb = compCtl.addCompetenciaCTL(new CompetenciaO(nombreTxt.getText(), descTxt.getText(), siglaTxt.getText(), no, 1, now, null, null));
+                    if (vb) {
+                        nombreTxt.clear();
+                        txtNivelOptimo.clear();
+                        siglaTxt.clear();
+                        descTxt.clear();
+                        msj.setText("Competencia Creada Exitosamente");
+                    } else {
+                        msj.setText("Error Al Crear Competencia");
+                    }
                 } else {
-                    msj.setText("Error Al Crear Competencia");
+                    msj.setText("Nivel Óptimo ingrese sólo números entre 0 y 5");
                 }
             }
         });
 
-        Scene display = new Scene(grid);
+        Scene display = new Scene(grid, 420, 400);
         window.setScene(display);
         display.getStylesheets().add(CrearCompetencia.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
