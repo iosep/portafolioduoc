@@ -360,6 +360,7 @@ public abstract class Admin extends Application {
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
             final MenuItem eliminarMenuItem = new MenuItem("Desactivar");
+            final MenuItem verCompetenciasMenu = new MenuItem("Ver Competencias");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
                 System.out.println("Modificar area id: " + row.getItem().getId());
@@ -369,8 +370,13 @@ public abstract class Admin extends Application {
                 //tableUsers.getItems().remove(row.getItem());
                 System.out.println("Desactivar area id: " + row.getItem().getId());
             });
-            contextMenu.getItems().add(modificarMenuItem);
-            contextMenu.getItems().add(eliminarMenuItem);
+            verCompetenciasMenu.setOnAction(ee -> {
+                CrearAreaCompetencia acw = new CrearAreaCompetencia();
+                if (acw.display(row.getItem().getId())) {
+                    btnArea.fire();
+                }
+            });
+            contextMenu.getItems().addAll(modificarMenuItem, eliminarMenuItem, new SeparatorMenuItem(), verCompetenciasMenu);
             // Set context menu on row, but use a binding to make it only show for non-empty rows:
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())

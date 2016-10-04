@@ -18,7 +18,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -46,9 +45,9 @@ public class CrearUsuarioArea {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text scenetitle = new Text("SEC");
+        Text scenetitle = new Text("SEC - Asignar");
         scenetitle.getStyleClass().add("title");
-        grid.add(scenetitle, 0, 0, 3, 1);
+        grid.add(scenetitle, 0, 0, 4, 1);
 
         Label lblUser = new Label("Usuario RUT: " + userRut);
         grid.add(lblUser, 0, 1, 3, 1);

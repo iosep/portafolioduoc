@@ -5,6 +5,7 @@
  */
 package DAL;
 
+import O.AreaCompetenciaO;
 import O.AreaO;
 import O.CompetenciaO;
 import O.NivelO;
@@ -36,6 +37,19 @@ public class AaaInitialLoad {
     private static AreaO area5;
     private static AreaO area6;
     private static ArrayList<AreaO> areas;
+    private static CompetenciaO competencia1;
+    private static CompetenciaO competencia2;
+    private static CompetenciaO competencia3;
+    private static CompetenciaO competencia4;
+    private static CompetenciaO competencia5;
+    private static CompetenciaO competencia6;
+    private static CompetenciaO competencia7;
+    private static CompetenciaO competencia8;
+    private static CompetenciaO competencia9;
+    private static CompetenciaO competencia10;
+    private static CompetenciaO competencia11;
+    private static CompetenciaO competencia12;
+    private static CompetenciaO competencia13;
     private static ArrayList<CompetenciaO> competencias;
     private static ArrayList<NivelO> niveles;
     private static ArrayList<PreguntaO> preguntas;
@@ -43,6 +57,7 @@ public class AaaInitialLoad {
     private static ArrayList<ObservacionO> observaciones;
     private static ArrayList<PeriodoO> periodos;
     private static ArrayList<UsuarioAreaO> rUserAreas;
+    private static ArrayList<AreaCompetenciaO> rAreaCompetencias;
 
     public void cargar() {
         users = new ArrayList<>();
@@ -54,6 +69,7 @@ public class AaaInitialLoad {
         observaciones = new ArrayList<>();
         periodos = new ArrayList<>();
         rUserAreas = new ArrayList<>();
+        rAreaCompetencias = new ArrayList<>();
 
         Date fecha = new Date();
         user1 = new UsuarioO("1-9",
@@ -91,6 +107,34 @@ public class AaaInitialLoad {
         areas.add(area4);
         areas.add(area5);
         areas.add(area6);
+
+        competencia1 = new CompetenciaO("Liderazgo", "Ser líder", "ldr", 4, 1, fecha, null, null);
+        competencia2 = new CompetenciaO("Cognitiva", "Ser cognitivo", "cgn", 4, 1, fecha, null, null);
+        competencia3 = new CompetenciaO("Pensamiento científico", "Ser científico", "pcn", 4, 1, fecha, null, null);
+        competencia4 = new CompetenciaO("Perspicacia", "Ser perspicaz", "ppc", 4, 1, fecha, null, null);
+        competencia5 = new CompetenciaO("Orientación a las personas", "Ser personal", "oap", 4, 1, fecha, null, null);
+        competencia6 = new CompetenciaO("Trabajo en equipo", "Ser equipo", "tee", 4, 1, fecha, null, null);
+        competencia7 = new CompetenciaO("Comunicación", "Ser comunicativo", "cmc", 4, 1, fecha, null, null);
+        competencia8 = new CompetenciaO("Autocontrol", "Ser zen", "atc", 4, 1, fecha, null, null);
+        competencia9 = new CompetenciaO("Evaluación", "Ser evaluativo", "evl", 4, 1, fecha, null, null);
+        competencia10 = new CompetenciaO("Análisis y síntesis", "Ser analítico", "ays", 4, 1, fecha, null, null);
+        competencia11 = new CompetenciaO("Habilidad descriptiva", "Ser descriptivo", "hdc", 4, 1, fecha, null, null);
+        competencia12 = new CompetenciaO("Concentración", "Ser concentrado", "cnt", 4, 1, fecha, null, null);
+        competencia13 = new CompetenciaO("Organización y planificación", "Ser organizado", "oyp", 4, 1, fecha, null, null);
+
+        competencias.add(competencia1);
+        competencias.add(competencia2);
+        competencias.add(competencia3);
+        competencias.add(competencia4);
+        competencias.add(competencia5);
+        competencias.add(competencia6);
+        competencias.add(competencia7);
+        competencias.add(competencia8);
+        competencias.add(competencia9);
+        competencias.add(competencia10);
+        competencias.add(competencia11);
+        competencias.add(competencia12);
+        competencias.add(competencia13);
 
     }
 
@@ -175,4 +219,23 @@ public class AaaInitialLoad {
         }
         return false;
     }
+
+    public ArrayList<AreaCompetenciaO> mostrarAreaCompetencias() {
+        return rAreaCompetencias;
+    }
+
+    public boolean agregarAreaCompetencia(AreaCompetenciaO obj) {
+        return rAreaCompetencias.add(obj);
+    }
+
+    public boolean eliminarAreaCompetencia(int idArea, int idCompetencia) {
+        for (AreaCompetenciaO item : rAreaCompetencias) {
+            if (item.getArea_id() == idArea & item.getCompetencia_id() == idCompetencia) {
+                rAreaCompetencias.remove(item);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

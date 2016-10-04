@@ -28,6 +28,15 @@ public class CompetenciaCTL {
         return compDal.getCompetenciaById(id);
     }
 
+    public CompetenciaO getCompetenciaByNombre(String nombreCompetencia) {
+        for (CompetenciaO object : compDal.getCompetencias()) {
+            if (object.getNombre().equals(nombreCompetencia)) {
+                return object;
+            }
+        }
+        return null;
+    }
+
     public ObservableList<CompetenciaO> getCompetenciasFX() {
         ObservableList<CompetenciaO> fxList = FXCollections.observableArrayList();
         compDal.getCompetencias().stream().forEach((each) -> {
