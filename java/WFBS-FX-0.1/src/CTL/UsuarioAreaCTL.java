@@ -7,9 +7,7 @@ package CTL;
 
 import DAL.AreaDAL;
 import DAL.UsuarioAreaDAL;
-import O.AreaO;
 import O.UsuarioAreaO;
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -22,22 +20,12 @@ public class UsuarioAreaCTL {
     private final UsuarioAreaDAL usuarioAreaDal = new UsuarioAreaDAL();
     private final AreaDAL areaDal = new AreaDAL();
 
-    public ArrayList<UsuarioAreaO> getUsuarioAreas() {
-        return usuarioAreaDal.getUserAreas();
-    }
-
-    public ArrayList<UsuarioAreaO> getUsuarioAreaByUserId(int id) {
-        return usuarioAreaDal.getUserAreasByUserId(id);
-    }
-
-    public ArrayList<UsuarioAreaO> getUsuarioAreaByAreaId(int id) {
-        return usuarioAreaDal.getUserAreasByAreaId(id);
-    }
-
-    public ObservableList<UsuarioAreaO> getUsuarioAreasFX() {
+    public ObservableList<UsuarioAreaO> getUsuarioAreasByUserIdFX(int id) {
         ObservableList<UsuarioAreaO> fxList = FXCollections.observableArrayList();
         usuarioAreaDal.getUserAreas().stream().forEach((each) -> {
-            fxList.add(each);
+            if (each.getUsuario_id() == id) {
+                fxList.add(each);
+            }
         });
         return fxList;
     }
@@ -60,6 +48,10 @@ public class UsuarioAreaCTL {
 
     public boolean addUsuarioAreaCTL(UsuarioAreaO obj) {
         return usuarioAreaDal.addUsuarioArea(obj);
+    }
+
+    public boolean removeUserAreaCTL(int idUser, int idArea) {
+        return usuarioAreaDal.removeUsuarioArea(idUser, idArea);
     }
 
 }

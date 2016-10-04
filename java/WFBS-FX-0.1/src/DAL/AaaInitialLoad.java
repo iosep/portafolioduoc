@@ -80,18 +80,18 @@ public class AaaInitialLoad {
 
         area1 = new AreaO("Homicidios", "hmc", 1, fecha, null, null);
         area2 = new AreaO("Delitos sexuales", "dsx", 1, fecha, null, null);
-        area3 = new AreaO("Robos", "rb", 1, fecha, null, null);
-        area4 = new AreaO("Delitos económicos", "de", 1, fecha, null, null);
+        area3 = new AreaO("Robos", "rbs", 1, fecha, null, null);
+        area4 = new AreaO("Delitos económicos", "dec", 1, fecha, null, null);
         area5 = new AreaO("Delitos contra la propiedad intelectual", "dcpi", 1, fecha, null, null);
-        area6 = new AreaO("Ubicación de personas", "up", 1, fecha, null, null);
-        
+        area6 = new AreaO("Ubicación de personas", "udp", 1, fecha, null, null);
+
         areas.add(area1);
         areas.add(area2);
         areas.add(area3);
         areas.add(area4);
         areas.add(area5);
         areas.add(area6);
-        
+
     }
 
     public ArrayList<UsuarioO> mostrarUsuarios() {
@@ -166,4 +166,13 @@ public class AaaInitialLoad {
         return rUserAreas.add(obj);
     }
 
+    public boolean eliminarUsuarioArea(int idUser, int idArea) {
+        for (UsuarioAreaO item : rUserAreas) {
+            if (item.getArea_id() == idArea && item.getUsuario_id() == idUser) {
+                rUserAreas.remove(item);
+                return true;
+            }
+        }
+        return false;
+    }
 }

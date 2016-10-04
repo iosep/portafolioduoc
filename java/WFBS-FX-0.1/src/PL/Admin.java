@@ -261,7 +261,7 @@ public abstract class Admin extends Application {
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
             final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
-            final MenuItem agregarAreaMenu = new MenuItem("Agregar Área");
+            final MenuItem agregarAreaMenu = new MenuItem("Ver Áreas");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
                 System.out.println("Modificar usuario rut: " + row.getItem().getRut());

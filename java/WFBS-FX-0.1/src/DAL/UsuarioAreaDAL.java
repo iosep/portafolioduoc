@@ -31,18 +31,12 @@ public class UsuarioAreaDAL {
         return list;
     }
 
-    public ArrayList<UsuarioAreaO> getUserAreasByAreaId(int id) {
-        ArrayList<UsuarioAreaO> list = new ArrayList<>();
-        aaa.mostrarUsuarioAreas().stream().forEach((u) -> {
-            if (u.getArea_id() == id) {
-                list.add(u);
-            }
-        });
-        return list;
-    }
-
     public boolean addUsuarioArea(UsuarioAreaO obj) {
         return aaa.agregarUsuarioArea(obj);
+    }
+
+    public boolean removeUsuarioArea(int idUser, int idArea) {
+        return aaa.eliminarUsuarioArea(idUser, idArea);
     }
 
 }
