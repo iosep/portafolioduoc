@@ -50,15 +50,25 @@ public class CrearPeriodo {
         subtitle.getStyleClass().add("subtitle");
         grid.add(subtitle, 0, 1, 2, 1);
 
+        final Text msj = new Text();
+        grid.add(msj, 0, 9, 2, 1);
+        msj.getStyleClass().add("action");
+
         Label lblFechaInicio = new Label("Fecha Inicio:");
         grid.add(lblFechaInicio, 0, 4);
         DatePicker dpFechaInicio = new DatePicker();
         grid.add(dpFechaInicio, 1, 4);
+        dpFechaInicio.valueProperty().addListener((ob, ol, ne) -> {
+            msj.setText("");
+        });
 
         Label lblFechaFinal = new Label("Fecha Final:");
         grid.add(lblFechaFinal, 0, 5);
         DatePicker dpFechaFinal = new DatePicker();
         grid.add(dpFechaFinal, 1, 5);
+        dpFechaFinal.valueProperty().addListener((ob, ol, ne) -> {
+            msj.setText("");
+        });
 
         Label lblPorcJefe = new Label("Porcentaje Jefe Evaluación:");
         grid.add(lblPorcJefe, 0, 6);
@@ -73,14 +83,26 @@ public class CrearPeriodo {
         Validar v = new Validar();
         txtPorcJefe.textProperty().addListener((observable, oldValue, newValue) -> {
             if (v.validarInteger(newValue)) {
-                int auto = 100 - Integer.parseInt(newValue);
-                txtPorcAuto.setText("" + auto);
+                if (Integer.parseInt(newValue) < 100 && Integer.parseInt(newValue) > 0) {
+                    msj.setText("");
+                    int auto = 100 - Integer.parseInt(newValue);
+                    txtPorcAuto.setText("" + auto);
+                } else {
+                    msj.setText("");
+                    msj.setText("Porcentaje > 0 y < 100");
+                    txtPorcJefe.clear();
+                }
             }
         });
         txtPorcAuto.textProperty().addListener((observable, oldValue, newValue) -> {
             if (v.validarInteger(newValue)) {
-                int jefe = 100 - Integer.parseInt(newValue);
-                txtPorcJefe.setText("" + jefe);
+                if (Integer.parseInt(newValue) < 100 && Integer.parseInt(newValue) > 0) {
+                    int jefe = 100 - Integer.parseInt(newValue);
+                    txtPorcJefe.setText("" + jefe);
+                } else {
+                    msj.setText("Porcentaje > 0 y < 100");
+                    txtPorcAuto.clear();
+                }
             }
         });
 
@@ -90,11 +112,7 @@ public class CrearPeriodo {
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 1, 10, 1, 5);
 
-        final Text msj = new Text();
-        grid.add(msj, 0, 9, 2, 1);
-
         btn.setOnAction(e -> {
-            msj.getStyleClass().add("action");
             if (dpFechaInicio.getValue() == null) {
                 msj.setText("Seleccione Fecha Inicio");
             } else if (dpFechaFinal.getValue() == null) {

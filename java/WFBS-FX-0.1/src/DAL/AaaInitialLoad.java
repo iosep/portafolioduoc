@@ -12,6 +12,7 @@ import O.ObservacionO;
 import O.PeriodoO;
 import O.PreguntaO;
 import O.RespuestaO;
+import O.UsuarioAreaO;
 import O.UsuarioO;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +29,12 @@ public class AaaInitialLoad {
     private static UsuarioO user4;
     private static UsuarioO user5;
     private static ArrayList<UsuarioO> users;
+    private static AreaO area1;
+    private static AreaO area2;
+    private static AreaO area3;
+    private static AreaO area4;
+    private static AreaO area5;
+    private static AreaO area6;
     private static ArrayList<AreaO> areas;
     private static ArrayList<CompetenciaO> competencias;
     private static ArrayList<NivelO> niveles;
@@ -35,6 +42,7 @@ public class AaaInitialLoad {
     private static ArrayList<RespuestaO> respuestas;
     private static ArrayList<ObservacionO> observaciones;
     private static ArrayList<PeriodoO> periodos;
+    private static ArrayList<UsuarioAreaO> rUserAreas;
 
     public void cargar() {
         users = new ArrayList<>();
@@ -45,6 +53,7 @@ public class AaaInitialLoad {
         respuestas = new ArrayList<>();
         observaciones = new ArrayList<>();
         periodos = new ArrayList<>();
+        rUserAreas = new ArrayList<>();
 
         Date fecha = new Date();
         user1 = new UsuarioO("1-9",
@@ -68,6 +77,21 @@ public class AaaInitialLoad {
         users.add(user3);
         users.add(user4);
         users.add(user5);
+
+        area1 = new AreaO("Homicidios", "hmc", 1, fecha, null, null);
+        area2 = new AreaO("Delitos sexuales", "dsx", 1, fecha, null, null);
+        area3 = new AreaO("Robos", "rb", 1, fecha, null, null);
+        area4 = new AreaO("Delitos económicos", "de", 1, fecha, null, null);
+        area5 = new AreaO("Delitos contra la propiedad intelectual", "dcpi", 1, fecha, null, null);
+        area6 = new AreaO("Ubicación de personas", "up", 1, fecha, null, null);
+        
+        areas.add(area1);
+        areas.add(area2);
+        areas.add(area3);
+        areas.add(area4);
+        areas.add(area5);
+        areas.add(area6);
+        
     }
 
     public ArrayList<UsuarioO> mostrarUsuarios() {
@@ -132,6 +156,14 @@ public class AaaInitialLoad {
 
     public boolean agregarPeriodo(PeriodoO obj) {
         return periodos.add(obj);
+    }
+
+    public ArrayList<UsuarioAreaO> mostrarUsuarioAreas() {
+        return rUserAreas;
+    }
+
+    public boolean agregarUsuarioArea(UsuarioAreaO obj) {
+        return rUserAreas.add(obj);
     }
 
 }

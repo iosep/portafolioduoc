@@ -93,4 +93,9 @@ public class AreaO {
         this.desactivado = desactivado;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
 }

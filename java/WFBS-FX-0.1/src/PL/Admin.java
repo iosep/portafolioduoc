@@ -33,6 +33,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -259,18 +260,24 @@ public abstract class Admin extends Application {
             final TableRow<UsuarioO> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
-            final MenuItem eliminarMenuItem = new MenuItem("Desactivar");
+            final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
+            final MenuItem agregarAreaMenu = new MenuItem("Agregar Área");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
                 System.out.println("Modificar usuario rut: " + row.getItem().getRut());
             });
             //desactivar
-            eliminarMenuItem.setOnAction(event -> {
+            desactivarMenuItem.setOnAction(event -> {
                 //tableUsers.getItems().remove(row.getItem());
                 System.out.println("Desactivar usuario rut: " + row.getItem().getRut());
             });
-            contextMenu.getItems().add(modificarMenuItem);
-            contextMenu.getItems().add(eliminarMenuItem);
+            agregarAreaMenu.setOnAction(ev -> {
+                CrearUsuarioArea cuaw = new CrearUsuarioArea();
+                if (cuaw.display(row.getItem().getRut())) {
+                    btnUsuario.fire();
+                }
+            });
+            contextMenu.getItems().addAll(modificarMenuItem, desactivarMenuItem, new SeparatorMenuItem(), agregarAreaMenu);
             // Set context menu on row, but use a binding to make it only show for non-empty rows:
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())

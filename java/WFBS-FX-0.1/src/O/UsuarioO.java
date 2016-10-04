@@ -13,6 +13,9 @@ import java.util.Date;
  */
 public class UsuarioO {
 
+    private static int fakeId = 0;
+
+    private int id;
     private String rut;
     private String clave;
     private int rol;
@@ -32,6 +35,9 @@ public class UsuarioO {
     }
 
     public UsuarioO(String rut, String clave, int rol, String rut_jefe, String nombre, String apellido, String email, String sexo, int fono, int activo, Date creado, Date modificado, Date desactivado) {
+
+        this.id = ++fakeId;
+
         this.rut = rut;
         this.clave = clave;
         this.rol = rol;
@@ -58,6 +64,22 @@ public class UsuarioO {
             default:
                 break;
         }
+    }
+
+    public static int getFakeId() {
+        return fakeId;
+    }
+
+    public static void setFakeId(int fakeId) {
+        UsuarioO.fakeId = fakeId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getRut() {

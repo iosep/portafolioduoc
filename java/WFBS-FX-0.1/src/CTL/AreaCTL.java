@@ -28,6 +28,16 @@ public class AreaCTL {
         return ad.getAreaById(id);
     }
 
+    public AreaO getAreaByNombre(String nombre) {
+        AreaO result = null;
+        for (AreaO item : ad.getAreas()) {
+            if (item.toString().equals(nombre)) {
+                result = item;
+            }
+        }
+        return result;
+    }
+
     public ObservableList<AreaO> getAreasFX() {
         ObservableList<AreaO> areas = FXCollections.observableArrayList();
         ad.getAreas().stream().forEach((a) -> {
@@ -39,5 +49,5 @@ public class AreaCTL {
     public boolean addAreaCTL(AreaO afx) {
         return ad.addArea(afx);
     }
-    
+
 }

@@ -9,17 +9,19 @@ package O;
  *
  * @author iosep
  */
-public class UsuarioArea {
+public class UsuarioAreaO {
 
     private int usuario_id;
     private int area_id;
+    private String area_nombre;
 
-    public UsuarioArea(int usuario_id, int area_id) {
-        this.usuario_id = usuario_id;
-        this.area_id = area_id;
+    public UsuarioAreaO() {
     }
 
-    public UsuarioArea() {
+    public UsuarioAreaO(int usuario_id, int area_id, String area_nombre) {
+        this.usuario_id = usuario_id;
+        this.area_id = area_id;
+        this.area_nombre = area_nombre;
     }
 
     public int getUsuario_id() {
@@ -38,4 +40,16 @@ public class UsuarioArea {
         this.area_id = area_id;
     }
 
+    public String getArea_nombre() {
+        return area_nombre;
+    }
+
+    public void setArea_nombre(String area_nombre) {
+        this.area_nombre = area_nombre;
+    }
+
+    @Override
+    public String toString() {
+        return area_nombre;
+    }
 }
