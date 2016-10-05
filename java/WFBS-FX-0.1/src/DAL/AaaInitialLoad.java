@@ -7,6 +7,7 @@ package DAL;
 
 import O.AreaCompetenciaO;
 import O.AreaO;
+import O.CompetenciaNivelO;
 import O.CompetenciaO;
 import O.NivelO;
 import O.ObservacionO;
@@ -54,6 +55,12 @@ public class AaaInitialLoad {
     private static CompetenciaO competencia12;
     private static CompetenciaO competencia13;
     private static ArrayList<CompetenciaO> competencias;
+    public static NivelO nivel1;
+    public static NivelO nivel2;
+    public static NivelO nivel3;
+    public static NivelO nivel4;
+    public static NivelO nivel5;
+    public static NivelO nivel6;
     private static ArrayList<NivelO> niveles;
     private static ArrayList<PreguntaO> preguntas;
     private static ArrayList<RespuestaO> respuestas;
@@ -61,6 +68,7 @@ public class AaaInitialLoad {
     private static ArrayList<PeriodoO> periodos;
     private static ArrayList<UsuarioAreaO> rUserAreas;
     private static ArrayList<AreaCompetenciaO> rAreaCompetencias;
+    private static ArrayList<CompetenciaNivelO> rCompetenciaNiveles;
 
     public void cargar() {
         users = new ArrayList<>();
@@ -73,6 +81,7 @@ public class AaaInitialLoad {
         periodos = new ArrayList<>();
         rUserAreas = new ArrayList<>();
         rAreaCompetencias = new ArrayList<>();
+        rCompetenciaNiveles = new ArrayList<>();
 
         Date fecha = new Date();
         user1 = new UsuarioO("1-9",
@@ -99,7 +108,7 @@ public class AaaInitialLoad {
         user8 = new UsuarioO("14566421-7",
                 "77+9Qe+/vUdm77+9X1MQZe+/vV0177+9aGfvv70677+9cu+/ve+/ve+/vT/vv73vv70677+977+9De+/vSQ=,-576102074",
                 3, "11111111-1", "Totoro", "Oso", "ono@ono.com", "H", 977665544, 1, fecha, null, null);
-        
+
         users.add(user1);
         users.add(user2);
         users.add(user3);
@@ -151,6 +160,19 @@ public class AaaInitialLoad {
         competencias.add(competencia12);
         competencias.add(competencia13);
 
+        nivel1 = new NivelO("Nulo", 0, "Todo malo", 1, fecha, null, null);
+        nivel2 = new NivelO("Muy Malo", 1, "Casi todo malo", 1, fecha, null, null);
+        nivel3 = new NivelO("Malo", 2, "Muchas malas", 1, fecha, null, null);
+        nivel4 = new NivelO("Regular", 3, "Algunas malas", 1, fecha, null, null);
+        nivel5 = new NivelO("Bien", 4, "Casi todo bien", 1, fecha, null, null);
+        nivel6 = new NivelO("Muy Bien", 5, "Todo bien", 1, fecha, null, null);
+
+        niveles.add(nivel1);
+        niveles.add(nivel2);
+        niveles.add(nivel3);
+        niveles.add(nivel4);
+        niveles.add(nivel5);
+        niveles.add(nivel6);
     }
 
     public ArrayList<UsuarioO> mostrarUsuarios() {
@@ -228,8 +250,7 @@ public class AaaInitialLoad {
     public boolean eliminarUsuarioArea(int idUser, int idArea) {
         for (UsuarioAreaO item : rUserAreas) {
             if (item.getArea_id() == idArea && item.getUsuario_id() == idUser) {
-                rUserAreas.remove(item);
-                return true;
+                return rUserAreas.remove(item);
             }
         }
         return false;
@@ -245,9 +266,25 @@ public class AaaInitialLoad {
 
     public boolean eliminarAreaCompetencia(int idArea, int idCompetencia) {
         for (AreaCompetenciaO item : rAreaCompetencias) {
-            if (item.getArea_id() == idArea & item.getCompetencia_id() == idCompetencia) {
-                rAreaCompetencias.remove(item);
-                return true;
+            if (item.getArea_id() == idArea && item.getCompetencia_id() == idCompetencia) {
+                return rAreaCompetencias.remove(item);
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<CompetenciaNivelO> mostrarCompetenciaNiveles() {
+        return rCompetenciaNiveles;
+    }
+
+    public boolean agregarCompetenciaNivel(CompetenciaNivelO obj) {
+        return rCompetenciaNiveles.add(obj);
+    }
+
+    public boolean eliminarCompetenciaNivel(int idCompetencia, int idNivel) {
+        for (CompetenciaNivelO item : rCompetenciaNiveles) {
+            if (item.getCompetencia_id() == idCompetencia && item.getNivel_id() == idNivel) {
+                return rCompetenciaNiveles.remove(item);
             }
         }
         return false;

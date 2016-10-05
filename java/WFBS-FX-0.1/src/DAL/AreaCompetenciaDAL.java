@@ -31,6 +31,16 @@ public class AreaCompetenciaDAL {
         return list;
     }
 
+    public ArrayList<AreaCompetenciaO> getAreaCompetenciasByCompetenciaId(int id) {
+        ArrayList<AreaCompetenciaO> list = new ArrayList<>();
+        aaa.mostrarAreaCompetencias().stream().forEach((item) -> {
+            if (item.getCompetencia_id() == id) {
+                list.add(item);
+            }
+        });
+        return list;
+    }
+
     public boolean addAreaCompetencia(AreaCompetenciaO obj) {
         return aaa.agregarAreaCompetencia(obj);
     }

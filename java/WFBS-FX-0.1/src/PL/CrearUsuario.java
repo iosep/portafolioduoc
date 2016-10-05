@@ -36,7 +36,7 @@ public class CrearUsuario {
     private final UsuarioCTL uctl = new UsuarioCTL();
     static boolean vb = false;
 
-    public boolean display() {
+    public void display() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("SEC - Crear Nuevo Usuario");
@@ -208,6 +208,5 @@ public class CrearUsuario {
         display.getStylesheets().add(CrearUsuario.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
-        return vb;
     }
 }

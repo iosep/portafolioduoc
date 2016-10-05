@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -30,7 +31,7 @@ public class CrearNivel {
     private final NivelCTL nivelCtl = new NivelCTL();
     static boolean vb = false;
 
-    public boolean display() {
+    public void display() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("SEC - Crear Nuevo Nivel");
@@ -58,42 +59,55 @@ public class CrearNivel {
         TextField notaTxt = new TextField();
         grid.add(notaTxt, 1, 5);
 
+        Label descLbl = new Label("Descripción:");
+        grid.add(descLbl, 0, 6);
+        TextField descTxt = new TextField();
+        grid.add(descTxt, 1, 6);
+
+        final Text msj = new Text();
+        msj.getStyleClass().add("action");
+        grid.add(msj, 0, 8, 2, 1);
+
         Button btn = new Button("CREAR");
         HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 8, 1, 4);
-
-        final Text msj = new Text();
-        grid.add(msj, 0, 7, 2, 1);
+        grid.add(hbBtn, 1, 9, 1, 4);
 
         btn.setOnAction(e -> {
-            msj.getStyleClass().add("action");
             Validar v = new Validar();
             if (nombreTxt.getText().isEmpty()) {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Nombre");
             } else if (notaTxt.getText().isEmpty()) {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Nota");
-            } else if (v.validarInteger(notaTxt.getText())) {
+            } else if (descTxt.getText().isEmpty()) {
+                msj.setFill(Color.FIREBRICK);
+                msj.setText("Ingrese Descripción");
+            } else if (v.validarInteger(notaTxt.getText()) && Integer.parseInt(notaTxt.getText()) >= 0 && Integer.parseInt(notaTxt.getText()) <= 5) {
                 Date now = new Date();
-                vb = nivelCtl.addNivelCTL(new NivelO(nombreTxt.getText(), Integer.parseInt(notaTxt.getText()), 1, now, null, null));
+                vb = nivelCtl.addNivelCTL(new NivelO(nombreTxt.getText(), Integer.parseInt(notaTxt.getText()), descTxt.getText(), 1, now, null, null));
                 if (vb) {
-                    nombreTxt.clear();
+                    descTxt.clear();
                     notaTxt.clear();
+                    nombreTxt.clear();
+                    msj.setFill(Color.GREEN);
                     msj.setText("Nivel Creado Exitosamente");
                 } else {
+                    msj.setFill(Color.FIREBRICK);
                     msj.setText("Error Al Crear Nivel");
                 }
             } else {
-                msj.setText("Nota Ingrese Solo Números");
+                msj.setFill(Color.FIREBRICK);
+                msj.setText("Nota Ingrese Solo Números entre 0 y 5");
             }
         });
 
-        Scene display = new Scene(grid);
+        Scene display = new Scene(grid, 400, 400);
         window.setScene(display);
         display.getStylesheets().add(CrearNivel.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
-        return vb;
     }
 }

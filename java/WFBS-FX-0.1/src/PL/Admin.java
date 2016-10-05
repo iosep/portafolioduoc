@@ -22,6 +22,9 @@ import O.PeriodoO;
 import O.PreguntaO;
 import O.RespuestaO;
 import O.UsuarioO;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.collections.transformation.FilteredList;
@@ -35,6 +38,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -63,6 +67,7 @@ public abstract class Admin extends Application {
     private final HBox hbBottomBox = new HBox();
     private final Button btCrear = new Button();
     private final Tooltip tooltipFilter = new Tooltip();
+    private final DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //variables mantenedor usuarios
     private final UsuarioCTL usersCtl = new UsuarioCTL();
     private final TableView<UsuarioO> usersTable = new TableView<>();
@@ -74,14 +79,14 @@ public abstract class Admin extends Application {
     private TableColumn<UsuarioO, String> sexoColumn;
     private TableColumn<UsuarioO, String> rolColumn;
     private TableColumn<UsuarioO, String> jefeColumn;
-    private TableColumn<UsuarioO, String> activoColumn;
+    //private TableColumn<UsuarioO, String> activoColumn;
     private TableColumn<UsuarioO, String> creadoColumn;
     private TableColumn<UsuarioO, String> modificadoColumn;
-    private TableColumn<UsuarioO, String> desactivadoColumn;
+    //private TableColumn<UsuarioO, String> desactivadoColumn;
 //variables mantenedor areas
     private final AreaCTL areasCtl = new AreaCTL();
     private final TableView<AreaO> areasTable = new TableView<>();
-    private TableColumn<AreaO, String> areaIdColumn;
+    //private TableColumn<AreaO, String> areaIdColumn;
     private TableColumn<AreaO, String> areaNombreColumn;
     private TableColumn<AreaO, String> areaSiglaColumn;
     private TableColumn<AreaO, String> areaActivoColumn;
@@ -91,7 +96,7 @@ public abstract class Admin extends Application {
 //variables mantenedor COMPETENCIAS
     private final CompetenciaCTL compCtl = new CompetenciaCTL();
     private final TableView<CompetenciaO> compTable = new TableView<>();
-    private TableColumn<CompetenciaO, String> compIdCol;
+    //private TableColumn<CompetenciaO, String> compIdCol;
     private TableColumn<CompetenciaO, String> compNombreCol;
     private TableColumn<CompetenciaO, String> compDescCol;
     private TableColumn<CompetenciaO, String> compSiglaCol;
@@ -103,52 +108,53 @@ public abstract class Admin extends Application {
 //variables mantenedor NIVEL //maintainer variables LEVEL
     private final NivelCTL nivelCtl = new NivelCTL();
     private final TableView<NivelO> nivelTable = new TableView<>();
-    private TableColumn<NivelO, String> idNivelCol;
+    //private TableColumn<NivelO, String> idNivelCol;
     private TableColumn<NivelO, String> nombreNivelCol;
     private TableColumn<NivelO, String> notaNivelCol;
-    private TableColumn<NivelO, String> activoNivelCol;
+    private TableColumn<NivelO, String> descNivelCol;
+    //private TableColumn<NivelO, String> activoNivelCol;
     private TableColumn<NivelO, String> creadoNivelCol;
     private TableColumn<NivelO, String> modificadoNivelCol;
-    private TableColumn<NivelO, String> desactivadoNivelCol;
+    //private TableColumn<NivelO, String> desactivadoNivelCol;
 //variables mantenedor PREGUNTA //maintainer variables QUESTION
     private final PreguntaCTL questionCtl = new PreguntaCTL();
     private final TableView<PreguntaO> questionTable = new TableView<>();
-    private TableColumn<PreguntaO, String> questionIdCol;
+    //private TableColumn<PreguntaO, String> questionIdCol;
     private TableColumn<PreguntaO, String> questionPreguntaCol;
     private TableColumn<PreguntaO, String> questionCompetenciaCol;
-    private TableColumn<PreguntaO, String> questionActivoCol;
+    //private TableColumn<PreguntaO, String> questionActivoCol;
     private TableColumn<PreguntaO, String> questionCreadoCol;
     private TableColumn<PreguntaO, String> questionModificadoCol;
-    private TableColumn<PreguntaO, String> questionDesactivadoCol;
+    //private TableColumn<PreguntaO, String> questionDesactivadoCol;
 //variables mantenedor RESPUESTA //maintainer variables ANSWER
     private final RespuestaCTL answerCtl = new RespuestaCTL();
     private final TableView<RespuestaO> answerTable = new TableView<>();
-    private TableColumn<RespuestaO, String> answerIdCol;
+    //private TableColumn<RespuestaO, String> answerIdCol;
     private TableColumn<RespuestaO, String> answerRespuestaCol;
     private TableColumn<RespuestaO, String> answerPuntosCol;
     private TableColumn<RespuestaO, String> answerPreguntaCol;
-    private TableColumn<RespuestaO, String> answerActivoCol;
+    //private TableColumn<RespuestaO, String> answerActivoCol;
     private TableColumn<RespuestaO, String> answerCreadoCol;
     private TableColumn<RespuestaO, String> answerModificadoCol;
-    private TableColumn<RespuestaO, String> answerDesactivadoCol;
+    //private TableColumn<RespuestaO, String> answerDesactivadoCol;
 //variables mantenedor OBSERVACION //maintainer variables COMMENT
     private final ObservacionCTL commentCtl = new ObservacionCTL();
     private final TableView<ObservacionO> commentTable = new TableView<>();
-    private TableColumn<ObservacionO, String> commentIdCol;
+    //private TableColumn<ObservacionO, String> commentIdCol;
     private TableColumn<ObservacionO, String> commentNivelInfCol;
     private TableColumn<ObservacionO, String> commentNivelSupCol;
     private TableColumn<ObservacionO, String> commentMsjInfCol;
     private TableColumn<ObservacionO, String> commentMsjSupCol;
     private TableColumn<ObservacionO, String> commentCompetenciaCol;
-    private TableColumn<ObservacionO, String> commentActivoCol;
+    //private TableColumn<ObservacionO, String> commentActivoCol;
     private TableColumn<ObservacionO, String> commentCreadoCol;
     private TableColumn<ObservacionO, String> commentModificadoCol;
-    private TableColumn<ObservacionO, String> commentDesactivadoCol;
+    //private TableColumn<ObservacionO, String> commentDesactivadoCol;
 //variables mantenedor PERIODO
     private final PeriodoCTL periodoCtl = new PeriodoCTL();
     private final TableView<PeriodoO> periodoTable = new TableView<>();
-    private TableColumn<PeriodoO, String> periodoIdCol;
-    private TableColumn<PeriodoO, String> periodoInicioCol;
+    //private TableColumn<PeriodoO, String> periodoIdCol;
+    private TableColumn<PeriodoO, Date> periodoInicioCol;
     private TableColumn<PeriodoO, String> periodoFinCol;
     private TableColumn<PeriodoO, String> periodoPorcJefeCol;
     private TableColumn<PeriodoO, String> periodoPorcAutoCol;
@@ -245,14 +251,12 @@ public abstract class Admin extends Application {
             btCrear.setText("Crear Nuevo Usuario");
             btCrear.setOnAction(ev -> {
                 CrearUsuario cuw = new CrearUsuario();
-                boolean crearVB = cuw.display();
-                if (crearVB) {
-                    btnUsuario.fire();
-                }
+                cuw.display();
+                btnUsuario.fire();
             });
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
-            tooltipFilter.setText("Rut, Nombre, Apellido");
+            tooltipFilter.setText("Rut, Nombre o Apellido");
             filterField.setTooltip(tooltipFilter);
             hbBottomBox.getChildren().addAll(filterLabel, filterField, btCrear);
             //load vbox display
@@ -265,7 +269,7 @@ public abstract class Admin extends Application {
             final TableRow<UsuarioO> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
-            final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
+            final MenuItem desactivarMenuItem = new MenuItem("Eliminar");
             final MenuItem agregarAreaMenu = new MenuItem("Ver Áreas");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
@@ -274,14 +278,13 @@ public abstract class Admin extends Application {
             //desactivar
             desactivarMenuItem.setOnAction(event -> {
                 //tableUsers.getItems().remove(row.getItem());
-                System.out.println("Desactivar usuario rut: " + row.getItem().getRut());
+                System.out.println("Eliminar usuario rut: " + row.getItem().getRut());
             });
             agregarAreaMenu.setOnAction(ev -> {
                 if (row.getItem().getRol() == 3) {
                     CrearUsuarioArea cuaw = new CrearUsuarioArea();
-                    if (cuaw.display(row.getItem().getRut())) {
-                        btnUsuario.fire();
-                    }
+                    cuaw.display(row.getItem().getRut());
+                    btnUsuario.fire();
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Información");
@@ -318,17 +321,17 @@ public abstract class Admin extends Application {
         rolColumn.setCellValueFactory(new PropertyValueFactory<>("rolString"));
         jefeColumn = new TableColumn<>("Jefa");
         jefeColumn.setCellValueFactory(new PropertyValueFactory<>("rut_jefe"));
-        activoColumn = new TableColumn<>("Activo");
-        activoColumn.setCellValueFactory(new PropertyValueFactory<>("activo"));
+        //activoColumn = new TableColumn<>("Activo");
+        //activoColumn.setCellValueFactory(new PropertyValueFactory<>("activo"));
         creadoColumn = new TableColumn<>("Creado");
         creadoColumn.setCellValueFactory(new PropertyValueFactory<>("creado"));
         modificadoColumn = new TableColumn<>("Modificado");
         modificadoColumn.setCellValueFactory(new PropertyValueFactory<>("modificado"));
-        desactivadoColumn = new TableColumn<>("Desactivado");
-        desactivadoColumn.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
+        //desactivadoColumn = new TableColumn<>("Desactivado");
+        //desactivadoColumn.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
 //load USERS columns
         usersTable.getColumns().addAll(rutColumn, nombreColumn, apellidoColumn, fonoColumn, emailColumn, sexoColumn,
-                rolColumn, jefeColumn, activoColumn, creadoColumn, modificadoColumn, desactivadoColumn);
+                rolColumn, jefeColumn, creadoColumn, modificadoColumn);
 //
 //MANTENEDOR AREAS //AREAS MAINTAINER
 //
@@ -356,12 +359,13 @@ public abstract class Admin extends Application {
             btCrear.setText("Crear Nueva Área");
             btCrear.setOnAction(ev -> {
                 CrearArea caw = new CrearArea();
-                if (caw.display()) {
-                    btnArea.fire();
-                }
+                caw.display();
+                btnArea.fire();
             });
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
+            tooltipFilter.setText("Nombre o Sigla");
+            filterField.setTooltip(tooltipFilter);
             hbBottomBox.getChildren().addAll(filterLabel, filterField, btCrear);
             //load vbox display
             vbDisplay.getChildren().clear();
@@ -387,15 +391,13 @@ public abstract class Admin extends Application {
             });
             verCompetenciasMenu.setOnAction(ee -> {
                 CrearAreaCompetencia acw = new CrearAreaCompetencia();
-                if (acw.display(row.getItem().getId())) {
-                    btnArea.fire();
-                }
+                acw.display(row.getItem().getId());
+                btnArea.fire();
             });
             verUsuariosMenu.setOnAction(ee -> {
                 CrearAreaUsuario auw = new CrearAreaUsuario();
-                if (auw.display(row.getItem().getId())) {
-                    btnArea.fire();
-                }
+                auw.display(row.getItem().getId());
+                btnArea.fire();
             });
             contextMenu.getItems().addAll(modificarMenuItem, eliminarMenuItem, new SeparatorMenuItem(), verCompetenciasMenu, verUsuariosMenu);
             // Set context menu on row, but use a binding to make it only show for non-empty rows:
@@ -407,8 +409,8 @@ public abstract class Admin extends Application {
             return row;
         });
 //setting AREAS table columns data and headers
-        areaIdColumn = new TableColumn<>("Id");
-        areaIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        //areaIdColumn = new TableColumn<>("Id");
+        //areaIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         areaNombreColumn = new TableColumn<>("Nombre");
         areaNombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         areaSiglaColumn = new TableColumn<>("Sigla");
@@ -422,7 +424,7 @@ public abstract class Admin extends Application {
         areaDesactivadoColumn = new TableColumn<>("Desactivado");
         areaDesactivadoColumn.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
 //load AREAS columns
-        areasTable.getColumns().addAll(areaIdColumn, areaNombreColumn, areaSiglaColumn, areaActivoColumn,
+        areasTable.getColumns().addAll(areaNombreColumn, areaSiglaColumn, areaActivoColumn,
                 areaCreadoColumn, areaModificadoColumn, areaDesactivadoColumn);
 //
 //MANTENEDOR COMPETENCIAS //CAPACITY MAINTAINER
@@ -453,12 +455,13 @@ public abstract class Admin extends Application {
             btCrear.setText("Crear Nueva Competencia");
             btCrear.setOnAction(ev -> {
                 CrearCompetencia ccw = new CrearCompetencia();
-                if (ccw.display()) {
-                    btnCompetencia.fire();
-                }
+                ccw.display();
+                btnCompetencia.fire();
             });
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
+            tooltipFilter.setText("Nombre, Sigla o Descripción");
+            filterField.setTooltip(tooltipFilter);
             hbBottomBox.getChildren().addAll(filterLabel, filterField, btCrear);
             //load vbox display
             vbDisplay.getChildren().clear();
@@ -473,6 +476,7 @@ public abstract class Admin extends Application {
             final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
             final MenuItem crearPreguntaMenu = new MenuItem("Crear Pregunta");
             final MenuItem crearCommentMenu = new MenuItem("Crear Observación");
+            final MenuItem verAreasMenu = new MenuItem("Ver Áreas");
             //modificar
             modificarMenuItem.setOnAction(event -> {
                 System.out.println("Modificar Competencia Id: " + row.getItem().getId());
@@ -484,18 +488,22 @@ public abstract class Admin extends Application {
             crearPreguntaMenu.setOnAction(event -> {
                 int id_competencia = row.getItem().getId();
                 CrearPregunta cpw = new CrearPregunta();
-                if (cpw.display(id_competencia)) {
-                    btnPregunta.fire();
-                }
+                cpw.display(id_competencia);
+                btnPregunta.fire();
             });
             crearCommentMenu.setOnAction(event -> {
                 int id_competencia = row.getItem().getId();
                 CrearObservacion cow = new CrearObservacion();
-                if (cow.display(id_competencia)) {
-                    btnComment.fire();
-                }
+                cow.display(id_competencia);
+                btnComment.fire();
             });
-            contextMenu.getItems().addAll(modificarMenuItem, desactivarMenuItem, crearPreguntaMenu, crearCommentMenu);
+            verAreasMenu.setOnAction(ev -> {
+                int id_competencia = row.getItem().getId();
+                CrearCompetenciaArea ccaw = new CrearCompetenciaArea();
+                ccaw.display(id_competencia);
+            });
+            contextMenu.getItems().addAll(modificarMenuItem, desactivarMenuItem, new SeparatorMenuItem(), crearPreguntaMenu, crearCommentMenu,
+                    new SeparatorMenuItem(), verAreasMenu);
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                     .then((ContextMenu) null)
@@ -504,8 +512,8 @@ public abstract class Admin extends Application {
             return row;
         });
 //setting COMPETENCIAS table columns data and headers
-        compIdCol = new TableColumn<>("Id");
-        compIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        //compIdCol = new TableColumn<>("Id");
+        //compIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         compNombreCol = new TableColumn<>("Nombre");
         compNombreCol.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         compSiglaCol = new TableColumn<>("Sigla");
@@ -523,7 +531,7 @@ public abstract class Admin extends Application {
         compDesactivadoCol = new TableColumn<>("Desactivado");
         compDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
 //load COMPETENCIAS columns
-        compTable.getColumns().addAll(compIdCol, compNombreCol, compSiglaCol, compDescCol, compNiOpCol, compActivoCol,
+        compTable.getColumns().addAll(compNombreCol, compSiglaCol, compDescCol, compNiOpCol, compActivoCol,
                 compCreadoCol, compModificadoCol, compDesactivadoCol);
 //
 //MANTENEDOR NIVEL //LEVEL MAINTAINER
@@ -541,10 +549,9 @@ public abstract class Admin extends Application {
                         return true;
                     }
                     Validar v = new Validar();
-                    if (v.validarInteger(newValue) && filter.getNota() == Integer.parseInt(newValue)) {
-                        return true;
-                    }
-                    return filter.getNombre().toLowerCase().contains(newValue.toLowerCase());
+                    String nota = "" + filter.getNota();
+                    return filter.getNombre().toLowerCase().contains(newValue.toLowerCase())
+                            || nota.equals(newValue);
                 });
             });
             SortedList<NivelO> sortedData = new SortedList<>(filteredData);
@@ -555,12 +562,13 @@ public abstract class Admin extends Application {
             btCrear.setText("Crear Nuevo Nivel");
             btCrear.setOnAction(ev -> {
                 CrearNivel cnw = new CrearNivel();
-                if (cnw.display()) {
-                    btnNivel.fire();
-                }
+                cnw.display();
+                btnNivel.fire();
             });
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
+            tooltipFilter.setText("Nombre o Nota");
+            filterField.setTooltip(tooltipFilter);
             hbBottomBox.getChildren().addAll(filterLabel, filterField, btCrear);
             //load vbox display
             vbDisplay.getChildren().clear();
@@ -572,7 +580,7 @@ public abstract class Admin extends Application {
             final TableRow<NivelO> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
-            final MenuItem eliminarMenuItem = new MenuItem("Desactivar");
+            final MenuItem eliminarMenuItem = new MenuItem("Eliminar");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
                 System.out.println("Modificar Nivel Id: " + row.getItem().getId());
@@ -591,22 +599,24 @@ public abstract class Admin extends Application {
             return row;
         });
 //setting NIVEL table columns data and headers
-        idNivelCol = new TableColumn<>("Id");
-        idNivelCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        //idNivelCol = new TableColumn<>("Id");
+        //idNivelCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nombreNivelCol = new TableColumn<>("Nombre");
         nombreNivelCol.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         notaNivelCol = new TableColumn<>("Nota");
         notaNivelCol.setCellValueFactory(new PropertyValueFactory<>("nota"));
-        activoNivelCol = new TableColumn<>("Activo");
-        activoNivelCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
+        descNivelCol = new TableColumn<>("Descripción");
+        descNivelCol.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        //activoNivelCol = new TableColumn<>("Activo");
+        //activoNivelCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
         creadoNivelCol = new TableColumn<>("Creado");
         creadoNivelCol.setCellValueFactory(new PropertyValueFactory<>("creado"));
         modificadoNivelCol = new TableColumn<>("Modificado");
         modificadoNivelCol.setCellValueFactory(new PropertyValueFactory<>("modificado"));
-        desactivadoNivelCol = new TableColumn<>("Desactivado");
-        desactivadoNivelCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
+        //desactivadoNivelCol = new TableColumn<>("Desactivado");
+        //desactivadoNivelCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
 //load NIVEL columns
-        nivelTable.getColumns().addAll(idNivelCol, nombreNivelCol, notaNivelCol, activoNivelCol, creadoNivelCol, modificadoNivelCol, desactivadoNivelCol);
+        nivelTable.getColumns().addAll(nombreNivelCol, notaNivelCol, descNivelCol, creadoNivelCol, modificadoNivelCol);
 //
 //MANTENEDOR PREGUNTA //QUESTION MAINTAINER
 //
@@ -632,6 +642,8 @@ public abstract class Admin extends Application {
             filterLabel.setText("Filtrar: ");
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
+            tooltipFilter.setText("Pregunta");
+            filterField.setTooltip(tooltipFilter);
             hbBottomBox.getChildren().addAll(filterLabel, filterField);
             //load vbox display
             vbDisplay.getChildren().clear();
@@ -643,7 +655,7 @@ public abstract class Admin extends Application {
             final TableRow<PreguntaO> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
-            final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
+            final MenuItem desactivarMenuItem = new MenuItem("Eliminar");
             final MenuItem crearRespuestaMenu = new MenuItem("Crear Respuesta");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
@@ -657,9 +669,8 @@ public abstract class Admin extends Application {
             crearRespuestaMenu.setOnAction(event -> {
                 int id_pregunta = row.getItem().getId();
                 CrearRespuesta cpw = new CrearRespuesta();
-                if (cpw.display(id_pregunta)) {
-                    btnRespuesta.fire();
-                }
+                cpw.display(id_pregunta);
+                btnRespuesta.fire();
             });
             contextMenu.getItems().addAll(modificarMenuItem, desactivarMenuItem, crearRespuestaMenu);
             row.contextMenuProperty().bind(
@@ -670,23 +681,23 @@ public abstract class Admin extends Application {
             return row;
         });
 //setting PREGUNTA table columns data and headers
-        questionIdCol = new TableColumn<>("Id");
-        questionIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        //questionIdCol = new TableColumn<>("Id");
+        //questionIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         questionPreguntaCol = new TableColumn<>("Pregunta");
         questionPreguntaCol.setCellValueFactory(new PropertyValueFactory<>("pregunta"));
         questionCompetenciaCol = new TableColumn<>("Competencia");
         questionCompetenciaCol.setCellValueFactory(new PropertyValueFactory<>("competencia_id"));
-        questionActivoCol = new TableColumn<>("Activo");
-        questionActivoCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
+        //questionActivoCol = new TableColumn<>("Activo");
+        //questionActivoCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
         questionCreadoCol = new TableColumn<>("Creado");
         questionCreadoCol.setCellValueFactory(new PropertyValueFactory<>("creado"));
         questionModificadoCol = new TableColumn<>("Modificado");
         questionModificadoCol.setCellValueFactory(new PropertyValueFactory<>("modificado"));
-        questionDesactivadoCol = new TableColumn<>("Desactivado");
-        questionDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
+        //questionDesactivadoCol = new TableColumn<>("Desactivado");
+        //questionDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
 //load PREGUNTA columns
-        questionTable.getColumns().addAll(questionIdCol, questionPreguntaCol, questionCompetenciaCol, questionActivoCol,
-                questionCreadoCol, questionModificadoCol, questionDesactivadoCol);
+        questionTable.getColumns().addAll(questionPreguntaCol, questionCompetenciaCol,
+                questionCreadoCol, questionModificadoCol);
 //
 //MANTENEDOR RESPUESTA //ANSWER MAINTAINER
 //
@@ -712,6 +723,8 @@ public abstract class Admin extends Application {
             filterLabel.setText("Filtrar: ");
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
+            tooltipFilter.setText("Respuesta");
+            filterField.setTooltip(tooltipFilter);
             hbBottomBox.getChildren().addAll(filterLabel, filterField);
             //load vbox display
             vbDisplay.getChildren().clear();
@@ -723,7 +736,7 @@ public abstract class Admin extends Application {
             final TableRow<RespuestaO> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
-            final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
+            final MenuItem desactivarMenuItem = new MenuItem("Eliminar");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
                 System.out.println("Modificar Respuesta Id: " + row.getItem().getId());
@@ -742,25 +755,25 @@ public abstract class Admin extends Application {
             return row;
         });
 //setting RESPUESTA table columns data and headers
-        answerIdCol = new TableColumn<>("Id");
-        answerIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        //answerIdCol = new TableColumn<>("Id");
+        //answerIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         answerRespuestaCol = new TableColumn<>("Respuesta");
         answerRespuestaCol.setCellValueFactory(new PropertyValueFactory<>("respuesta"));
         answerPuntosCol = new TableColumn<>("Puntos");
         answerPuntosCol.setCellValueFactory(new PropertyValueFactory<>("puntos"));
         answerPreguntaCol = new TableColumn<>("Pregunta");
         answerPreguntaCol.setCellValueFactory(new PropertyValueFactory<>("pregunta_id"));
-        answerActivoCol = new TableColumn<>("Activo");
-        answerActivoCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
+        //answerActivoCol = new TableColumn<>("Activo");
+        //answerActivoCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
         answerCreadoCol = new TableColumn<>("Creado");
         answerCreadoCol.setCellValueFactory(new PropertyValueFactory<>("creado"));
         answerModificadoCol = new TableColumn<>("Modificado");
         answerModificadoCol.setCellValueFactory(new PropertyValueFactory<>("modificado"));
-        answerDesactivadoCol = new TableColumn<>("Desactivado");
-        answerDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
+        //answerDesactivadoCol = new TableColumn<>("Desactivado");
+        //answerDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
 //load RESPUESTA columns
-        answerTable.getColumns().addAll(answerIdCol, answerRespuestaCol, answerPuntosCol, answerPreguntaCol, answerActivoCol,
-                answerCreadoCol, answerModificadoCol, answerDesactivadoCol);
+        answerTable.getColumns().addAll(answerRespuestaCol, answerPuntosCol, answerPreguntaCol,
+                answerCreadoCol, answerModificadoCol);
 //
 //MANTENEDOR OBSERVACIÓN //COMMENT MAINTAINER
 //
@@ -788,6 +801,8 @@ public abstract class Admin extends Application {
             filterLabel.setText("Filtrar: ");
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
+            tooltipFilter.setText("Mensaje Inferior o Mensaje Superior");
+            filterField.setTooltip(tooltipFilter);
             hbBottomBox.getChildren().addAll(filterLabel, filterField);
             //load vbox display
             vbDisplay.getChildren().clear();
@@ -799,7 +814,7 @@ public abstract class Admin extends Application {
             final TableRow<ObservacionO> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
-            final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
+            final MenuItem desactivarMenuItem = new MenuItem("Eliminar");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
                 System.out.println("Modificar Observacion Id: " + row.getItem().getId());
@@ -818,8 +833,8 @@ public abstract class Admin extends Application {
             return row;
         });
 //setting COMMENT table columns data and headers
-        commentIdCol = new TableColumn<>("Id");
-        commentIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        //commentIdCol = new TableColumn<>("Id");
+        //commentIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         commentNivelInfCol = new TableColumn<>("Nivel Inferior");
         commentNivelInfCol.setCellValueFactory(new PropertyValueFactory<>("nivel_inf"));
         commentNivelSupCol = new TableColumn<>("Nivel Superior");
@@ -830,17 +845,17 @@ public abstract class Admin extends Application {
         commentMsjSupCol.setCellValueFactory(new PropertyValueFactory<>("msj_sup"));
         commentCompetenciaCol = new TableColumn<>("Competencia");
         commentCompetenciaCol.setCellValueFactory(new PropertyValueFactory<>("competencia_id"));
-        commentActivoCol = new TableColumn<>("Activo");
-        commentActivoCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
+        //commentActivoCol = new TableColumn<>("Activo");
+        //commentActivoCol.setCellValueFactory(new PropertyValueFactory<>("activo"));
         commentCreadoCol = new TableColumn<>("Creado");
         commentCreadoCol.setCellValueFactory(new PropertyValueFactory<>("creado"));
         commentModificadoCol = new TableColumn<>("Modificado");
         commentModificadoCol.setCellValueFactory(new PropertyValueFactory<>("modificado"));
-        commentDesactivadoCol = new TableColumn<>("Desactivado");
-        commentDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
+        //commentDesactivadoCol = new TableColumn<>("Desactivado");
+        //commentDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
 //load COMMENT columns
-        commentTable.getColumns().addAll(commentIdCol, commentNivelInfCol, commentNivelSupCol, commentMsjInfCol, commentMsjSupCol,
-                commentCompetenciaCol, commentActivoCol, commentCreadoCol, commentModificadoCol, commentDesactivadoCol);
+        commentTable.getColumns().addAll(commentNivelInfCol, commentNivelSupCol, commentMsjInfCol, commentMsjSupCol,
+                commentCompetenciaCol, commentCreadoCol, commentModificadoCol);
 //
 //MANTENEDOR PERIODO
 //
@@ -849,19 +864,18 @@ public abstract class Admin extends Application {
             filterField.clear();
             titleMantenedores.setText("SEC - Mantenedor Periodos");
             periodoTable.setItems(periodoCtl.getPeriodosFX());
-            //filtro por porcentaje
+            //filtro por porcentaje y fecha
             FilteredList<PeriodoO> filteredData = new FilteredList<>(periodoCtl.getPeriodosFX(), p -> true);
             filterField.textProperty().addListener((observable, oldValue, newValue) -> {
                 filteredData.setPredicate(filter -> {
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
                     }
-                    Validar v = new Validar();
-                    if (v.validarInteger(newValue)) {
-                        return filter.getJefe_porc() == Integer.parseInt(newValue)
-                                || filter.getAuto_porc() == Integer.parseInt(newValue);
-                    }
-                    return false;
+                    String inicio = df.format(filter.getInicio());
+                    String fin = df.format(filter.getFin());
+                    String porjefe = "" + filter.getJefe_porc();
+                    String porauto = "" + filter.getAuto_porc();
+                    return inicio.contains(newValue) || fin.contains(newValue) || porjefe.contains(newValue) || porauto.contains(newValue);
                 });
             });
             SortedList<PeriodoO> sortedData = new SortedList<>(filteredData);
@@ -872,12 +886,13 @@ public abstract class Admin extends Application {
             btCrear.setText("Crear Nuevo Periodo");
             btCrear.setOnAction(ev -> {
                 CrearPeriodo cpw = new CrearPeriodo();
-                if (cpw.display()) {
-                    btnPeriodo.fire();
-                }
+                cpw.display();
+                btnPeriodo.fire();
             });
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
+            tooltipFilter.setText("Fecha Inicio, Fecha Final, Porcentaje Jefe o Auto Procentaje");
+            filterField.setTooltip(tooltipFilter);
             hbBottomBox.getChildren().addAll(filterLabel, filterField, btCrear);
             //load vbox display
             vbDisplay.getChildren().clear();
@@ -908,10 +923,21 @@ public abstract class Admin extends Application {
             return row;
         });
 //setting PERIODO table columns data and headers
-        periodoIdCol = new TableColumn<>("Id");
-        periodoIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        //periodoIdCol = new TableColumn<>("Id");
+        //periodoIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         periodoInicioCol = new TableColumn<>("Fecha Inicio");
         periodoInicioCol.setCellValueFactory(new PropertyValueFactory<>("inicio"));
+        periodoInicioCol.setCellFactory(column -> {
+            return new TableCell<PeriodoO, Date>() {
+                @Override
+                protected void updateItem(Date item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null) {
+                        setText(df.format(item));
+                    }
+                }
+            };
+        });
         periodoFinCol = new TableColumn<>("Fecha Final");
         periodoFinCol.setCellValueFactory(new PropertyValueFactory<>("fin"));
         periodoPorcJefeCol = new TableColumn<>("Porcentaje Evaluación Jefe");
@@ -927,7 +953,7 @@ public abstract class Admin extends Application {
         periodoDesactivadoCol = new TableColumn<>("Desactivado");
         periodoDesactivadoCol.setCellValueFactory(new PropertyValueFactory<>("desactivado"));
 //load PERIODO columns
-        periodoTable.getColumns().addAll(periodoIdCol, periodoInicioCol, periodoFinCol, periodoPorcJefeCol, periodoPorcAutoCol,
+        periodoTable.getColumns().addAll(periodoInicioCol, periodoFinCol, periodoPorcJefeCol, periodoPorcAutoCol,
                 periodoActivoCol, periodoCreadoCol, periodoModificadoCol, periodoDesactivadoCol);
 
 //

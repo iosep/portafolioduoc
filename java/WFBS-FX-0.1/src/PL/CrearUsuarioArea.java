@@ -35,9 +35,8 @@ public class CrearUsuarioArea {
     private final UsuarioCTL userCtl = new UsuarioCTL();
     private static AreaO auxArea;
     private static UsuarioAreaO auxUserArea;
-    static boolean vb = false;
-
-    public boolean display(String userRut) {
+    
+    public void display(String userRut) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("SEC - Asignar Área a Usuario");
@@ -191,6 +190,5 @@ public class CrearUsuarioArea {
         display.getStylesheets().add(CrearUsuarioArea.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
-        return vb;
     }
 }

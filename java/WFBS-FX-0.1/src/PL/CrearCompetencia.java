@@ -30,7 +30,7 @@ public class CrearCompetencia {
     private final CompetenciaCTL compCtl = new CompetenciaCTL();
     static boolean vb = false;
 
-    public boolean display() {
+    public void display() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("SEC - Crear Nueva Competencia");
@@ -113,6 +113,5 @@ public class CrearCompetencia {
         display.getStylesheets().add(CrearCompetencia.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
-        return vb;
     }
 }

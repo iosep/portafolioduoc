@@ -32,7 +32,7 @@ public class CrearPeriodo {
     private final PeriodoCTL periodoCtl = new PeriodoCTL();
     static boolean vb = false;
 
-    public boolean display() {
+    public void display() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("SEC - Crear Nuevo Periodo");
@@ -147,6 +147,5 @@ public class CrearPeriodo {
         display.getStylesheets().add(CrearPeriodo.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
-        return vb;
     }
 }

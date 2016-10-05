@@ -30,7 +30,7 @@ public class CrearArea {
     private final AreaCTL actl = new AreaCTL();
     static boolean vb = false;
 
-    public boolean display() {
+    public void display() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("SEC - Crear Nueva Area");
@@ -92,6 +92,5 @@ public class CrearArea {
         display.getStylesheets().add(CrearArea.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
-        return vb;
     }
 }

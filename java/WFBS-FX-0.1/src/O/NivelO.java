@@ -18,6 +18,7 @@ public class NivelO {
     private int id;
     private String nombre;
     private int nota;
+    private String descripcion;
     private int activo;
     private Date creado;
     private Date modificado;
@@ -26,11 +27,13 @@ public class NivelO {
     public NivelO() {
     }
 
-    public NivelO(String nombre, int nota, int activo, Date creado, Date modificado, Date desactivado) {
+    public NivelO(String nombre, int nota, String descripcion, int activo, Date creado, Date modificado, Date desactivado) {
+
         this.id = ++fakeId;
 
         this.nombre = nombre;
         this.nota = nota;
+        this.descripcion = descripcion;
         this.activo = activo;
         this.creado = creado;
         this.modificado = modificado;
@@ -59,6 +62,14 @@ public class NivelO {
 
     public void setNota(int nota) {
         this.nota = nota;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public int getActivo() {

@@ -30,7 +30,7 @@ public class CrearPregunta {
     private final PreguntaCTL preguntaCtl = new PreguntaCTL();
     static boolean vb = false;
 
-    public boolean display(int id_competencia) {
+    public void display(int id_competencia) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("SEC - Crear Nueva Pregunta");
@@ -84,6 +84,5 @@ public class CrearPregunta {
         display.getStylesheets().add(CrearPregunta.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
-        return vb;
     }
 }

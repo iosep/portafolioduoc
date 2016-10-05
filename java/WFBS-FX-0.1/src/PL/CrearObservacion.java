@@ -30,7 +30,7 @@ public class CrearObservacion {
     private final ObservacionCTL observacionCtl = new ObservacionCTL();
     static boolean vb = false;
 
-    public boolean display(int id_competencia) {
+    public void display(int id_competencia) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("SEC - Crear Nueva Observacion");
@@ -90,7 +90,7 @@ public class CrearObservacion {
                 msj.setText("Ingrese Mensaje Nivel Superior");
             } else if (v.validarInteger(txtNivelInf.getText()) && v.validarInteger(txtNivelSup.getText())) {
                 Date now = new Date();
-                vb = observacionCtl.addObservacionCTL(new ObservacionO(Integer.parseInt(txtNivelInf.getText()), Integer.parseInt(txtNivelSup.getText()), 
+                vb = observacionCtl.addObservacionCTL(new ObservacionO(Integer.parseInt(txtNivelInf.getText()), Integer.parseInt(txtNivelSup.getText()),
                         txtMsjInf.getText(), txtMsjSup.getText(), id_competencia, 1, now, null, null));
                 if (vb) {
                     txtNivelInf.clear();
@@ -111,6 +111,5 @@ public class CrearObservacion {
         display.getStylesheets().add(CrearObservacion.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
-        return vb;
     }
 }

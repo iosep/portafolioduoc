@@ -30,7 +30,7 @@ public class CrearRespuesta {
     private final RespuestaCTL respuestaCtl = new RespuestaCTL();
     static boolean vb = false;
 
-    public boolean display(int id_pregunta) {
+    public void display(int id_pregunta) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("SEC - Crear Nueva Respuesta");
@@ -94,6 +94,5 @@ public class CrearRespuesta {
         display.getStylesheets().add(CrearRespuesta.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
-        return vb;
     }
 }

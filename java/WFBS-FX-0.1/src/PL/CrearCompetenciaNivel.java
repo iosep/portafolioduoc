@@ -29,7 +29,7 @@ import javafx.stage.Stage;
  *
  * @author iosep
  */
-public class CrearAreaCompetencia {
+public class CrearCompetenciaNivel {
 
     private final AreaCompetenciaCTL areaCompetenciaCtl = new AreaCompetenciaCTL();
     private final CompetenciaCTL compCtl = new CompetenciaCTL();
@@ -38,10 +38,10 @@ public class CrearAreaCompetencia {
     private static AreaO auxArea;
     private static AreaCompetenciaO auxAreaComp;
 
-    public void display(int areaId) {
+    public void display(int compId) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("SEC - Asignar Competencia a Área");
+        window.setTitle("SEC - Asignar Nivel a Competencia");
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -53,8 +53,8 @@ public class CrearAreaCompetencia {
         scenetitle.getStyleClass().add("title");
         grid.add(scenetitle, 0, 0, 4, 1);
 
-        auxArea = areaCtl.getAreaById(areaId);
-        Label lblUser = new Label("Área: " + auxArea.getNombre());
+        auxComp = compCtl.getCompetenciaById(compId);
+        Label lblUser = new Label("Competencia: " + auxComp.getNombre());
         lblUser.getStyleClass().add("subtitle");
         grid.add(lblUser, 0, 1, 3, 1);
 
@@ -62,18 +62,17 @@ public class CrearAreaCompetencia {
         msj.getStyleClass().add("action");
         grid.add(msj, 0, 5, 2, 1);
 
-        Label lblListaDisponible = new Label("Competencias disponibles:");
-        //lblListaDisponible.getStyleClass().add("subtitle");
+        Label lblListaDisponible = new Label("Niveles disponibles:");
         grid.add(lblListaDisponible, 0, 3);
         ListView listaDisponible = new ListView();
-        listaDisponible.setItems(areaCompetenciaCtl.getCompetenciasDisponiblesByAreaFX(areaId));
+        listaDisponible.setItems(areaCompetenciaCtl.getAreasDisponiblesByCompetenciaFX(compId));
         listaDisponible.setCellFactory(param -> new ListCell<AreaCompetenciaO>() {
             @Override
             protected void updateItem(AreaCompetenciaO item, boolean empty) {
                 super.updateItem(item, empty);
                 if (item != null) {
-                    auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
-                    setText(auxComp.getNombre());
+                    auxArea = areaCtl.getAreaById(item.getArea_id());
+                    setText(auxArea.getNombre());
                 }
             }
         });
@@ -83,18 +82,17 @@ public class CrearAreaCompetencia {
                 msj.setText("");
             }
         });
-        Label lblSeleccionadas = new Label("Competencias del Área:");
-        //lblSeleccionadas.getStyleClass().add("subtitle");
+        Label lblSeleccionadas = new Label("Niveles de la Competencia:");
         grid.add(lblSeleccionadas, 3, 3);
         ListView listSeleccionadas = new ListView();
-        listSeleccionadas.setItems(areaCompetenciaCtl.getAreaCompetenciasByAreaIdFX(areaId));
+        listSeleccionadas.setItems(areaCompetenciaCtl.getAreaCompetenciasByCompetenciaIdFX(compId));
         listSeleccionadas.setCellFactory(param -> new ListCell<AreaCompetenciaO>() {
             @Override
             protected void updateItem(AreaCompetenciaO item, boolean empty) {
                 super.updateItem(item, empty);
                 if (item != null) {
-                    auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
-                    setText(auxComp.getNombre());
+                    auxArea = areaCtl.getAreaById(item.getArea_id());
+                    setText(auxArea.getNombre());
                 }
             }
         });
@@ -118,26 +116,26 @@ public class CrearAreaCompetencia {
                 auxAreaComp = (AreaCompetenciaO) listaDisponible.getSelectionModel().getSelectedItem();
                 if (areaCompetenciaCtl.addAreaCompetenciaCTL(auxAreaComp)) {
                     msj.setFill(Color.GREEN);
-                    msj.setText("Competencia Agregada Exitosamente");
-                    listSeleccionadas.setItems(areaCompetenciaCtl.getAreaCompetenciasByAreaIdFX(areaId));
+                    msj.setText("Área Agregada Exitosamente");
+                    listSeleccionadas.setItems(areaCompetenciaCtl.getAreaCompetenciasByCompetenciaIdFX(compId));
                     listSeleccionadas.setCellFactory(param -> new ListCell<AreaCompetenciaO>() {
                         @Override
                         protected void updateItem(AreaCompetenciaO item, boolean empty) {
                             super.updateItem(item, empty);
                             if (item != null) {
-                                auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
-                                setText(auxComp.getNombre());
+                                auxArea = areaCtl.getAreaById(item.getArea_id());
+                                setText(auxArea.getNombre());
                             }
                         }
                     });
-                    listaDisponible.setItems(areaCompetenciaCtl.getCompetenciasDisponiblesByAreaFX(areaId));
+                    listaDisponible.setItems(areaCompetenciaCtl.getAreasDisponiblesByCompetenciaFX(compId));
                     listaDisponible.setCellFactory(param -> new ListCell<AreaCompetenciaO>() {
                         @Override
                         protected void updateItem(AreaCompetenciaO item, boolean empty) {
                             super.updateItem(item, empty);
                             if (item != null) {
-                                auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
-                                setText(auxComp.getNombre());
+                                auxArea = areaCtl.getAreaById(item.getArea_id());
+                                setText(auxArea.getNombre());
                             }
                         }
                     });
@@ -149,35 +147,35 @@ public class CrearAreaCompetencia {
                 }
             } else {
                 msj.setFill(Color.FIREBRICK);
-                msj.setText("Seleccione una Competencia");
+                msj.setText("Seleccione un Área");
             }
         });
 
         btnQuitar.setOnAction(e -> {
             if (listSeleccionadas.getSelectionModel().getSelectedItem() != null) {
                 auxAreaComp = (AreaCompetenciaO) listSeleccionadas.getSelectionModel().getSelectedItem();
-                if (areaCompetenciaCtl.removeAreaCompCTL(areaId, auxAreaComp.getCompetencia_id())) {
+                if (areaCompetenciaCtl.removeAreaCompCTL(auxAreaComp.getArea_id(), compId)) {
                     msj.setFill(Color.GREEN);
-                    msj.setText("Competencia Eliminada Exitosamente");
-                    listSeleccionadas.setItems(areaCompetenciaCtl.getAreaCompetenciasByAreaIdFX(areaId));
+                    msj.setText("Área Eliminada Exitosamente");
+                    listSeleccionadas.setItems(areaCompetenciaCtl.getAreaCompetenciasByCompetenciaIdFX(compId));
                     listSeleccionadas.setCellFactory(param -> new ListCell<AreaCompetenciaO>() {
                         @Override
                         protected void updateItem(AreaCompetenciaO item, boolean empty) {
                             super.updateItem(item, empty);
                             if (item != null) {
-                                auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
-                                setText(auxComp.getNombre());
+                                auxArea = areaCtl.getAreaById(item.getArea_id());
+                                setText(auxArea.getNombre());
                             }
                         }
                     });
-                    listaDisponible.setItems(areaCompetenciaCtl.getCompetenciasDisponiblesByAreaFX(areaId));
+                    listaDisponible.setItems(areaCompetenciaCtl.getAreasDisponiblesByCompetenciaFX(compId));
                     listaDisponible.setCellFactory(param -> new ListCell<AreaCompetenciaO>() {
                         @Override
                         protected void updateItem(AreaCompetenciaO item, boolean empty) {
                             super.updateItem(item, empty);
                             if (item != null) {
-                                auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
-                                setText(auxComp.getNombre());
+                                auxArea = areaCtl.getAreaById(item.getArea_id());
+                                setText(auxArea.getNombre());
                             }
                         }
                     });
@@ -189,13 +187,13 @@ public class CrearAreaCompetencia {
                 }
             } else {
                 msj.setFill(Color.FIREBRICK);
-                msj.setText("Seleccione una Competencia");
+                msj.setText("Seleccione un Área");
             }
         });
 
         Scene display = new Scene(grid);
         window.setScene(display);
-        display.getStylesheets().add(CrearAreaCompetencia.class.getResource("Style.css").toExternalForm());
+        display.getStylesheets().add(CrearCompetenciaNivel.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
     }
