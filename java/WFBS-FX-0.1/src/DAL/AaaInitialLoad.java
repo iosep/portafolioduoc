@@ -29,6 +29,9 @@ public class AaaInitialLoad {
     private static UsuarioO user3;
     private static UsuarioO user4;
     private static UsuarioO user5;
+    private static UsuarioO user6;
+    private static UsuarioO user7;
+    private static UsuarioO user8;
     private static ArrayList<UsuarioO> users;
     private static AreaO area1;
     private static AreaO area2;
@@ -87,12 +90,24 @@ public class AaaInitialLoad {
         user5 = new UsuarioO("77777777-7",
                 "77+9Qe+/vUdm77+9X1MQZe+/vV0177+9aGfvv70677+9cu+/ve+/ve+/vT/vv73vv70677+977+9De+/vSQ=,-576102074",
                 3, "11111111-1", "Thor", "Aven", "ono@ono.com", "H", 977665544, 1, fecha, null, null);
-
+        user6 = new UsuarioO("12345678-5",
+                "77+9Qe+/vUdm77+9X1MQZe+/vV0177+9aGfvv70677+9cu+/ve+/ve+/vT/vv73vv70677+977+9De+/vSQ=,-576102074",
+                3, "11111111-1", "Raven", "Mortal", "ono@ono.com", "H", 977665544, 1, fecha, null, null);
+        user7 = new UsuarioO("98765432-5",
+                "77+9Qe+/vUdm77+9X1MQZe+/vV0177+9aGfvv70677+9cu+/ve+/ve+/vT/vv73vv70677+977+9De+/vSQ=,-576102074",
+                3, "11111111-1", "Mia", "Walrus", "ono@ono.com", "M", 977665544, 1, fecha, null, null);
+        user8 = new UsuarioO("14566421-7",
+                "77+9Qe+/vUdm77+9X1MQZe+/vV0177+9aGfvv70677+9cu+/ve+/ve+/vT/vv73vv70677+977+9De+/vSQ=,-576102074",
+                3, "11111111-1", "Totoro", "Oso", "ono@ono.com", "H", 977665544, 1, fecha, null, null);
+        
         users.add(user1);
         users.add(user2);
         users.add(user3);
         users.add(user4);
         users.add(user5);
+        users.add(user6);
+        users.add(user7);
+        users.add(user8);
 
         area1 = new AreaO("Homicidios", "hmc", 1, fecha, null, null);
         area2 = new AreaO("Delitos sexuales", "dsx", 1, fecha, null, null);

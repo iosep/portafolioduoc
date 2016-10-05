@@ -53,13 +53,13 @@ public class UsuarioO {
         this.desactivado = desactivado;
         switch (rol) {
             case 1:
-                this.rolString = "Admin";
+                this.rolString = "Administrador";
                 break;
             case 2:
-                this.rolString = "Jefa";
+                this.rolString = "Jefe";
                 break;
             case 3:
-                this.rolString = "Funcionaria";
+                this.rolString = "Funcionario";
                 break;
             default:
                 break;

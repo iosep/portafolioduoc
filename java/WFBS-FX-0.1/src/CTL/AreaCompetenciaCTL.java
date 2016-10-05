@@ -40,7 +40,7 @@ public class AreaCompetenciaCTL {
                 }
             }
             if (add) {
-                fxList.add(new AreaCompetenciaO(areaId, competencia.getId(), competencia.getNombre()));
+                fxList.add(new AreaCompetenciaO(areaId, competencia.getId()));
             }
         });
         return fxList;

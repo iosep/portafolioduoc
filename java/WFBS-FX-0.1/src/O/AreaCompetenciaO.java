@@ -13,15 +13,13 @@ public class AreaCompetenciaO {
 
     private int area_id;
     private int competencia_id;
-    private String competencia_nombre;
 
     public AreaCompetenciaO() {
     }
 
-    public AreaCompetenciaO(int area_id, int competencia_id, String competencia_nombre) {
+    public AreaCompetenciaO(int area_id, int competencia_id) {
         this.area_id = area_id;
         this.competencia_id = competencia_id;
-        this.competencia_nombre = competencia_nombre;
     }
 
     public int getArea_id() {
@@ -40,17 +38,4 @@ public class AreaCompetenciaO {
         this.competencia_id = competencia_id;
     }
 
-    public String getCompetencia_nombre() {
-        return competencia_nombre;
-    }
-
-    public void setCompetencia_nombre(String competencia_nombre) {
-        this.competencia_nombre = competencia_nombre;
-    }
-
-    @Override
-    public String toString() {
-        return competencia_nombre;
-    }
-    
 }

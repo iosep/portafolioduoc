@@ -31,6 +31,16 @@ public class UsuarioAreaDAL {
         return list;
     }
 
+    public ArrayList<UsuarioAreaO> getUserAreasByAreaId(int id) {
+        ArrayList<UsuarioAreaO> list = new ArrayList<>();
+        aaa.mostrarUsuarioAreas().stream().forEach((item) -> {
+            if (item.getArea_id() == id) {
+                list.add(item);
+            }
+        });
+        return list;
+    }
+
     public boolean addUsuarioArea(UsuarioAreaO obj) {
         return aaa.agregarUsuarioArea(obj);
     }

@@ -23,6 +23,15 @@ public class UsuarioDAL {
         return cd.mostrarUsuarios();
     }
 
+    public UsuarioO getUsuarioById(int id) {
+        cd.mostrarUsuarios().stream().forEach((item) -> {
+            if (item.getId() == id) {
+                uo = item;
+            }
+        });
+        return uo;
+    }
+
     public UsuarioO getUsuarioByRut(String rut) {
         cd.mostrarUsuarios().stream().forEach((u) -> {
             if (u.getRut().equals(rut)) {

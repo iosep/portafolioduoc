@@ -28,19 +28,20 @@ import javafx.stage.Stage;
  *
  * @author iosep
  */
-public class CrearUsuarioArea {
+public class CrearAreaUsuario {
 
     private final UsuarioAreaCTL usuarioAreaCtl = new UsuarioAreaCTL();
     private final AreaCTL areaCtl = new AreaCTL();
     private final UsuarioCTL userCtl = new UsuarioCTL();
     private static AreaO auxArea;
+    private static UsuarioO auxUser;
     private static UsuarioAreaO auxUserArea;
     static boolean vb = false;
 
-    public boolean display(String userRut) {
+    public boolean display(int idArea) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("SEC - Asignar Área a Usuario");
+        window.setTitle("SEC - Asignar Usuario a Área");
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -52,7 +53,8 @@ public class CrearUsuarioArea {
         scenetitle.getStyleClass().add("title");
         grid.add(scenetitle, 0, 0, 4, 1);
 
-        Label lblUser = new Label("Usuario RUT: " + userRut);
+        auxArea = areaCtl.getAreaById(idArea);
+        Label lblUser = new Label("Área: " + auxArea.getNombre());
         lblUser.getStyleClass().add("subtitle");
         grid.add(lblUser, 0, 1, 3, 1);
 
@@ -60,45 +62,44 @@ public class CrearUsuarioArea {
         msj.getStyleClass().add("action");
         grid.add(msj, 0, 5, 2, 1);
 
-        UsuarioO userO = userCtl.getUsuarioByRut(userRut);
-        Label lblListaAreas = new Label("Áreas disponibles:");
-//        lblListaAreas.getStyleClass().add("subtitle");
-        grid.add(lblListaAreas, 0, 3);
-        ListView listaAreas = new ListView();
-        listaAreas.setItems(usuarioAreaCtl.getAreasDisponiblesByUserFX(userO.getId()));
-        listaAreas.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
+        Label lblDisponible = new Label("Usuarios disponibles:");
+//        lblDisponible.getStyleClass().add("subtitle");
+        grid.add(lblDisponible, 0, 3);
+        ListView listDisponible = new ListView();
+        listDisponible.setItems(usuarioAreaCtl.getUsuariosDisponiblesByAreaFX(idArea));
+        listDisponible.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
             @Override
             protected void updateItem(UsuarioAreaO item, boolean empty) {
                 super.updateItem(item, empty);
                 if (item != null) {
-                    auxArea = areaCtl.getAreaById(item.getArea_id());
-                    setText(auxArea.getNombre());
+                    auxUser = userCtl.getUsuarioById(item.getUsuario_id());
+                    setText(auxUser.getRut());
                 }
             }
         });
-        grid.add(listaAreas, 0, 4);
-        listaAreas.getSelectionModel().selectedItemProperty().addListener((ob, ol, ne) -> {
+        grid.add(listDisponible, 0, 4);
+        listDisponible.getSelectionModel().selectedItemProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
             }
         });
-        Label lblAreasSeleccionadas = new Label("Áreas del Usuario:");
-//        lblAreasSeleccionadas.getStyleClass().add("subtitle");
-        grid.add(lblAreasSeleccionadas, 3, 3);
-        ListView areasSeleccionadas = new ListView();
-        areasSeleccionadas.setItems(usuarioAreaCtl.getUsuarioAreasByUserIdFX(userO.getId()));
-        areasSeleccionadas.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
+        Label lblSeleccionada = new Label("Usuarios del Área:");
+//        lblSeleccionada.getStyleClass().add("subtitle");
+        grid.add(lblSeleccionada, 3, 3);
+        ListView listSeleccion = new ListView();
+        listSeleccion.setItems(usuarioAreaCtl.getUsuarioAreasByAreaIdFX(idArea));
+        listSeleccion.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
             @Override
             protected void updateItem(UsuarioAreaO item, boolean empty) {
                 super.updateItem(item, empty);
                 if (item != null) {
-                    auxArea = areaCtl.getAreaById(item.getArea_id());
-                    setText(auxArea.getNombre());
+                    auxUser = userCtl.getUsuarioById(item.getUsuario_id());
+                    setText(auxUser.getRut());
                 }
             }
         });
-        grid.add(areasSeleccionadas, 3, 4);
-        areasSeleccionadas.getSelectionModel().selectedItemProperty().addListener((ob, ol, ne) -> {
+        grid.add(listSeleccion, 3, 4);
+        listSeleccion.getSelectionModel().selectedItemProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
             }
@@ -113,82 +114,82 @@ public class CrearUsuarioArea {
         grid.add(vbButtons, 2, 4);
 
         btnAgregar.setOnAction(e -> {
-            if (listaAreas.getSelectionModel().getSelectedItem() != null) {
-                auxUserArea = (UsuarioAreaO) listaAreas.getSelectionModel().getSelectedItem();
+            if (listDisponible.getSelectionModel().getSelectedItem() != null) {
+                auxUserArea = (UsuarioAreaO) listDisponible.getSelectionModel().getSelectedItem();
                 if (usuarioAreaCtl.addUsuarioAreaCTL(auxUserArea)) {
-                    msj.setText("Área Agregada Exitosamente");
-                    areasSeleccionadas.setItems(usuarioAreaCtl.getUsuarioAreasByUserIdFX(userO.getId()));
-                    areasSeleccionadas.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
+                    msj.setText("Usuario Agregado Exitosamente");
+                    listSeleccion.setItems(usuarioAreaCtl.getUsuarioAreasByAreaIdFX(idArea));
+                    listSeleccion.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
                         @Override
                         protected void updateItem(UsuarioAreaO item, boolean empty) {
                             super.updateItem(item, empty);
                             if (item != null) {
-                                auxArea = areaCtl.getAreaById(item.getArea_id());
-                                setText(auxArea.getNombre());
+                                auxUser = userCtl.getUsuarioById(item.getUsuario_id());
+                                setText(auxUser.getRut());
                             }
                         }
                     });
-                    listaAreas.setItems(usuarioAreaCtl.getAreasDisponiblesByUserFX(userO.getId()));
-                    listaAreas.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
+                    listDisponible.setItems(usuarioAreaCtl.getUsuariosDisponiblesByAreaFX(idArea));
+                    listDisponible.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
                         @Override
                         protected void updateItem(UsuarioAreaO item, boolean empty) {
                             super.updateItem(item, empty);
                             if (item != null) {
-                                auxArea = areaCtl.getAreaById(item.getArea_id());
-                                setText(auxArea.getNombre());
+                                auxUser = userCtl.getUsuarioById(item.getUsuario_id());
+                                setText(auxUser.getRut());
                             }
                         }
                     });
-                    areasSeleccionadas.getSelectionModel().clearSelection();
-                    listaAreas.getSelectionModel().clearSelection();
+                    listSeleccion.getSelectionModel().clearSelection();
+                    listDisponible.getSelectionModel().clearSelection();
                 } else {
                     msj.setText("Ha ocurrido un error");
                 }
             } else {
-                msj.setText("Seleccione un Área");
+                msj.setText("Seleccione un Usuario");
             }
         });
 
         btnQuitar.setOnAction(e -> {
-            if (areasSeleccionadas.getSelectionModel().getSelectedItem() != null) {
-                auxUserArea = (UsuarioAreaO) areasSeleccionadas.getSelectionModel().getSelectedItem();
+            if (listSeleccion.getSelectionModel().getSelectedItem() != null) {
+                auxUserArea = (UsuarioAreaO) listSeleccion.getSelectionModel().getSelectedItem();
                 if (usuarioAreaCtl.removeUserAreaCTL(auxUserArea.getUsuario_id(), auxUserArea.getArea_id())) {
-                    msj.setText("Área Eliminada Exitosamente");
-                    areasSeleccionadas.setItems(usuarioAreaCtl.getUsuarioAreasByUserIdFX(userO.getId()));
-                    areasSeleccionadas.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
+                    msj.setText("Usuario Eliminado Exitosamente");
+                    listSeleccion.setItems(usuarioAreaCtl.getUsuarioAreasByAreaIdFX(idArea));
+                    listSeleccion.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
                         @Override
                         protected void updateItem(UsuarioAreaO item, boolean empty) {
                             super.updateItem(item, empty);
                             if (item != null) {
-                                auxArea = areaCtl.getAreaById(item.getArea_id());
-                                setText(auxArea.getNombre());
+                                auxUser = userCtl.getUsuarioById(item.getUsuario_id());
+                                setText(auxUser.getRut());
                             }
                         }
                     });
-                    listaAreas.setItems(usuarioAreaCtl.getAreasDisponiblesByUserFX(userO.getId()));
-                    listaAreas.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
+                    listDisponible.setItems(usuarioAreaCtl.getUsuariosDisponiblesByAreaFX(idArea));
+                    listDisponible.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
                         @Override
                         protected void updateItem(UsuarioAreaO item, boolean empty) {
                             super.updateItem(item, empty);
                             if (item != null) {
-                                auxArea = areaCtl.getAreaById(item.getArea_id());
-                                setText(auxArea.getNombre());
+                                auxUser = userCtl.getUsuarioById(item.getUsuario_id());
+                                setText(auxUser.getRut());
                             }
                         }
                     });
-                    areasSeleccionadas.getSelectionModel().clearSelection();
-                    listaAreas.getSelectionModel().clearSelection();
+                    listSeleccion.getSelectionModel().clearSelection();
+                    listDisponible.getSelectionModel().clearSelection();
                 } else {
                     msj.setText("Ha ocurrido un error");
                 }
             } else {
-                msj.setText("Seleccione un Área");
+                msj.setText("Seleccione un Usuario");
             }
         });
 
         Scene display = new Scene(grid);
         window.setScene(display);
-        display.getStylesheets().add(CrearUsuarioArea.class.getResource("Style.css").toExternalForm());
+        display.getStylesheets().add(CrearAreaUsuario.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
         return vb;

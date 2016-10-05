@@ -28,6 +28,10 @@ public class UsuarioCTL {
         return ud.getUsuarioByRut(rut);
     }
 
+    public UsuarioO getUsuarioById(int id) {
+        return ud.getUsuarioById(id);
+    }
+
     public ObservableList<UsuarioO> getUsuariosByRol(int rol) {
         return ud.getUsuariosByRol(rol);
     }

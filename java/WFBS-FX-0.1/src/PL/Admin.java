@@ -28,6 +28,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Hyperlink;
@@ -38,6 +39,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
@@ -60,6 +62,7 @@ public abstract class Admin extends Application {
     private final Label filterLabel = new Label();
     private final HBox hbBottomBox = new HBox();
     private final Button btCrear = new Button();
+    private final Tooltip tooltipFilter = new Tooltip();
 //variables mantenedor usuarios
     private final UsuarioCTL usersCtl = new UsuarioCTL();
     private final TableView<UsuarioO> usersTable = new TableView<>();
@@ -249,6 +252,8 @@ public abstract class Admin extends Application {
             });
             hbBottomBox.getStyleClass().add("hbox");
             hbBottomBox.getChildren().clear();
+            tooltipFilter.setText("Rut, Nombre, Apellido");
+            filterField.setTooltip(tooltipFilter);
             hbBottomBox.getChildren().addAll(filterLabel, filterField, btCrear);
             //load vbox display
             vbDisplay.getChildren().clear();
@@ -272,9 +277,17 @@ public abstract class Admin extends Application {
                 System.out.println("Desactivar usuario rut: " + row.getItem().getRut());
             });
             agregarAreaMenu.setOnAction(ev -> {
-                CrearUsuarioArea cuaw = new CrearUsuarioArea();
-                if (cuaw.display(row.getItem().getRut())) {
-                    btnUsuario.fire();
+                if (row.getItem().getRol() == 3) {
+                    CrearUsuarioArea cuaw = new CrearUsuarioArea();
+                    if (cuaw.display(row.getItem().getRut())) {
+                        btnUsuario.fire();
+                    }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Información");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Sólo Funcionarios tienen Áreas asociadas");
+                    alert.showAndWait();
                 }
             });
             contextMenu.getItems().addAll(modificarMenuItem, desactivarMenuItem, new SeparatorMenuItem(), agregarAreaMenu);
@@ -286,6 +299,7 @@ public abstract class Admin extends Application {
             );
             return row;
         });
+
 //setting users table columns data and headers
         rutColumn = new TableColumn<>("Rut");
         rutColumn.setCellValueFactory(new PropertyValueFactory<>("rut"));
@@ -361,6 +375,7 @@ public abstract class Admin extends Application {
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
             final MenuItem eliminarMenuItem = new MenuItem("Desactivar");
             final MenuItem verCompetenciasMenu = new MenuItem("Ver Competencias");
+            final MenuItem verUsuariosMenu = new MenuItem("Ver Usuarios");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
                 System.out.println("Modificar area id: " + row.getItem().getId());
@@ -376,7 +391,13 @@ public abstract class Admin extends Application {
                     btnArea.fire();
                 }
             });
-            contextMenu.getItems().addAll(modificarMenuItem, eliminarMenuItem, new SeparatorMenuItem(), verCompetenciasMenu);
+            verUsuariosMenu.setOnAction(ee -> {
+                CrearAreaUsuario auw = new CrearAreaUsuario();
+                if (auw.display(row.getItem().getId())) {
+                    btnArea.fire();
+                }
+            });
+            contextMenu.getItems().addAll(modificarMenuItem, eliminarMenuItem, new SeparatorMenuItem(), verCompetenciasMenu, verUsuariosMenu);
             // Set context menu on row, but use a binding to make it only show for non-empty rows:
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
