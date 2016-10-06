@@ -87,13 +87,9 @@ public class Login extends Application {
                     logUser = userCtl.getUsuarioByRut(txtRun.getText());
                     switch (logUser.getRol()) {
                         case 1:
-                            Admin a = new Admin() {
-                                @Override
-                                public void start(Stage primaryStage) throws Exception {
-                                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                                }
-                            };
-                            a.start(primaryStage, logUser.getRut());
+                            Admin a = new Admin();
+                            a.display(logUser.getRut());
+                            primaryStage.close();
                             break;
                         case 2:
                             System.out.println("Jefa logeada");

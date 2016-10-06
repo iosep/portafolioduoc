@@ -34,6 +34,10 @@ public class Cifrar {
             UsuarioO uo = uc.getUsuarioByRut(rut);
             String hashedAndSalted = uo.getClave();
             String salt = hashedAndSalted.split(",")[1];
+            System.out.println("salt: " + salt);
+            System.out.println("hash&salt: " + hashedAndSalted);
+            System.out.println("make pass: " + makePasswordHash(password, salt));
+            System.out.println("pass: " + password);
 
             if (!hashedAndSalted.equals(makePasswordHash(password, salt))) {
                 System.out.println("Password no corresponde");
@@ -55,9 +59,7 @@ public class Cifrar {
             String saltedAndHashed = password + "," + salt;
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             digest.update(saltedAndHashed.getBytes());
-            //BASE64Encoder encoder = new BASE64Encoder();
             byte hashedBytes[] = (new String(digest.digest(), "UTF-8")).getBytes();
-            //return encoder.encode(hashedBytes) + "," + salt;
             return DatatypeConverter.printBase64Binary(hashedBytes) + "," + salt;
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("SHA-256 no está disponible", e);

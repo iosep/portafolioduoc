@@ -45,7 +45,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -59,7 +58,7 @@ import javafx.stage.Stage;
  *
  * @author iosep
  */
-public abstract class Admin extends Application {
+public class Admin {
 
 //variables reutilizables
     private final VBox vbDisplay = new VBox();
@@ -170,10 +169,11 @@ public abstract class Admin extends Application {
      * @param primaryStage
      * @param logRut
      */
-    public void start(Stage primaryStage, String logRut) {
+    public void display(String logRut) {
 //
 //GENERAL SETTINGS
 //
+        Stage primaryStage = new Stage();
         Text titleMantenedores = new Text("SEC - Mantenedores");
         titleMantenedores.getStyleClass().add("title");
         Label lblActiveUser = new Label("Usuario Activo:");
