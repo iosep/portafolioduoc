@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -34,7 +35,7 @@ public class Login extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("desk.png")));
 //carga de datos de prueba
         AaaInitialLoad aaa = new AaaInitialLoad();
         aaa.cargar();

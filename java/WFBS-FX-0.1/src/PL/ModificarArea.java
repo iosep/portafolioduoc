@@ -12,9 +12,11 @@ import java.util.Date;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -26,15 +28,17 @@ import javafx.stage.Stage;
  *
  * @author iosep
  */
-public class CrearArea {
+public class ModificarArea {
 
-    private final AreaCTL actl = new AreaCTL();
+    private final AreaCTL areaCtl = new AreaCTL();
+    private static AreaO a0;
     static boolean vb = false;
 
-    public void display() {
+    public void display(int idArea) {
         Stage window = new Stage();
+        window.getIcons().add(new Image(getClass().getResourceAsStream("desk.png")));
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("SEC - Crear Nueva Área");
+        window.setTitle("SEC - Crear Nueva Area");
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -45,17 +49,19 @@ public class CrearArea {
         Text scenetitle = new Text("SEC");
         scenetitle.getStyleClass().add("title");
         grid.add(scenetitle, 0, 0, 2, 1);
-        Label subtitle = new Label("Crear Nueva Área");
+        Label subtitle = new Label("Modificar Área");
         subtitle.getStyleClass().add("subtitle");
         grid.add(subtitle, 0, 1, 2, 1);
-                
+
         final Text msj = new Text();
         msj.getStyleClass().add("action");
         grid.add(msj, 0, 8, 2, 1);
 
+        a0 = areaCtl.getAreaById(idArea);
+
         Label nombreLbl = new Label("Nombre:");
         grid.add(nombreLbl, 0, 5);
-        TextField nombreTxt = new TextField();
+        TextField nombreTxt = new TextField(a0.getNombre());
         nombreTxt.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
@@ -65,7 +71,7 @@ public class CrearArea {
 
         Label siglaLbl = new Label("Sigla:");
         grid.add(siglaLbl, 0, 6);
-        TextField siglaTxt = new TextField();
+        TextField siglaTxt = new TextField(a0.getSigla());
         siglaTxt.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
@@ -73,7 +79,7 @@ public class CrearArea {
         });
         grid.add(siglaTxt, 1, 6);
 
-        Button btn = new Button("CREAR");
+        Button btn = new Button("MODIFICAR");
         HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
@@ -89,22 +95,36 @@ public class CrearArea {
                 msj.setText("Ingrese Sigla");
             } else {
                 Date now = new Date();
-                vb = actl.addAreaCTL(new AreaO(nombreTxt.getText().trim(), siglaTxt.getText().trim(), 1, now, null, null));
+                vb = areaCtl.addAreaCTL(new AreaO(nombreTxt.getText().trim(), siglaTxt.getText().trim(), 1, now, null, null));
                 if (vb) {
-                    nombreTxt.clear();
+                    /*nombreTxt.clear();
                     siglaTxt.clear();
                     msj.setFill(Color.GREEN);
-                    msj.setText("Área Creada Exitosamente");
+                    msj.setText("Área Creada Exitosamente");*/
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(window);
+                    alert.setTitle("Área Modificada");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Área Modificada Exitosamente");
+                    alert.showAndWait();
+                    window.close();
                 } else {
-                    msj.setFill(Color.FIREBRICK);
-                    msj.setText("Error Al Crear Área");
+                    /*msj.setFill(Color.FIREBRICK);
+                    msj.setText("Error Al Crear Área");*/
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.initOwner(window);
+                    alert.setTitle("ERROR - Modificar Área");
+                    alert.setHeaderText(null);
+                    alert.setContentText("ERROR al Modificar Área");
+                    alert.showAndWait();
+                    window.close();
                 }
             }
         });
 
         Scene display = new Scene(grid);
         window.setScene(display);
-        display.getStylesheets().add(CrearArea.class.getResource("Style.css").toExternalForm());
+        display.getStylesheets().add(ModificarArea.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
     }

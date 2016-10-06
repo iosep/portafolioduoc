@@ -20,6 +20,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -35,7 +36,7 @@ public class CrearUsuarioArea {
     private final UsuarioCTL userCtl = new UsuarioCTL();
     private static AreaO auxArea;
     private static UsuarioAreaO auxUserArea;
-    
+
     public void display(String userRut) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -115,6 +116,7 @@ public class CrearUsuarioArea {
             if (listaAreas.getSelectionModel().getSelectedItem() != null) {
                 auxUserArea = (UsuarioAreaO) listaAreas.getSelectionModel().getSelectedItem();
                 if (usuarioAreaCtl.addUsuarioAreaCTL(auxUserArea)) {
+                    msj.setFill(Color.GREEN);
                     msj.setText("Área Agregada Exitosamente");
                     areasSeleccionadas.setItems(usuarioAreaCtl.getUsuarioAreasByUserIdFX(userO.getId()));
                     areasSeleccionadas.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
@@ -141,9 +143,11 @@ public class CrearUsuarioArea {
                     areasSeleccionadas.getSelectionModel().clearSelection();
                     listaAreas.getSelectionModel().clearSelection();
                 } else {
+                    msj.setFill(Color.FIREBRICK);
                     msj.setText("Ha ocurrido un error");
                 }
             } else {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Seleccione un Área");
             }
         });
@@ -152,6 +156,7 @@ public class CrearUsuarioArea {
             if (areasSeleccionadas.getSelectionModel().getSelectedItem() != null) {
                 auxUserArea = (UsuarioAreaO) areasSeleccionadas.getSelectionModel().getSelectedItem();
                 if (usuarioAreaCtl.removeUserAreaCTL(auxUserArea.getUsuario_id(), auxUserArea.getArea_id())) {
+                    msj.setFill(Color.GREEN);
                     msj.setText("Área Eliminada Exitosamente");
                     areasSeleccionadas.setItems(usuarioAreaCtl.getUsuarioAreasByUserIdFX(userO.getId()));
                     areasSeleccionadas.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
@@ -178,9 +183,11 @@ public class CrearUsuarioArea {
                     areasSeleccionadas.getSelectionModel().clearSelection();
                     listaAreas.getSelectionModel().clearSelection();
                 } else {
+                    msj.setFill(Color.FIREBRICK);
                     msj.setText("Ha ocurrido un error");
                 }
             } else {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Seleccione un Área");
             }
         });

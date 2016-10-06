@@ -49,24 +49,39 @@ public class CrearNivel {
         subtitle.getStyleClass().add("subtitle");
         grid.add(subtitle, 0, 1, 2, 1);
 
+        final Text msj = new Text();
+        msj.getStyleClass().add("action");
+        grid.add(msj, 0, 8, 2, 1);
+
         Label nombreLbl = new Label("Nombre:");
         grid.add(nombreLbl, 0, 4);
         TextField nombreTxt = new TextField();
+        nombreTxt.textProperty().addListener((ob, ol, ne) -> {
+            if (ne != null) {
+                msj.setText("");
+            }
+        });
         grid.add(nombreTxt, 1, 4);
 
         Label notaLbl = new Label("Nota:");
         grid.add(notaLbl, 0, 5);
         TextField notaTxt = new TextField();
+        notaTxt.textProperty().addListener((ob, ol, ne) -> {
+            if (ne != null) {
+                msj.setText("");
+            }
+        });
         grid.add(notaTxt, 1, 5);
 
         Label descLbl = new Label("Descripción:");
         grid.add(descLbl, 0, 6);
         TextField descTxt = new TextField();
+        descTxt.textProperty().addListener((ob, ol, ne) -> {
+            if (ne != null) {
+                msj.setText("");
+            }
+        });
         grid.add(descTxt, 1, 6);
-
-        final Text msj = new Text();
-        msj.getStyleClass().add("action");
-        grid.add(msj, 0, 8, 2, 1);
 
         Button btn = new Button("CREAR");
         HBox hbBtn = new HBox();

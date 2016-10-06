@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -48,24 +49,48 @@ public class CrearObservacion {
         subtitle.getStyleClass().add("subtitle");
         grid.add(subtitle, 0, 1, 2, 1);
 
+        final Text msj = new Text();
+        msj.getStyleClass().add("action");
+        grid.add(msj, 0, 9, 2, 1);
+
         Label lblNivelInf = new Label("Nivel Inferior:");
         grid.add(lblNivelInf, 0, 4);
         TextField txtNivelInf = new TextField();
+        txtNivelInf.textProperty().addListener((ob, ol, ne) -> {
+            if (ne != null) {
+                msj.setText("");
+            }
+        });
         grid.add(txtNivelInf, 1, 4);
 
         Label lblNivelSup = new Label("Nivel Superior:");
         grid.add(lblNivelSup, 0, 5);
         TextField txtNivelSup = new TextField();
+        txtNivelSup.textProperty().addListener((ob, ol, ne) -> {
+            if (ne != null) {
+                msj.setText("");
+            }
+        });
         grid.add(txtNivelSup, 1, 5);
 
         Label lblMsjInf = new Label("Mensaje Nivel Inferior:");
         grid.add(lblMsjInf, 0, 6);
         TextField txtMsjInf = new TextField();
+        txtMsjInf.textProperty().addListener((ob, ol, ne) -> {
+            if (ne != null) {
+                msj.setText("");
+            }
+        });
         grid.add(txtMsjInf, 1, 6);
 
         Label lblMsjSup = new Label("Mensaje Nivel Superior:");
         grid.add(lblMsjSup, 0, 7);
         TextField txtMsjSup = new TextField();
+        txtMsjSup.textProperty().addListener((ob, ol, ne) -> {
+            if (ne != null) {
+                msj.setText("");
+            }
+        });
         grid.add(txtMsjSup, 1, 7);
 
         Button btn = new Button("CREAR");
@@ -74,35 +99,45 @@ public class CrearObservacion {
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 1, 10, 1, 4);
 
-        final Text msj = new Text();
-        grid.add(msj, 0, 9, 2, 1);
-
         btn.setOnAction(e -> {
-            msj.getStyleClass().add("action");
             Validar v = new Validar();
             if (txtNivelInf.getText().isEmpty()) {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Nivel Inferior");
             } else if (txtNivelSup.getText().isEmpty()) {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Nivel Superior");
             } else if (txtMsjInf.getText().isEmpty()) {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Mensaje Nivel Inferior");
             } else if (txtMsjSup.getText().isEmpty()) {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Mensaje Nivel Superior");
-            } else if (v.validarInteger(txtNivelInf.getText()) && v.validarInteger(txtNivelSup.getText())) {
-                Date now = new Date();
-                vb = observacionCtl.addObservacionCTL(new ObservacionO(Integer.parseInt(txtNivelInf.getText()), Integer.parseInt(txtNivelSup.getText()),
-                        txtMsjInf.getText(), txtMsjSup.getText(), id_competencia, 1, now, null, null));
-                if (vb) {
-                    txtNivelInf.clear();
-                    txtNivelSup.clear();
-                    txtMsjInf.clear();
-                    txtMsjSup.clear();
-                    msj.setText("Observación Creada Exitosamente");
+            } else if (v.validarInteger(txtNivelInf.getText()) && v.validarInteger(txtNivelSup.getText())
+                    && Integer.parseInt(txtNivelInf.getText()) >= 0 && Integer.parseInt(txtNivelInf.getText()) <= 5
+                    && Integer.parseInt(txtNivelSup.getText()) <= 5 && Integer.parseInt(txtNivelSup.getText()) >= 0) {
+                if (Integer.parseInt(txtNivelSup.getText()) > Integer.parseInt(txtNivelInf.getText())) {
+                    Date now = new Date();
+                    vb = observacionCtl.addObservacionCTL(new ObservacionO(Integer.parseInt(txtNivelInf.getText()), Integer.parseInt(txtNivelSup.getText()),
+                            txtMsjInf.getText(), txtMsjSup.getText(), id_competencia, 1, now, null, null));
+                    if (vb) {
+                        txtNivelInf.clear();
+                        txtNivelSup.clear();
+                        txtMsjInf.clear();
+                        txtMsjSup.clear();
+                        msj.setFill(Color.GREEN);
+                        msj.setText("Observación Creada Exitosamente");
+                    } else {
+                        msj.setFill(Color.FIREBRICK);
+                        msj.setText("Error Al Crear Observación");
+                    }
                 } else {
-                    msj.setText("Error Al Crear Observación");
+                    msj.setFill(Color.FIREBRICK);
+                    msj.setText("Nivel Superior mayor a Nivel Inferior");
                 }
             } else {
-                msj.setText("Niveles Ingrese Solo Números");
+                msj.setFill(Color.FIREBRICK);
+                msj.setText("Niveles Ingrese Solo Números entre 0 y 5");
             }
         });
 

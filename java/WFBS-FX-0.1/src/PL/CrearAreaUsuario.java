@@ -20,6 +20,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -116,6 +117,7 @@ public class CrearAreaUsuario {
             if (listDisponible.getSelectionModel().getSelectedItem() != null) {
                 auxUserArea = (UsuarioAreaO) listDisponible.getSelectionModel().getSelectedItem();
                 if (usuarioAreaCtl.addUsuarioAreaCTL(auxUserArea)) {
+                    msj.setFill(Color.GREEN);
                     msj.setText("Usuario Agregado Exitosamente");
                     listSeleccion.setItems(usuarioAreaCtl.getUsuarioAreasByAreaIdFX(idArea));
                     listSeleccion.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
@@ -142,9 +144,11 @@ public class CrearAreaUsuario {
                     listSeleccion.getSelectionModel().clearSelection();
                     listDisponible.getSelectionModel().clearSelection();
                 } else {
+                    msj.setFill(Color.FIREBRICK);
                     msj.setText("Ha ocurrido un error");
                 }
             } else {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Seleccione un Usuario");
             }
         });
@@ -153,6 +157,7 @@ public class CrearAreaUsuario {
             if (listSeleccion.getSelectionModel().getSelectedItem() != null) {
                 auxUserArea = (UsuarioAreaO) listSeleccion.getSelectionModel().getSelectedItem();
                 if (usuarioAreaCtl.removeUserAreaCTL(auxUserArea.getUsuario_id(), auxUserArea.getArea_id())) {
+                    msj.setFill(Color.GREEN);
                     msj.setText("Usuario Eliminado Exitosamente");
                     listSeleccion.setItems(usuarioAreaCtl.getUsuarioAreasByAreaIdFX(idArea));
                     listSeleccion.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
@@ -179,9 +184,11 @@ public class CrearAreaUsuario {
                     listSeleccion.getSelectionModel().clearSelection();
                     listDisponible.getSelectionModel().clearSelection();
                 } else {
+                    msj.setFill(Color.FIREBRICK);
                     msj.setText("Ha ocurrido un error");
                 }
             } else {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Seleccione un Usuario");
             }
         });

@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -48,14 +49,28 @@ public class CrearRespuesta {
         subtitle.getStyleClass().add("subtitle");
         grid.add(subtitle, 0, 1, 2, 1);
 
+        final Text msj = new Text();
+        msj.getStyleClass().add("action");
+        grid.add(msj, 0, 7, 2, 1);
+
         Label lblRespuesta = new Label("Respuesta:");
         grid.add(lblRespuesta, 0, 4);
         TextField txtRespuesta = new TextField();
+        txtRespuesta.textProperty().addListener((ob, ol, ne) -> {
+            if (ne != null) {
+                msj.setText("");
+            }
+        });
         grid.add(txtRespuesta, 1, 4);
 
         Label lblPuntos = new Label("Puntos:");
         grid.add(lblPuntos, 0, 5);
         TextField txtPuntos = new TextField();
+        txtPuntos.textProperty().addListener((ob, ol, ne) -> {
+            if (ne != null) {
+                msj.setText("");
+            }
+        });
         grid.add(txtPuntos, 1, 5);
 
         Button btn = new Button("CREAR");
@@ -64,15 +79,13 @@ public class CrearRespuesta {
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 1, 8, 1, 4);
 
-        final Text msj = new Text();
-        grid.add(msj, 0, 7, 2, 1);
-
         btn.setOnAction(e -> {
-            msj.getStyleClass().add("action");
             Validar v = new Validar();
             if (txtRespuesta.getText().isEmpty()) {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Respuesta");
             } else if (txtPuntos.getText().isEmpty()) {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Puntos");
             } else if (v.validarInteger(txtPuntos.getText())) {
                 Date now = new Date();
@@ -80,11 +93,14 @@ public class CrearRespuesta {
                 if (vb) {
                     txtRespuesta.clear();
                     txtPuntos.clear();
+                    msj.setFill(Color.GREEN);
                     msj.setText("Respuesta Creada Exitosamente");
                 } else {
+                    msj.setFill(Color.FIREBRICK);
                     msj.setText("Error Al Crear Respuesta");
                 }
             } else {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Puntos Ingrese Solo Números");
             }
         });

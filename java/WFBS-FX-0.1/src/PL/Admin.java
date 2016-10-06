@@ -45,6 +45,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -287,6 +288,7 @@ public abstract class Admin extends Application {
                     btnUsuario.fire();
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(primaryStage);
                     alert.setTitle("Información");
                     alert.setHeaderText(null);
                     alert.setContentText("Sólo Funcionarios tienen Áreas asociadas");
@@ -382,7 +384,9 @@ public abstract class Admin extends Application {
             final MenuItem verUsuariosMenu = new MenuItem("Ver Usuarios");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
-                System.out.println("Modificar area id: " + row.getItem().getId());
+                ModificarArea ma = new ModificarArea();
+                ma.display(row.getItem().getId());
+                btnArea.fire();
             });
             //desactivar
             eliminarMenuItem.setOnAction(event -> {
@@ -477,9 +481,12 @@ public abstract class Admin extends Application {
             final MenuItem crearPreguntaMenu = new MenuItem("Crear Pregunta");
             final MenuItem crearCommentMenu = new MenuItem("Crear Observación");
             final MenuItem verAreasMenu = new MenuItem("Ver Áreas");
+            final MenuItem verNivelMenu = new MenuItem("Ver Niveles");
             //modificar
             modificarMenuItem.setOnAction(event -> {
-                System.out.println("Modificar Competencia Id: " + row.getItem().getId());
+                ModificarCompetencia mc = new ModificarCompetencia();
+                mc.display(row.getItem().getId());
+                btnCompetencia.fire();
             });
             //desactivar
             desactivarMenuItem.setOnAction(event -> {
@@ -502,8 +509,12 @@ public abstract class Admin extends Application {
                 CrearCompetenciaArea ccaw = new CrearCompetenciaArea();
                 ccaw.display(id_competencia);
             });
+            verNivelMenu.setOnAction(ev -> {
+                CrearCompetenciaNivel ccnw = new CrearCompetenciaNivel();
+                ccnw.display(row.getItem().getId());
+            });
             contextMenu.getItems().addAll(modificarMenuItem, desactivarMenuItem, new SeparatorMenuItem(), crearPreguntaMenu, crearCommentMenu,
-                    new SeparatorMenuItem(), verAreasMenu);
+                    new SeparatorMenuItem(), verAreasMenu, verNivelMenu);
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                     .then((ContextMenu) null)
@@ -581,6 +592,7 @@ public abstract class Admin extends Application {
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
             final MenuItem eliminarMenuItem = new MenuItem("Eliminar");
+            final MenuItem verCompMenu = new MenuItem("Ver Competencias");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
                 System.out.println("Modificar Nivel Id: " + row.getItem().getId());
@@ -589,8 +601,11 @@ public abstract class Admin extends Application {
             eliminarMenuItem.setOnAction(event -> {
                 System.out.println("Desactivar Nivel Id: " + row.getItem().getId());
             });
-            contextMenu.getItems().add(modificarMenuItem);
-            contextMenu.getItems().add(eliminarMenuItem);
+            verCompMenu.setOnAction(ev -> {
+                CrearNivelCompetencia cnc = new CrearNivelCompetencia();
+                cnc.display(row.getItem().getId());
+            });
+            contextMenu.getItems().addAll(modificarMenuItem, eliminarMenuItem, new SeparatorMenuItem(), verCompMenu);
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                     .then((ContextMenu) null)

@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -88,7 +89,7 @@ public class CrearPeriodo {
                     int auto = 100 - Integer.parseInt(newValue);
                     txtPorcAuto.setText("" + auto);
                 } else {
-                    msj.setText("");
+                    msj.setFill(Color.FIREBRICK);
                     msj.setText("Porcentaje > 0 y < 100");
                     txtPorcJefe.clear();
                 }
@@ -100,6 +101,7 @@ public class CrearPeriodo {
                     int jefe = 100 - Integer.parseInt(newValue);
                     txtPorcJefe.setText("" + jefe);
                 } else {
+                    msj.setFill(Color.FIREBRICK);
                     msj.setText("Porcentaje > 0 y < 100");
                     txtPorcAuto.clear();
                 }
@@ -114,12 +116,16 @@ public class CrearPeriodo {
 
         btn.setOnAction(e -> {
             if (dpFechaInicio.getValue() == null) {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Seleccione Fecha Inicio");
             } else if (dpFechaFinal.getValue() == null) {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Seleccione Fecha Final");
             } else if (txtPorcJefe.getText().isEmpty()) {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Porcentaje Evaluación Jefe");
             } else if (txtPorcAuto.getText().isEmpty()) {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Porcentaje Autoevaluación");
             } else if (v.validarInteger(txtPorcAuto.getText()) && v.validarInteger(txtPorcJefe.getText())) {
                 Date inicio = Date.from(dpFechaInicio.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -133,11 +139,14 @@ public class CrearPeriodo {
                     dpFechaFinal.setValue(null);
                     txtPorcJefe.clear();
                     txtPorcAuto.clear();
+                    msj.setFill(Color.GREEN);
                     msj.setText("Periodo Creado Exitosamente");
                 } else {
+                    msj.setFill(Color.FIREBRICK);
                     msj.setText("Error Al Crear Periodo");
                 }
             } else {
+                msj.setFill(Color.FIREBRICK);
                 msj.setText("Porcentajes Ingreso Solo Números");
             }
         });

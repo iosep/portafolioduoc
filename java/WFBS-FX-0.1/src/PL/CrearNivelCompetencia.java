@@ -33,7 +33,7 @@ import javafx.stage.Stage;
  *
  * @author iosep
  */
-public class CrearCompetenciaNivel {
+public class CrearNivelCompetencia {
 
     private final CompetenciaNivelCTL compNivelCtl = new CompetenciaNivelCTL();
     private final CompetenciaCTL compCtl = new CompetenciaCTL();
@@ -42,10 +42,10 @@ public class CrearCompetenciaNivel {
     private static NivelO auxNivel;
     private static CompetenciaNivelO auxCompNivel;
 
-    public void display(int compId) {
+    public void display(int nivelId) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("SEC - Asignar Nivel a Competencia");
+        window.setTitle("SEC - Asignar Competencia a Nivel");
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -57,8 +57,8 @@ public class CrearCompetenciaNivel {
         scenetitle.getStyleClass().add("title");
         grid.add(scenetitle, 0, 0, 4, 1);
 
-        auxComp = compCtl.getCompetenciaById(compId);
-        Label lblUser = new Label("Competencia: " + auxComp.getNombre());
+        auxNivel = nivelCtl.getNivelById(nivelId);
+        Label lblUser = new Label("Nivel: " + auxNivel.getNombre());
         lblUser.getStyleClass().add("subtitle");
         grid.add(lblUser, 0, 1, 3, 1);
 
@@ -66,17 +66,17 @@ public class CrearCompetenciaNivel {
         msj.getStyleClass().add("action");
         grid.add(msj, 0, 5, 2, 1);
 
-        Label lblListaDisponible = new Label("Niveles disponibles:");
+        Label lblListaDisponible = new Label("Competencias disponibles:");
         grid.add(lblListaDisponible, 0, 3);
         ListView listaDisponible = new ListView();
-        listaDisponible.setItems(compNivelCtl.getNivelesDisponiblesByCompetenciaFX(compId));
+        listaDisponible.setItems(compNivelCtl.getCompetenciasDisponiblesByNivelFX(nivelId));
         listaDisponible.setCellFactory(param -> new ListCell<CompetenciaNivelO>() {
             @Override
             protected void updateItem(CompetenciaNivelO item, boolean empty) {
                 super.updateItem(item, empty);
                 if (item != null) {
-                    auxNivel = nivelCtl.getNivelById(item.getNivel_id());
-                    setText(auxNivel.getNombre());
+                    auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
+                    setText(auxComp.getNombre());
                 }
             }
         });
@@ -86,17 +86,17 @@ public class CrearCompetenciaNivel {
                 msj.setText("");
             }
         });
-        Label lblSeleccionadas = new Label("Niveles de la Competencia:");
+        Label lblSeleccionadas = new Label("Competencias del Nivel:");
         grid.add(lblSeleccionadas, 3, 3);
         ListView listSeleccionadas = new ListView();
-        listSeleccionadas.setItems(compNivelCtl.getCompetenciaNivelesByCompetenciaIdFX(compId));
+        listSeleccionadas.setItems(compNivelCtl.getCompetenciaNivelesByNivelIdFX(nivelId));
         listSeleccionadas.setCellFactory(param -> new ListCell<CompetenciaNivelO>() {
             @Override
             protected void updateItem(CompetenciaNivelO item, boolean empty) {
                 super.updateItem(item, empty);
                 if (item != null) {
-                    auxNivel = nivelCtl.getNivelById(item.getNivel_id());
-                    setText(auxNivel.getNombre());
+                    auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
+                    setText(auxComp.getNombre());
                 }
             }
         });
@@ -120,26 +120,26 @@ public class CrearCompetenciaNivel {
                 auxCompNivel = (CompetenciaNivelO) listaDisponible.getSelectionModel().getSelectedItem();
                 if (compNivelCtl.addCompetenciaNivelCTL(auxCompNivel)) {
                     msj.setFill(Color.GREEN);
-                    msj.setText("Nivel Agregado Exitosamente");
-                    listSeleccionadas.setItems(compNivelCtl.getCompetenciaNivelesByCompetenciaIdFX(compId));
+                    msj.setText("Competencia Agregada Exitosamente");
+                    listSeleccionadas.setItems(compNivelCtl.getCompetenciaNivelesByNivelIdFX(nivelId));
                     listSeleccionadas.setCellFactory(param -> new ListCell<CompetenciaNivelO>() {
                         @Override
                         protected void updateItem(CompetenciaNivelO item, boolean empty) {
                             super.updateItem(item, empty);
                             if (item != null) {
-                                auxNivel = nivelCtl.getNivelById(item.getNivel_id());
-                                setText(auxNivel.getNombre());
+                                auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
+                                setText(auxComp.getNombre());
                             }
                         }
                     });
-                    listaDisponible.setItems(compNivelCtl.getNivelesDisponiblesByCompetenciaFX(compId));
+                    listaDisponible.setItems(compNivelCtl.getCompetenciasDisponiblesByNivelFX(nivelId));
                     listaDisponible.setCellFactory(param -> new ListCell<CompetenciaNivelO>() {
                         @Override
                         protected void updateItem(CompetenciaNivelO item, boolean empty) {
                             super.updateItem(item, empty);
                             if (item != null) {
-                                auxNivel = nivelCtl.getNivelById(item.getNivel_id());
-                                setText(auxNivel.getNombre());
+                                auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
+                                setText(auxComp.getNombre());
                             }
                         }
                     });
@@ -151,35 +151,35 @@ public class CrearCompetenciaNivel {
                 }
             } else {
                 msj.setFill(Color.FIREBRICK);
-                msj.setText("Seleccione un Nivel");
+                msj.setText("Seleccione una Competencia");
             }
         });
 
         btnQuitar.setOnAction(e -> {
             if (listSeleccionadas.getSelectionModel().getSelectedItem() != null) {
                 auxCompNivel = (CompetenciaNivelO) listSeleccionadas.getSelectionModel().getSelectedItem();
-                if (compNivelCtl.removeAreaCompCTL(compId, auxCompNivel.getNivel_id())) {
+                if (compNivelCtl.removeAreaCompCTL(auxCompNivel.getCompetencia_id(), nivelId)) {
                     msj.setFill(Color.GREEN);
-                    msj.setText("Nivel Eliminado Exitosamente");
-                    listSeleccionadas.setItems(compNivelCtl.getCompetenciaNivelesByCompetenciaIdFX(compId));
+                    msj.setText("Competencia Eliminada Exitosamente");
+                    listSeleccionadas.setItems(compNivelCtl.getCompetenciaNivelesByNivelIdFX(nivelId));
                     listSeleccionadas.setCellFactory(param -> new ListCell<CompetenciaNivelO>() {
                         @Override
                         protected void updateItem(CompetenciaNivelO item, boolean empty) {
                             super.updateItem(item, empty);
                             if (item != null) {
-                                auxNivel = nivelCtl.getNivelById(item.getNivel_id());
-                                setText(auxNivel.getNombre());
+                                auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
+                                setText(auxComp.getNombre());
                             }
                         }
                     });
-                    listaDisponible.setItems(compNivelCtl.getNivelesDisponiblesByCompetenciaFX(compId));
+                    listaDisponible.setItems(compNivelCtl.getCompetenciasDisponiblesByNivelFX(nivelId));
                     listaDisponible.setCellFactory(param -> new ListCell<CompetenciaNivelO>() {
                         @Override
                         protected void updateItem(CompetenciaNivelO item, boolean empty) {
                             super.updateItem(item, empty);
                             if (item != null) {
-                                auxNivel = nivelCtl.getNivelById(item.getNivel_id());
-                                setText(auxNivel.getNombre());
+                                auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
+                                setText(auxComp.getNombre());
                             }
                         }
                     });
@@ -191,13 +191,13 @@ public class CrearCompetenciaNivel {
                 }
             } else {
                 msj.setFill(Color.FIREBRICK);
-                msj.setText("Seleccione un Nivel");
+                msj.setText("Seleccione una Competencia");
             }
         });
 
         Scene display = new Scene(grid);
         window.setScene(display);
-        display.getStylesheets().add(CrearCompetenciaNivel.class.getResource("Style.css").toExternalForm());
+        display.getStylesheets().add(CrearNivelCompetencia.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
     }
