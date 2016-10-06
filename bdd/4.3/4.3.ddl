@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 4.1.3.901
---   en:        2016-10-05 18:33:48 CLST
+--   en:        2016-10-06 14:00:14 BRT
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -128,11 +128,11 @@ CREATE TABLE nivel
     id          INTEGER NOT NULL ,
     nota        INTEGER NOT NULL ,
     nombre      VARCHAR2 (255) ,
+    descripcion VARCHAR2 (255) ,
     creado      DATE NOT NULL ,
     modificado  DATE NOT NULL ,
     desactivado DATE ,
-    activo      NUMBER (1) DEFAULT 1 NOT NULL ,
-    descripcion VARCHAR2 (255)
+    activo      NUMBER (1) DEFAULT 1 NOT NULL
   ) ;
 ALTER TABLE nivel ADD CONSTRAINT nivel_PK PRIMARY KEY ( id ) ;
 

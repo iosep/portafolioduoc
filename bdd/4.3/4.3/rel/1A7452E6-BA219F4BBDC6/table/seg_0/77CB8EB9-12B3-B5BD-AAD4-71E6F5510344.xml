@@ -44,6 +44,18 @@
 <ownDataTypeParameters>255,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="descripcion" id="65986847-D12E-016C-D507-114DF247DC1A">
+<createdBy>vitorio</createdBy>
+<createdTime>2016-10-05 21:33:11 UTC</createdTime>
+<ownerDesignName>4.3</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 <Column name="creado" id="C8BF3FAE-257D-CDC2-ECFF-D98DF2A37B26">
 <createdBy>iosep</createdBy>
 <createdTime>2016-09-26 15:32:51 UTC</createdTime>
@@ -86,18 +98,6 @@
 <usesDefaultValue>true</usesDefaultValue>
 <defaultValue>1</defaultValue>
 <ownDataTypeParameters>,1,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="descripcion" id="65986847-D12E-016C-D507-114DF247DC1A">
-<createdBy>vitorio</createdBy>
-<createdTime>2016-10-05 21:33:11 UTC</createdTime>
-<ownerDesignName>4.3</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>255</dataTypeSize>
-<ownDataTypeParameters>255,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>
