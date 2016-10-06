@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 4.1.3.901
---   en:        2016-09-27 16:04:33 BRT
+--   en:        2016-10-05 18:33:48 CLST
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -51,6 +51,7 @@ CREATE TABLE competencia
     nombre      VARCHAR2 (255) NOT NULL ,
     descripcion VARCHAR2 (255) ,
     sigla       VARCHAR2 (255) ,
+    n_optimo    INTEGER ,
     creado      DATE NOT NULL ,
     modificado  DATE NOT NULL ,
     desactivado DATE ,
@@ -130,7 +131,8 @@ CREATE TABLE nivel
     creado      DATE NOT NULL ,
     modificado  DATE NOT NULL ,
     desactivado DATE ,
-    activo      NUMBER (1) DEFAULT 1 NOT NULL
+    activo      NUMBER (1) DEFAULT 1 NOT NULL ,
+    descripcion VARCHAR2 (255)
   ) ;
 ALTER TABLE nivel ADD CONSTRAINT nivel_PK PRIMARY KEY ( id ) ;
 

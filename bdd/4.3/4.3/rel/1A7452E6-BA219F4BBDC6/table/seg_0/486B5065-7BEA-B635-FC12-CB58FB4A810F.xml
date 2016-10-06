@@ -58,6 +58,17 @@
 <ownDataTypeParameters>255,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="n_optimo" id="59B982D7-4536-9A23-44F1-F7BB0D315274">
+<createdBy>vitorio</createdBy>
+<createdTime>2016-10-05 21:32:12 UTC</createdTime>
+<ownerDesignName>4.3</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 <Column name="creado" id="4A408DA2-C882-878D-BAC9-D90A5BFF7BBB">
 <createdBy>iosep</createdBy>
 <createdTime>2016-09-26 15:25:49 UTC</createdTime>
