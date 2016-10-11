@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class RolDAL {
 
     private final AaaInitialLoad aaa = new AaaInitialLoad();
-    private RolO r0;
+    private static RolO r0;
 
     public RolO getRolById(int id) {
         aaa.mostrarRoles().stream().filter((object) -> (id == object.getId())).forEach((object) -> {

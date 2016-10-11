@@ -71,9 +71,9 @@ public class AaaInitialLoad {
     private static ArrayList<AreaCompetenciaO> rAreaCompetencias;
     private static ArrayList<CompetenciaNivelO> rCompetenciaNiveles;
     private static ArrayList<RolO> roles;
-    private RolO rol1;
-    private RolO rol2;
-    private RolO rol3;
+    private static RolO rol1;
+    private static RolO rol2;
+    private static RolO rol3;
 
     public void cargar() {
         users = new ArrayList<>();

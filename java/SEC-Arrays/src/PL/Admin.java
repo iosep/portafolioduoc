@@ -45,12 +45,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -195,6 +197,15 @@ public class Admin {
         vbDisplay.getStyleClass().add("vbox");
         BorderPane bp = new BorderPane();
         bp.setTop(vbTopOrder);
+        HBox hbCopyright = new HBox();
+        hbCopyright.getStyleClass().add("hboxbottom");
+        Text tCopyright = new Text("©copyright @iosep (José Oñate)");
+        tCopyright.setFill(Color.DARKCYAN);
+        hbCopyright.getChildren().addAll(tCopyright);
+        hbCopyright.setAlignment(Pos.CENTER);
+        bp.setBottom(hbCopyright);
+        hbBottomBox.setPrefHeight(130);
+        btCrear.setAlignment(Pos.TOP_RIGHT);
 //
 //MANTENEDOR USUARIOS //USER MAINTAINER
 //
@@ -1332,10 +1343,11 @@ public class Admin {
 //load display in center border pane
         bp.setCenter(vbDisplay);
 //setting scene
-        Scene admin = new Scene(bp, 1040, 640);
+        Scene admin = new Scene(bp);
 //loading stage scene and style
         primaryStage.setTitle("SEC - Mantenedores");
         primaryStage.setScene(admin);
+        primaryStage.setMaximized(true);
         admin.getStylesheets().add(Admin.class.getResource("Style.css").toExternalForm());
         primaryStage.show();
     }

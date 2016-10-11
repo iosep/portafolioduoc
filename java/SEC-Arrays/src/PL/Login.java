@@ -34,8 +34,6 @@ public class Login extends Application {
 
     private final UsuarioCTL userCtl = new UsuarioCTL();
     private final RolCTL rolCtl = new RolCTL();
-    private UsuarioO logUser;
-    private RolO logRol;
 
     @Override
     public void start(Stage primaryStage) {
@@ -95,8 +93,8 @@ public class Login extends Application {
             if (v.validarRut(txtRun.getText())) {
                 Cifrar c = new Cifrar();
                 if (c.validatePassword(txtRun.getText(), pwBox.getText())) {
-                    logUser = userCtl.getUsuarioByRut(txtRun.getText());
-                    logRol = rolCtl.getRolById(logUser.getRol());
+                    UsuarioO logUser = userCtl.getUsuarioByRut(txtRun.getText());
+                    RolO logRol = rolCtl.getRolById(logUser.getRol());
                     switch (logRol.getNombre()) {
                         case "Administrador":
                             Admin a = new Admin();
@@ -120,7 +118,7 @@ public class Login extends Application {
             }
         });
 
-        Scene display = new Scene(grid, 1040, 640);
+        Scene display = new Scene(grid, 800, 600);
         primaryStage.setScene(display);
         display.getStylesheets().add(Login.class.getResource("Style.css").toExternalForm());
         primaryStage.show();
