@@ -46,9 +46,9 @@ public class CrearUsuarioArea {
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+        grid.setHgap(3);
+        grid.setVgap(3);
+        grid.setPadding(new Insets(0, 25, 5, 25));
 
         Text scenetitle = new Text("SEC - Asignar");
         scenetitle.getStyleClass().add("title");
@@ -206,7 +206,7 @@ public class CrearUsuarioArea {
             }
         });
 
-        Scene display = new Scene(grid);
+        Scene display = new Scene(grid, 650, 500);
         window.setScene(display);
         display.getStylesheets().add(CrearUsuarioArea.class.getResource("Style.css").toExternalForm());
         window.showAndWait();

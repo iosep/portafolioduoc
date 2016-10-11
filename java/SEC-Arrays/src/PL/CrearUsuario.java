@@ -48,9 +48,9 @@ public class CrearUsuario {
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+        grid.setHgap(5);
+        grid.setVgap(5);
+        grid.setPadding(new Insets(10, 25, 25, 25));
 
         Text scenetitle = new Text("SEC");
         scenetitle.getStyleClass().add("title");
@@ -61,7 +61,7 @@ public class CrearUsuario {
 
         final Text msj = new Text();
         msj.getStyleClass().add("action");
-        grid.add(msj, 0, 15, 2, 1);
+        grid.add(msj, 0, 10, 2, 1);
 
         Label rutLbl = new Label("RUT:");
         grid.add(rutLbl, 0, 4);
@@ -121,59 +121,59 @@ public class CrearUsuario {
         });
 
         Label lblNombre = new Label("Nombre:");
-        grid.add(lblNombre, 0, 9);
+        grid.add(lblNombre, 3, 4);
         TextField txtNombre = new TextField();
         txtNombre.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
             }
         });
-        grid.add(txtNombre, 1, 9);
+        grid.add(txtNombre, 4, 4);
 
         Label lblApellido = new Label("Apellido:");
-        grid.add(lblApellido, 0, 10);
+        grid.add(lblApellido, 3, 5);
         TextField txtApellido = new TextField();
         txtApellido.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
             }
         });
-        grid.add(txtApellido, 1, 10);
+        grid.add(txtApellido, 4, 5);
 
         Label lblEmail = new Label("Email:");
-        grid.add(lblEmail, 0, 11);
+        grid.add(lblEmail, 3, 6);
         TextField txtEmail = new TextField();
         txtEmail.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
             }
         });
-        grid.add(txtEmail, 1, 11);
+        grid.add(txtEmail, 4, 6);
 
         Label lblSexo = new Label("Sexo:");
-        grid.add(lblSexo, 0, 12);
+        grid.add(lblSexo, 3, 7);
         ChoiceBox cbSexo = new ChoiceBox(FXCollections.observableArrayList("Hombre", "Mujer"));
         cbSexo.setOnAction(ev -> {
             msj.setText("");
         });
-        grid.add(cbSexo, 1, 12);
+        grid.add(cbSexo, 4, 7);
 
         Label lblFono = new Label("Teléfono:");
-        grid.add(lblFono, 0, 13);
+        grid.add(lblFono, 3, 8);
         TextField txtFono = new TextField();
         txtFono.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
             }
         });
-        grid.add(txtFono, 1, 13);
+        grid.add(txtFono, 4, 8);
 
         //grid.setGridLinesVisible(true);
         Button btn = new Button("CREAR");
         HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 16, 1, 5);
+        grid.add(hbBtn, 1, 11);
 
         btn.setOnAction(e -> {
             Validar v = new Validar();
@@ -185,30 +185,25 @@ public class CrearUsuario {
                     } else if (cbRol.getValue() == null) {
                         msj.setFill(Color.FIREBRICK);
                         msj.setText("Seleccione Rol");
-                    } else if (txtNombre.getText().isEmpty() && txtApellido.getText().isEmpty()) {
+                    } else if (txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty()) {
                         msj.setFill(Color.FIREBRICK);
-                        msj.setText("Ingrese Nombre y Apellido");
+                        msj.setText("Ingrese Nombre y/o Apellido");
                     } else if (!v.validarEmail(txtEmail.getText())) {
                         msj.setFill(Color.FIREBRICK);
                         msj.setText("Email No Válido");
                     } else if (cbSexo.getValue() == null) {
                         msj.setFill(Color.FIREBRICK);
                         msj.setText("Seleccione Sexo");
-                    } else if (!v.validarInteger(txtFono.getText())) {
-                        msj.setFill(Color.FIREBRICK);
-                        msj.setText("Teléfono Sólo Números");
-                    } else if (txtFono.getText().length() != 9) {
+                    } else if (!v.validarInteger(txtFono.getText()) || txtFono.getText().length() != 9) {
                         msj.setFill(Color.FIREBRICK);
                         msj.setText("Teléfono Ingrese 9 Números");
                     } else {
-                        String rutJefa = "";
                         boolean boo = false;
                         if (cbRol.getSelectionModel().getSelectedIndex() == 2) {
                             if (cbJefa.getValue() == null) {
                                 msj.setFill(Color.FIREBRICK);
                                 msj.setText("Seleccione Jefa");
                             } else {
-                                rutJefa = cbJefa.getValue().toString();
                                 boo = true;
                             }
                         } else {
@@ -232,8 +227,9 @@ public class CrearUsuario {
                             }
                             Formato f = new Formato();
                             String rut = f.formatoRut(txtRun.getText());
-                            if (uctl.addUsuarioCTL(new UsuarioO(rut, clave, ((RolO) cbRol.getSelectionModel().getSelectedItem()).getId(), rutJefa,
-                                    txtNombre.getText().trim(), txtApellido.getText().trim(), txtEmail.getText(), sSexo, fono, now, null))) {
+                            if (uctl.addUsuarioCTL(new UsuarioO(rut, clave, ((RolO) cbRol.getSelectionModel().getSelectedItem()).getId(),
+                                    ((UsuarioO) cbJefa.getValue()).getRut(), txtNombre.getText().trim(), txtApellido.getText().trim(),
+                                    txtEmail.getText(), sSexo, fono, now, null))) {
                                 txtRun.clear();
                                 pwBox.clear();
                                 pwBox2.clear();

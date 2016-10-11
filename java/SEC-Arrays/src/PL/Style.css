@@ -12,14 +12,14 @@ and open the template in the editor.
 }
 
 .label {
-    -fx-font-size: 13px;
+    -fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
 
 .logout {
-    -fx-font-size: 13px;
+    -fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-font-family: "Tahoma";
 }
@@ -47,29 +47,27 @@ and open the template in the editor.
 }
 
 .title {
-    -fx-font-size: 44px;
+    -fx-font-size: 32px;
     -fx-font-family: "Arial Black";
     -fx-fill: #818181;
     -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
 
 .subtitle {
-    -fx-font-size: 22px;
+    -fx-font-size: 17px;
     -fx-font-family: "Arial Narrow";
     -fx-fill: #818181;
-    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
 
 .action {
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
     -fx-fill: firebrick;
     -fx-font-weight: bold;
 }
 
 .button {
-    -fx-label-padding: 5;
     -fx-text-fill: white;
-    -fx-font-size: 13px;
+    -fx-font-size: 12px;
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(#61a2b1, #2A5058);
@@ -80,6 +78,6 @@ and open the template in the editor.
     -fx-background-color: linear-gradient(#2A5058, #61a2b1);
 }
 
-.slimbutton {
-    -fx-label-padding: 0;
+.topbutton {
+    -fx-label-padding: 3;
 }

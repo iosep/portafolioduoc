@@ -24,6 +24,7 @@ import O.RespuestaO;
 import O.UsuarioO;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import javafx.beans.binding.Bindings;
 import javafx.collections.transformation.FilteredList;
@@ -191,6 +192,9 @@ public class Admin {
         Button btnRespuesta = new Button("Respuestas");
         Button btnComment = new Button("Observaciones");
         Button btnPeriodo = new Button("Periodos");
+        Arrays.asList(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta, btnRespuesta, btnComment, btnPeriodo).stream().forEach((btn) -> {
+            btn.getStyleClass().add("topbutton");
+        });
         hbTopButtons.getChildren().addAll(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta, btnRespuesta, btnComment, btnPeriodo);
         hbTopButtons.getStyleClass().add("hboxtop");
         VBox vbTopOrder = new VBox();
@@ -1214,7 +1218,9 @@ public class Admin {
             final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
-                System.out.println("Modificar Periodo Id: " + row.getItem().getId());
+                ModificarPeriodo mp = new ModificarPeriodo();
+                mp.display(row.getItem().getId());
+                btnPeriodo.fire();
             });
             //desactivar
             desactivarMenuItem.setOnAction(event -> {

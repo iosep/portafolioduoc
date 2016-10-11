@@ -14,6 +14,7 @@ import java.util.Date;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -32,16 +33,18 @@ import javafx.util.Callback;
  *
  * @author iosep
  */
-public class CrearPeriodo {
+public class ModificarPeriodo {
 
     private final PeriodoCTL periodoCtl = new PeriodoCTL();
+    private PeriodoO p0;
     static boolean vb = false;
 
-    public void display() {
+    public void display(int idPeriodo) {
         Stage window = new Stage();
         window.getIcons().add(new Image(getClass().getResourceAsStream("desk.png")));
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("SEC - Crear Nuevo Periodo");
+        window.setTitle("SEC - Modificar Periodo");
+        p0 = periodoCtl.getPeriodoById(idPeriodo);
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -52,7 +55,7 @@ public class CrearPeriodo {
         Text scenetitle = new Text("SEC");
         scenetitle.getStyleClass().add("title");
         grid.add(scenetitle, 0, 0, 2, 1);
-        Label subtitle = new Label("Crear Nuevo Periodo");
+        Label subtitle = new Label("Modificar Periodo");
         subtitle.getStyleClass().add("subtitle");
         grid.add(subtitle, 0, 1, 2, 1);
 
@@ -62,7 +65,7 @@ public class CrearPeriodo {
 
         Label lblFechaInicio = new Label("Fecha Inicio:");
         grid.add(lblFechaInicio, 0, 4);
-        DatePicker dpFechaInicio = new DatePicker();
+        DatePicker dpFechaInicio = new DatePicker(p0.getInicio().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         final Callback<DatePicker, DateCell> cellFactoryFromToday = new Callback<DatePicker, DateCell>() {
             @Override
             public DateCell call(final DatePicker datePicker) {
@@ -83,7 +86,7 @@ public class CrearPeriodo {
 
         Label lblFechaFinal = new Label("Fecha Final:");
         grid.add(lblFechaFinal, 0, 5);
-        DatePicker dpFechaFinal = new DatePicker();
+        DatePicker dpFechaFinal = new DatePicker(p0.getFin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         final Callback<DatePicker, DateCell> cellFactoryAfterInicio = new Callback<DatePicker, DateCell>() {
             @Override
             public DateCell call(final DatePicker datePicker) {
@@ -103,29 +106,25 @@ public class CrearPeriodo {
         dpFechaFinal.valueProperty().addListener((ob, ol, ne) -> {
             msj.setText("");
         });
-        dpFechaFinal.setDisable(true);
 
+        dpFechaFinal.setDayCellFactory(cellFactoryAfterInicio);
         dpFechaInicio.valueProperty().addListener((ob, ol, ne) -> {
             msj.setText("");
-            if (ne != null) {
-                dpFechaFinal.setDisable(false);
-                dpFechaFinal.setDayCellFactory(cellFactoryAfterInicio);
-                if (dpFechaFinal.getValue() != null && !dpFechaFinal.getValue().isAfter(ne)) {
-                    dpFechaFinal.setValue(dpFechaInicio.getValue().plusDays(1));
-                    msj.setFill(Color.GREEN);
-                    msj.setText("Fecha Final Ajustada Automáticamente");
-                }
+            if (ne != null && dpFechaFinal.getValue() != null && !dpFechaFinal.getValue().isAfter(ne)) {
+                dpFechaFinal.setValue(dpFechaInicio.getValue().plusDays(1));
+                msj.setFill(Color.GREEN);
+                msj.setText("Fecha Final Ajustada Automáticamente");
             }
         });
 
         Label lblPorcJefe = new Label("Porcentaje Jefe Evaluación:");
         grid.add(lblPorcJefe, 0, 6);
-        TextField txtPorcJefe = new TextField();
+        TextField txtPorcJefe = new TextField("" + p0.getJefe_porc());
         grid.add(txtPorcJefe, 1, 6);
 
         Label lblPorcAuto = new Label("Porcentaje Autoevaluación:");
         grid.add(lblPorcAuto, 0, 7);
-        TextField txtPorcAuto = new TextField();
+        TextField txtPorcAuto = new TextField("" + p0.getAuto_porc());
         grid.add(txtPorcAuto, 1, 7);
 
         Validar v = new Validar();
@@ -163,7 +162,7 @@ public class CrearPeriodo {
             }
         });
 
-        Button btn = new Button("CREAR");
+        Button btn = new Button("MODIFICAR");
         HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
@@ -190,15 +189,21 @@ public class CrearPeriodo {
                         1, now, null, null));
 
                 if (vb) {
-                    dpFechaInicio.setValue(null);
-                    dpFechaFinal.setValue(null);
-                    txtPorcJefe.clear();
-                    txtPorcAuto.clear();
-                    msj.setFill(Color.GREEN);
-                    msj.setText("Periodo Creado Exitosamente");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(window);
+                    alert.setTitle("Periodo Modificado");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Periodo Modificado Exitosamente");
+                    alert.showAndWait();
+                    window.close();
                 } else {
-                    msj.setFill(Color.FIREBRICK);
-                    msj.setText("Error Al Crear Periodo");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.initOwner(window);
+                    alert.setTitle("ERROR - Modificar Periodo");
+                    alert.setHeaderText(null);
+                    alert.setContentText("ERROR al Modificar Periodo");
+                    alert.showAndWait();
+                    window.close();
                 }
             } else {
                 msj.setFill(Color.FIREBRICK);
@@ -208,7 +213,7 @@ public class CrearPeriodo {
 
         Scene display = new Scene(grid, 450, 400);
         window.setScene(display);
-        display.getStylesheets().add(CrearPeriodo.class.getResource("Style.css").toExternalForm());
+        display.getStylesheets().add(ModificarPeriodo.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
 
     }

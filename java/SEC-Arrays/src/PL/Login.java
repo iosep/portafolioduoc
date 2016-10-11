@@ -118,7 +118,7 @@ public class Login extends Application {
             }
         });
 
-        Scene display = new Scene(grid, 800, 550);
+        Scene display = new Scene(grid, 700, 500);
         primaryStage.setScene(display);
         //primaryStage.setMaximized(!primaryStage.isMaximized());
         display.getStylesheets().add(Login.class.getResource("Style.css").toExternalForm());
