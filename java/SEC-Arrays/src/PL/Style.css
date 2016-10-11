@@ -79,3 +79,7 @@ and open the template in the editor.
 .button:hover {
     -fx-background-color: linear-gradient(#2A5058, #61a2b1);
 }
+
+.slimbutton {
+    -fx-label-padding: 0;
+}

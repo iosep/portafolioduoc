@@ -45,6 +45,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import static javafx.scene.input.KeyCode.F11;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -148,6 +150,8 @@ public class Admin {
     private TableColumn<PeriodoO, Date> periodoModificadoCol;
     private TableColumn<PeriodoO, Date> periodoDesactivadoCol;
 
+    Stage primaryStage = new Stage();
+
     /**
      * starts primary stage ADMIN
      *
@@ -157,7 +161,6 @@ public class Admin {
 //
 //GENERAL SETTINGS
 //
-        Stage primaryStage = new Stage();
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("desk.png")));
         Text titleMantenedores = new Text("SEC - Mantenedores");
         titleMantenedores.getStyleClass().add("title");
@@ -205,6 +208,7 @@ public class Admin {
         bp.setBottom(hbCopyright);
         hbBottomBox.setPrefHeight(130);
         btCrear.setAlignment(Pos.TOP_RIGHT);
+        //btCrear.getStyleClass().add("slimbutton");
 //
 //MANTENEDOR USUARIOS //USER MAINTAINER
 //
@@ -1346,9 +1350,18 @@ public class Admin {
 //loading stage scene and style
         primaryStage.setTitle("SEC - Mantenedores");
         primaryStage.setScene(admin);
-        primaryStage.setMaximized(true);
+        this.primaryStage.setMaximized(!primaryStage.isMaximized());
+        this.primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, this::handleKey);
         admin.getStylesheets().add(Admin.class.getResource("Style.css").toExternalForm());
         primaryStage.show();
+    }
+
+    private void handleKey(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()) {
+            case F11:
+                primaryStage.setFullScreen(!primaryStage.isFullScreen());
+                break;
+        }
     }
 
 }
