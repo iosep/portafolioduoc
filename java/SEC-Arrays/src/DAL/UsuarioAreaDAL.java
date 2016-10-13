@@ -14,16 +14,16 @@ import java.util.ArrayList;
  */
 public class UsuarioAreaDAL {
 
-    private final AaaInitialLoad aaa = new AaaInitialLoad();
+    //private final AaaInitialLoad AaaInitialLoad = new AaaInitialLoad();
     private static UsuarioAreaO uao;
 
     public ArrayList<UsuarioAreaO> getUserAreas() {
-        return aaa.mostrarUsuarioAreas();
+        return AInitLoad.mostrarUsuarioAreas();
     }
 
     public ArrayList<UsuarioAreaO> getUserAreasByUserId(int id) {
         ArrayList<UsuarioAreaO> list = new ArrayList<>();
-        aaa.mostrarUsuarioAreas().stream().forEach((u) -> {
+        AInitLoad.mostrarUsuarioAreas().stream().forEach((u) -> {
             if (u.getUsuario_id() == id) {
                 list.add(u);
             }
@@ -33,7 +33,7 @@ public class UsuarioAreaDAL {
 
     public ArrayList<UsuarioAreaO> getUserAreasByAreaId(int id) {
         ArrayList<UsuarioAreaO> list = new ArrayList<>();
-        aaa.mostrarUsuarioAreas().stream().forEach((item) -> {
+        AInitLoad.mostrarUsuarioAreas().stream().forEach((item) -> {
             if (item.getArea_id() == id) {
                 list.add(item);
             }
@@ -42,11 +42,11 @@ public class UsuarioAreaDAL {
     }
 
     public boolean addUsuarioArea(UsuarioAreaO obj) {
-        return aaa.agregarUsuarioArea(obj);
+        return AInitLoad.agregarUsuarioArea(obj);
     }
 
     public boolean removeUsuarioArea(int idUser, int idArea) {
-        return aaa.eliminarUsuarioArea(idUser, idArea);
+        return AInitLoad.eliminarUsuarioArea(idUser, idArea);
     }
 
 }

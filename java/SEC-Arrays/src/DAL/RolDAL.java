@@ -14,18 +14,18 @@ import java.util.ArrayList;
  */
 public class RolDAL {
 
-    private final AaaInitialLoad aaa = new AaaInitialLoad();
-    private static RolO r0;
+    private final AInitLoad load = new AInitLoad();
+    private static RolO rol0;
 
     public RolO getRolById(int id) {
-        aaa.mostrarRoles().stream().filter((object) -> (id == object.getId())).forEach((object) -> {
-            r0 = object;
+        load.mostrarRoles().stream().filter((rol) -> (rol.getId() == id)).forEach((rol) -> {
+            rol0 = rol;
         });
-        return r0;
+        return rol0;
     }
 
     public ArrayList<RolO> getRoles() {
-        return aaa.mostrarRoles();
+        return load.mostrarRoles();
     }
 
 }

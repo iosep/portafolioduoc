@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class CompetenciaDAL {
 
-    private final AaaInitialLoad aaa = new AaaInitialLoad();
+    private final AInitLoad aaa = new AInitLoad();
     private static CompetenciaO competencia;
 
     public ArrayList<CompetenciaO> getCompetencias() {

@@ -14,7 +14,7 @@ public class RolO {
     private int id;
     private String nombre;
 
-    private static int fakeId = 0;
+    static int fakeId = 0;
 
     public RolO() {
     }

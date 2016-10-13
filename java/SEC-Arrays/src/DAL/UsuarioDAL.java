@@ -16,15 +16,15 @@ import javafx.collections.ObservableList;
  */
 public class UsuarioDAL {
 
-    private final AaaInitialLoad cd = new AaaInitialLoad();
+    private final AInitLoad load = new AInitLoad();
     private static UsuarioO uo;
 
     public ArrayList<UsuarioO> getUsuarios() {
-        return cd.mostrarUsuarios();
+        return load.mostrarUsuarios();
     }
 
     public UsuarioO getUsuarioById(int id) {
-        cd.mostrarUsuarios().stream().forEach((item) -> {
+        load.mostrarUsuarios().stream().forEach((item) -> {
             if (item.getId() == id) {
                 uo = item;
             }
@@ -33,7 +33,7 @@ public class UsuarioDAL {
     }
 
     public UsuarioO getUsuarioByRut(String rut) {
-        cd.mostrarUsuarios().stream().forEach((u) -> {
+        load.mostrarUsuarios().stream().forEach((u) -> {
             if (u.getRut().equals(rut)) {
                 uo = u;
             }
@@ -43,7 +43,7 @@ public class UsuarioDAL {
 
     public ObservableList<UsuarioO> getUsuariosByRol(int rol) {
         ObservableList<UsuarioO> usuariosRol = FXCollections.observableArrayList();
-        cd.mostrarUsuarios().stream().forEach((u) -> {
+        load.mostrarUsuarios().stream().forEach((u) -> {
             if (u.getRol() == rol) {
                 usuariosRol.add(u);
             }
@@ -52,6 +52,6 @@ public class UsuarioDAL {
     }
 
     public boolean addUsuario(UsuarioO ufx) {
-        return cd.agregarUsuario(ufx);
+        return load.agregarUsuario(ufx);
     }
 }

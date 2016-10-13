@@ -47,4 +47,13 @@ public class UsuarioCTL {
     public boolean addUsuarioCTL(UsuarioO ufx) {
         return ud.addUsuario(ufx);
     }
+
+    public ObservableList<UsuarioO> getUsersByRutJefe(String idJefe) {
+        ObservableList<UsuarioO> users = FXCollections.observableArrayList();
+        ud.getUsuariosByRol(3).stream().filter((user) -> (user.getRut_jefe().equals(idJefe))).forEach((user) -> {
+            users.add(user);
+        });
+        return users;
+    }
+
 }

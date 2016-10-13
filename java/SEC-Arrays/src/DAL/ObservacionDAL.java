@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class ObservacionDAL {
 
-    private final AaaInitialLoad aaa = new AaaInitialLoad();
+    private final AInitLoad aaa = new AInitLoad();
     private static ObservacionO observacionObj;
 
     public ArrayList<ObservacionO> getObservaciones() {

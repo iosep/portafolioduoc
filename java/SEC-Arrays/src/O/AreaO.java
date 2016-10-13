@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class AreaO {
 
-    private static int fakeId = 0;
+    static int fakeId = 0;
 
     private int id;
     private String nombre;

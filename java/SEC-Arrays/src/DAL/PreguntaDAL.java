@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class PreguntaDAL {
 
-    private final AaaInitialLoad aaa = new AaaInitialLoad();
+    private final AInitLoad aaa = new AInitLoad();
     private static PreguntaO preguntaObj;
 
     public ArrayList<PreguntaO> getPreguntas() {

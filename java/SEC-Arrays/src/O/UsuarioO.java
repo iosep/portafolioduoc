@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class UsuarioO {
 
-    private static int fakeId = 0;
+    static int fakeId = 0;
 
     private int id;
     private String rut;
@@ -46,14 +46,6 @@ public class UsuarioO {
         this.fono = fono;
         this.creado = creado;
         this.modificado = modificado;
-    }
-
-    public static int getFakeId() {
-        return fakeId;
-    }
-
-    public static void setFakeId(int fakeId) {
-        UsuarioO.fakeId = fakeId;
     }
 
     public int getId() {

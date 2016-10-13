@@ -17,11 +17,12 @@ import javafx.collections.ObservableList;
  * @author iosep
  */
 public class UsuarioAreaCTL {
-    
+
     private final UsuarioAreaDAL usuarioAreaDal = new UsuarioAreaDAL();
     private final AreaDAL areaDal = new AreaDAL();
     private final UsuarioDAL userDal = new UsuarioDAL();
-    
+    private final UsuarioCTL userCtl = new UsuarioCTL();
+
     public ObservableList<UsuarioAreaO> getUsuarioAreasByUserIdFX(int id) {
         ObservableList<UsuarioAreaO> fxList = FXCollections.observableArrayList();
         usuarioAreaDal.getUserAreas().stream().forEach((each) -> {
@@ -31,7 +32,7 @@ public class UsuarioAreaCTL {
         });
         return fxList;
     }
-    
+
     public ObservableList<UsuarioAreaO> getUsuarioAreasByAreaIdFX(int id) {
         ObservableList<UsuarioAreaO> fxList = FXCollections.observableArrayList();
         usuarioAreaDal.getUserAreas().stream().forEach((each) -> {
@@ -41,7 +42,7 @@ public class UsuarioAreaCTL {
         });
         return fxList;
     }
-    
+
     public ObservableList<UsuarioAreaO> getAreasDisponiblesByUserFX(int userId) {
         ObservableList<UsuarioAreaO> fxList = FXCollections.observableArrayList();
         areaDal.getAreas().stream().forEach((area) -> {
@@ -57,7 +58,7 @@ public class UsuarioAreaCTL {
         });
         return fxList;
     }
-    
+
     public ObservableList<UsuarioAreaO> getUsuariosDisponiblesByAreaFX(int areaId) {
         ObservableList<UsuarioAreaO> fxList = FXCollections.observableArrayList();
         userDal.getUsuariosByRol(3).stream().forEach((user) -> {
@@ -73,13 +74,26 @@ public class UsuarioAreaCTL {
         });
         return fxList;
     }
-    
+
     public boolean addUsuarioAreaCTL(UsuarioAreaO obj) {
         return usuarioAreaDal.addUsuarioArea(obj);
     }
-    
+
     public boolean removeUserAreaCTL(int idUser, int idArea) {
         return usuarioAreaDal.removeUsuarioArea(idUser, idArea);
     }
-    
+
+    public ObservableList<UsuarioAreaO> getUserAreaByRutJefe(String rutJefe) {
+        ObservableList<UsuarioAreaO> fxList = FXCollections.observableArrayList();
+        if (!userCtl.getUsersByRutJefe(rutJefe).isEmpty()) {
+            userCtl.getUsersByRutJefe(rutJefe).stream().forEach((usuario) -> {
+                if (!usuarioAreaDal.getUserAreas().isEmpty()) {
+                    usuarioAreaDal.getUserAreas().stream().filter((usuarioArea) -> (usuario.getId() == usuarioArea.getUsuario_id())).forEach((usuarioArea) -> {
+                        fxList.add(usuarioArea);
+                    });
+                }
+            });
+        }
+        return fxList;
+    }
 }

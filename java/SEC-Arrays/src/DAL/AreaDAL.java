@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class AreaDAL {
 
-    private final AaaInitialLoad aaa = new AaaInitialLoad();
+    private final AInitLoad aaa = new AInitLoad();
     private static AreaO ao;
 
     public ArrayList<AreaO> getAreas() {

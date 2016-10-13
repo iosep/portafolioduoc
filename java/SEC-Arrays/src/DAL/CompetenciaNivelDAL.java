@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class CompetenciaNivelDAL {
 
-    private final AaaInitialLoad aaa = new AaaInitialLoad();
+    private final AInitLoad aaa = new AInitLoad();
 
     public ArrayList<CompetenciaNivelO> getCompetenciaNiveles() {
         return aaa.mostrarCompetenciaNiveles();

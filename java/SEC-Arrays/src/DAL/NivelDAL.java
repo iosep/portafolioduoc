@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class NivelDAL {
 
-    private final AaaInitialLoad aaa = new AaaInitialLoad();
+    private final AInitLoad aaa = new AInitLoad();
     private static NivelO nivel;
 
     public ArrayList<NivelO> getNiveles() {

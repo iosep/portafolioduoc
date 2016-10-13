@@ -7,7 +7,7 @@ package PL;
 
 import CTL.RolCTL;
 import CTL.UsuarioCTL;
-import DAL.AaaInitialLoad;
+import DAL.AInitLoad;
 import FN.Cifrar;
 import FN.Validar;
 import O.RolO;
@@ -34,14 +34,13 @@ public class Login extends Application {
 
     private final UsuarioCTL userCtl = new UsuarioCTL();
     private final RolCTL rolCtl = new RolCTL();
+    AInitLoad load = new AInitLoad();
+    private static RolO rol;
+    private static UsuarioO user;
 
     @Override
     public void start(Stage primaryStage) {
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("desk.png")));
-//carga de datos de prueba
-        AaaInitialLoad aaa = new AaaInitialLoad();
-        aaa.cargar();
-
         primaryStage.setTitle("SEC - Login");
 
         GridPane grid = new GridPane();
@@ -93,16 +92,18 @@ public class Login extends Application {
             if (v.validarRut(txtRun.getText())) {
                 Cifrar c = new Cifrar();
                 if (c.validatePassword(txtRun.getText(), pwBox.getText())) {
-                    UsuarioO logUser = userCtl.getUsuarioByRut(txtRun.getText());
-                    RolO logRol = rolCtl.getRolById(logUser.getRol());
-                    switch (logRol.getNombre()) {
+                    user = userCtl.getUsuarioByRut(txtRun.getText());
+                    rol = rolCtl.getRolById(user.getRol());
+                    switch (rol.getNombre()) {
                         case "Administrador":
                             Admin a = new Admin();
-                            a.display(logUser.getRut());
+                            a.display(user.getRut());
                             primaryStage.close();
                             break;
                         case "Jefe":
-                            System.out.println("Jefe logeado");
+                            Jefe j = new Jefe();
+                            j.start(user.getRut());
+                            primaryStage.close();
                             break;
                         case "Funcionario":
                             System.out.println("Funcionario logeado");

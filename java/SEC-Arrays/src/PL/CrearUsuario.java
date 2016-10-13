@@ -206,12 +206,14 @@ public class CrearUsuario {
                         msj.setText("Teléfono Ingrese 9 Números");
                     } else {
                         boolean boo = false;
+                        String rut_jefe = "";
                         if (cbRol.getSelectionModel().getSelectedIndex() == 2) {
                             if (cbJefa.getValue() == null) {
                                 msj.setFill(Color.FIREBRICK);
                                 msj.setText("Seleccione Jefa");
                             } else {
                                 boo = true;
+                                rut_jefe = ((UsuarioO) cbJefa.getValue()).getRut();
                             }
                         } else {
                             boo = true;
@@ -235,7 +237,7 @@ public class CrearUsuario {
                             Formato f = new Formato();
                             String rut = f.formatoRut(txtRun.getText());
                             if (uctl.addUsuarioCTL(new UsuarioO(rut, clave, ((RolO) cbRol.getSelectionModel().getSelectedItem()).getId(),
-                                    ((UsuarioO) cbJefa.getValue()).getRut(), txtNombre.getText().trim(), txtApellido.getText().trim(),
+                                    rut_jefe, txtNombre.getText().trim(), txtApellido.getText().trim(),
                                     txtEmail.getText(), sSexo, fono, now, null))) {
                                 txtRun.clear();
                                 pwBox.clear();
