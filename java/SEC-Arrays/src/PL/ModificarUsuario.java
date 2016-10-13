@@ -25,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -54,6 +55,12 @@ public class ModificarUsuario {
         grid.setHgap(5);
         grid.setVgap(5);
         grid.setPadding(new Insets(10, 25, 25, 25));
+        ColumnConstraints col0 = new ColumnConstraints(120);
+        ColumnConstraints col1 = new ColumnConstraints(180);
+        ColumnConstraints col2 = new ColumnConstraints(5);
+        ColumnConstraints col3 = new ColumnConstraints(60);
+        ColumnConstraints col4 = new ColumnConstraints(180);
+        grid.getColumnConstraints().addAll(col0, col1, col2, col3, col4);
 
         Text scenetitle = new Text("SEC");
         scenetitle.getStyleClass().add("title");
