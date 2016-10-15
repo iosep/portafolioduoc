@@ -85,8 +85,8 @@ public class UsuarioAreaCTL {
 
     public ObservableList<UsuarioAreaO> getUserAreaByRutJefe(String rutJefe) {
         ObservableList<UsuarioAreaO> fxList = FXCollections.observableArrayList();
-        if (!userCtl.getUsersByRutJefe(rutJefe).isEmpty()) {
-            userCtl.getUsersByRutJefe(rutJefe).stream().forEach((usuario) -> {
+        if (!userCtl.getFuncionariosByRutJefe(rutJefe).isEmpty()) {
+            userCtl.getFuncionariosByRutJefe(rutJefe).stream().forEach((usuario) -> {
                 if (!usuarioAreaDal.getUserAreas().isEmpty()) {
                     usuarioAreaDal.getUserAreas().stream().filter((usuarioArea) -> (usuario.getId() == usuarioArea.getUsuario_id())).forEach((usuarioArea) -> {
                         fxList.add(usuarioArea);
