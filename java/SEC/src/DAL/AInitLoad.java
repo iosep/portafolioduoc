@@ -106,9 +106,28 @@ public class AInitLoad {
     final UsuarioAreaO usAr1 = new UsuarioAreaO(4, 1);
     final UsuarioAreaO usAr2 = new UsuarioAreaO(5, 2);
     final UsuarioAreaO usAr3 = new UsuarioAreaO(6, 3);
-    final ArrayList<UsuarioAreaO> userAreaFinal = new ArrayList<>(Arrays.asList(usAr1, usAr2, usAr3));
-//
+    final UsuarioAreaO usAr4 = new UsuarioAreaO(7, 4);
+    final UsuarioAreaO usAr5 = new UsuarioAreaO(8, 5);
+    final UsuarioAreaO usAr6 = new UsuarioAreaO(4, 6);
+    final UsuarioAreaO usAr7 = new UsuarioAreaO(5, 1);
+    final UsuarioAreaO usAr8 = new UsuarioAreaO(6, 2);
+    final UsuarioAreaO usAr9 = new UsuarioAreaO(7, 3);
+    final UsuarioAreaO usAr0 = new UsuarioAreaO(8, 4);
+    final ArrayList<UsuarioAreaO> userAreaFinal = new ArrayList<>(Arrays.asList(usAr1, usAr2, usAr3, usAr4, usAr5, usAr6, usAr7, usAr8, usAr9, usAr0));
+//areaCompetencia
     private static ArrayList<AreaCompetenciaO> rAreaCompetencias;
+    final AreaCompetenciaO arCo1 = new AreaCompetenciaO(1, 1);
+    final AreaCompetenciaO arCo2 = new AreaCompetenciaO(2, 2);
+    final AreaCompetenciaO arCo3 = new AreaCompetenciaO(3, 3);
+    final AreaCompetenciaO arCo4 = new AreaCompetenciaO(4, 4);
+    final AreaCompetenciaO arCo5 = new AreaCompetenciaO(5, 5);
+    final AreaCompetenciaO arCo6 = new AreaCompetenciaO(6, 6);
+    final AreaCompetenciaO arCo7 = new AreaCompetenciaO(1, 7);
+    final AreaCompetenciaO arCo8 = new AreaCompetenciaO(2, 8);
+    final AreaCompetenciaO arCo9 = new AreaCompetenciaO(3, 9);
+    final AreaCompetenciaO arCo0 = new AreaCompetenciaO(4, 10);
+    final ArrayList<AreaCompetenciaO> areaCompFinal = new ArrayList<>(Arrays.asList(arCo1, arCo2, arCo3, arCo4, arCo5, arCo6, arCo7, arCo8, arCo9, arCo0));
+//    
     private static ArrayList<CompetenciaNivelO> rCompetenciaNiveles;
 //    
     private static boolean load = true;
@@ -140,12 +159,14 @@ public class AInitLoad {
         rUserAreas = new ArrayList<>();
         rUserAreas.removeAll(userAreaFinal);
         rUserAreas.addAll(userAreaFinal);
+        rAreaCompetencias = new ArrayList<>();
+        rAreaCompetencias.removeAll(areaCompFinal);
+        rAreaCompetencias.addAll(areaCompFinal);
 //        
         preguntas = new ArrayList<>();
         respuestas = new ArrayList<>();
         observaciones = new ArrayList<>();
         periodos = new ArrayList<>();
-        rAreaCompetencias = new ArrayList<>();
         rCompetenciaNiveles = new ArrayList<>();
     }
 

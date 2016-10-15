@@ -6,19 +6,13 @@
 package PL;
 
 import CTL.AreaCTL;
-import CTL.CompetenciaCTL;
 import CTL.UsuarioAreaCTL;
 import CTL.UsuarioCTL;
-import O.AreaO;
-import O.UsuarioAreaO;
-import O.UsuarioO;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Border;
@@ -35,9 +29,7 @@ import javafx.stage.Stage;
  *
  * @author iosep
  */
-public class Jefe {
-
-    private final UsuarioAreaCTL usArCtl = new UsuarioAreaCTL();
+public class Funcionario {
 
     Stage window = new Stage();
     BorderPane borderPane = new BorderPane();
@@ -48,33 +40,26 @@ public class Jefe {
     GridPane gpSesion = new GridPane();
     HBox hbTop0 = new HBox();
     VBox vbTop = new VBox();
-    VBox vbLeft = new VBox();
     HBox hbCopyright = new HBox();
     Text tCopyright = new Text("©copyright @iosep (José Oñate)");
 
-    TreeItem<String> tiFuncByArea = new TreeItem<>("Funcionarios por Área");
+    TreeItem<String> tiRoot = new TreeItem<>("Raíz");
 
     public void start(String userRut) {
-        tTitle = new Text("SEC - Jefe");
         tTitle.getStyleClass().add("title");
-        lblActiveUser = new Label("Usuario Activo:");
         lblActiveUserRut = new Label("  " + userRut);
-        hlExit = new Hyperlink("Cerrar Sesión");
         hlExit.setBorder(Border.EMPTY);
         hlExit.setOnAction(e -> {
             Login login = new Login();
             login.start(window);
         });
-        gpSesion = new GridPane();
         gpSesion.setAlignment(Pos.TOP_RIGHT);
         gpSesion.add(lblActiveUser, 0, 0);
         gpSesion.add(lblActiveUserRut, 1, 0);
         gpSesion.add(hlExit, 1, 1);
         gpSesion.getStyleClass().add("logout");
-        hbTop0 = new HBox();
         hbTop0.getChildren().addAll(tTitle, gpSesion);
         HBox.setHgrow(gpSesion, Priority.ALWAYS);
-        vbTop = new VBox();
         vbTop.getStyleClass().add("vbox");
 //add top vbox children
         vbTop.getChildren().addAll(hbTop0);
@@ -84,42 +69,18 @@ public class Jefe {
         hbCopyright.getChildren().addAll(tCopyright);
         hbCopyright.setAlignment(Pos.CENTER);
 
-//jefe treeView
-        tiFuncByArea.setExpanded(true);
-        for (UsuarioAreaO usAr : usArCtl.getFuncionarioUserAreaByRutJefe(userRut)) {
-            TreeItem<String> tiFuncionario = new TreeItem<>(usAr.getUsuarioString());
-            boolean found = false;
-            for (TreeItem<String> area : tiFuncByArea.getChildren()) {
-                if (area.getValue().contentEquals(usAr.getAreaString())) {
-                    area.getChildren().add(tiFuncionario);
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                TreeItem<String> tiArea = new TreeItem<>(usAr.getAreaString());
-                tiFuncByArea.getChildren().add(tiArea);
-                tiArea.getChildren().add(tiFuncionario);
-            }
-        }
-        TreeView<String> tvTree = new TreeView<>(tiFuncByArea);
-        vbLeft.getStyleClass().add("vbox");
-        vbLeft.getChildren().add(tvTree);
-//borderPane
-        borderPane = new BorderPane();
+//border pane
         borderPane.setTop(vbTop);
-        borderPane.setLeft(vbLeft);
         borderPane.setBottom(hbCopyright);
-//scene & window
+//main window display        
         Scene scene = new Scene(borderPane);
-        scene.getStylesheets().add(Jefe.class.getResource("Style.css").toExternalForm());
+        scene.getStylesheets().add(Funcionario.class.getResource("Style.css").toExternalForm());
         this.window.getIcons().add(new Image(getClass().getResourceAsStream("desk.png")));
         this.window.setTitle("SEC");
         this.window.setScene(scene);
         this.window.setMaximized(!window.isMaximized());
         this.window.addEventHandler(KeyEvent.KEY_PRESSED, this::handleKey);
         this.window.show();
-
     }
 
     private void handleKey(KeyEvent keyEvent) {

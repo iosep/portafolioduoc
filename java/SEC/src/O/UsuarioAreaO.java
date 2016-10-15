@@ -5,6 +5,9 @@
  */
 package O;
 
+import CTL.AreaCTL;
+import CTL.UsuarioCTL;
+
 /**
  *
  * @author iosep
@@ -38,4 +41,13 @@ public class UsuarioAreaO {
         this.area_id = area_id;
     }
 
+    public String getUsuarioString() {
+        final UsuarioCTL uc = new UsuarioCTL();
+        return uc.getUsuarioById(usuario_id).toString();
+    }
+
+    public String getAreaString() {
+        final AreaCTL ac = new AreaCTL();
+        return ac.getAreaById(area_id).getNombre();
+    }
 }

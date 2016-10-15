@@ -32,11 +32,11 @@ import javafx.stage.Stage;
  */
 public class Login extends Application {
 
+    AInitLoad load = new AInitLoad();
     private final UsuarioCTL userCtl = new UsuarioCTL();
     private final RolCTL rolCtl = new RolCTL();
-    AInitLoad load = new AInitLoad();
-    private static RolO rol;
     private static UsuarioO user;
+    private static RolO rol;
 
     @Override
     public void start(Stage primaryStage) {
@@ -106,7 +106,9 @@ public class Login extends Application {
                             primaryStage.close();
                             break;
                         case "Funcionario":
-                            System.out.println("Funcionario logeado");
+                            Funcionario f = new Funcionario();
+                            f.start(user.getRut());
+                            primaryStage.close();
                             break;
                         default:
                             break;

@@ -83,7 +83,7 @@ public class UsuarioAreaCTL {
         return usuarioAreaDal.removeUsuarioArea(idUser, idArea);
     }
 
-    public ObservableList<UsuarioAreaO> getUserAreaByRutJefe(String rutJefe) {
+    public ObservableList<UsuarioAreaO> getFuncionarioUserAreaByRutJefe(String rutJefe) {
         ObservableList<UsuarioAreaO> fxList = FXCollections.observableArrayList();
         if (!userCtl.getFuncionariosByRutJefe(rutJefe).isEmpty()) {
             userCtl.getFuncionariosByRutJefe(rutJefe).stream().forEach((usuario) -> {
