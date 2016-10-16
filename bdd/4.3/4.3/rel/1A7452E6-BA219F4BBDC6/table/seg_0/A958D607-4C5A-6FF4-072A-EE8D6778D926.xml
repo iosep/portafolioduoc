@@ -20,46 +20,10 @@
 <autoIncrementColumn>true</autoIncrementColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="rut" id="B1522AAE-414D-D786-0C8F-C8DBE326623E">
+<Column name="rut_evaluado" id="B1522AAE-414D-D786-0C8F-C8DBE326623E">
 <createdBy>iosep</createdBy>
 <createdTime>2016-09-23 16:23:18 UTC</createdTime>
 <generatorID>398E42A9-2871-A6DB-E5E1-DDE70674B5FD</generatorID>
-<ownerDesignName>bdd-4.2</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="rut_jefe" id="13515BA6-78E8-8E5F-C194-868723822098">
-<createdBy>iosep</createdBy>
-<createdTime>2016-09-23 16:23:18 UTC</createdTime>
-<generatorID>0B9BC457-4957-1572-8331-B752B8794F34</generatorID>
-<ownerDesignName>bdd-4.2</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="nota_auto" id="2A63774B-BAA4-FEA5-695E-600709FADA31">
-<createdBy>iosep</createdBy>
-<createdTime>2016-09-23 16:23:18 UTC</createdTime>
-<generatorID>ECE1FEB4-1F62-F935-CC69-AD2846F48D2C</generatorID>
-<ownerDesignName>bdd-4.2</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="nota_jefe" id="6D3C7C4A-782F-764B-8E7D-1AA921EB9B94">
-<createdBy>iosep</createdBy>
-<createdTime>2016-09-23 16:23:18 UTC</createdTime>
-<generatorID>4E079752-FA9D-D0B3-5281-5854FB4F9662</generatorID>
 <ownerDesignName>bdd-4.2</ownerDesignName>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>

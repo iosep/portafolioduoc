@@ -16,7 +16,7 @@
 <objectViews>
 <OView class="oracle.dbtools.crest.swingui.relational.TVTable" oid="0084C26A-108A-1753-6AB8-535940E9FEE9" otype="Table" vid="3800A9DD-AA5E-E4C1-6D63-DF93A7599BD9">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
-<bounds x="60" y="740" width="195" height="144"/>
+<bounds x="60" y="740" width="195" height="171"/>
 </OView>
 <OView class="oracle.dbtools.crest.swingui.relational.TVTable" oid="0F95DEC1-DB3A-D352-1E55-D0AE54B24E34" otype="Table" vid="8A94B1D8-8CD1-C953-F9C8-30926E536AA6">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
@@ -68,7 +68,7 @@
 </OView>
 <OView class="oracle.dbtools.crest.swingui.relational.TVTable" oid="A958D607-4C5A-6FF4-072A-EE8D6778D926" otype="Table" vid="835C70F1-63AD-C83B-9566-CE7578BB4782">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
-<bounds x="610" y="90" width="209" height="251"/>
+<bounds x="620" y="110" width="209" height="221"/>
 </OView>
 <OView class="oracle.dbtools.crest.swingui.relational.TVTable" oid="B36D2EE9-E85D-12C3-D7AE-7201B056769D" otype="Table" vid="81851E07-FB04-85EB-03B8-071CCCC23193">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
@@ -104,8 +104,8 @@
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
 <lineWidth>1</lineWidth>
 <points>
-<point x="890" y="131"/>
-<point x="819" y="130"/>
+<point x="890" y="141"/>
+<point x="829" y="141"/>
 </points>
 </Connector>
 <Connector class="oracle.dbtools.crest.swingui.relational.TVFKRelation" oid="2547328A-FFF0-1986-3672-C54F73BB13DA" otype="FKIndexAssociation" vid_source="93E42C4E-CC59-01E4-2A33-4891F58F1A23" vid_target="D9A5BAB1-393D-A54D-7ED8-A7F34ED15432">
@@ -195,8 +195,8 @@
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
 <lineWidth>1</lineWidth>
 <points>
-<point x="508" y="305"/>
-<point x="610" y="305"/>
+<point x="508" y="300"/>
+<point x="620" y="300"/>
 </points>
 </Connector>
 <Connector class="oracle.dbtools.crest.swingui.relational.TVFKRelation" oid="C932F87A-395B-DDE5-38BB-C9E158267EB6" otype="FKIndexAssociation" vid_source="CAB1F69F-F2B6-948F-E09B-74E659CA6D76" vid_target="17690FDF-5291-0DF4-AC66-B59E753775E2">

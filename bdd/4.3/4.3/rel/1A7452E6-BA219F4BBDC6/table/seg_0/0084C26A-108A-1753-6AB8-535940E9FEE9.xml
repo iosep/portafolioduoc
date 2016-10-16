@@ -44,6 +44,18 @@
 <ownDataTypeParameters>255,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="descripcion" id="BB5E0834-C0E5-5688-CF34-9D65D1D4BA8D">
+<createdBy>duoc</createdBy>
+<createdTime>2016-10-16 03:30:16 UTC</createdTime>
+<ownerDesignName>4.3</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 <Column name="creado" id="38F74939-D303-C14A-D0BE-F51550C16B98">
 <createdBy>iosep</createdBy>
 <createdTime>2016-09-26 15:23:21 UTC</createdTime>

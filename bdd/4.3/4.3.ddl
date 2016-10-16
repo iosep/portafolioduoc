@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 4.1.3.901
---   en:        2016-10-06 14:00:14 BRT
+--   en:        2016-10-16 01:34:48 BRST
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -11,6 +11,7 @@ CREATE TABLE area
     id          INTEGER NOT NULL ,
     nombre      VARCHAR2 (255) NOT NULL ,
     sigla       VARCHAR2 (255) NOT NULL ,
+    descripcion VARCHAR2 (255) ,
     creado      DATE NOT NULL ,
     modificado  DATE NOT NULL ,
     desactivado DATE ,
@@ -107,18 +108,15 @@ ALTER TABLE encuesta ADD CONSTRAINT encuesta_PK PRIMARY KEY ( id ) ;
 
 CREATE TABLE evaluacion
   (
-    id          INTEGER NOT NULL ,
-    rut         INTEGER ,
-    rut_jefe    INTEGER ,
-    nota_auto   INTEGER ,
-    nota_jefe   INTEGER ,
-    nota        INTEGER ,
-    usuario_id  INTEGER NOT NULL ,
-    periodo_id  INTEGER NOT NULL ,
-    creado      DATE NOT NULL ,
-    modificado  DATE NOT NULL ,
-    desactivado DATE ,
-    activo      NUMBER (1) DEFAULT 1 NOT NULL
+    id           INTEGER NOT NULL ,
+    rut_evaluado INTEGER ,
+    nota         INTEGER ,
+    usuario_id   INTEGER NOT NULL ,
+    periodo_id   INTEGER NOT NULL ,
+    creado       DATE NOT NULL ,
+    modificado   DATE NOT NULL ,
+    desactivado  DATE ,
+    activo       NUMBER (1) DEFAULT 1 NOT NULL
   ) ;
 ALTER TABLE evaluacion ADD CONSTRAINT evaluacion_PK PRIMARY KEY ( id ) ;
 
