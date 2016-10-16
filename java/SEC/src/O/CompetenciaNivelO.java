@@ -5,6 +5,9 @@
  */
 package O;
 
+import CTL.CompetenciaCTL;
+import CTL.NivelCTL;
+
 /**
  *
  * @author iosep
@@ -28,6 +31,16 @@ public class CompetenciaNivelO {
 
     public int getNivel_id() {
         return nivel_id;
+    }
+
+    public String getCompNombre() {
+        final CompetenciaCTL cc = new CompetenciaCTL();
+        return cc.getCompetenciaById(competencia_id).getNombre();
+    }
+
+    public String getNivelNombre() {
+        final NivelCTL nc = new NivelCTL();
+        return nc.getNivelById(nivel_id).getNombre();
     }
 
 }

@@ -31,7 +31,7 @@ public class AreaCTL {
     public AreaO getAreaByNombre(String nombre) {
         AreaO result = null;
         for (AreaO item : ad.getAreas()) {
-            if (item.toString().equals(nombre)) {
+            if (item.getNombre().equals(nombre)) {
                 result = item;
             }
         }

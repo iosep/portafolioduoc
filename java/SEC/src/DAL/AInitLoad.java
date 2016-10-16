@@ -127,8 +127,19 @@ public class AInitLoad {
     final AreaCompetenciaO arCo9 = new AreaCompetenciaO(3, 9);
     final AreaCompetenciaO arCo0 = new AreaCompetenciaO(4, 10);
     final ArrayList<AreaCompetenciaO> areaCompFinal = new ArrayList<>(Arrays.asList(arCo1, arCo2, arCo3, arCo4, arCo5, arCo6, arCo7, arCo8, arCo9, arCo0));
-//    
+//competenciaNivel    
     private static ArrayList<CompetenciaNivelO> rCompetenciaNiveles;
+    final CompetenciaNivelO comNi1 = new CompetenciaNivelO(1, 1);
+    final CompetenciaNivelO comNi2 = new CompetenciaNivelO(2, 2);
+    final CompetenciaNivelO comNi3 = new CompetenciaNivelO(3, 3);
+    final CompetenciaNivelO comNi4 = new CompetenciaNivelO(4, 4);
+    final CompetenciaNivelO comNi5 = new CompetenciaNivelO(5, 5);
+    final CompetenciaNivelO comNi6 = new CompetenciaNivelO(6, 6);
+    final CompetenciaNivelO comNi7 = new CompetenciaNivelO(7, 1);
+    final CompetenciaNivelO comNi8 = new CompetenciaNivelO(8, 2);
+    final CompetenciaNivelO comNi9 = new CompetenciaNivelO(9, 3);
+    final CompetenciaNivelO comNi0 = new CompetenciaNivelO(10, 4);
+    final ArrayList<CompetenciaNivelO> comNiFinal = new ArrayList<>(Arrays.asList(comNi1, comNi2, comNi3, comNi4, comNi5, comNi6, comNi7, comNi8, comNi9, comNi0));
 //    
     private static boolean load = true;
 
@@ -162,12 +173,15 @@ public class AInitLoad {
         rAreaCompetencias = new ArrayList<>();
         rAreaCompetencias.removeAll(areaCompFinal);
         rAreaCompetencias.addAll(areaCompFinal);
+        rCompetenciaNiveles = new ArrayList<>();
+        rCompetenciaNiveles.removeAll(comNiFinal);
+        rCompetenciaNiveles.addAll(comNiFinal);
 //        
         preguntas = new ArrayList<>();
         respuestas = new ArrayList<>();
         observaciones = new ArrayList<>();
         periodos = new ArrayList<>();
-        rCompetenciaNiveles = new ArrayList<>();
+
     }
 
     public ArrayList<UsuarioO> mostrarUsuarios() {
