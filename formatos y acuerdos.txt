@@ -24,8 +24,9 @@
     - nota_auto
     - nota_jefe
     - rut_jefe
-  - cambiar rut a rut_evaluado
-
+    - cambiar rut a rut_evaluado
+editar Area
+    - agregar campo descripcion (string)
 - areas:
   - homicicios
   - delitos sexuales
