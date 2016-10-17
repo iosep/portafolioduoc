@@ -113,43 +113,33 @@ public class Jefe {
         TreeItem<String> tiLayer4;
         TreeItem<String> tiLayer5;
         boolean found;
-//Áreas        
+//Funcionarios By Áreas
         for (UsuarioAreaO usAr : usArCtl.getFuncionarioUserAreaByRutJefe(userRut)) {
             if (!funcionarios.contains(userCtl.getUsuarioById(usAr.getUsuario_id()))) {
                 funcionarios.add(userCtl.getUsuarioById(usAr.getUsuario_id()));
                 System.out.println("funcionariosList: " + usAr.getUsuarioString());
             }
+            tiLayer3 = new TreeItem<>(usAr.getUsuarioString());
             found = false;
-            for (TreeItem<String> area : tiRoot.getChildren()) {
-                if (area.getValue().contentEquals(usAr.getAreaString())) {
-                    found = true;
-                    break;
+            for (TreeItem<String> treeLayer1 : tiRoot.getChildren()) {
+                if (treeLayer1.getValue().contentEquals(usAr.getAreaString())) {
+                    for (TreeItem<String> treeLayer2 : treeLayer1.getChildren()) {
+                        if (treeLayer2.getValue().contentEquals("Funcionarios")) {
+                            treeLayer2.getChildren().add(tiLayer3);
+                            found = true;
+                            break;
+                        }
+                    }
                 }
             }
             if (!found) {
                 System.out.println("areasList: " + usAr.getAreaString());
                 areas.add(areaCtl.getAreaById(usAr.getArea_id()));
                 tiLayer1 = new TreeItem<>(usAr.getAreaString());
+                tiLayer2 = new TreeItem<>("Funcionarios");
+                tiLayer2.getChildren().add(tiLayer3);
+                tiLayer1.getChildren().add(tiLayer2);
                 tiRoot.getChildren().add(tiLayer1);
-            }
-        }
-//Funcionarios By Área
-        for (TreeItem<String> treeLayer1 : tiRoot.getChildren()) {
-            for (UsuarioAreaO usAr : usArCtl.getUsuarioAreasByAreaIdFX(areaCtl.getAreaByNombre(treeLayer1.getValue()).getId())) {
-                tiLayer3 = new TreeItem<>(usAr.getUsuarioString());
-                found = false;
-                for (TreeItem<String> treeLayer2 : treeLayer1.getChildren()) {
-                    if (treeLayer2.getValue().contentEquals("Funcionarios")) {
-                        treeLayer2.getChildren().add(tiLayer3);
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    tiLayer2 = new TreeItem<>("Funcionarios");
-                    tiLayer2.getChildren().add(tiLayer3);
-                    treeLayer1.getChildren().add(tiLayer2);
-                }
             }
         }
 //Competencias By Área        
