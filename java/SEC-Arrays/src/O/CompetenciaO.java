@@ -24,7 +24,7 @@ public class CompetenciaO {
     private Date creado;
     private Date modificado;
     private Date desactivado;
-
+        
     public CompetenciaO() {
     }
 

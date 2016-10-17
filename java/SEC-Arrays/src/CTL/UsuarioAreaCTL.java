@@ -9,6 +9,7 @@ import DAL.AreaDAL;
 import DAL.UsuarioAreaDAL;
 import DAL.UsuarioDAL;
 import O.UsuarioAreaO;
+import O.UsuarioO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -83,15 +84,13 @@ public class UsuarioAreaCTL {
         return usuarioAreaDal.removeUsuarioArea(idUser, idArea);
     }
 
-    public ObservableList<UsuarioAreaO> getUserAreaByRutJefe(String rutJefe) {
+    public ObservableList<UsuarioAreaO> getFuncionarioUserAreaByRutJefe(String rutJefe) {
         ObservableList<UsuarioAreaO> fxList = FXCollections.observableArrayList();
-        if (!userCtl.getUsersByRutJefe(rutJefe).isEmpty()) {
-            userCtl.getUsersByRutJefe(rutJefe).stream().forEach((usuario) -> {
-                if (!usuarioAreaDal.getUserAreas().isEmpty()) {
-                    usuarioAreaDal.getUserAreas().stream().filter((usuarioArea) -> (usuario.getId() == usuarioArea.getUsuario_id())).forEach((usuarioArea) -> {
-                        fxList.add(usuarioArea);
-                    });
-                }
+        if (!userCtl.getFuncionariosByRutJefe(rutJefe).isEmpty()) {
+            userCtl.getFuncionariosByRutJefe(rutJefe).stream().filter((funcionario) -> (!usuarioAreaDal.getUserAreas().isEmpty())).forEach((funcionario) -> {
+                usuarioAreaDal.getUserAreas().stream().filter((usAr) -> (funcionario.getId() == usAr.getUsuario_id())).forEach((usAr) -> {
+                    fxList.add(usAr);
+                });
             });
         }
         return fxList;

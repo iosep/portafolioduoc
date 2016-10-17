@@ -5,6 +5,9 @@
  */
 package O;
 
+import CTL.AreaCTL;
+import CTL.CompetenciaCTL;
+
 /**
  *
  * @author iosep
@@ -36,6 +39,16 @@ public class AreaCompetenciaO {
 
     public void setCompetencia_id(int competencia_id) {
         this.competencia_id = competencia_id;
+    }
+
+    public String getAreaNombre() {
+        final AreaCTL ac = new AreaCTL();
+        return ac.getAreaById(area_id).getNombre();
+    }
+
+    public String getCompNombre() {
+        final CompetenciaCTL cc = new CompetenciaCTL();
+        return cc.getCompetenciaById(competencia_id).getNombre();
     }
 
 }

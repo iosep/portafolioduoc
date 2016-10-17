@@ -48,12 +48,12 @@ public class UsuarioCTL {
         return ud.addUsuario(ufx);
     }
 
-    public ObservableList<UsuarioO> getUsersByRutJefe(String idJefe) {
-        ObservableList<UsuarioO> users = FXCollections.observableArrayList();
-        ud.getUsuariosByRol(3).stream().filter((user) -> (user.getRut_jefe().equals(idJefe))).forEach((user) -> {
-            users.add(user);
+    public ObservableList<UsuarioO> getFuncionariosByRutJefe(String rutJefe) {
+        ObservableList<UsuarioO> funcionarios = FXCollections.observableArrayList();
+        ud.getUsuariosByRol(3).stream().filter((user) -> (user.getRut_jefe().equals(rutJefe))).forEach((user) -> {
+            funcionarios.add(user);
         });
-        return users;
+        return funcionarios;
     }
 
 }
