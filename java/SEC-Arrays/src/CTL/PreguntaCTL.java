@@ -39,4 +39,12 @@ public class PreguntaCTL {
         return preguntaDal.addPregunta(obj);
     }
 
+    public ArrayList<PreguntaO> getPreguntasByCompetenciaId(int idComp) {
+        ArrayList<PreguntaO> preByComp = new ArrayList<>();
+        preguntaDal.getPreguntas().stream().filter((p) -> (p.getCompetencia_id() == idComp)).forEach((p) -> {
+            preByComp.add(p);
+        });
+        return preByComp;
+    }
+
 }

@@ -5,7 +5,12 @@
  */
 package O;
 
+import CTL.RespuestaCTL;
+import java.util.ArrayList;
 import java.util.Date;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -72,6 +77,59 @@ public class PreguntaO {
 
     public void setModificado(Date modificado) {
         this.modificado = modificado;
+    }
+
+    @Override
+    public String toString() {
+        return "" + id;
+    }
+
+    public static ArrayList<ObjQuestion> createEncuesta(ArrayList<PreguntaO> preguntas) {
+        RespuestaCTL respCtl = new RespuestaCTL();
+        ArrayList<ObjQuestion> questions = new ArrayList<>();
+        int count = 0;
+        for (PreguntaO p : preguntas) {
+            ToggleGroup tg = new ToggleGroup();
+            tg.setUserData(p);
+            ArrayList<RadioButton> rbs = new ArrayList<>();
+            for (RespuestaO r : respCtl.getRespuestasByPreguntaId(p.getId())) {
+                RadioButton rb = new RadioButton(r.getRespuesta());
+                rb.setUserData(r);
+                rb.setToggleGroup(tg);
+//                rb.getStyleClass().add("label");
+                rbs.add(rb);
+            }
+            Text t = new Text(++count + ".- " + p.getPregunta());
+            t.getStyleClass().add("label");
+            questions.add(new ObjQuestion(t, tg, rbs));
+        }
+        return questions;
+    }
+
+    public static class ObjQuestion {
+
+        private final Text t;
+        private final ToggleGroup tg;
+        private final ArrayList<RadioButton> rb;
+
+        public ObjQuestion(Text t, ToggleGroup tg, ArrayList<RadioButton> rb) {
+            this.t = t;
+            this.tg = tg;
+            this.rb = rb;
+        }
+
+        public Text getT() {
+            return t;
+        }
+
+        public ToggleGroup getTg() {
+            return tg;
+        }
+
+        public ArrayList<RadioButton> getRb() {
+            return rb;
+        }
+
     }
 
 }

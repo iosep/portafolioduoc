@@ -36,14 +36,6 @@ public class RespuestaO {
         this.modificado = modificado;
     }
 
-    public static int getFakeId() {
-        return fakeId;
-    }
-
-    public static void setFakeId(int fakeId) {
-        RespuestaO.fakeId = fakeId;
-    }
-
     public int getId() {
         return id;
     }
@@ -92,4 +84,8 @@ public class RespuestaO {
         this.modificado = modificado;
     }
 
+    @Override
+    public String toString() {
+        return "" + id;
+    }
 }

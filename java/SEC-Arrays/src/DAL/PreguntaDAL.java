@@ -14,15 +14,14 @@ import java.util.ArrayList;
  */
 public class PreguntaDAL {
 
-    private final AInitLoad aaa = new AInitLoad();
     private static PreguntaO preguntaObj;
 
     public ArrayList<PreguntaO> getPreguntas() {
-        return aaa.mostrarPreguntas();
+        return AInitLoad.mostrarPreguntas();
     }
 
     public PreguntaO getPreguntaById(int id) {
-        aaa.mostrarPreguntas().stream().forEach((each) -> {
+        AInitLoad.mostrarPreguntas().stream().forEach((each) -> {
             if (each.getId() == id) {
                 preguntaObj = each;
             }
@@ -31,7 +30,7 @@ public class PreguntaDAL {
     }
 
     public boolean addPregunta(PreguntaO obj) {
-        return aaa.agregarPregunta(obj);
+        return AInitLoad.agregarPregunta(obj);
     }
 
 }

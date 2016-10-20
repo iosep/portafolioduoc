@@ -39,4 +39,12 @@ public class RespuestaCTL {
         return respuestaDal.addRespuesta(obj);
     }
 
+    public ArrayList<RespuestaO> getRespuestasByPreguntaId(int idPregunta) {
+        ArrayList<RespuestaO> respuestas = new ArrayList<>();
+        respuestaDal.getRespuestas().stream().filter((r) -> (r.getPregunta_id() == idPregunta)).forEach((r) -> {
+            respuestas.add(r);
+        });
+        return respuestas;
+    }
+
 }
