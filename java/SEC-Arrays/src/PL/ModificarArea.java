@@ -79,6 +79,16 @@ public class ModificarArea {
         });
         grid.add(siglaTxt, 1, 6);
 
+        Label descLbl = new Label("Descripción:");
+        grid.add(descLbl, 0, 6);
+        TextField descTxt = new TextField(a0.getDescripcion());
+        descTxt.textProperty().addListener((ob, ol, ne) -> {
+            if (ne != null) {
+                msj.setText("");
+            }
+        });
+        grid.add(siglaTxt, 1, 6);
+
         Button btn = new Button("MODIFICAR");
         HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
@@ -93,9 +103,12 @@ public class ModificarArea {
             } else if (siglaTxt.getText().isEmpty()) {
                 msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Sigla");
+            } else if (descTxt.getText().isEmpty()) {
+                msj.setFill(Color.FIREBRICK);
+                msj.setText("Ingrese Descripción");
             } else {
                 Date now = new Date();
-                vb = areaCtl.addAreaCTL(new AreaO(nombreTxt.getText().trim(), siglaTxt.getText().trim(), 1, now, null, null));
+                vb = areaCtl.addAreaCTL(new AreaO(nombreTxt.getText().trim(), siglaTxt.getText().trim(), descTxt.getText().trim(), 1, now, null, null));
                 if (vb) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(window);

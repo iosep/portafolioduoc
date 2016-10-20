@@ -18,6 +18,7 @@ public class AreaO {
     private int id;
     private String nombre;
     private String sigla;
+    private String descripcion;
     private int activo;
     private Date creado;
     private Date modificado;
@@ -26,11 +27,13 @@ public class AreaO {
     public AreaO() {
     }
 
-    public AreaO(String nombre, String sigla, int activo, Date creado, Date modificado, Date desactivado) {
+    public AreaO(String nombre, String sigla, String descripcion, int activo, Date creado, Date modificado, Date desactivado) {
 //fake area id
         this.id = ++fakeId;
+
         this.nombre = nombre;
         this.sigla = sigla;
+        this.descripcion = descripcion;
         this.activo = activo;
         this.creado = creado;
         this.modificado = modificado;
@@ -59,6 +62,14 @@ public class AreaO {
 
     public void setSigla(String sigla) {
         this.sigla = sigla;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public int getActivo() {

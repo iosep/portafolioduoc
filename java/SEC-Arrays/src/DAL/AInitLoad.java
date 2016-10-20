@@ -65,12 +65,12 @@ public class AInitLoad {
     final ArrayList<RolO> rolesFinal = new ArrayList<>(Arrays.asList(rol1, rol2, rol3));
     static ArrayList<RolO> roles;
 //area
-    final AreaO area1 = new AreaO("Homicidios", "hmc", 1, fecha, null, null);
-    final AreaO area2 = new AreaO("Delitos sexuales", "dsx", 1, fecha, null, null);
-    final AreaO area3 = new AreaO("Robos", "rbs", 1, fecha, null, null);
-    final AreaO area4 = new AreaO("Delitos económicos", "dec", 1, fecha, null, null);
-    final AreaO area5 = new AreaO("Delitos contra la propiedad intelectual", "dcpi", 1, fecha, null, null);
-    final AreaO area6 = new AreaO("Ubicación de personas", "udp", 1, fecha, null, null);
+    final AreaO area1 = new AreaO("Homicidios", "hmc", "capturar a homicidas", 1, fecha, null, null);
+    final AreaO area2 = new AreaO("Delitos sexuales", "dsx", "capturar a sexópatas", 1, fecha, null, null);
+    final AreaO area3 = new AreaO("Robos", "rbs", "capturar a ladrones", 1, fecha, null, null);
+    final AreaO area4 = new AreaO("Delitos económicos", "dec", "capturar a estafadores", 1, fecha, null, null);
+    final AreaO area5 = new AreaO("Delitos contra la propiedad intelectual", "dcpi", "capturar a usurpadores", 1, fecha, null, null);
+    final AreaO area6 = new AreaO("Ubicación de personas", "udp", "encontrar personas desaparecidas", 1, fecha, null, null);
     final ArrayList<AreaO> areasFinal = new ArrayList<>(Arrays.asList(area1, area2, area3, area4, area5, area6));
     static ArrayList<AreaO> areas;
 //competencia

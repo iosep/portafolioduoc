@@ -91,6 +91,7 @@ public class Admin {
     private final TableView<AreaO> areasTable = new TableView<>();
     private TableColumn<AreaO, String> areaNombreColumn;
     private TableColumn<AreaO, String> areaSiglaColumn;
+    private TableColumn<AreaO, String> areaDescColumn;
     private TableColumn<AreaO, Integer> areaActivoColumn;
     private TableColumn<AreaO, Date> areaCreadoColumn;
     private TableColumn<AreaO, Date> areaModificadoColumn;
@@ -163,7 +164,7 @@ public class Admin {
 //GENERAL SETTINGS
 //
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("desk.png")));
-        Text titleMantenedores = new Text("SEC - Mantenedores");
+        Text titleMantenedores = new Text("SEC - Administrador");
         titleMantenedores.getStyleClass().add("title");
         Label lblActiveUser = new Label("Usuario Activo:");
         Label lblLogRutUser = new Label("  " + logRut);
@@ -460,6 +461,8 @@ public class Admin {
         areaNombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         areaSiglaColumn = new TableColumn<>("Sigla");
         areaSiglaColumn.setCellValueFactory(new PropertyValueFactory<>("sigla"));
+        areaDescColumn = new TableColumn<>("Descripción");
+        areaDescColumn.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         areaActivoColumn = new TableColumn<>("Estado");
         areaActivoColumn.setCellValueFactory(new PropertyValueFactory<>("activo"));
         areaActivoColumn.setCellFactory(column -> {
@@ -531,7 +534,7 @@ public class Admin {
             };
         });
 //load AREAS columns
-        areasTable.getColumns().addAll(areaNombreColumn, areaSiglaColumn, areaActivoColumn,
+        areasTable.getColumns().addAll(areaNombreColumn, areaSiglaColumn, areaDescColumn, areaActivoColumn,
                 areaCreadoColumn, areaModificadoColumn, areaDesactivadoColumn);
 //
 //MANTENEDOR COMPETENCIAS //CAPACITY MAINTAINER

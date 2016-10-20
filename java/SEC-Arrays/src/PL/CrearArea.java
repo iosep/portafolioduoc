@@ -50,10 +50,10 @@ public class CrearArea {
         Label subtitle = new Label("Crear Nueva Área");
         subtitle.getStyleClass().add("subtitle");
         grid.add(subtitle, 0, 1, 2, 1);
-                
+
         final Text msj = new Text();
         msj.getStyleClass().add("action");
-        grid.add(msj, 0, 8, 2, 1);
+        grid.add(msj, 0, 9, 2, 1);
 
         Label nombreLbl = new Label("Nombre:");
         grid.add(nombreLbl, 0, 5);
@@ -75,11 +75,21 @@ public class CrearArea {
         });
         grid.add(siglaTxt, 1, 6);
 
+        Label descLbl = new Label("Descripción:");
+        grid.add(descLbl, 0, 7);
+        TextField descTxt = new TextField();
+        descTxt.textProperty().addListener((ob, ol, ne) -> {
+            if (ne != null) {
+                msj.setText("");
+            }
+        });
+        grid.add(siglaTxt, 1, 7);
+
         Button btn = new Button("CREAR");
         HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 9, 1, 4);
+        grid.add(hbBtn, 1, 10, 1, 4);
 
         btn.setOnAction(e -> {
             Validar v = new Validar();
@@ -89,9 +99,12 @@ public class CrearArea {
             } else if (siglaTxt.getText().isEmpty()) {
                 msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Sigla");
+            } else if (descTxt.getText().isEmpty()) {
+                msj.setFill(Color.FIREBRICK);
+                msj.setText("Ingrese Descripción");
             } else {
                 Date now = new Date();
-                vb = actl.addAreaCTL(new AreaO(nombreTxt.getText().trim(), siglaTxt.getText().trim(), 1, now, null, null));
+                vb = actl.addAreaCTL(new AreaO(nombreTxt.getText().trim(), siglaTxt.getText().trim(), descTxt.getText().trim(), 1, now, null, null));
                 if (vb) {
                     nombreTxt.clear();
                     siglaTxt.clear();
