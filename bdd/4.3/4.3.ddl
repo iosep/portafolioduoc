@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 4.1.3.901
---   en:        2016-10-16 01:34:48 BRST
+--   en:        2016-10-20 14:49:15 BRST
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -32,7 +32,7 @@ CREATE TABLE area_competencia
 ALTER TABLE area_competencia ADD CONSTRAINT area_competencia_PK PRIMARY KEY ( area_id, competencia_id ) ;
 
 
-CREATE TABLE "audit"
+CREATE TABLE audit_log
   (
     id          INTEGER NOT NULL ,
     fecha       DATE NOT NULL ,
@@ -43,7 +43,7 @@ CREATE TABLE "audit"
     desactivado DATE ,
     activo      NUMBER (1) DEFAULT 1 NOT NULL
   ) ;
-ALTER TABLE "audit" ADD CONSTRAINT audit_PK PRIMARY KEY ( id ) ;
+ALTER TABLE audit_log ADD CONSTRAINT audit_log_PK PRIMARY KEY ( id ) ;
 
 
 CREATE TABLE competencia
@@ -255,7 +255,7 @@ ALTER TABLE area_competencia ADD CONSTRAINT area_competencia_FK FOREIGN KEY ( co
 
 ALTER TABLE usuario_area ADD CONSTRAINT area_usuario_FK FOREIGN KEY ( usuario_id ) REFERENCES usuario ( id ) ;
 
-ALTER TABLE "audit" ADD CONSTRAINT audit_usuario_FK FOREIGN KEY ( usuario_id ) REFERENCES usuario ( id ) ;
+ALTER TABLE audit_log ADD CONSTRAINT audit_usuario_FK FOREIGN KEY ( usuario_id ) REFERENCES usuario ( id ) ;
 
 ALTER TABLE area_competencia ADD CONSTRAINT competencia_area_FK FOREIGN KEY ( area_id ) REFERENCES area ( id ) ;
 
@@ -293,9 +293,9 @@ CREATE OR REPLACE TRIGGER area_id_TRG BEFORE
 END;
 /
 
-CREATE SEQUENCE audit_id_SEQ START WITH 1 NOCACHE ORDER ;
-CREATE OR REPLACE TRIGGER audit_id_TRG BEFORE
-  INSERT ON "audit" FOR EACH ROW WHEN (NEW.id IS NULL) BEGIN :NEW.id := audit_id_SEQ.NEXTVAL;
+CREATE SEQUENCE audit_log_id_SEQ START WITH 1 NOCACHE ORDER ;
+CREATE OR REPLACE TRIGGER audit_log_id_TRG BEFORE
+  INSERT ON audit_log FOR EACH ROW WHEN (NEW.id IS NULL) BEGIN :NEW.id := audit_log_id_SEQ.NEXTVAL;
 END;
 /
 
