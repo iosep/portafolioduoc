@@ -1,0 +1,118 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="77CB8EB9-12B3-B5BD-AAD4-71E6F5510344" name="nivel">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>945DD45B-67D5-7FD3-9E69-8DE320C43528</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="575CF796-90A0-BA26-E744-37C65F83B6D1">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>07371B9D-E109-74AF-6BC7-90C55F137EDC</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nota" id="20B8C3A4-51D5-C1F2-38CF-8BA6D7DDFB88">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>9CBB8BD3-9039-11F0-3FE0-BCFC07C310AA</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="BC37B12D-A207-18C5-383E-BFBBF4734FEC">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>FDC30A32-D9C3-21F1-97B0-82A4311EFF34</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="descripcion" id="65986847-D12E-016C-D507-114DF247DC1A">
+<createdBy>vitorio</createdBy>
+<createdTime>2016-10-05 21:33:11 UTC</createdTime>
+<ownerDesignName>4.3</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="creado" id="C8BF3FAE-257D-CDC2-ECFF-D98DF2A37B26">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-26 15:32:51 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="modificado" id="8EF98EA4-330E-60EB-802A-0208890415AD">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-26 15:33:09 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="desactivado" id="8F19FA68-6458-83CE-E01C-FD833171A8D1">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-26 15:33:09 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="activo" id="8CFB4A7B-8D6E-614D-5217-1B04B7DBBC98">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-27 17:13:57 UTC</createdTime>
+<ownerDesignName>4.3</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<usesDefaultValue>true</usesDefaultValue>
+<defaultValue>1</defaultValue>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D9CB7931-0607-4A5E-321D-EF1A9B645569" name="nivel_PK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:23:18 UTC</createdTime>
+<generatorID>543327EC-C492-C454-3F1A-B74E5D2262D2</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="575CF796-90A0-BA26-E744-37C65F83B6D1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
