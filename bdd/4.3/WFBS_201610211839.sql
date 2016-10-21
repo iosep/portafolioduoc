@@ -6399,7 +6399,8 @@ IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
         COMMIT;
         
         OPEN l_cursor FOR
-        SELECT ua.usuario_id AS USUARIO_ID,
+        SELECT 
+        ua.usuario_id AS USUARIO_ID,
         u.rut AS USUARIO_RUT,
         ua.area_id AS AREA_ID,
         a.nombre AS AREA_NOMBRE,
@@ -6912,6 +6913,2471 @@ wwv_flow_api.create_restful_param(
 ,p_handler_id=>wwv_flow_api.id(5803524474175489)
 ,p_name=>'usuarioid'
 ,p_bind_variable_name=>'usuarioid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+end;
+/
+begin
+wwv_flow_api.import_end(p_auto_install_sup_obj => nvl(wwv_flow_application_install.get_auto_install_sup_obj, false));
+commit;
+end;
+/
+--set verify on feedback on define on
+--prompt  ...done
+create or replace PACKAGE PKG_AREA_COMPETENCIA 
+AS 
+PROCEDURE SP_AREA_COMPT_CREATE 
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_AREAID IN AREA_COMPETENCIA.AREA_ID%type,
+    p_COMPTID IN AREA_COMPETENCIA.COMPETENCIA_ID%type
+);
+ 
+PROCEDURE SP_AREA_COMPT_READ_ALL
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE
+);
+ 
+PROCEDURE SP_AREA_COMPT_READ_AREA 
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_AREAID IN AREA_COMPETENCIA.AREA_ID%type
+);
+ 
+PROCEDURE SP_AREA_COMPT_READ_COMPT 
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_COMPTID   IN AREA_COMPETENCIA.COMPETENCIA_ID%type
+);
+ 
+PROCEDURE SP_AREA_COMPT_UPDATE 
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_AREAID IN AREA_COMPETENCIA.AREA_ID%type,
+    p_COMPTID IN AREA_COMPETENCIA.COMPETENCIA_ID%type,
+    p_NAREAID IN AREA_COMPETENCIA.AREA_ID%type,
+    p_NCOMPTID IN AREA_COMPETENCIA.COMPETENCIA_ID%type
+);
+ 
+PROCEDURE SP_AREA_COMPT_DELETE_ID 
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_AREAID IN AREA_COMPETENCIA.AREA_ID%type,
+    p_COMPTID IN AREA_COMPETENCIA.COMPETENCIA_ID%type
+);
+ 
+FUNCTION FN_TOKEN
+(
+  p_ID IN USUARIO.ID%TYPE,
+  p_TOKEN IN USUARIO.TOKEN%TYPE
+) RETURN INT;
+ 
+END PKG_AREA_COMPETENCIA;
+/
+create or replace PACKAGE BODY PKG_AREA_COMPETENCIA AS
+PROCEDURE SP_AREA_COMPT_CREATE 
+(	
+	p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_AREAID IN AREA_COMPETENCIA.AREA_ID%type,
+    p_COMPTID IN AREA_COMPETENCIA.COMPETENCIA_ID%type
+) 
+IS
+total number;
+lastarea number;
+lastcompe number;
+l_cursor SYS_REFCURSOR;
+exarea number;
+excomp number;
+ 
+BEGIN
+total := 0;
+lastarea:=0;
+lastcompe:=0;
+exarea:=0;
+excomp:=0;
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+    SELECT COUNT(*) INTO total FROM AREA_COMPETENCIA WHERE AREA_ID =p_AREAID AND COMPETENCIA_ID =p_COMPTID;
+    SELECT COUNT(*) INTO exarea FROM AREA WHERE ID = p_AREAID;
+    SELECT COUNT(*) INTO excomp FROM COMPETENCIA WHERE ID = p_COMPTID;
+    
+    IF total = 0 AND (excomp+exarea) = 2 THEN
+        INSERT INTO AREA_COMPETENCIA (AREA_ID,COMPETENCIA_ID,CREADO,MODIFICADO) 
+        VALUES (p_AREAID,p_COMPTID,SYSDATE,SYSDATE) 
+        RETURNING AREA_ID,COMPETENCIA_ID INTO lastarea,lastcompe;
+        COMMIT;
+        
+        OPEN l_cursor FOR
+        SELECT 
+        ac.area_id AS AREA_ID,
+        a.nombre AS AREA_NOMBRE,
+        ac.competencia_id AS COMPETENCIA_ID,
+        c.nombre AS COMPETENCIA_NOMBRE,
+        ac.modificado AS MODIFICADO,
+        ac.desactivado AS DESACTIVADO,
+        ac.activo AS ACTIVO
+        FROM  area_competencia  ac 
+        INNER JOIN competencia c
+        ON ac.competencia_id = c.id
+        INNER JOIN area a 
+        ON ac.area_id = a.id
+        WHERE ac.area_id = lastarea 
+        AND ac.competencia_id = lastcompe;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('area_competencia', l_cursor);
+        APEX_JSON.close_object;
+    ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT  * FROM area_competencia WHERE competencia_id = 0 AND area_id=0;
+        APEX_JSON.open_object;
+        APEX_JSON.write('area_competencia', l_cursor);
+        APEX_JSON.close_object;  
+    END IF;  
+ELSE
+ 
+    OPEN l_cursor FOR
+    SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+    APEX_JSON.open_object;
+    APEX_JSON.write('RESPUESTA', l_cursor);
+    APEX_JSON.close_object;  
+ 
+END IF; 
+END SP_AREA_COMPT_CREATE;
+ 
+PROCEDURE SP_AREA_COMPT_READ_ALL 
+(
+	p_IDUSUARIO IN USUARIO.ID%TYPE,
+	p_TOKEN     IN USUARIO.TOKEN%TYPE
+) 
+AS
+l_cursor SYS_REFCURSOR;
+BEGIN
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+        OPEN l_cursor FOR
+        SELECT 
+        ac.area_id AS AREA_ID,
+        a.nombre AS AREA_NOMBRE,
+        ac.competencia_id AS COMPETENCIA_ID,
+        c.nombre AS COMPETENCIA_NOMBRE,
+        ac.modificado AS MODIFICADO,
+        ac.desactivado AS DESACTIVADO,
+        ac.activo AS ACTIVO
+        FROM  area_competencia  ac 
+        INNER JOIN competencia c
+        ON ac.competencia_id = c.id
+        INNER JOIN area a 
+        ON ac.area_id = a.id
+        ORDER BY ac.area_id;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('area_competencia', l_cursor);
+        APEX_JSON.close_object;
+    
+ELSE
+ 
+	    OPEN l_cursor FOR
+	    SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+	    APEX_JSON.open_object;
+	    APEX_JSON.write('RESPUESTA', l_cursor);
+	    APEX_JSON.close_object;  
+ 
+END IF; 
+END SP_AREA_COMPT_READ_ALL;
+ 
+PROCEDURE SP_AREA_COMPT_READ_AREA 
+(
+	p_IDUSUARIO IN USUARIO.ID%TYPE,
+	p_TOKEN     IN USUARIO.TOKEN%TYPE,
+	p_AREAID IN AREA_COMPETENCIA.AREA_ID%type
+) 
+AS
+l_cursor SYS_REFCURSOR;
+BEGIN
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+        OPEN l_cursor FOR
+        SELECT 
+        ac.area_id AS AREA_ID,
+        a.nombre AS AREA_NOMBRE,
+        ac.competencia_id AS COMPETENCIA_ID,
+        c.nombre AS COMPETENCIA_NOMBRE,
+        ac.modificado AS MODIFICADO,
+        ac.desactivado AS DESACTIVADO,
+        ac.activo AS ACTIVO
+        FROM  area_competencia  ac 
+        INNER JOIN competencia c
+        ON ac.competencia_id = c.id
+        INNER JOIN area a 
+        ON ac.area_id = a.id
+        WHERE ac.area_id = p_AREAID
+        ORDER BY a.nombre;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('area_competencia', l_cursor);
+        APEX_JSON.close_object;
+    
+ELSE
+ 
+	    OPEN l_cursor FOR
+	    SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+	    APEX_JSON.open_object;
+	    APEX_JSON.write('RESPUESTA', l_cursor);
+	    APEX_JSON.close_object;  
+ 
+END IF; 
+END SP_AREA_COMPT_READ_AREA;
+ 
+PROCEDURE SP_AREA_COMPT_READ_COMPT 
+(
+	p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_COMPTID   IN AREA_COMPETENCIA.COMPETENCIA_ID%type
+) 
+AS
+l_cursor SYS_REFCURSOR;
+BEGIN
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+        OPEN l_cursor FOR
+        SELECT 
+        ac.area_id AS AREA_ID,
+        a.nombre AS AREA_NOMBRE,
+        ac.competencia_id AS COMPETENCIA_ID,
+        c.nombre AS COMPETENCIA_NOMBRE,
+        ac.modificado AS MODIFICADO,
+        ac.desactivado AS DESACTIVADO,
+        ac.activo AS ACTIVO
+        FROM  area_competencia  ac 
+        INNER JOIN competencia c
+        ON ac.competencia_id = c.id
+        INNER JOIN area a 
+        ON ac.area_id = a.id
+        WHERE ac.competencia_id = p_COMPTID
+        ORDER BY c.nombre;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('area_competencia', l_cursor);
+        APEX_JSON.close_object;
+    
+ELSE
+ 
+	    OPEN l_cursor FOR
+	    SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+	    APEX_JSON.open_object;
+	    APEX_JSON.write('RESPUESTA', l_cursor);
+	    APEX_JSON.close_object;  
+ 
+END IF; 
+ 
+END SP_AREA_COMPT_READ_COMPT;
+ 
+PROCEDURE SP_AREA_COMPT_UPDATE 
+(
+	p_IDUSUARIO IN USUARIO.ID%TYPE,
+	p_TOKEN     IN USUARIO.TOKEN%TYPE,
+	p_AREAID IN AREA_COMPETENCIA.AREA_ID%type,
+	p_COMPTID IN AREA_COMPETENCIA.COMPETENCIA_ID%type,
+	p_NAREAID IN AREA_COMPETENCIA.AREA_ID%type,
+	p_NCOMPTID IN AREA_COMPETENCIA.COMPETENCIA_ID%type
+) 
+IS
+total number;
+lastarea number;
+lastcompe number;
+l_cursor SYS_REFCURSOR;
+exarea number;
+excomp number;
+ 
+BEGIN
+total := 0;
+lastarea:=0;
+lastcompe:=0;
+exarea:=0;
+excomp:=0;
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+    SELECT COUNT(*) INTO total FROM AREA_COMPETENCIA WHERE AREA_ID =p_AREAID AND COMPETENCIA_ID =p_COMPTID;
+    SELECT COUNT(*) INTO exarea FROM AREA WHERE ID = p_AREAID;
+    SELECT COUNT(*) INTO excomp FROM COMPETENCIA WHERE ID = p_COMPTID;
+    
+    IF total = 1 AND (excomp+exarea) = 2 THEN
+        UPDATE AREA_COMPETENCIA SET
+        AREA_ID = p_NAREAID,
+        COMPETENCIA_ID = p_NCOMPTID,
+        MODIFICADO = SYSDATE
+        WHERE AREA_ID =p_AREAID 
+        AND COMPETENCIA_ID =p_COMPTID
+        RETURNING AREA_ID,COMPETENCIA_ID INTO lastarea,lastcompe;
+        COMMIT;
+        
+        OPEN l_cursor FOR
+        SELECT 
+        ac.area_id AS AREA_ID,
+        a.nombre AS AREA_NOMBRE,
+        ac.competencia_id AS COMPETENCIA_ID,
+        c.nombre AS COMPETENCIA_NOMBRE,
+        ac.modificado AS MODIFICADO,
+        ac.desactivado AS DESACTIVADO,
+        ac.activo AS ACTIVO
+        FROM  area_competencia  ac 
+        INNER JOIN competencia c
+        ON ac.competencia_id = c.id
+        INNER JOIN area a 
+        ON ac.area_id = a.id
+        WHERE ac.area_id = lastarea 
+        AND ac.competencia_id = lastcompe;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('area_competencia', l_cursor);
+        APEX_JSON.close_object;
+    ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT  * FROM area_competencia WHERE competencia_id = 0 AND area_id=0;
+        APEX_JSON.open_object;
+        APEX_JSON.write('area_competencia', l_cursor);
+        APEX_JSON.close_object;  
+    END IF;  
+ELSE
+ 
+    OPEN l_cursor FOR
+    SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+    APEX_JSON.open_object;
+    APEX_JSON.write('RESPUESTA', l_cursor);
+    APEX_JSON.close_object;  
+ 
+END IF;  
+ 
+END SP_AREA_COMPT_UPDATE;
+ 
+ 
+PROCEDURE SP_AREA_COMPT_DELETE_ID 
+(
+	p_IDUSUARIO IN USUARIO.ID%TYPE,
+	p_TOKEN     IN USUARIO.TOKEN%TYPE,
+	p_AREAID IN AREA_COMPETENCIA.AREA_ID%type,
+	p_COMPTID IN AREA_COMPETENCIA.COMPETENCIA_ID%type
+) 
+AS
+total number;
+lastarea number;
+lastcompe number;
+l_cursor SYS_REFCURSOR;
+exarea number;
+excomp number;
+ 
+BEGIN
+total := 0;
+lastarea:=0;
+lastcompe:=0;
+exarea:=0;
+excomp:=0;
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+    SELECT COUNT(*) INTO total FROM AREA_COMPETENCIA WHERE AREA_ID =p_AREAID AND COMPETENCIA_ID =p_COMPTID;
+    SELECT COUNT(*) INTO exarea FROM AREA WHERE ID = p_AREAID;
+    SELECT COUNT(*) INTO excomp FROM COMPETENCIA WHERE ID = p_COMPTID;
+    
+    IF total = 1 AND (excomp+exarea) = 2 THEN
+        UPDATE AREA_COMPETENCIA SET
+        DESACTIVADO = SYSDATE,
+        ACTIVO = 0
+        WHERE AREA_ID =p_AREAID 
+        AND COMPETENCIA_ID =p_COMPTID
+        RETURNING AREA_ID,COMPETENCIA_ID INTO lastarea,lastcompe;
+        COMMIT;
+        
+        OPEN l_cursor FOR
+        SELECT 
+        ac.area_id AS AREA_ID,
+        a.nombre AS AREA_NOMBRE,
+        ac.competencia_id AS COMPETENCIA_ID,
+        c.nombre AS COMPETENCIA_NOMBRE,
+        ac.modificado AS MODIFICADO,
+        ac.desactivado AS DESACTIVADO,
+        ac.activo AS ACTIVO
+        FROM  area_competencia  ac 
+        INNER JOIN competencia c
+        ON ac.competencia_id = c.id
+        INNER JOIN area a 
+        ON ac.area_id = a.id
+        WHERE ac.area_id = lastarea 
+        AND ac.competencia_id = lastcompe;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('area_competencia', l_cursor);
+        APEX_JSON.close_object;
+    ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT  * FROM area_competencia WHERE competencia_id = 0 AND area_id=0;
+        APEX_JSON.open_object;
+        APEX_JSON.write('area_competencia', l_cursor);
+        APEX_JSON.close_object;  
+    END IF;  
+ELSE
+ 
+    OPEN l_cursor FOR
+    SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+    APEX_JSON.open_object;
+    APEX_JSON.write('RESPUESTA', l_cursor);
+    APEX_JSON.close_object;  
+ 
+END IF;  
+ 
+END SP_AREA_COMPT_DELETE_ID;
+ 
+--------FUNCION PARA VALIDAR TOKEN
+FUNCTION FN_TOKEN
+(
+    p_ID IN USUARIO.ID%TYPE,
+    p_TOKEN IN USUARIO.TOKEN%TYPE
+) RETURN INT 
+IS
+token varchar(255):=null;
+res int(1):=0;
+ 
+BEGIN
+    SELECT token INTO token FROM usuario WHERE id = p_ID;
+    IF token = p_token THEN 
+    res:=1;
+END IF;
+ 
+return res;
+END;
+ 
+END PKG_AREA_COMPETENCIA;
+/
+--set define off verify off feedback off
+--whenever sqlerror exit sql.sqlcode rollback
+--------------------------------------------------------------------------------
+--
+-- ORACLE Application Express (APEX) export file
+--
+-- You should run the script connected to SQL*Plus as the Oracle user
+-- APEX_050000 or as the owner (parsing schema) of the application.
+--
+-- NOTE: Calls to apex_application_install override the defaults below.
+--
+--------------------------------------------------------------------------------
+begin
+wwv_flow_api.import_begin (
+ p_version_yyyy_mm_dd=>'2013.01.01'
+,p_default_workspace_id=>100000
+);
+end;
+/
+--prompt  Set Application Offset...
+begin
+   -- -- SET APPLICATION OFFSET
+   wwv_flow_api.g_id_offset := nvl(wwv_flow_application_install.get_offset,0);
+null;
+end;
+/
+begin
+wwv_flow_api.remove_restful_service(
+ p_id=>wwv_flow_api.id(5845194390248795)
+,p_name=>'area_competencia'
+);
+ 
+end;
+/
+--prompt --application/restful_services/area_competencia
+begin
+wwv_flow_api.create_restful_module(
+ p_id=>wwv_flow_api.id(5845194390248795)
+,p_name=>'area_competencia'
+,p_uri_prefix=>'area_competencia/'
+,p_parsing_schema=>'WFBS'
+,p_items_per_page=>25
+,p_status=>'PUBLISHED'
+,p_row_version_number=>38
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5845278218250821)
+,p_module_id=>wwv_flow_api.id(5845194390248795)
+,p_uri_template=>'json/create'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5845324273264456)
+,p_template_id=>wwv_flow_api.id(5845278218250821)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'POST'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_AREA_COMPETENCIA.SP_AREA_COMPT_CREATE',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :areaid,',
+'    :comptid',
+')',
+';END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5845650346267772)
+,p_handler_id=>wwv_flow_api.id(5845324273264456)
+,p_name=>'areaid'
+,p_bind_variable_name=>'areaid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5845780588268923)
+,p_handler_id=>wwv_flow_api.id(5845324273264456)
+,p_name=>'comptid'
+,p_bind_variable_name=>'comptid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5845485747265352)
+,p_handler_id=>wwv_flow_api.id(5845324273264456)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5845599732266516)
+,p_handler_id=>wwv_flow_api.id(5845324273264456)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5851277038572418)
+,p_module_id=>wwv_flow_api.id(5845194390248795)
+,p_uri_template=>'json/delete'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5851344335575832)
+,p_template_id=>wwv_flow_api.id(5851277038572418)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'DELETE'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_AREA_COMPETENCIA.SP_AREA_COMPT_DELETE_ID',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :areaid,',
+'    :comptid',
+')',
+';END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5851653003580549)
+,p_handler_id=>wwv_flow_api.id(5851344335575832)
+,p_name=>'areaid'
+,p_bind_variable_name=>'areaid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5851759920581436)
+,p_handler_id=>wwv_flow_api.id(5851344335575832)
+,p_name=>'comptid'
+,p_bind_variable_name=>'comptid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5851455083578419)
+,p_handler_id=>wwv_flow_api.id(5851344335575832)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5851576064579441)
+,p_handler_id=>wwv_flow_api.id(5851344335575832)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5846247885304319)
+,p_module_id=>wwv_flow_api.id(5845194390248795)
+,p_uri_template=>'json/read_all'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5846381700307739)
+,p_template_id=>wwv_flow_api.id(5846247885304319)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'POST'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_AREA_COMPETENCIA.SP_AREA_COMPT_READ_ALL',
+'(',
+'    :idusuario,',
+'    :token',
+')',
+';END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5846491620308928)
+,p_handler_id=>wwv_flow_api.id(5846381700307739)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5846590636310009)
+,p_handler_id=>wwv_flow_api.id(5846381700307739)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5847164561362163)
+,p_module_id=>wwv_flow_api.id(5845194390248795)
+,p_uri_template=>'json/read_area'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5847258666363851)
+,p_template_id=>wwv_flow_api.id(5847164561362163)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'POST'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_AREA_COMPETENCIA.SP_AREA_COMPT_READ_AREA',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :areaid',
+')',
+';END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5847562775366818)
+,p_handler_id=>wwv_flow_api.id(5847258666363851)
+,p_name=>'areaid'
+,p_bind_variable_name=>'areaid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5847347488364928)
+,p_handler_id=>wwv_flow_api.id(5847258666363851)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5847471304365900)
+,p_handler_id=>wwv_flow_api.id(5847258666363851)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5848440176419610)
+,p_module_id=>wwv_flow_api.id(5845194390248795)
+,p_uri_template=>'json/read_competencia'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5848549180422042)
+,p_template_id=>wwv_flow_api.id(5848440176419610)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'POST'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_AREA_COMPETENCIA.SP_AREA_COMPT_READ_COMPT',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :comptid',
+')',
+';END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5848862627424924)
+,p_handler_id=>wwv_flow_api.id(5848549180422042)
+,p_name=>'comptid'
+,p_bind_variable_name=>'comptid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5848601514422934)
+,p_handler_id=>wwv_flow_api.id(5848549180422042)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5848779600423729)
+,p_handler_id=>wwv_flow_api.id(5848549180422042)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5849525882504236)
+,p_module_id=>wwv_flow_api.id(5845194390248795)
+,p_uri_template=>'json/update'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5849619341508016)
+,p_template_id=>wwv_flow_api.id(5849525882504236)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'PUT'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_AREA_COMPETENCIA.SP_AREA_COMPT_UPDATE',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :areaid,',
+'    :comptid,',
+'    :nareaid,',
+'    :ncomptid',
+')',
+';END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5849953249511991)
+,p_handler_id=>wwv_flow_api.id(5849619341508016)
+,p_name=>'areaid'
+,p_bind_variable_name=>'areaid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5850048503512862)
+,p_handler_id=>wwv_flow_api.id(5849619341508016)
+,p_name=>'comptid'
+,p_bind_variable_name=>'comptid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5849705531510130)
+,p_handler_id=>wwv_flow_api.id(5849619341508016)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5850162037514295)
+,p_handler_id=>wwv_flow_api.id(5849619341508016)
+,p_name=>'nareaid'
+,p_bind_variable_name=>'nareaid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5850223322515264)
+,p_handler_id=>wwv_flow_api.id(5849619341508016)
+,p_name=>'ncomptid'
+,p_bind_variable_name=>'ncomptid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5849802642511042)
+,p_handler_id=>wwv_flow_api.id(5849619341508016)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+end;
+/
+begin
+wwv_flow_api.import_end(p_auto_install_sup_obj => nvl(wwv_flow_application_install.get_auto_install_sup_obj, false));
+commit;
+end;
+/
+--set verify on feedback on define on
+--prompt  ...done
+create or replace PACKAGE PKG_COMPETENCIA_NIVEL 
+AS
+ 
+PROCEDURE SP_COMPT_NIVEL_CREATE 
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_COMPTID IN COMPETENCIA_NIVEL.COMPETENCIA_ID%type,
+    p_NIVELID IN COMPETENCIA_NIVEL.NIVEL_ID%type
+);
+ 
+PROCEDURE SP_COMPT_NIVEL_READ_ALL
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE
+);
+ 
+PROCEDURE SP_COMPT_NIVEL_READ_NIVEL
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_NIVELID IN COMPETENCIA_NIVEL.NIVEL_ID%type
+);
+ 
+PROCEDURE SP_COMPT_NIVEL_READ_COMPT 
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_COMPTID IN COMPETENCIA_NIVEL.COMPETENCIA_ID%type
+);
+ 
+PROCEDURE SP_COMPT_NIVEL_UPDATE
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_COMPTID IN COMPETENCIA_NIVEL.COMPETENCIA_ID%type,
+    p_NIVELID IN COMPETENCIA_NIVEL.NIVEL_ID%type,
+    p_NCOMPTID IN COMPETENCIA_NIVEL.COMPETENCIA_ID%type,
+    p_NNIVELID IN COMPETENCIA_NIVEL.NIVEL_ID%type
+);
+ 
+PROCEDURE SP_COMPT_NIVEL_DELETE_ID
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_COMPTID IN COMPETENCIA_NIVEL.COMPETENCIA_ID%type,
+    p_NIVELID IN COMPETENCIA_NIVEL.NIVEL_ID%type
+);
+ 
+FUNCTION FN_TOKEN
+(
+  p_ID IN USUARIO.ID%TYPE,
+  p_TOKEN IN USUARIO.TOKEN%TYPE
+) RETURN INT;
+ 
+END PKG_COMPETENCIA_NIVEL;
+/
+create or replace PACKAGE BODY PKG_COMPETENCIA_NIVEL AS
+PROCEDURE SP_COMPT_NIVEL_CREATE 
+(
+  p_IDUSUARIO IN USUARIO.ID%TYPE,
+  p_TOKEN     IN USUARIO.TOKEN%TYPE,
+  p_COMPTID IN COMPETENCIA_NIVEL.COMPETENCIA_ID%type,
+  p_NIVELID IN COMPETENCIA_NIVEL.NIVEL_ID%type
+)
+IS
+total number;
+lastcompe number;
+lastnivel number;
+l_cursor SYS_REFCURSOR;
+excomp number;
+exnivel number;
+ 
+BEGIN
+total := 0;
+lastcompe:=0;
+lastnivel:=0;
+excomp:=0;
+exnivel:=0;
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+    SELECT COUNT(*) INTO total FROM COMPETENCIA_NIVEL WHERE COMPETENCIA_ID =p_COMPTID AND NIVEL_ID =p_NIVELID;
+    SELECT COUNT(*) INTO excomp FROM COMPETENCIA WHERE ID = p_COMPTID;
+    SELECT COUNT(*) INTO exnivel FROM NIVEL WHERE ID = p_NIVELID;
+    
+    IF total = 0 AND (excomp+exnivel) = 2 THEN
+        INSERT INTO COMPETENCIA_NIVEL (COMPETENCIA_ID,NIVEL_ID,CREADO,MODIFICADO) 
+        VALUES (p_COMPTID,p_NIVELID,SYSDATE,SYSDATE) 
+        RETURNING COMPETENCIA_ID,NIVEL_ID INTO lastcompe,lastnivel;
+        COMMIT;
+        
+        OPEN l_cursor FOR
+        SELECT 
+        cn.competencia_id AS COMPETENCIA_ID,
+        c.nombre AS COMPETENCIA_NOMBRE,
+        cn.nivel_id AS NIVEL_ID,
+        n.nombre AS NIVEL_NOMBRE,
+        cn.modificado AS MODIFICADO,
+        cn.desactivado AS DESACTIVADO,
+        cn.activo AS ACTIVO
+        FROM  competencia_nivel  cn 
+        INNER JOIN competencia c
+        ON cn.competencia_id = c.id
+        INNER JOIN nivel n 
+        ON cn.nivel_id = n.id
+        WHERE cn.nivel_id = lastnivel 
+        AND cn.competencia_id = lastcompe;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('competencia_nivel', l_cursor);
+        APEX_JSON.close_object;
+    ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT  * FROM competencia_nivel WHERE competencia_id = 0 AND nivel_id=0;
+        APEX_JSON.open_object;
+        APEX_JSON.write('competencia_nivel', l_cursor);
+        APEX_JSON.close_object;  
+    END IF;  
+ELSE
+ 
+    OPEN l_cursor FOR
+    SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+    APEX_JSON.open_object;
+    APEX_JSON.write('RESPUESTA', l_cursor);
+    APEX_JSON.close_object;  
+ 
+END IF; 
+ 
+END SP_COMPT_NIVEL_CREATE;  
+ 
+PROCEDURE SP_COMPT_NIVEL_READ_ALL 
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE
+) 
+AS
+l_cursor SYS_REFCURSOR;
+BEGIN
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+        OPEN l_cursor FOR
+        SELECT 
+        cn.competencia_id AS COMPETENCIA_ID,
+        c.nombre AS COMPETENCIA_NOMBRE,
+        cn.nivel_id AS NIVEL_ID,
+        n.nombre AS NIVEL_NOMBRE,
+        cn.modificado AS MODIFICADO,
+        cn.desactivado AS DESACTIVADO,
+        cn.activo AS ACTIVO
+        FROM  competencia_nivel  cn 
+        INNER JOIN competencia c
+        ON cn.competencia_id = c.id
+        INNER JOIN nivel n 
+        ON cn.nivel_id = n.id
+        ORDER BY cn.competencia_id;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('competencia_nivel', l_cursor);
+        APEX_JSON.close_object;
+    
+ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+        APEX_JSON.open_object;
+        APEX_JSON.write('RESPUESTA', l_cursor);
+        APEX_JSON.close_object;  
+ 
+END IF; 
+ 
+END SP_COMPT_NIVEL_READ_ALL; 
+ 
+PROCEDURE SP_COMPT_NIVEL_READ_NIVEL 
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_NIVELID IN COMPETENCIA_NIVEL.NIVEL_ID%type
+) 
+AS
+l_cursor SYS_REFCURSOR;
+BEGIN
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+        OPEN l_cursor FOR
+        SELECT 
+        cn.competencia_id AS COMPETENCIA_ID,
+        c.nombre AS COMPETENCIA_NOMBRE,
+        cn.nivel_id AS NIVEL_ID,
+        n.nombre AS NIVEL_NOMBRE,
+        cn.modificado AS MODIFICADO,
+        cn.desactivado AS DESACTIVADO,
+        cn.activo AS ACTIVO
+        FROM  competencia_nivel  cn 
+        INNER JOIN competencia c
+        ON cn.competencia_id = c.id
+        INNER JOIN nivel n 
+        ON cn.nivel_id = n.id
+        WHERE cn.nivel_id = p_NIVELID
+        ORDER BY cn.nivel_id;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('competencia_nivel', l_cursor);
+        APEX_JSON.close_object;
+    
+ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+        APEX_JSON.open_object;
+        APEX_JSON.write('RESPUESTA', l_cursor);
+        APEX_JSON.close_object;  
+ 
+END IF; 
+END SP_COMPT_NIVEL_READ_NIVEL;
+ 
+PROCEDURE SP_COMPT_NIVEL_READ_COMPT 
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_COMPTID IN COMPETENCIA_NIVEL.COMPETENCIA_ID%type
+) 
+AS
+l_cursor SYS_REFCURSOR;
+BEGIN
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+        OPEN l_cursor FOR
+        SELECT 
+        cn.competencia_id AS COMPETENCIA_ID,
+        c.nombre AS COMPETENCIA_NOMBRE,
+        cn.nivel_id AS NIVEL_ID,
+        n.nombre AS NIVEL_NOMBRE,
+        cn.modificado AS MODIFICADO,
+        cn.desactivado AS DESACTIVADO,
+        cn.activo AS ACTIVO
+        FROM  competencia_nivel  cn 
+        INNER JOIN competencia c
+        ON cn.competencia_id = c.id
+        INNER JOIN nivel n 
+        ON cn.competencia_id = c.id
+        WHERE cn.competencia_id = p_COMPTID
+        ORDER BY cn.competencia_id;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('competencia_nivel', l_cursor);
+        APEX_JSON.close_object;
+    
+ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+        APEX_JSON.open_object;
+        APEX_JSON.write('RESPUESTA', l_cursor);
+        APEX_JSON.close_object;  
+ 
+END IF; 
+END SP_COMPT_NIVEL_READ_COMPT;  
+ 
+PROCEDURE SP_COMPT_NIVEL_UPDATE 
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_COMPTID IN COMPETENCIA_NIVEL.COMPETENCIA_ID%type,
+    p_NIVELID IN COMPETENCIA_NIVEL.NIVEL_ID%type,
+    p_NCOMPTID IN COMPETENCIA_NIVEL.COMPETENCIA_ID%type,
+    p_NNIVELID IN COMPETENCIA_NIVEL.NIVEL_ID%type
+) 
+IS
+total number;
+lastcompe number;
+lastnivel number;
+l_cursor SYS_REFCURSOR;
+excomp number;
+exnivel number;
+ 
+BEGIN
+total := 0;
+lastcompe:=0;
+lastnivel:=0;
+excomp:=0;
+exnivel:=0;
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+    SELECT COUNT(*) INTO total FROM COMPETENCIA_NIVEL WHERE COMPETENCIA_ID =p_COMPTID AND NIVEL_ID =p_NIVELID;
+    SELECT COUNT(*) INTO excomp FROM COMPETENCIA WHERE ID = p_COMPTID;
+    SELECT COUNT(*) INTO exnivel FROM NIVEL WHERE ID = p_NIVELID;
+    
+    IF total = 1 AND (excomp+exnivel) = 2 THEN
+             
+        UPDATE COMPETENCIA_NIVEL SET
+        COMPETENCIA_ID = p_NCOMPTID,
+        NIVEL_ID = p_NNIVELID,
+        MODIFICADO = SYSDATE
+        WHERE COMPETENCIA_ID =p_COMPTID AND NIVEL_ID =p_NIVELID
+        RETURNING COMPETENCIA_ID,NIVEL_ID INTO lastcompe,lastnivel;
+        COMMIT;
+        
+        OPEN l_cursor FOR
+        SELECT 
+        cn.competencia_id AS COMPETENCIA_ID,
+        c.nombre AS COMPETENCIA_NOMBRE,
+        cn.nivel_id AS NIVEL_ID,
+        n.nombre AS NIVEL_NOMBRE,
+        cn.modificado AS MODIFICADO,
+        cn.desactivado AS DESACTIVADO,
+        cn.activo AS ACTIVO
+        FROM  competencia_nivel  cn 
+        INNER JOIN competencia c
+        ON cn.competencia_id = c.id
+        INNER JOIN nivel n 
+        ON cn.nivel_id = n.id
+        WHERE cn.nivel_id = lastnivel 
+        AND cn.competencia_id = lastcompe;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('competencia_nivel', l_cursor);
+        APEX_JSON.close_object;
+    ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT  * FROM competencia_nivel WHERE competencia_id = 0 AND nivel_id=0;
+        APEX_JSON.open_object;
+        APEX_JSON.write('competencia_nivel', l_cursor);
+        APEX_JSON.close_object;  
+    END IF;  
+ELSE
+ 
+    OPEN l_cursor FOR
+    SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+    APEX_JSON.open_object;
+    APEX_JSON.write('RESPUESTA', l_cursor);
+    APEX_JSON.close_object;  
+ 
+END IF; 
+END SP_COMPT_NIVEL_UPDATE;
+  
+  
+PROCEDURE SP_COMPT_NIVEL_DELETE_ID 
+(
+    p_IDUSUARIO IN USUARIO.ID%TYPE,
+    p_TOKEN     IN USUARIO.TOKEN%TYPE,
+    p_COMPTID IN COMPETENCIA_NIVEL.COMPETENCIA_ID%type,
+    p_NIVELID IN COMPETENCIA_NIVEL.NIVEL_ID%type
+) 
+IS
+total number;
+lastcompe number;
+lastnivel number;
+l_cursor SYS_REFCURSOR;
+excomp number;
+exnivel number;
+ 
+BEGIN
+total := 0;
+lastcompe:=0;
+lastnivel:=0;
+excomp:=0;
+exnivel:=0;
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+    SELECT COUNT(*) INTO total FROM COMPETENCIA_NIVEL WHERE COMPETENCIA_ID =p_COMPTID AND NIVEL_ID =p_NIVELID;
+    SELECT COUNT(*) INTO excomp FROM COMPETENCIA WHERE ID = p_COMPTID;
+    SELECT COUNT(*) INTO exnivel FROM NIVEL WHERE ID = p_NIVELID;
+    
+    IF total = 1 AND (excomp+exnivel) = 2 THEN
+             
+        UPDATE COMPETENCIA_NIVEL SET
+        DESACTIVADO = SYSDATE,
+        ACTIVO = 0
+        WHERE COMPETENCIA_ID =p_COMPTID AND NIVEL_ID =p_NIVELID
+        RETURNING COMPETENCIA_ID,NIVEL_ID INTO lastcompe,lastnivel;
+        COMMIT;
+        
+        OPEN l_cursor FOR
+        SELECT 
+        cn.competencia_id AS COMPETENCIA_ID,
+        c.nombre AS COMPETENCIA_NOMBRE,
+        cn.nivel_id AS NIVEL_ID,
+        n.nombre AS NIVEL_NOMBRE,
+        cn.modificado AS MODIFICADO,
+        cn.desactivado AS DESACTIVADO,
+        cn.activo AS ACTIVO
+        FROM  competencia_nivel  cn 
+        INNER JOIN competencia c
+        ON cn.competencia_id = c.id
+        INNER JOIN nivel n 
+        ON cn.nivel_id = n.id
+        WHERE cn.nivel_id = lastnivel 
+        AND cn.competencia_id = lastcompe;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('competencia_nivel', l_cursor);
+        APEX_JSON.close_object;
+    ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT  * FROM competencia_nivel WHERE competencia_id = 0 AND nivel_id=0;
+        APEX_JSON.open_object;
+        APEX_JSON.write('competencia_nivel', l_cursor);
+        APEX_JSON.close_object;  
+    END IF;  
+ELSE
+ 
+    OPEN l_cursor FOR
+    SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+    APEX_JSON.open_object;
+    APEX_JSON.write('RESPUESTA', l_cursor);
+    APEX_JSON.close_object;  
+ 
+END IF;
+END SP_COMPT_NIVEL_DELETE_ID;
+  
+--------FUNCION PARA VALIDAR TOKEN
+FUNCTION FN_TOKEN
+(
+    p_ID IN USUARIO.ID%TYPE,
+    p_TOKEN IN USUARIO.TOKEN%TYPE
+) RETURN INT 
+IS
+token varchar(255):=null;
+res int(1):=0;
+ 
+BEGIN
+    SELECT token INTO token FROM usuario WHERE id = p_ID;
+    IF token = p_token THEN 
+    res:=1;
+END IF;
+ 
+return res;
+END;
+ 
+END PKG_COMPETENCIA_NIVEL;
+/
+--set define off verify off feedback off
+--whenever sqlerror exit sql.sqlcode rollback
+--------------------------------------------------------------------------------
+--
+-- ORACLE Application Express (APEX) export file
+--
+-- You should run the script connected to SQL*Plus as the Oracle user
+-- APEX_050000 or as the owner (parsing schema) of the application.
+--
+-- NOTE: Calls to apex_application_install override the defaults below.
+--
+--------------------------------------------------------------------------------
+begin
+wwv_flow_api.import_begin (
+ p_version_yyyy_mm_dd=>'2013.01.01'
+,p_default_workspace_id=>100000
+);
+end;
+/
+--prompt  Set Application Offset...
+begin
+   -- -- SET APPLICATION OFFSET
+   wwv_flow_api.g_id_offset := nvl(wwv_flow_application_install.get_offset,0);
+null;
+end;
+/
+begin
+wwv_flow_api.remove_restful_service(
+ p_id=>wwv_flow_api.id(5853900582666794)
+,p_name=>'competencia_nivel'
+);
+ 
+end;
+/
+--prompt --application/restful_services/competencia_nivel
+begin
+wwv_flow_api.create_restful_module(
+ p_id=>wwv_flow_api.id(5853900582666794)
+,p_name=>'competencia_nivel'
+,p_uri_prefix=>'competencia_nivel/'
+,p_parsing_schema=>'WFBS'
+,p_items_per_page=>25
+,p_status=>'PUBLISHED'
+,p_row_version_number=>37
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5855798280787844)
+,p_module_id=>wwv_flow_api.id(5853900582666794)
+,p_uri_template=>'json/create'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5855819989797160)
+,p_template_id=>wwv_flow_api.id(5855798280787844)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'POST'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_COMPETENCIA_NIVEL.SP_COMPT_NIVEL_CREATE',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :comptid,',
+'    :nivelid',
+');',
+'END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5856127164800127)
+,p_handler_id=>wwv_flow_api.id(5855819989797160)
+,p_name=>'comptid'
+,p_bind_variable_name=>'comptid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5855923007798135)
+,p_handler_id=>wwv_flow_api.id(5855819989797160)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5856215869801036)
+,p_handler_id=>wwv_flow_api.id(5855819989797160)
+,p_name=>'nivelid'
+,p_bind_variable_name=>'nivelid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5856008155799152)
+,p_handler_id=>wwv_flow_api.id(5855819989797160)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5860736681352957)
+,p_module_id=>wwv_flow_api.id(5853900582666794)
+,p_uri_template=>'json/delete'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5860858088356188)
+,p_template_id=>wwv_flow_api.id(5860736681352957)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'DELETE'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_COMPETENCIA_NIVEL.SP_COMPT_NIVEL_DELETE_ID',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :comptid,',
+'    :nivelid',
+');',
+'END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5861155336359048)
+,p_handler_id=>wwv_flow_api.id(5860858088356188)
+,p_name=>'comptid'
+,p_bind_variable_name=>'comptid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5860985307357084)
+,p_handler_id=>wwv_flow_api.id(5860858088356188)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5861256810359910)
+,p_handler_id=>wwv_flow_api.id(5860858088356188)
+,p_name=>'nivelid'
+,p_bind_variable_name=>'nivelid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5861040570358063)
+,p_handler_id=>wwv_flow_api.id(5860858088356188)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5856792281145632)
+,p_module_id=>wwv_flow_api.id(5853900582666794)
+,p_uri_template=>'json/read_all'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5856855829149250)
+,p_template_id=>wwv_flow_api.id(5856792281145632)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'POST'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_COMPETENCIA_NIVEL.SP_COMPT_NIVEL_READ_ALL',
+'(',
+'    :idusuario,',
+'    :token',
+');    ',
+'END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5856929007150150)
+,p_handler_id=>wwv_flow_api.id(5856855829149250)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5857047936150904)
+,p_handler_id=>wwv_flow_api.id(5856855829149250)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5858629604242077)
+,p_module_id=>wwv_flow_api.id(5853900582666794)
+,p_uri_template=>'json/read_competencia'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5858744996244906)
+,p_template_id=>wwv_flow_api.id(5858629604242077)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'POST'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_COMPETENCIA_NIVEL.SP_COMPT_NIVEL_READ_COMPT',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :comptid',
+');    ',
+'END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5859007880247810)
+,p_handler_id=>wwv_flow_api.id(5858744996244906)
+,p_name=>'comptid'
+,p_bind_variable_name=>'comptid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5858803732245883)
+,p_handler_id=>wwv_flow_api.id(5858744996244906)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5858989257246901)
+,p_handler_id=>wwv_flow_api.id(5858744996244906)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5857586882198986)
+,p_module_id=>wwv_flow_api.id(5853900582666794)
+,p_uri_template=>'json/read_nivel'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5857608362207312)
+,p_template_id=>wwv_flow_api.id(5857586882198986)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'POST'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_COMPETENCIA_NIVEL.SP_COMPT_NIVEL_READ_NIVEL',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :nivelid',
+');    ',
+'END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5857753587208182)
+,p_handler_id=>wwv_flow_api.id(5857608362207312)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5857975940210026)
+,p_handler_id=>wwv_flow_api.id(5857608362207312)
+,p_name=>'nivelid'
+,p_bind_variable_name=>'nivelid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5857807555208974)
+,p_handler_id=>wwv_flow_api.id(5857608362207312)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5859582322311297)
+,p_module_id=>wwv_flow_api.id(5853900582666794)
+,p_uri_template=>'json/update'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5859608417315546)
+,p_template_id=>wwv_flow_api.id(5859582322311297)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'PUT'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_COMPETENCIA_NIVEL.SP_COMPT_NIVEL_UPDATE',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :comptid,',
+'    :nivelid,',
+'    :ncomptid,',
+'    :nnivelid',
+');',
+'END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5859935116318085)
+,p_handler_id=>wwv_flow_api.id(5859608417315546)
+,p_name=>'comptid'
+,p_bind_variable_name=>'comptid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5859735268316344)
+,p_handler_id=>wwv_flow_api.id(5859608417315546)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5860147233319892)
+,p_handler_id=>wwv_flow_api.id(5859608417315546)
+,p_name=>'ncomptid'
+,p_bind_variable_name=>'ncomptid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5860042461318970)
+,p_handler_id=>wwv_flow_api.id(5859608417315546)
+,p_name=>'nivelid'
+,p_bind_variable_name=>'nivelid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5860236849320864)
+,p_handler_id=>wwv_flow_api.id(5859608417315546)
+,p_name=>'nnivelid'
+,p_bind_variable_name=>'nnivelid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5859838417317180)
+,p_handler_id=>wwv_flow_api.id(5859608417315546)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+end;
+/
+begin
+wwv_flow_api.import_end(p_auto_install_sup_obj => nvl(wwv_flow_application_install.get_auto_install_sup_obj, false));
+commit;
+end;
+/
+--set verify on feedback on define on
+--prompt  ...done
+create or replace PACKAGE PKG_RESPUESTA 
+AS 
+PROCEDURE SP_RESPUESTA_CREATE 
+(
+    p_IDUSUARIO  IN USUARIO.ID%TYPE,
+    p_TOKEN      IN USUARIO.TOKEN%TYPE,
+    p_RESPUESTA  IN RESPUESTA.RESPUESTA%type,
+    p_PUNTOS     IN RESPUESTA.PUNTOS%type,
+    p_PREGUNTAID IN RESPUESTA.PREGUNTA_ID%type
+);
+ 
+PROCEDURE SP_RESPUESTA_READ_ALL 
+(
+    p_IDUSUARIO  IN USUARIO.ID%TYPE,
+    p_TOKEN      IN USUARIO.TOKEN%TYPE
+);
+ 
+PROCEDURE SP_RESPUESTA_READ_ID 
+(
+    p_IDUSUARIO  IN USUARIO.ID%TYPE,
+    p_TOKEN      IN USUARIO.TOKEN%TYPE,
+    p_id IN RESPUESTA.ID%TYPE
+);
+ 
+PROCEDURE SP_RESPUESTA_READ_PREGUNTA
+(
+    p_IDUSUARIO  IN USUARIO.ID%TYPE,
+    p_TOKEN      IN USUARIO.TOKEN%TYPE,
+    p_PREGUNTAID IN RESPUESTA.PREGUNTA_ID%TYPE
+);
+ 
+PROCEDURE SP_RESPUESTA_UPDATE
+(
+    p_IDUSUARIO  IN USUARIO.ID%TYPE,
+    p_TOKEN      IN USUARIO.TOKEN%TYPE,
+    p_id         IN RESPUESTA.ID%TYPE,
+    p_RESPUESTA  IN RESPUESTA.RESPUESTA%type,
+    p_PUNTOS     IN RESPUESTA.PUNTOS%type,
+    p_PREGUNTAID IN RESPUESTA.PREGUNTA_ID%type
+);
+ 
+PROCEDURE SP_RESPUESTA_DELETE_ID 
+(
+    p_IDUSUARIO  IN USUARIO.ID%TYPE,
+    p_TOKEN      IN USUARIO.TOKEN%TYPE,
+    p_id IN RESPUESTA.ID%TYPE
+);
+ 
+FUNCTION FN_TOKEN
+(
+  p_ID IN USUARIO.ID%TYPE,
+  p_TOKEN IN USUARIO.TOKEN%TYPE
+) RETURN INT;
+ 
+END PKG_RESPUESTA;
+/
+create or replace PACKAGE BODY PKG_RESPUESTA AS
+PROCEDURE SP_RESPUESTA_CREATE 
+(
+    p_IDUSUARIO  IN USUARIO.ID%TYPE,
+    p_TOKEN      IN USUARIO.TOKEN%TYPE,
+    p_RESPUESTA  IN RESPUESTA.RESPUESTA%type,
+    p_PUNTOS     IN RESPUESTA.PUNTOS%type,
+    p_PREGUNTAID IN RESPUESTA.PREGUNTA_ID%type
+) 
+IS
+ 
+total number;
+lastid number;
+expreg number;
+l_cursor SYS_REFCURSOR;
+ 
+BEGIN
+total := 0;
+lastid:=0;
+expreg:=0;
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+    SELECT COUNT(*) INTO total FROM RESPUESTA WHERE RESPUESTA LIKE UPPER(p_RESPUESTA);
+    SELECT COUNT(*) INTO expreg FROM PREGUNTA WHERE ID = p_PREGUNTAID;
+    IF total = 0  AND expreg = 1 THEN
+        INSERT INTO RESPUESTA (RESPUESTA,PUNTOS,PREGUNTA_ID,CREADO,MODIFICADO) 
+        VALUES (UPPER(p_RESPUESTA),p_PUNTOS,p_PREGUNTAID,SYSDATE,SYSDATE) 
+        RETURNING ID INTO lastid;
+        COMMIT;
+        
+        OPEN l_cursor FOR
+        SELECT 
+        r.id AS ID,
+        r.respuesta AS RESPUESTA,
+        r.puntos AS PUNTOS,
+        r.pregunta_id AS PREGUNTA_ID,
+        p.pregunta AS PREGUNTA_PREGUNTA,
+        r.modificado AS MODIFICADO,
+        r.desactivado AS DESACTIVADO,
+        r.activo AS ACTIVO
+        FROM  respuesta r 
+        INNER JOIN pregunta p
+        ON r.pregunta_id = p.id
+        WHERE r.id = lastid;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('respuesta', l_cursor);
+        APEX_JSON.close_object;
+    ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT  * FROM respuesta WHERE id = 0;
+        APEX_JSON.open_object;
+        APEX_JSON.write('respuesta', l_cursor);
+        APEX_JSON.close_object;  
+    END IF;  
+ELSE
+ 
+    OPEN l_cursor FOR
+    SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+    APEX_JSON.open_object;
+    APEX_JSON.write('RESPUESTA', l_cursor);
+    APEX_JSON.close_object;  
+ 
+END IF; 
+END SP_RESPUESTA_CREATE;
+ 
+PROCEDURE SP_RESPUESTA_READ_ALL 
+(
+  p_IDUSUARIO  IN USUARIO.ID%TYPE,
+  p_TOKEN      IN USUARIO.TOKEN%TYPE
+) 
+AS
+l_cursor SYS_REFCURSOR;
+BEGIN
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+        OPEN l_cursor FOR
+        SELECT 
+        r.id AS ID,
+        r.respuesta AS RESPUESTA,
+        r.puntos AS PUNTOS,
+        r.pregunta_id AS PREGUNTA_ID,
+        p.pregunta AS PREGUNTA_PREGUNTA,
+        r.modificado AS MODIFICADO,
+        r.desactivado AS DESACTIVADO,
+        r.activo AS ACTIVO
+        FROM  respuesta r 
+        INNER JOIN pregunta p
+        ON r.pregunta_id = p.id
+        ORDER BY r.id;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('respuesta', l_cursor);
+        APEX_JSON.close_object;
+    
+ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+        APEX_JSON.open_object;
+        APEX_JSON.write('RESPUESTA', l_cursor);
+        APEX_JSON.close_object;  
+ 
+END IF; 
+ 
+ 
+ 
+END SP_RESPUESTA_READ_ALL; 
+ 
+PROCEDURE SP_RESPUESTA_READ_ID
+(
+  p_IDUSUARIO  IN USUARIO.ID%TYPE,
+  p_TOKEN      IN USUARIO.TOKEN%TYPE,
+  p_id IN RESPUESTA.ID%TYPE
+) 
+AS
+ 
+l_cursor SYS_REFCURSOR;
+BEGIN
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+        OPEN l_cursor FOR
+        SELECT 
+        r.id AS ID,
+        r.respuesta AS RESPUESTA,
+        r.puntos AS PUNTOS,
+        r.pregunta_id AS PREGUNTA_ID,
+        p.pregunta AS PREGUNTA_PREGUNTA,
+        r.modificado AS MODIFICADO,
+        r.desactivado AS DESACTIVADO,
+        r.activo AS ACTIVO
+        FROM  respuesta r 
+        INNER JOIN pregunta p
+        ON r.pregunta_id = p.id
+        WHERE r.id=p_id;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('respuesta', l_cursor);
+        APEX_JSON.close_object;
+    
+ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+        APEX_JSON.open_object;
+        APEX_JSON.write('RESPUESTA', l_cursor);
+        APEX_JSON.close_object;  
+ 
+END IF; 
+ 
+END SP_RESPUESTA_READ_ID;
+ 
+PROCEDURE SP_RESPUESTA_READ_PREGUNTA
+(
+  p_IDUSUARIO  IN USUARIO.ID%TYPE,
+  p_TOKEN      IN USUARIO.TOKEN%TYPE,
+  p_PREGUNTAID IN RESPUESTA.PREGUNTA_ID%TYPE
+) 
+AS
+ 
+l_cursor SYS_REFCURSOR;
+BEGIN
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+        OPEN l_cursor FOR
+        SELECT 
+        r.id AS ID,
+        r.respuesta AS RESPUESTA,
+        r.puntos AS PUNTOS,
+        r.pregunta_id AS PREGUNTA_ID,
+        p.pregunta AS PREGUNTA_PREGUNTA,
+        r.modificado AS MODIFICADO,
+        r.desactivado AS DESACTIVADO,
+        r.activo AS ACTIVO
+        FROM  respuesta r 
+        INNER JOIN pregunta p
+        ON r.pregunta_id = p.id
+        WHERE r.pregunta_id=p_PREGUNTAID
+        ORDER BY r.id;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('respuesta', l_cursor);
+        APEX_JSON.close_object;
+    
+ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+        APEX_JSON.open_object;
+        APEX_JSON.write('RESPUESTA', l_cursor);
+        APEX_JSON.close_object;  
+ 
+END IF; 
+ 
+END SP_RESPUESTA_READ_PREGUNTA;  
+  
+PROCEDURE SP_RESPUESTA_UPDATE 
+(
+  p_IDUSUARIO  IN USUARIO.ID%TYPE,
+  p_TOKEN      IN USUARIO.TOKEN%TYPE,
+  p_id         IN RESPUESTA.ID%TYPE,
+  p_RESPUESTA  IN RESPUESTA.RESPUESTA%type,
+  p_PUNTOS     IN RESPUESTA.PUNTOS%type,
+  p_PREGUNTAID IN RESPUESTA.PREGUNTA_ID%type
+) 
+ 
+IS
+ 
+total number;
+lastid number;
+expreg number;
+l_cursor SYS_REFCURSOR;
+ 
+BEGIN
+total := 0;
+lastid:=0;
+expreg:=0;
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+    SELECT COUNT(*) INTO total FROM RESPUESTA WHERE ID = p_id;
+    SELECT COUNT(*) INTO expreg FROM PREGUNTA WHERE ID = p_PREGUNTAID;
+    IF total = 1  AND expreg = 1 THEN
+        
+        UPDATE RESPUESTA SET 
+        RESPUESTA = UPPER(p_RESPUESTA),
+        PUNTOS = p_PUNTOS,
+        PREGUNTA_ID = p_PREGUNTAID,
+        MODIFICADO = SYSDATE
+        WHERE ID = p_id
+        RETURNING ID INTO lastid;
+        COMMIT;
+        
+        OPEN l_cursor FOR
+        SELECT 
+        r.id AS ID,
+        r.respuesta AS RESPUESTA,
+        r.puntos AS PUNTOS,
+        r.pregunta_id AS PREGUNTA_ID,
+        p.pregunta AS PREGUNTA_PREGUNTA,
+        r.modificado AS MODIFICADO,
+        r.desactivado AS DESACTIVADO,
+        r.activo AS ACTIVO
+        FROM  respuesta r 
+        INNER JOIN pregunta p
+        ON r.pregunta_id = p.id
+        WHERE r.id = lastid;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('respuesta', l_cursor);
+        APEX_JSON.close_object;
+    ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT  * FROM respuesta WHERE id = 0;
+        APEX_JSON.open_object;
+        APEX_JSON.write('respuesta', l_cursor);
+        APEX_JSON.close_object;  
+    END IF;  
+ELSE
+ 
+    OPEN l_cursor FOR
+    SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+    APEX_JSON.open_object;
+    APEX_JSON.write('RESPUESTA', l_cursor);
+    APEX_JSON.close_object;  
+ 
+END IF; 
+ 
+END SP_RESPUESTA_UPDATE;  
+ 
+PROCEDURE SP_RESPUESTA_DELETE_ID 
+(
+  p_IDUSUARIO  IN USUARIO.ID%TYPE,
+  p_TOKEN      IN USUARIO.TOKEN%TYPE,
+  p_id IN RESPUESTA.ID%TYPE
+) 
+AS
+ 
+total number;
+lastid number;
+ 
+l_cursor SYS_REFCURSOR;
+ 
+BEGIN
+total := 0;
+lastid:=0;
+ 
+ 
+IF FN_TOKEN(p_IDUSUARIO,p_TOKEN)=1 then
+ 
+    SELECT COUNT(*) INTO total FROM RESPUESTA WHERE ID = p_id;
+    IF total = 1 THEN
+        
+        UPDATE RESPUESTA SET 
+        DESACTIVADO = SYSDATE,
+        ACTIVO = 0
+        WHERE ID = p_id
+        RETURNING ID INTO lastid;
+        COMMIT;
+        
+        OPEN l_cursor FOR
+        SELECT 
+        r.id AS ID,
+        r.respuesta AS RESPUESTA,
+        r.puntos AS PUNTOS,
+        r.pregunta_id AS PREGUNTA_ID,
+        p.pregunta AS PREGUNTA_PREGUNTA,
+        r.modificado AS MODIFICADO,
+        r.desactivado AS DESACTIVADO,
+        r.activo AS ACTIVO
+        FROM  respuesta r 
+        INNER JOIN pregunta p
+        ON r.pregunta_id = p.id
+        WHERE r.id = lastid;   
+        APEX_JSON.open_object;
+        APEX_JSON.write('respuesta', l_cursor);
+        APEX_JSON.close_object;
+    ELSE
+ 
+        OPEN l_cursor FOR
+        SELECT  * FROM respuesta WHERE id = 0;
+        APEX_JSON.open_object;
+        APEX_JSON.write('respuesta', l_cursor);
+        APEX_JSON.close_object;  
+    END IF;  
+ELSE
+ 
+    OPEN l_cursor FOR
+    SELECT 'ACCESO NO AUTORIZADO' AS ADVERTENCIA FROM DUAL;
+    APEX_JSON.open_object;
+    APEX_JSON.write('RESPUESTA', l_cursor);
+    APEX_JSON.close_object;  
+ 
+END IF; 
+ 
+END SP_RESPUESTA_DELETE_ID;
+  
+--------FUNCION PARA VALIDAR TOKEN
+FUNCTION FN_TOKEN
+(
+    p_ID IN USUARIO.ID%TYPE,
+    p_TOKEN IN USUARIO.TOKEN%TYPE
+) RETURN INT 
+IS
+token varchar(255):=null;
+res int(1):=0;
+ 
+BEGIN
+    SELECT token INTO token FROM usuario WHERE id = p_ID;
+    IF token = p_token THEN 
+    res:=1;
+END IF;
+ 
+return res;
+END;
+ 
+END PKG_RESPUESTA;
+/
+--set define off verify off feedback off
+--whenever sqlerror exit sql.sqlcode rollback
+--------------------------------------------------------------------------------
+--
+-- ORACLE Application Express (APEX) export file
+--
+-- You should run the script connected to SQL*Plus as the Oracle user
+-- APEX_050000 or as the owner (parsing schema) of the application.
+--
+-- NOTE: Calls to apex_application_install override the defaults below.
+--
+--------------------------------------------------------------------------------
+begin
+wwv_flow_api.import_begin (
+ p_version_yyyy_mm_dd=>'2013.01.01'
+,p_default_workspace_id=>100000
+);
+end;
+/
+--prompt  Set Application Offset...
+begin
+   -- -- SET APPLICATION OFFSET
+   wwv_flow_api.g_id_offset := nvl(wwv_flow_application_install.get_offset,0);
+null;
+end;
+/
+begin
+wwv_flow_api.remove_restful_service(
+ p_id=>wwv_flow_api.id(5862708326164686)
+,p_name=>'respuesta'
+);
+ 
+end;
+/
+--prompt --application/restful_services/respuesta
+begin
+wwv_flow_api.create_restful_module(
+ p_id=>wwv_flow_api.id(5862708326164686)
+,p_name=>'respuesta'
+,p_uri_prefix=>'respuesta/'
+,p_parsing_schema=>'WFBS'
+,p_items_per_page=>25
+,p_status=>'PUBLISHED'
+,p_row_version_number=>37
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5862876906170214)
+,p_module_id=>wwv_flow_api.id(5862708326164686)
+,p_uri_template=>'json/create'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5863855418294783)
+,p_template_id=>wwv_flow_api.id(5862876906170214)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'POST'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_RESPUESTA.SP_RESPUESTA_CREATE',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :respuesta,',
+'    :puntos,',
+'    :preguntaid',
+');',
+'END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5863930766295632)
+,p_handler_id=>wwv_flow_api.id(5863855418294783)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5864362782299076)
+,p_handler_id=>wwv_flow_api.id(5863855418294783)
+,p_name=>'preguntaid'
+,p_bind_variable_name=>'preguntaid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5864214734298131)
+,p_handler_id=>wwv_flow_api.id(5863855418294783)
+,p_name=>'puntos'
+,p_bind_variable_name=>'puntos'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5864148518297352)
+,p_handler_id=>wwv_flow_api.id(5863855418294783)
+,p_name=>'respuesta'
+,p_bind_variable_name=>'respuesta'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5864072097296475)
+,p_handler_id=>wwv_flow_api.id(5863855418294783)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5869833350664500)
+,p_module_id=>wwv_flow_api.id(5862708326164686)
+,p_uri_template=>'json/delete'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5869994287666571)
+,p_template_id=>wwv_flow_api.id(5869833350664500)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'DELETE'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_RESPUESTA.SP_RESPUESTA_DELETE_ID',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :id',
+');',
+'END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5870259846669568)
+,p_handler_id=>wwv_flow_api.id(5869994287666571)
+,p_name=>'id'
+,p_bind_variable_name=>'id'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5870038156667527)
+,p_handler_id=>wwv_flow_api.id(5869994287666571)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5870161443668424)
+,p_handler_id=>wwv_flow_api.id(5869994287666571)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5865132726396824)
+,p_module_id=>wwv_flow_api.id(5862708326164686)
+,p_uri_template=>'json/read_all'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5865206798399283)
+,p_template_id=>wwv_flow_api.id(5865132726396824)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'POST'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_RESPUESTA.SP_RESPUESTA_READ_ALL',
+'(',
+'    :idusuario,',
+'    :token',
+');',
+'END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5865341485400211)
+,p_handler_id=>wwv_flow_api.id(5865206798399283)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5865439485401066)
+,p_handler_id=>wwv_flow_api.id(5865206798399283)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5866702102452288)
+,p_module_id=>wwv_flow_api.id(5862708326164686)
+,p_uri_template=>'json/read_id'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5866829464458471)
+,p_template_id=>wwv_flow_api.id(5866702102452288)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'POST'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_RESPUESTA.SP_RESPUESTA_READ_ID',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :id',
+');',
+'END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5867131402461316)
+,p_handler_id=>wwv_flow_api.id(5866829464458471)
+,p_name=>'id'
+,p_bind_variable_name=>'id'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5866986554459420)
+,p_handler_id=>wwv_flow_api.id(5866829464458471)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5867065945460238)
+,p_handler_id=>wwv_flow_api.id(5866829464458471)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5867594358511836)
+,p_module_id=>wwv_flow_api.id(5862708326164686)
+,p_uri_template=>'json/read_pregunta'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5867639915514809)
+,p_template_id=>wwv_flow_api.id(5867594358511836)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'POST'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_RESPUESTA.SP_RESPUESTA_READ_PREGUNTA',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :preguntaid',
+');',
+'END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5867799454525816)
+,p_handler_id=>wwv_flow_api.id(5867639915514809)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5867979682528680)
+,p_handler_id=>wwv_flow_api.id(5867639915514809)
+,p_name=>'preguntaid'
+,p_bind_variable_name=>'preguntaid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5867885996526706)
+,p_handler_id=>wwv_flow_api.id(5867639915514809)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_template(
+ p_id=>wwv_flow_api.id(5868517574596557)
+,p_module_id=>wwv_flow_api.id(5862708326164686)
+,p_uri_template=>'json/update'
+,p_priority=>0
+,p_etag_type=>'HASH'
+);
+wwv_flow_api.create_restful_handler(
+ p_id=>wwv_flow_api.id(5868709547603591)
+,p_template_id=>wwv_flow_api.id(5868517574596557)
+,p_source_type=>'PLSQL'
+,p_format=>'DEFAULT'
+,p_method=>'PUT'
+,p_require_https=>'NO'
+,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'BEGIN PKG_RESPUESTA.SP_RESPUESTA_UPDATE',
+'(',
+'    :idusuario,',
+'    :token,',
+'    :id,',
+'    :respuesta,',
+'    :puntos,',
+'    :preguntaid',
+');',
+'END;'))
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5869024942607262)
+,p_handler_id=>wwv_flow_api.id(5868709547603591)
+,p_name=>'id'
+,p_bind_variable_name=>'id'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5868891515604247)
+,p_handler_id=>wwv_flow_api.id(5868709547603591)
+,p_name=>'idusuario'
+,p_bind_variable_name=>'idusuario'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5869392449618492)
+,p_handler_id=>wwv_flow_api.id(5868709547603591)
+,p_name=>'preguntaid'
+,p_bind_variable_name=>'preguntaid'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5869231378617496)
+,p_handler_id=>wwv_flow_api.id(5868709547603591)
+,p_name=>'puntos'
+,p_bind_variable_name=>'puntos'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5869121848608142)
+,p_handler_id=>wwv_flow_api.id(5868709547603591)
+,p_name=>'respuesta'
+,p_bind_variable_name=>'respuesta'
+,p_source_type=>'HEADER'
+,p_access_method=>'IN'
+,p_param_type=>'STRING'
+);
+wwv_flow_api.create_restful_param(
+ p_id=>wwv_flow_api.id(5868950203606378)
+,p_handler_id=>wwv_flow_api.id(5868709547603591)
+,p_name=>'token'
+,p_bind_variable_name=>'token'
 ,p_source_type=>'HEADER'
 ,p_access_method=>'IN'
 ,p_param_type=>'STRING'
