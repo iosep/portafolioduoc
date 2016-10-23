@@ -13,8 +13,6 @@ import java.util.Date;
  */
 public class AreaO {
 
-    static int fakeId = 0;
-
     private int id;
     private String nombre;
     private String sigla;
@@ -27,17 +25,10 @@ public class AreaO {
     public AreaO() {
     }
 
-    public AreaO(String nombre, String sigla, String descripcion, int activo, Date creado, Date modificado, Date desactivado) {
-//fake area id
-        this.id = ++fakeId;
-
+    public AreaO(String nombre, String sigla, String descripcion) {
         this.nombre = nombre;
         this.sigla = sigla;
         this.descripcion = descripcion;
-        this.activo = activo;
-        this.creado = creado;
-        this.modificado = modificado;
-        this.desactivado = desactivado;
     }
 
     public int getId() {

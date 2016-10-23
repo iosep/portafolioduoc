@@ -8,7 +8,6 @@ package PL;
 import CTL.AreaCTL;
 import FN.Validar;
 import O.AreaO;
-import java.util.Date;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -31,8 +30,7 @@ import javafx.stage.Stage;
 public class ModificarArea {
 
     private final AreaCTL areaCtl = new AreaCTL();
-    private static AreaO a0;
-    static boolean vb = false;
+    private AreaO a0;
 
     public void display(int idArea) {
         Stage window = new Stage();
@@ -55,7 +53,7 @@ public class ModificarArea {
 
         final Text msj = new Text();
         msj.getStyleClass().add("action");
-        grid.add(msj, 0, 8, 2, 1);
+        grid.add(msj, 0, 9, 2, 1);
 
         a0 = areaCtl.getAreaById(idArea);
 
@@ -80,20 +78,20 @@ public class ModificarArea {
         grid.add(siglaTxt, 1, 6);
 
         Label descLbl = new Label("Descripción:");
-        grid.add(descLbl, 0, 6);
+        grid.add(descLbl, 0, 7);
         TextField descTxt = new TextField(a0.getDescripcion());
         descTxt.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
             }
         });
-        grid.add(siglaTxt, 1, 6);
+        grid.add(descTxt, 1, 7);
 
         Button btn = new Button("MODIFICAR");
         HBox hbBtn = new HBox();
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 9, 1, 4);
+        grid.add(hbBtn, 1, 10, 1, 4);
 
         btn.setOnAction(e -> {
             Validar v = new Validar();
@@ -107,9 +105,9 @@ public class ModificarArea {
                 msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Descripción");
             } else {
-                Date now = new Date();
-                vb = areaCtl.addAreaCTL(new AreaO(nombreTxt.getText().trim(), siglaTxt.getText().trim(), descTxt.getText().trim(), 1, now, null, null));
-                if (vb) {
+                AreaO a1 = new AreaO(nombreTxt.getText().trim(), siglaTxt.getText().trim(), descTxt.getText().trim());
+                a1.setId(idArea);
+                if (areaCtl.modificarArea(a1)) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(window);
                     alert.setTitle("Área Modificada");

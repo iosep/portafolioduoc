@@ -421,7 +421,8 @@ public class Admin {
             final TableRow<AreaO> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
-            final MenuItem eliminarMenuItem = new MenuItem("Desactivar");
+            final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
+            final MenuItem activarMenuItem = new MenuItem("Activar");
             final MenuItem verCompetenciasMenu = new MenuItem("Ver Competencias");
             final MenuItem verUsuariosMenu = new MenuItem("Ver Usuarios");
             //modificar            
@@ -431,9 +432,30 @@ public class Admin {
                 btnArea.fire();
             });
             //desactivar
-            eliminarMenuItem.setOnAction(event -> {
-                //tableUsers.getItems().remove(row.getItem());
-                System.out.println("Desactivar area id: " + row.getItem().getId());
+            desactivarMenuItem.setOnAction(event -> {
+                if (row.getItem().getActivo() == 0) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Información");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Área ya se encuentra desactivada");
+                    alert.showAndWait();
+                } else {
+                    areasCtl.desactivarArea(row.getItem().getId());
+                    btnArea.fire();
+                }
+            });
+            activarMenuItem.setOnAction(event -> {
+                if (row.getItem().getActivo() == 0) {
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Información");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Área ya se encuentra activada");
+                    alert.showAndWait();
+                }
             });
             verCompetenciasMenu.setOnAction(ee -> {
                 CrearAreaCompetencia acw = new CrearAreaCompetencia();
@@ -445,7 +467,7 @@ public class Admin {
                 auw.display(row.getItem().getId());
                 btnArea.fire();
             });
-            contextMenu.getItems().addAll(modificarMenuItem, eliminarMenuItem, new SeparatorMenuItem(), verCompetenciasMenu, verUsuariosMenu);
+            contextMenu.getItems().addAll(activarMenuItem, modificarMenuItem, desactivarMenuItem, new SeparatorMenuItem(), verCompetenciasMenu, verUsuariosMenu);
             // Set context menu on row, but use a binding to make it only show for non-empty rows:
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
@@ -475,13 +497,10 @@ public class Admin {
                     } else {
                         switch (item) {
                             case 0:
-                                setText("Inactivo");
+                                setText("INACTIVO");
                                 break;
                             case 1:
-                                setText("Activo");
-                                break;
-                            default:
-                                setText("Estado Desconocido");
+                                setText("ACTIVO");
                                 break;
                         }
                     }

@@ -158,6 +158,7 @@ public class UsuarioDAL {
         jsonPut.put("rolid", obj.getRolid());
         try {
             String response = cx.put("usuario/json/update", jsonPut);
+            System.out.println("updateUser response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("usuario").length() > 0) {
                 return true;
@@ -221,6 +222,7 @@ public class UsuarioDAL {
         jsonPost.put("token", VariablesDAL.token);
         try {
             String response = cx.post("usuario/json/read_jefes", jsonPost);
+            System.out.println("getJefes response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("jefes").length() > 0) {
                 for (int i = 0; i < jsonResponse.getJSONArray("jefes").length(); i++) {

@@ -83,7 +83,7 @@ public class CrearArea {
                 msj.setText("");
             }
         });
-        grid.add(siglaTxt, 1, 7);
+        grid.add(descTxt, 1, 7);
 
         Button btn = new Button("CREAR");
         HBox hbBtn = new HBox();
@@ -103,8 +103,7 @@ public class CrearArea {
                 msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Descripción");
             } else {
-                Date now = new Date();
-                vb = actl.addAreaCTL(new AreaO(nombreTxt.getText().trim(), siglaTxt.getText().trim(), descTxt.getText().trim(), 1, now, null, null));
+                vb = actl.addAreaCTL(new AreaO(nombreTxt.getText().trim(), siglaTxt.getText().trim(), descTxt.getText().trim()));
                 if (vb) {
                     nombreTxt.clear();
                     siglaTxt.clear();

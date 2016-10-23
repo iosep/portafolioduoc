@@ -81,7 +81,7 @@ public class ModificarUsuario {
         Label pw = new Label("Contraseña:");
         grid.add(pw, 0, 5);
         PasswordField pwBox = new PasswordField();
-        pwBox.setText(u0.getRut().substring(0, 5));
+        pwBox.setText("12345");
         pwBox.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
@@ -92,7 +92,7 @@ public class ModificarUsuario {
         Label pw2 = new Label("Repetir Contraseña:");
         grid.add(pw2, 0, 6);
         PasswordField pwBox2 = new PasswordField();
-        pwBox2.setText(u0.getRut().substring(0, 5));
+        pwBox2.setText("12345");
         pwBox2.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
@@ -238,7 +238,7 @@ public class ModificarUsuario {
                         boo = true;
                     }
                     if (boo) {
-                        String clave = u0.getRut().substring(0, 5);
+                        String clave = "12345";
                         boolean add = true;
                         if (pwBox.getLength() > 0 || pwBox2.getLength() > 0) {
                             add = false;
@@ -255,7 +255,6 @@ public class ModificarUsuario {
                         }
                         if (add) {
                             int fono = Integer.parseInt(txtFono.getText());
-                            Date now = new Date();
                             String sSexo = "";
                             switch (cbSexo.getSelectionModel().getSelectedIndex()) {
                                 case 0:

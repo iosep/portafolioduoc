@@ -7,7 +7,6 @@ package CTL;
 
 import DAL.AreaDAL;
 import O.AreaO;
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -19,35 +18,24 @@ public class AreaCTL {
 
     private final AreaDAL ad = new AreaDAL();
 
-    public ArrayList<AreaO> getAreas() {
-        ArrayList<AreaO> al = new ArrayList<>();
-        return al;
-    }
-
     public AreaO getAreaById(int id) {
         return ad.getAreaById(id);
     }
 
-    public AreaO getAreaByNombre(String nombre) {
-        AreaO result = null;
-        for (AreaO item : ad.getAreas()) {
-            if (item.getNombre().equals(nombre)) {
-                result = item;
-            }
-        }
-        return result;
-    }
-
     public ObservableList<AreaO> getAreasFX() {
-        ObservableList<AreaO> areas = FXCollections.observableArrayList();
-        ad.getAreas().stream().forEach((a) -> {
-            areas.add(a);
-        });
+        ObservableList<AreaO> areas = FXCollections.observableArrayList(ad.getAreas());
         return areas;
     }
 
-    public boolean addAreaCTL(AreaO afx) {
-        return ad.addArea(afx);
+    public boolean addAreaCTL(AreaO obj) {
+        return ad.addArea(obj);
     }
 
+    public boolean modificarArea(AreaO obj) {
+        return ad.updateArea(obj);
+    }
+
+    public boolean desactivarArea(int id) {
+        return ad.deleteArea(id);
+    }
 }
