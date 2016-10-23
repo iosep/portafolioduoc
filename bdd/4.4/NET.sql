@@ -6,7 +6,7 @@ CREATE TABLE AplicacionPerfil
     DateCreated DATE ,
     UserUpdated VARCHAR2(50) ,
     DateUpdated DATE ,
-    PRIMARY KEY( IdApp )
+    PRIMARY KEY( IdApp,IdPerfil)
   );
   
 CREATE TABLE Aplicacion
@@ -48,34 +48,71 @@ CREATE TABLE Sesion
     ses_fecha_expiracion    DATE ,
     PRIMARY KEY( sesID )
   );
-create or replace PACKAGE PKG_NET 
-AS  
-PROCEDURE STI_S_AppPorPerfil 
-( 
-    v_Perfil NUMBER, 
-    v_Tipo   VARCHAR2, 
-    v_App    VARCHAR2 
-); 
+Insert into APLICACION (IDAPP,APP,NOMAPP,IDPADRE,TIPO,URL,PRIORIDAD,ACTIVO,ACCIONFLUJO,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('0','.0.','SistemaEncuesta','-1','Sitio','#','1','A',null,null,null,null,null);
+Insert into APLICACION (IDAPP,APP,NOMAPP,IDPADRE,TIPO,URL,PRIORIDAD,ACTIVO,ACCIONFLUJO,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('1','.0.1.','Administración','0','Menu','#','1','A',null,null,null,null,null);
+Insert into APLICACION (IDAPP,APP,NOMAPP,IDPADRE,TIPO,URL,PRIORIDAD,ACTIVO,ACCIONFLUJO,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('2','.0.2.','Encuesta','0','Menu','#','2','A',null,null,null,null,null);
+Insert into APLICACION (IDAPP,APP,NOMAPP,IDPADRE,TIPO,URL,PRIORIDAD,ACTIVO,ACCIONFLUJO,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('3','.0.3.','Reportes','0','Menu','#','3','A',null,null,null,null,null);
+Insert into APLICACION (IDAPP,APP,NOMAPP,IDPADRE,TIPO,URL,PRIORIDAD,ACTIVO,ACCIONFLUJO,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('11','.0.1.11.','Usuario','1','Menu','frm_usuario.aspx','1','A',null,null,null,null,null);
+Insert into APLICACION (IDAPP,APP,NOMAPP,IDPADRE,TIPO,URL,PRIORIDAD,ACTIVO,ACCIONFLUJO,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('12','.0.1.12.','Area','1','Menu','frm_area.aspx','2','A',null,null,null,null,null);
+Insert into APLICACION (IDAPP,APP,NOMAPP,IDPADRE,TIPO,URL,PRIORIDAD,ACTIVO,ACCIONFLUJO,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('13','.0.1.13.','Competencia','1','Menu','frm_competencia.aspx','3','A',null,null,null,null,null);
+Insert into APLICACION (IDAPP,APP,NOMAPP,IDPADRE,TIPO,URL,PRIORIDAD,ACTIVO,ACCIONFLUJO,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('14','.0.1.14.','Periodo','1','Menu','frm_Periodo.aspx','4','A',null,null,null,null,null);
+Insert into APLICACION (IDAPP,APP,NOMAPP,IDPADRE,TIPO,URL,PRIORIDAD,ACTIVO,ACCIONFLUJO,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('15','.0.1.15.','Nivel','1','Menu','frm_Nivel.aspx','5','A',null,null,null,null,null);
+Insert into APLICACION (IDAPP,APP,NOMAPP,IDPADRE,TIPO,URL,PRIORIDAD,ACTIVO,ACCIONFLUJO,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('16','.0.1.16.','Pregunta','1','Menu','frm_Pregunta.aspx','6','A',null,null,null,null,null);
+Insert into APLICACION (IDAPP,APP,NOMAPP,IDPADRE,TIPO,URL,PRIORIDAD,ACTIVO,ACCIONFLUJO,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('17','.0.1.17.','Respuesta','1','Menu','frm_Respuesta.aspx','7','A',null,null,null,null,null);
+Insert into APLICACION (IDAPP,APP,NOMAPP,IDPADRE,TIPO,URL,PRIORIDAD,ACTIVO,ACCIONFLUJO,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('18','.0.1.18.','Observaciones','1','Menu','frm_Observaciones.aspx','8','A',null,null,null,null,null);
+
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('0','1',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('0','2',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('1','1',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('1','2',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('2','1',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('2','2',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('3','1',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('3','2',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('11','1',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('12','1',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('13','1',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('14','1',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('15','1',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('16','1',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('17','1',null,null,null,null);
+Insert into APLICACIONPERFIL (IDAPP,IDPERFIL,USERCREATED,DATECREATED,USERUPDATED,DATEUPDATED) values ('18','1',null,null,null,null);
+
+create or replace PACKAGE PKG_NET  
+AS   
+PROCEDURE STI_S_AppPorPerfil  
+(  
+    v_Perfil NUMBER,  
+    v_Tipo   VARCHAR2,  
+    v_App    VARCHAR2  
+);  
+   
+PROCEDURE STI_SESION  
+(  
+    v_Tipo               VARCHAR2,  
+    v_usuario            VARCHAR2,  
+    v_clave              VARCHAR2,	  
+    v_ses_remote_addr    VARCHAR2,  
+    v_ses_remote_user    VARCHAR2,  
+    v_ses_remote_host    VARCHAR2,  
+    v_ses_user_agent     VARCHAR2,  
+    v_ses_language       VARCHAR2,  
+    v_ses_referer        VARCHAR2,  
+    v_ses_cookie         VARCHAR2,  
+    v_ses_host           VARCHAR2,  
+    v_sesID              VARCHAR2,  
+    v_usuID              NUMBER,    
+    v_usu_ultimo_ingreso DATE  
+);  
+
+FUNCTION FN_HASH
+(
+  v_usuario in varchar2, 
+  v_clave in varchar2
+) RETURN VARCHAR2;
   
-PROCEDURE STI_SESION 
-( 
-    v_Tipo               VARCHAR2, 
-    v_usuario            VARCHAR2, 
-    v_clave              VARCHAR2,	 
-    v_ses_remote_addr    VARCHAR2, 
-    v_ses_remote_user    VARCHAR2, 
-    v_ses_remote_host    VARCHAR2, 
-    v_ses_user_agent     VARCHAR2, 
-    v_ses_language       VARCHAR2, 
-    v_ses_referer        VARCHAR2, 
-    v_ses_cookie         VARCHAR2, 
-    v_ses_host           VARCHAR2, 
-    v_sesID              VARCHAR2, 
-    v_usuID              NUMBER,   
-    v_usu_ultimo_ingreso DATE 
-); 
+END PKG_NET;  
  
-END PKG_NET; 
 /
 create or replace PACKAGE BODY PKG_NET AS 
   
@@ -129,8 +166,10 @@ PROCEDURE STI_SESION
     v_usu_ultimo_ingreso DATE
 )  
 is  
-l_cursor SYS_REFCURSOR;  
+l_cursor SYS_REFCURSOR;
+clave_hash varchar2(4000);
 begin 
+clave_hash:=Fn_Hash(v_usuario,v_clave);
 	IF v_Tipo = 'Crear' THEN 
     DECLARE V_COUNT NUMBER(10,0); 
     v_usuID2 number(10, 0); 
@@ -141,8 +180,8 @@ begin
           INNER JOIN ROL ON U.ROL_ID = ROL.ID 
           WHERE U.RUT = v_usuario 
 					--AND 1 = pwdcompare(v_clave, usu_contrasena, 0) 
-					AND U.CLAVE = v_clave 
-					AND U.ACTIVO = 0; 
+					AND U.CLAVE = clave_hash 
+					AND U.ACTIVO = 1; 
 			IF V_COUNT = 0 THEN 
 				BEGIN 
 				--registrar login fallido 
@@ -195,7 +234,7 @@ begin
       FROM Usuario U 
 			WHERE U.RUT = v_usuario 
 				--AND 1 = pwdcompare(v_clave, usu_contrasena, 0) 
-				AND U.CLAVE = v_clave; 
+				AND U.CLAVE = clave_hash; 
 			IF SQL%ROWCOUNT > 0 THEN 
 				BEGIN 
 					INSERT 
@@ -235,7 +274,7 @@ begin
 					SELECT	v_usuID2 as usuID, 
 							v_sesID2 as sesID, 
 							'true' as isOK , 
-							'Su usuario o clave no son correctos' as MensajeError  
+							'Acceso Autorizado' as Mensaje  
 					FROM DUAL; 
 					APEX_JSON.open_object;  
 					APEX_JSON.write('Datos', l_cursor);  
@@ -393,7 +432,16 @@ begin
 		END; 
 	END IF; 
 END STI_SESION; 
-  
+
+--------FUNCION PARA CREAR EL HASH DE LA CLAVE DEL USUARIO  
+FUNCTION FN_HASH (v_usuario in varchar2, v_clave in varchar2) RETURN VARCHAR2 is
+   l_password VARCHAR2(4000);
+   l_salt VARCHAR2(4000) := 'ISYmHMtSrjFmT2nEZUvEU5LA3jrV3i';
+BEGIN
+   l_password := utl_raw.cast_to_raw(dbms_obfuscation_toolkit.md5(input_string => v_clave || substr(l_salt,10,13) || v_usuario || substr(l_salt, 4,10)));
+   RETURN l_password;
+END;
+
 END PKG_NET; 
 /
 --set define off verify off feedback off
@@ -439,7 +487,7 @@ wwv_flow_api.create_restful_module(
 ,p_parsing_schema=>'WFBS'
 ,p_items_per_page=>25
 ,p_status=>'PUBLISHED'
-,p_row_version_number=>11
+,p_row_version_number=>1
 );
 wwv_flow_api.create_restful_template(
  p_id=>wwv_flow_api.id(5987963592910548)
