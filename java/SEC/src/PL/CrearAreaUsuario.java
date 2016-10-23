@@ -68,7 +68,7 @@ public class CrearAreaUsuario {
 //        lblDisponible.getStyleClass().add("subtitle");
         grid.add(lblDisponible, 0, 3);
         ListView listDisponible = new ListView();
-        listDisponible.setItems(usuarioAreaCtl.getUsuariosDisponiblesByAreaFX(idArea));
+        listDisponible.setItems(usuarioAreaCtl.getFuncionariosDisponiblesByAreaFX(idArea));
         listDisponible.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
             @Override
             protected void updateItem(UsuarioAreaO item, boolean empty) {
@@ -138,7 +138,7 @@ public class CrearAreaUsuario {
                             }
                         }
                     });
-                    listDisponible.setItems(usuarioAreaCtl.getUsuariosDisponiblesByAreaFX(idArea));
+                    listDisponible.setItems(usuarioAreaCtl.getFuncionariosDisponiblesByAreaFX(idArea));
                     listDisponible.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
                         @Override
                         protected void updateItem(UsuarioAreaO item, boolean empty) {
@@ -182,7 +182,7 @@ public class CrearAreaUsuario {
                             }
                         }
                     });
-                    listDisponible.setItems(usuarioAreaCtl.getUsuariosDisponiblesByAreaFX(idArea));
+                    listDisponible.setItems(usuarioAreaCtl.getFuncionariosDisponiblesByAreaFX(idArea));
                     listDisponible.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
                         @Override
                         protected void updateItem(UsuarioAreaO item, boolean empty) {

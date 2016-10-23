@@ -5,12 +5,10 @@
  */
 package PL;
 
-import CTL.RolCTL;
 import CTL.UsuarioCTL;
-import DAL.AInitLoad;
-import FN.Cifrar;
+import DAL.VariablesDAL;
+import FN.Formato;
 import FN.Validar;
-import O.RolO;
 import O.UsuarioO;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -32,11 +30,8 @@ import javafx.stage.Stage;
  */
 public class Login extends Application {
 
-    AInitLoad load = new AInitLoad();
     private final UsuarioCTL userCtl = new UsuarioCTL();
-    private final RolCTL rolCtl = new RolCTL();
     private static UsuarioO user;
-    private static RolO rol;
 
     @Override
     public void start(Stage primaryStage) {
@@ -90,22 +85,21 @@ public class Login extends Application {
         btn.setOnAction(e -> {
             Validar v = new Validar();
             if (v.validarRut(txtRun.getText())) {
-                Cifrar c = new Cifrar();
-                if (c.validatePassword(txtRun.getText(), pwBox.getText())) {
-                    user = userCtl.getUsuarioByRut(txtRun.getText());
-                    rol = rolCtl.getRolById(user.getRol());
-                    switch (rol.getNombre()) {
-                        case "Administrador":
+                String login = userCtl.logInCtl(Formato.formatoRut(txtRun.getText()), pwBox.getText());
+                if (login.equals("login exitoso")) {
+                    user = userCtl.getUsuarioById(VariablesDAL.getIdUsuario());
+                    switch (user.getRol_nombre()) {
+                        case "ADMINISTRADOR":
                             Admin a = new Admin();
                             a.display(user.getRut());
                             primaryStage.close();
                             break;
-                        case "Jefe":
+                        case "JEFE":
                             Jefe j = new Jefe();
                             j.start(user.getRut());
                             primaryStage.close();
                             break;
-                        case "Funcionario":
+                        case "FUNCIONARIO":
                             Funcionario f = new Funcionario();
                             f.start(user.getRut());
                             primaryStage.close();
@@ -114,7 +108,7 @@ public class Login extends Application {
                             break;
                     }
                 } else {
-                    msj.setText("Login Incorrecto");
+                    msj.setText(login);
                 }
             } else {
                 msj.setText("RUT No Válido");
@@ -123,10 +117,8 @@ public class Login extends Application {
 
         Scene display = new Scene(grid, 700, 500);
         primaryStage.setScene(display);
-        //primaryStage.setMaximized(!primaryStage.isMaximized());
         display.getStylesheets().add(Login.class.getResource("Style.css").toExternalForm());
         primaryStage.show();
-
     }
 
     /**

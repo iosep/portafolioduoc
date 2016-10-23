@@ -13,13 +13,12 @@ import java.util.Date;
  */
 public class UsuarioO {
 
-    static int fakeId = 0;
-
     private int id;
     private String rut;
     private String clave;
-    private int rol;
-    private String rut_jefe;
+    private int rolid;
+    private String rol_nombre;
+    private String rutjefe;
     private String nombre;
     private String apellido;
     private String email;
@@ -27,25 +26,21 @@ public class UsuarioO {
     private int fono;
     private Date creado;
     private Date modificado;
+    private int activo;
 
     public UsuarioO() {
     }
 
-    public UsuarioO(String rut, String clave, int rol, String rut_jefe, String nombre, String apellido, String email, String sexo, int fono, Date creado, Date modificado) {
-
-        this.id = ++fakeId;
-
+    public UsuarioO(String rut, String clave, int rol, String rut_jefe, String nombre, String apellido, String email, String sexo, int fono) {
         this.rut = rut;
         this.clave = clave;
-        this.rol = rol;
-        this.rut_jefe = rut_jefe;
+        this.rolid = rol;
+        this.rutjefe = rut_jefe;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.sexo = sexo;
         this.fono = fono;
-        this.creado = creado;
-        this.modificado = modificado;
     }
 
     public int getId() {
@@ -72,20 +67,28 @@ public class UsuarioO {
         this.clave = clave;
     }
 
-    public int getRol() {
-        return rol;
+    public int getRolid() {
+        return rolid;
     }
 
-    public void setRol(int rol) {
-        this.rol = rol;
+    public void setRolid(int rolid) {
+        this.rolid = rolid;
     }
 
-    public String getRut_jefe() {
-        return rut_jefe;
+    public String getRol_nombre() {
+        return rol_nombre;
     }
 
-    public void setRut_jefe(String rut_jefe) {
-        this.rut_jefe = rut_jefe;
+    public void setRol_nombre(String rol_nombre) {
+        this.rol_nombre = rol_nombre;
+    }
+
+    public String getRutjefe() {
+        return rutjefe;
+    }
+
+    public void setRutjefe(String rutjefe) {
+        this.rutjefe = rutjefe;
     }
 
     public String getNombre() {
@@ -142,6 +145,14 @@ public class UsuarioO {
 
     public void setModificado(Date modificado) {
         this.modificado = modificado;
+    }
+
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
     }
 
     @Override

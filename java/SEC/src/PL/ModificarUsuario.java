@@ -7,7 +7,6 @@ package PL;
 
 import CTL.RolCTL;
 import CTL.UsuarioCTL;
-import FN.Cifrar;
 import FN.Formato;
 import FN.Validar;
 import O.RolO;
@@ -82,6 +81,7 @@ public class ModificarUsuario {
         Label pw = new Label("Contraseña:");
         grid.add(pw, 0, 5);
         PasswordField pwBox = new PasswordField();
+        pwBox.setText(u0.getRut().substring(0, 5));
         pwBox.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
@@ -92,6 +92,7 @@ public class ModificarUsuario {
         Label pw2 = new Label("Repetir Contraseña:");
         grid.add(pw2, 0, 6);
         PasswordField pwBox2 = new PasswordField();
+        pwBox2.setText(u0.getRut().substring(0, 5));
         pwBox2.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
@@ -102,22 +103,31 @@ public class ModificarUsuario {
         Label rolLbl = new Label("Rol:");
         grid.add(rolLbl, 0, 7);
         ChoiceBox cbRol = new ChoiceBox(rctl.getRolesFX());
-        cbRol.getSelectionModel().select(rctl.getRolById(u0.getRol()));
+        for (int i = 0; i < cbRol.getItems().size(); i++) {
+            if (((RolO) cbRol.getItems().get(i)).getId() == u0.getRolid()) {
+                cbRol.getSelectionModel().select(i);
+            }
+        }
         grid.add(cbRol, 1, 7);
 
         Label jefaLbl = new Label("Jefe:");
         grid.add(jefaLbl, 0, 8);
-        ChoiceBox cbJefa = new ChoiceBox(FXCollections.observableArrayList(uctl.getUsuariosByRol(2)));
+        ChoiceBox cbJefa = new ChoiceBox(FXCollections.observableArrayList(uctl.getJefesFX()));
         cbJefa.setOnAction(ev -> {
             msj.setText("");
         });
         grid.add(cbJefa, 1, 8);
 
-        if (u0.getRol() != 3) {
+        if (u0.getRolid() != 3) {
             jefaLbl.setVisible(false);
             cbJefa.setVisible(false);
         } else {
-            cbJefa.getSelectionModel().select(uctl.getUsuarioByRut(u0.getRut_jefe()));
+            for (int i = 0; i < cbJefa.getItems().size(); i++) {
+                if (((UsuarioO) cbJefa.getItems().get(i)).getRut().equals(u0.getRutjefe())) {
+                    cbJefa.getSelectionModel().select(i);
+                    System.out.println(i);
+                }
+            }
         }
 
         cbRol.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
@@ -164,15 +174,13 @@ public class ModificarUsuario {
 
         Label lblSexo = new Label("Sexo:");
         grid.add(lblSexo, 3, 7);
-        ChoiceBox cbSexo = new ChoiceBox(FXCollections.observableArrayList("Hombre", "Mujer"));
+        ChoiceBox cbSexo = new ChoiceBox(FXCollections.observableArrayList("MASCULINO", "FEMENINO"));
         switch (u0.getSexo()) {
-            case "H":
+            case "M":
                 cbSexo.getSelectionModel().select(0);
                 break;
-            case "M":
+            case "F":
                 cbSexo.getSelectionModel().select(1);
-                break;
-            default:
                 break;
         }
         cbSexo.setOnAction(ev -> {
@@ -217,11 +225,11 @@ public class ModificarUsuario {
                     msj.setText("Teléfono Ingrese 9 Números");
                 } else {
                     boolean boo = false;
-                    String rut_jefe = "";
+                    String rut_jefe = "1";
                     if (cbRol.getSelectionModel().getSelectedIndex() == 2) {
                         if (cbJefa.getValue() == null) {
                             msj.setFill(Color.FIREBRICK);
-                            msj.setText("Seleccione Jefa");
+                            msj.setText("Seleccione JEFE");
                         } else {
                             boo = true;
                             rut_jefe = ((UsuarioO) cbJefa.getValue()).getRut();
@@ -230,14 +238,13 @@ public class ModificarUsuario {
                         boo = true;
                     }
                     if (boo) {
-                        String clave = u0.getClave();
+                        String clave = u0.getRut().substring(0, 5);
                         boolean add = true;
                         if (pwBox.getLength() > 0 || pwBox2.getLength() > 0) {
                             add = false;
                             if (pwBox.getLength() >= 5 && pwBox2.getLength() >= 5) {
                                 if (pwBox.getText().equals(pwBox2.getText())) {
-                                    Cifrar c = new Cifrar();
-                                    clave = c.hashPassword(pwBox.getText());
+                                    clave = pwBox.getText().trim();
                                     add = true;
                                 } else {
                                     msj.setText("Contraseñas no coinciden");
@@ -252,19 +259,21 @@ public class ModificarUsuario {
                             String sSexo = "";
                             switch (cbSexo.getSelectionModel().getSelectedIndex()) {
                                 case 0:
-                                    sSexo = "H";
+                                    sSexo = "M";
                                     break;
                                 case 1:
-                                    sSexo = "M";
+                                    sSexo = "F";
                                     break;
                                 default:
                                     break;
                             }
-                            Formato f = new Formato();
-                            String rut = f.formatoRut(txtRun.getText());
-                            if (uctl.addUsuarioCTL(new UsuarioO(rut, clave, ((RolO) cbRol.getSelectionModel().getSelectedItem()).getId(),
+                            String rut = Formato.formatoRut(txtRun.getText());
+                            UsuarioO u1 = new UsuarioO(rut, clave,
+                                    ((RolO) cbRol.getSelectionModel().getSelectedItem()).getId(),
                                     rut_jefe, txtNombre.getText().trim(), txtApellido.getText().trim(),
-                                    txtEmail.getText(), sSexo, fono, now, null))) {
+                                    txtEmail.getText(), sSexo, fono);
+                            u1.setId(u0.getId());
+                            if (uctl.updateUser(u1)) {
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                 alert.initOwner(window);
                                 alert.setTitle("Usuario Modificado");

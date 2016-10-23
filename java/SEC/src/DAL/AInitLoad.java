@@ -33,33 +33,6 @@ public class AInitLoad {
 
 //fecha
     final Date fecha = new Date();
-//usuario    
-    final UsuarioO user1 = new UsuarioO("1-9",
-            "b25hdGUsLTU3NjEwMjA3NA==,-576102074",
-            1, "", "José", "Feliz", "ono@ono.com", "H", 999887766, fecha, null);
-    final UsuarioO user2 = new UsuarioO("12312312-3",
-            "b25hdGUsLTU3NjEwMjA3NA==,-576102074",
-            2, "", "Andrés", "Piano", "ono@ono.com", "H", 988776655, fecha, null);
-    final UsuarioO user3 = new UsuarioO("11111111-1",
-            "b25hdGUsLTU3NjEwMjA3NA==,-576102074",
-            2, "", "Amelia", "López", "ono@ono.com", "M", 977665544, fecha, null);
-    final UsuarioO user4 = new UsuarioO("13131313-6",
-            "b25hdGUsLTU3NjEwMjA3NA==,-576102074",
-            3, "12312312-3", "Ana", "Zar", "ono@ono.com", "M", 977665544, fecha, null);
-    final UsuarioO user5 = new UsuarioO("77777777-7",
-            "b25hdGUsLTU3NjEwMjA3NA==,-576102074",
-            3, "11111111-1", "Thor", "Aven", "ono@ono.com", "H", 977665544, fecha, null);
-    final UsuarioO user6 = new UsuarioO("12345678-5",
-            "b25hdGUsLTU3NjEwMjA3NA==,-576102074",
-            3, "12312312-3", "Raven", "Mortal", "ono@ono.com", "H", 977665544, fecha, null);
-    final UsuarioO user7 = new UsuarioO("98765432-5",
-            "b25hdGUsLTU3NjEwMjA3NA==,-576102074",
-            3, "11111111-1", "Mia", "Walrus", "ono@ono.com", "M", 977665544, fecha, null);
-    final UsuarioO user8 = new UsuarioO("14566421-7",
-            "b25hdGUsLTU3NjEwMjA3NA==,-576102074",
-            3, "12312312-3", "Totoro", "Oso", "ono@ono.com", "H", 977665544, fecha, null);
-    final ArrayList<UsuarioO> users = new ArrayList<>(Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8));
-    static ArrayList<UsuarioO> usersAdd;
 //rol
     final RolO rol1 = new RolO("Administrador");
     final RolO rol2 = new RolO("Jefe");
@@ -224,9 +197,7 @@ public class AInitLoad {
         encuestas = new ArrayList<>();
         selections = new ArrayList<>();
 //final + static
-        usersAdd = new ArrayList<>();
-//        usersAdd.removeAll(users);
-        usersAdd.addAll(users);
+        
         roles = new ArrayList<>();
 //        roles.removeAll(rolesFinal);
         roles.addAll(rolesFinal);
@@ -259,13 +230,6 @@ public class AInitLoad {
         periodos.addAll(perFinal);
     }
 
-    public ArrayList<UsuarioO> mostrarUsuarios() {
-        return usersAdd;
-    }
-
-    public boolean agregarUsuario(UsuarioO ufx) {
-        return usersAdd.add(ufx);
-    }
 
     public static ArrayList<AreaO> mostrarAreas() {
         return areas;

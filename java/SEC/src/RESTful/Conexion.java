@@ -6,9 +6,13 @@
 package RESTful;
 
 import java.io.IOException;
+import java.net.URI;
+import org.apache.http.annotation.NotThreadSafe;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -31,18 +35,79 @@ public class Conexion {
         HttpClient httpClient = new DefaultHttpClient();
         String responseBody = null;
         try {
-            HttpPost httpPost = new HttpPost("http://192.168.99.100:8844/ords/wfbs/" + command);
+            HttpPost httpPost = new HttpPost("http://192.168.99.100:8080/ords/wfbs/" + command);
             StringEntity stringEntity = new StringEntity(json.toString());
             httpPost.setEntity(stringEntity);
             httpPost.setHeader("Content-type", "application/json");
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             responseBody = httpClient.execute(httpPost, responseHandler);
         } catch (IOException e) {
-            System.out.println("IOException from " + e.getMessage());
+            System.out.println("IOException Conexion: " + e.getMessage());
         } finally {
             httpClient.getConnectionManager().shutdown();
         }
         return responseBody;
+    }
+
+    public String put(String command, JSONObject json) {
+        HttpClient httpClient = new DefaultHttpClient();
+        String responseBody = null;
+        try {
+            HttpPut httpPut = new HttpPut("http://192.168.99.100:8080/ords/wfbs/" + command);
+            StringEntity stringEntity = new StringEntity(json.toString());
+            httpPut.setEntity(stringEntity);
+            httpPut.setHeader("Content-type", "application/json");
+            ResponseHandler<String> responseHandler = new BasicResponseHandler();
+            responseBody = httpClient.execute(httpPut, responseHandler);
+        } catch (IOException e) {
+            System.out.println("IOException Conexion: " + e.getMessage());
+        } finally {
+            httpClient.getConnectionManager().shutdown();
+        }
+        return responseBody;
+    }
+
+    public String delete(String command, JSONObject json) {
+        HttpClient httpClient = new DefaultHttpClient();
+        String responseBody = null;
+        try {
+            HttpDeleteWithBody httpDelete = new HttpDeleteWithBody("http://192.168.99.100:8080/ords/wfbs/" + command);
+            StringEntity stringEntity = new StringEntity(json.toString());
+            httpDelete.setEntity(stringEntity);
+            httpDelete.setHeader("Content-type", "application/json");
+            ResponseHandler<String> responseHandler = new BasicResponseHandler();
+            responseBody = httpClient.execute(httpDelete, responseHandler);
+        } catch (IOException e) {
+            System.out.println("IOException Conexion: " + e.getMessage());
+        } finally {
+            httpClient.getConnectionManager().shutdown();
+        }
+        return responseBody;
+    }
+
+    @NotThreadSafe
+    class HttpDeleteWithBody extends HttpEntityEnclosingRequestBase {
+
+        public static final String METHOD_NAME = "DELETE";
+
+        @Override
+        public String getMethod() {
+            return METHOD_NAME;
+        }
+
+        public HttpDeleteWithBody(final String uri) {
+            super();
+            setURI(URI.create(uri));
+        }
+
+        public HttpDeleteWithBody(final URI uri) {
+            super();
+            setURI(uri);
+        }
+
+        public HttpDeleteWithBody() {
+            super();
+        }
     }
 
 }

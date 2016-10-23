@@ -7,12 +7,10 @@ package PL;
 
 import CTL.RolCTL;
 import CTL.UsuarioCTL;
-import FN.Cifrar;
 import FN.Formato;
 import FN.Validar;
 import O.RolO;
 import O.UsuarioO;
-import java.util.Date;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -107,7 +105,7 @@ public class CrearUsuario {
 
         Label jefaLbl = new Label("Jefe:");
         grid.add(jefaLbl, 0, 8);
-        ChoiceBox cbJefa = new ChoiceBox(FXCollections.observableArrayList(uctl.getUsuariosByRol(2)));
+        ChoiceBox cbJefa = new ChoiceBox(uctl.getJefesFX());
         cbJefa.setOnAction(ev -> {
             msj.setText("");
         });
@@ -159,7 +157,7 @@ public class CrearUsuario {
 
         Label lblSexo = new Label("Sexo:");
         grid.add(lblSexo, 3, 7);
-        ChoiceBox cbSexo = new ChoiceBox(FXCollections.observableArrayList("Hombre", "Mujer"));
+        ChoiceBox cbSexo = new ChoiceBox(FXCollections.observableArrayList("MASCULINO", "FEMENINO"));
         cbSexo.setOnAction(ev -> {
             msj.setText("");
         });
@@ -206,11 +204,11 @@ public class CrearUsuario {
                         msj.setText("Teléfono Ingrese 9 Números");
                     } else {
                         boolean boo = false;
-                        String rut_jefe = "";
+                        String rut_jefe = "1";
                         if (cbRol.getSelectionModel().getSelectedIndex() == 2) {
                             if (cbJefa.getValue() == null) {
                                 msj.setFill(Color.FIREBRICK);
-                                msj.setText("Seleccione Jefa");
+                                msj.setText("Seleccione JEFE");
                             } else {
                                 boo = true;
                                 rut_jefe = ((UsuarioO) cbJefa.getValue()).getRut();
@@ -219,26 +217,23 @@ public class CrearUsuario {
                             boo = true;
                         }
                         if (boo) {
-                            Cifrar c = new Cifrar();
-                            String clave = c.hashPassword(pwBox.getText());
                             int fono = Integer.parseInt(txtFono.getText());
-                            Date now = new Date();
                             String sSexo = "";
                             switch (cbSexo.getSelectionModel().getSelectedIndex()) {
                                 case 0:
-                                    sSexo = "H";
+                                    sSexo = "M";
                                     break;
                                 case 1:
-                                    sSexo = "M";
+                                    sSexo = "F";
                                     break;
                                 default:
                                     break;
                             }
-                            Formato f = new Formato();
-                            String rut = f.formatoRut(txtRun.getText());
-                            if (uctl.addUsuarioCTL(new UsuarioO(rut, clave, ((RolO) cbRol.getSelectionModel().getSelectedItem()).getId(),
+                            String rut = Formato.formatoRut(txtRun.getText());
+                            if (uctl.addUsuarioCTL(new UsuarioO(rut, pwBox.getText().trim(),
+                                    ((RolO) cbRol.getSelectionModel().getSelectedItem()).getId(),
                                     rut_jefe, txtNombre.getText().trim(), txtApellido.getText().trim(),
-                                    txtEmail.getText(), sSexo, fono, now, null))) {
+                                    txtEmail.getText(), sSexo, fono))) {
                                 txtRun.clear();
                                 pwBox.clear();
                                 pwBox2.clear();

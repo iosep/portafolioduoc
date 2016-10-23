@@ -5,17 +5,12 @@
  */
 package FN;
 
-import CTL.UsuarioCTL;
-import O.UsuarioO;
-import java.util.Random;
-import javax.xml.bind.DatatypeConverter;
-
 /**
  *
  * @author iosep
  */
 public class Cifrar {
-
+/*
     private final ThreadLocal<Random> random = new ThreadLocal<>();
     private final UsuarioCTL uc = new UsuarioCTL();
 
@@ -72,5 +67,5 @@ public class Cifrar {
         }
         return result;
     }
-
+*/
 }

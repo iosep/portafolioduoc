@@ -12,7 +12,6 @@ import CTL.ObservacionCTL;
 import CTL.PeriodoCTL;
 import CTL.PreguntaCTL;
 import CTL.RespuestaCTL;
-import CTL.RolCTL;
 import CTL.UsuarioCTL;
 import O.AreaO;
 import O.CompetenciaO;
@@ -72,7 +71,6 @@ public class Admin {
     private final Button btCrear = new Button();
     private final Tooltip tooltipFilter = new Tooltip();
     private final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-    private final RolCTL rolCtl = new RolCTL();
 //variables mantenedor usuarios
     private final UsuarioCTL usersCtl = new UsuarioCTL();
     private final TableView<UsuarioO> usersTable = new TableView<>();
@@ -273,7 +271,7 @@ public class Admin {
             final TableRow<UsuarioO> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
-            final MenuItem desactivarMenuItem = new MenuItem("Eliminar");
+            final MenuItem eliminarMenuItem = new MenuItem("Eliminar");
             final MenuItem agregarAreaMenu = new MenuItem("Ver Áreas");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
@@ -282,12 +280,12 @@ public class Admin {
                 btnUsuario.fire();
             });
             //desactivar
-            desactivarMenuItem.setOnAction(event -> {
-                //tableUsers.getItems().remove(row.getItem());
-                System.out.println("Eliminar usuario rut: " + row.getItem().getRut());
+            eliminarMenuItem.setOnAction(event -> {
+                usersCtl.deleteUser(row.getItem().getId());
+                btnUsuario.fire();
             });
             agregarAreaMenu.setOnAction(ev -> {
-                if (row.getItem().getRol() == 3) {
+                if (row.getItem().getRolid() == 3) {
                     CrearUsuarioArea cuaw = new CrearUsuarioArea();
                     cuaw.display(row.getItem().getRut());
                     btnUsuario.fire();
@@ -300,7 +298,7 @@ public class Admin {
                     alert.showAndWait();
                 }
             });
-            contextMenu.getItems().addAll(modificarMenuItem, desactivarMenuItem, new SeparatorMenuItem(), agregarAreaMenu);
+            contextMenu.getItems().addAll(modificarMenuItem, eliminarMenuItem, new SeparatorMenuItem(), agregarAreaMenu);
             // Set context menu on row, but use a binding to make it only show for non-empty rows:
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
@@ -324,23 +322,25 @@ public class Admin {
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         sexoColumn = new TableColumn<>("Sexo");
         sexoColumn.setCellValueFactory(new PropertyValueFactory<>("sexo"));
-        rolColumn = new TableColumn<>("Rol");
-        rolColumn.setCellValueFactory(new PropertyValueFactory<>("rol"));
-        rolColumn.setCellFactory(column -> {
-            return new TableCell<UsuarioO, Integer>() {
+        sexoColumn.setCellFactory(column -> {
+            return new TableCell<UsuarioO, String>() {
                 @Override
-                protected void updateItem(Integer item, boolean empty) {
+                protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
                     if (empty || item == null) {
                         setText(null);
-                    } else {
-                        setText(rolCtl.getRolById(item).getNombre());
+                    } else if (item.equals("M")) {
+                        setText("MASCULINO");
+                    } else if (item.equals("F")) {
+                        setText("FEMENINO");
                     }
                 }
             };
         });
+        rolColumn = new TableColumn<>("Rol");
+        rolColumn.setCellValueFactory(new PropertyValueFactory<>("rol_nombre"));
         jefeColumn = new TableColumn<>("Jefe");
-        jefeColumn.setCellValueFactory(new PropertyValueFactory<>("rut_jefe"));
+        jefeColumn.setCellValueFactory(new PropertyValueFactory<>("rutjefe"));
         creadoColumn = new TableColumn<>("Creado");
         creadoColumn.setCellValueFactory(new PropertyValueFactory<>("creado"));
         creadoColumn.setCellFactory(column -> {

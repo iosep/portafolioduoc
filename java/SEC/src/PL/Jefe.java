@@ -136,7 +136,7 @@ public class Jefe {
         boolean found;
 
 //Funcionarios By Áreas
-        for (UsuarioAreaO usAr : usArCtl.getFuncionarioUserAreaByRutJefe(userRut)) {
+        for (UsuarioAreaO usAr : usArCtl.getFuncionarioUserAreaByRutJefeFX(userRut)) {
             if (!funcionarios.contains(userCtl.getUsuarioById(usAr.getUsuario_id()))) {
                 funcionarios.add(userCtl.getUsuarioById(usAr.getUsuario_id()));
                 System.out.println("funcionariosList: " + usAr.getUsuarioString());

@@ -19,7 +19,12 @@ public class RolCTL {
     private final RolDAL rd = new RolDAL();
 
     public RolO getRolById(int id) {
-        return rd.getRolById(id);
+        for (RolO r : rd.getRoles()) {
+            if (r.getId() == id) {
+                return r;
+            }
+        }
+        return null;
     }
 
     public ObservableList<RolO> getRolesFX() {

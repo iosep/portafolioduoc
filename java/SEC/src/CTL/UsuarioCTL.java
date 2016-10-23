@@ -7,7 +7,6 @@ package CTL;
 
 import DAL.UsuarioDAL;
 import O.UsuarioO;
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -19,11 +18,6 @@ public class UsuarioCTL {
 
     private final UsuarioDAL ud = new UsuarioDAL();
 
-    public ArrayList<UsuarioO> getUsuarios() {
-        ArrayList<UsuarioO> alu = new ArrayList<>();
-        return alu;
-    }
-
     public UsuarioO getUsuarioByRut(String rut) {
         return ud.getUsuarioByRut(rut);
     }
@@ -32,28 +26,51 @@ public class UsuarioCTL {
         return ud.getUsuarioById(id);
     }
 
-    public ObservableList<UsuarioO> getUsuariosByRol(int rol) {
-        return ud.getUsuariosByRol(rol);
+    public ObservableList<UsuarioO> getUsuariosByRolFX(int rol) {
+        ObservableList<UsuarioO> obList = FXCollections.observableArrayList();
+        ud.getUsuarios().stream().filter((u) -> (u.getActivo() == 1 && u.getRolid() == rol)).forEach((u) -> {
+            obList.add(u);
+        });
+        return obList;
     }
 
     public ObservableList<UsuarioO> getUsuariosFX() {
-        ObservableList<UsuarioO> users = FXCollections.observableArrayList();
-        ud.getUsuarios().stream().forEach((user) -> {
-            users.add(user);
+        ObservableList<UsuarioO> obList = FXCollections.observableArrayList();
+        ud.getUsuarios().stream().filter((u) -> (u.getActivo() == 1)).forEach((u) -> {
+            obList.add(u);
         });
-        return users;
+        return obList;
     }
 
-    public boolean addUsuarioCTL(UsuarioO ufx) {
-        return ud.addUsuario(ufx);
+    public boolean addUsuarioCTL(UsuarioO obj) {
+        return ud.addUsuario(obj);
     }
 
-    public ObservableList<UsuarioO> getFuncionariosByRutJefe(String rutJefe) {
+    public ObservableList<UsuarioO> getFuncionariosByRutJefeFX(String rutJefe) {
         ObservableList<UsuarioO> funcionarios = FXCollections.observableArrayList();
-        ud.getUsuariosByRol(3).stream().filter((user) -> (user.getRut_jefe().equals(rutJefe))).forEach((user) -> {
+        this.getUsuariosByRolFX(3).stream().filter((user) -> (user.getRutjefe().equals(rutJefe))).forEach((user) -> {
             funcionarios.add(user);
         });
         return funcionarios;
     }
 
+    public String logInCtl(String rut, String clave) {
+        return ud.logIn(rut, clave);
+    }
+
+    public ObservableList<UsuarioO> getJefesFX() {
+        ObservableList<UsuarioO> obList = FXCollections.observableArrayList();
+        ud.getJefes().stream().filter((u) -> (u.getActivo() == 1)).forEach((u) -> {
+            obList.add(u);
+        });
+        return obList;
+    }
+
+    public boolean deleteUser(int id) {
+        return ud.deleteUser(id);
+    }
+
+    public boolean updateUser(UsuarioO obj) {
+        return ud.updateUser(obj);
+    }
 }
