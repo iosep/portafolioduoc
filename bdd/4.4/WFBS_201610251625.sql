@@ -1979,7 +1979,7 @@ wwv_flow_api.create_restful_handler(
 ,p_source_type=>'PLSQL'
 ,p_format=>'DEFAULT'
 ,p_method=>'POST'
-,p_require_https=>'YES'
+,p_require_https=>'NO'
 ,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'BEGIN PKG_USUARIO.SP_USUARIO_LOGIN',
 '(',
