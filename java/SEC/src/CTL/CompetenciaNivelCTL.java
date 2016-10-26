@@ -6,8 +6,6 @@
 package CTL;
 
 import DAL.CompetenciaNivelDAL;
-import DAL.CompetenciaDAL;
-import DAL.NivelDAL;
 import O.CompetenciaNivelO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,12 +17,12 @@ import javafx.collections.ObservableList;
 public class CompetenciaNivelCTL {
 
     private final CompetenciaNivelDAL compNivelDal = new CompetenciaNivelDAL();
-    private final CompetenciaDAL competenciaDal = new CompetenciaDAL();
-    private final NivelDAL nivelDal = new NivelDAL();
+    private final CompetenciaCTL competenciaCtl = new CompetenciaCTL();
+    private final NivelCTL nivelCtl = new NivelCTL();
 
     public ObservableList<CompetenciaNivelO> getCompetenciaNivelesByNivelIdFX(int id) {
         ObservableList<CompetenciaNivelO> fxList = FXCollections.observableArrayList();
-        compNivelDal.getCompetenciaNivelesByNivelId(id).stream().forEach((each) -> {
+        compNivelDal.getCompetenciaNivelesByNivelId(id).stream().filter((each) -> (each.getActivo() == 1)).forEach((each) -> {
             fxList.add(each);
         });
         return fxList;
@@ -32,7 +30,7 @@ public class CompetenciaNivelCTL {
 
     public ObservableList<CompetenciaNivelO> getCompetenciaNivelesByCompetenciaIdFX(int id) {
         ObservableList<CompetenciaNivelO> fxList = FXCollections.observableArrayList();
-        compNivelDal.getCompetenciaNivelesByCompetenciaId(id).stream().forEach((each) -> {
+        compNivelDal.getCompetenciaNivelesByCompetenciaId(id).stream().filter((each) -> (each.getActivo() == 1)).forEach((each) -> {
             fxList.add(each);
         });
         return fxList;
@@ -40,7 +38,7 @@ public class CompetenciaNivelCTL {
 
     public ObservableList<CompetenciaNivelO> getCompetenciasDisponiblesByNivelFX(int nivelId) {
         ObservableList<CompetenciaNivelO> fxList = FXCollections.observableArrayList();
-        competenciaDal.getCompetencias().stream().forEach((competencia) -> {
+        competenciaCtl.getCompetenciasFX().stream().filter((each) -> (each.getActivo() == 1)).forEach((competencia) -> {
             boolean add = true;
             for (CompetenciaNivelO compNivel : compNivelDal.getCompetenciaNivelesByNivelId(nivelId)) {
                 if (compNivel.getCompetencia_id() == competencia.getId()) {
@@ -48,7 +46,9 @@ public class CompetenciaNivelCTL {
                 }
             }
             if (add) {
-                fxList.add(new CompetenciaNivelO(competencia.getId(), nivelId));
+                CompetenciaNivelO cn1 = new CompetenciaNivelO(competencia.getId(), nivelId);
+                cn1.setCompNombre(competencia.getNombre());
+                fxList.add(cn1);
             }
         });
         return fxList;
@@ -56,7 +56,7 @@ public class CompetenciaNivelCTL {
 
     public ObservableList<CompetenciaNivelO> getNivelesDisponiblesByCompetenciaFX(int compId) {
         ObservableList<CompetenciaNivelO> fxList = FXCollections.observableArrayList();
-        nivelDal.getNiveles().stream().forEach((nivel) -> {
+        nivelCtl.getNiveles().stream().forEach((nivel) -> {
             boolean add = true;
             for (CompetenciaNivelO compNivel : compNivelDal.getCompetenciaNivelesByCompetenciaId(compId)) {
                 if (compNivel.getNivel_id() == nivel.getId()) {
@@ -64,7 +64,9 @@ public class CompetenciaNivelCTL {
                 }
             }
             if (add) {
-                fxList.add(new CompetenciaNivelO(compId, nivel.getId()));
+                CompetenciaNivelO cn1 = new CompetenciaNivelO(compId, nivel.getId());
+                cn1.setNivelNombre(nivel.getNombre());
+                fxList.add(cn1);
             }
         });
         return fxList;

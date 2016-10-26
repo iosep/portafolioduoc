@@ -115,16 +115,21 @@ public class EncuestaJefe {
         for (UsuarioAreaO ua : usArCtl.getUsuarioAreasByUserIdFX(funcId)) {
             for (AreaCompetenciaO ac : arComCtl.getAreaCompetenciasByAreaIdFX(ua.getArea_id())) {
                 for (PreguntaO p : preCtl.getPreguntasByCompetenciaId(ac.getCompetencia_id())) {
-                    preguntas.add(p);
+                    boolean dupli = false;
+                    for (PreguntaO p1 : preguntas) {
+                        if (p1.getId() == p.getId()) {
+                            dupli = true;
+                        }
+                    }
+                    if (!dupli) {
+                        preguntas.add(p);
+                    }
                 }
             }
         }
         ArrayList<RespuestaO> respuestas = new ArrayList<>();
         if (preguntas.size() > 0) {
             for (ObjQuestion oq : PreguntaO.createEncuesta(preguntas)) {
-                RespuestaO r0 = new RespuestaO();
-                r0.setPregunta_id(((PreguntaO) oq.getTg().getUserData()).getId());
-                respuestas.add(r0);
                 oq.getTg().selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
                     @Override
                     public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
@@ -138,9 +143,14 @@ public class EncuestaJefe {
                         }
                     }
                 });
-                vbCenter.getChildren().add(oq.getT());
-                for (RadioButton rb : oq.getRb()) {
-                    vbCenter.getChildren().add(rb);
+                if (!oq.getRb().isEmpty()) {
+                    RespuestaO r0 = new RespuestaO();
+                    r0.setPregunta_id(((PreguntaO) oq.getTg().getUserData()).getId());
+                    respuestas.add(r0);
+                    vbCenter.getChildren().add(oq.getT());
+                    for (RadioButton rb : oq.getRb()) {
+                        vbCenter.getChildren().add(rb);
+                    }
                 }
             }
         }
@@ -168,7 +178,7 @@ public class EncuestaJefe {
                 EncuestaO enc = new EncuestaO(jefe.getId(), funcId, idPer);
                 if (enCtl.addEncuesta(enc)) {
                     for (RespuestaO r : respuestas) {
-                        if (SeleccionCTL.addSeleccion(new SeleccionO(enc.getId(), r.getId()))) {
+                        if (seCtl.addSeleccion(new SeleccionO(enc.getId(), r.getId()))) {
                             well = true;
                         } else {
                             well = false;

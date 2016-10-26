@@ -1,9 +1,3 @@
-updateArea put: {"descripcion":"AREA","sigla":"N1","id":7,"nombre":"llll","idusuario":2,"token":"OZ13799DXI96N9REEVYQS0OIX"}
-updateArea response: {
-"area":[
-]
-}
-
 
 addNivel post: {"descrip":"muchas buenas","nota":4,"nombre":"bien","idusuario":2,"token":"3LNU6VK58CQUS5ULVVBIBX1XL"}
 addNivel response: {
@@ -39,4 +33,42 @@ getRespuestas response: {
 "ID":2
 //falta campo creado
 
+
+addObservacion post: {"nivelsup":4,"nivelinf":2,"msginf":"inf","idcomp":10,"msgsup":"sup","idusuario":2,"token":"ZFE8GZYRDGQAUQ3JGFUENJVAR"}
+addObservacion response: {
+"observacion":[
+{
+"ID":2
+,"NIVEL_INF":2
+,"NIVEL_SUP":4
+,"MSJ_INF":"INF"
+,"MSJ_SUP":"SUP"
+,"COMPETENCIA_ID":10
+,"COMPETENCIA_NOMBRE":"AN\u00C1LISIS Y S\u00CDNTESIS"
+,"CREADO":"2016-10-26T18:52:36Z"
+,"MODIFICADO":"2016-10-26T18:52:36Z"
+,"ACTIVO":1
+}
+]
+}
+
+addObservacion post: {"nivelsup":5,"nivelinf":3,"msginf":"infff","idcomp":10,"msgsup":"suppp","idusuario":2,"token":"ZFE8GZYRDGQAUQ3JGFUENJVAR"}
+addObservacion response: {
+"observacion":[
+{
+"ID":2
+,"NIVEL_INF":2
+,"NIVEL_SUP":4
+,"MSJ_INF":"INF"
+,"MSJ_SUP":"SUP"
+,"COMPETENCIA_ID":10
+,"COMPETENCIA_NOMBRE":"AN\u00C1LISIS Y S\u00CDNTESIS"
+,"CREADO":"2016-10-26T18:52:36Z"
+,"MODIFICADO":"2016-10-26T18:52:36Z"
+,"ACTIVO":1
+}
+]
+}
+
+//2 create distintos same id
 

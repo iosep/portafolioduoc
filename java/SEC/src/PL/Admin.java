@@ -1148,7 +1148,8 @@ public class Admin {
             });
             //desactivar
             desactivarMenuItem.setOnAction(event -> {
-                System.out.println("Desactivar Observacion Id: " + row.getItem().getId());
+                commentCtl.eliminarObservacionCTL(row.getItem().getId());
+                btnComment.fire();
             });
             contextMenu.getItems().add(modificarMenuItem);
             contextMenu.getItems().add(desactivarMenuItem);
@@ -1169,8 +1170,8 @@ public class Admin {
         commentMsjSupCol = new TableColumn<>("Mensaje Nivel Superior");
         commentMsjSupCol.setCellValueFactory(new PropertyValueFactory<>("msj_sup"));
         commentCompetenciaCol = new TableColumn<>("Competencia");
-        commentCompetenciaCol.setCellValueFactory(new PropertyValueFactory<>("competencia_id"));
-        commentCompetenciaCol.setCellFactory(column -> {
+        commentCompetenciaCol.setCellValueFactory(new PropertyValueFactory<>("compNombre"));
+        /*commentCompetenciaCol.setCellFactory(column -> {
             return new TableCell<ObservacionO, Integer>() {
                 @Override
                 protected void updateItem(Integer item, boolean empty) {
@@ -1182,7 +1183,7 @@ public class Admin {
                     }
                 }
             };
-        });
+        });*/
         commentCreadoCol = new TableColumn<>("Creado");
         commentCreadoCol.setCellValueFactory(new PropertyValueFactory<>("creado"));
         commentCreadoCol.setCellFactory(column -> {

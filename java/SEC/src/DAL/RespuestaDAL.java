@@ -38,7 +38,7 @@ public class RespuestaDAL {
                     obj.setPuntos(jsonArray.getJSONObject(i).getInt("PUNTOS"));
                     obj.setPregunta_id(jsonArray.getJSONObject(i).getInt("PREGUNTA_ID"));
                     obj.setPreguntaNombre(jsonArray.getJSONObject(i).getString("PREGUNTA_PREGUNTA"));
-                    //obj.setCreado(Formato.stringToDate(jsonArray.getJSONObject(i).getString("CREADO")));
+                    obj.setCreado(Formato.stringToDate(jsonArray.getJSONObject(i).getString("CREADO")));
                     obj.setModificado(Formato.stringToDate(jsonArray.getJSONObject(i).getString("MODIFICADO")));
                     obj.setActivo(jsonArray.getJSONObject(i).getInt("ACTIVO"));
                     list.add(obj);
@@ -68,7 +68,7 @@ public class RespuestaDAL {
                 obj.setPuntos(jsonArray.getJSONObject(0).getInt("PUNTOS"));
                 obj.setPregunta_id(jsonArray.getJSONObject(0).getInt("PREGUNTA_ID"));
                 obj.setPreguntaNombre(jsonArray.getJSONObject(0).getString("PREGUNTA_PREGUNTA"));
-                //obj.setCreado(Formato.stringToDate(jsonArray.getJSONObject(0).getString("CREADO")));
+                obj.setCreado(Formato.stringToDate(jsonArray.getJSONObject(0).getString("CREADO")));
                 obj.setModificado(Formato.stringToDate(jsonArray.getJSONObject(0).getString("MODIFICADO")));
                 obj.setActivo(jsonArray.getJSONObject(0).getInt("ACTIVO"));
                 return obj;

@@ -6,13 +6,13 @@ Administradores
 
 Jefes
 ****************
-{"rut":"96714870-9","clave":"cocacola"}
+{"rut":"967148709","clave":"cocacola"}
 ----------------
-{"rut":"90413000-1","clave":"pepsi"}
+{"rut":"904130001","clave":"pepsi"}
 
 Funcionarios
 ****************
-{"rut":"76390989-1","clave":"nissan"}
+{"rut":"763909891","clave":"nissan"}
 ----------------
 {"rut":"86740500-3","clave":"toyota"}
 ----------------

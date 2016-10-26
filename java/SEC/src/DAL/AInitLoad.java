@@ -49,20 +49,6 @@ public class AInitLoad {
     private static ArrayList<RespuestaO> respuestas;
 //observacion
     private static ArrayList<ObservacionO> observaciones;
-    final ObservacionO ob1 = new ObservacionO(3, 4, "muy mal", "muy bien", 1, fecha, null);
-    final ObservacionO ob2 = new ObservacionO(3, 4, "muy mal", "muy bien", 2, fecha, null);
-    final ObservacionO ob3 = new ObservacionO(3, 4, "muy mal", "muy bien", 3, fecha, null);
-    final ObservacionO ob4 = new ObservacionO(3, 4, "muy mal", "muy bien", 4, fecha, null);
-    final ObservacionO ob5 = new ObservacionO(3, 4, "muy mal", "muy bien", 5, fecha, null);
-    final ObservacionO ob6 = new ObservacionO(3, 4, "muy mal", "muy bien", 6, fecha, null);
-    final ObservacionO ob7 = new ObservacionO(3, 4, "muy mal", "muy bien", 7, fecha, null);
-    final ObservacionO ob8 = new ObservacionO(3, 4, "muy mal", "muy bien", 8, fecha, null);
-    final ObservacionO ob9 = new ObservacionO(3, 4, "muy mal", "muy bien", 9, fecha, null);
-    final ObservacionO ob10 = new ObservacionO(3, 4, "muy mal", "muy bien", 10, fecha, null);
-    final ObservacionO ob11 = new ObservacionO(3, 4, "muy mal", "muy bien", 11, fecha, null);
-    final ObservacionO ob12 = new ObservacionO(3, 4, "muy mal", "muy bien", 12, fecha, null);
-    final ObservacionO ob13 = new ObservacionO(3, 4, "muy mal", "muy bien", 13, fecha, null);
-    final ArrayList<ObservacionO> obserFinal = new ArrayList<>(Arrays.asList(ob1, ob2, ob3, ob4, ob5, ob6, ob7, ob8, ob9, ob10, ob11, ob12, ob13));
 //periodo
     private static ArrayList<PeriodoO> periodos;
 //usuarioArea
@@ -147,7 +133,6 @@ public class AInitLoad {
         preguntas = new ArrayList<>();
         respuestas = new ArrayList<>();
         observaciones = new ArrayList<>();
-        observaciones.addAll(obserFinal);
         periodos = new ArrayList<>();
 
     }

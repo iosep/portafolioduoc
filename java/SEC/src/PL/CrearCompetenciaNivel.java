@@ -75,8 +75,10 @@ public class CrearCompetenciaNivel {
                 if (empty || item == null) {
                     setText(null);
                 } else {
+                    setText(item.getNivelNombre());
+                    /*
                     auxNivel = nivelCtl.getNivelById(item.getNivel_id());
-                    setText(auxNivel.getNombre());
+                    setText(auxNivel.getNombre());*/
                 }
             }
         });
@@ -97,8 +99,7 @@ public class CrearCompetenciaNivel {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    auxNivel = nivelCtl.getNivelById(item.getNivel_id());
-                    setText(auxNivel.getNombre());
+                    setText(item.getNivelNombre());
                 }
             }
         });
@@ -131,8 +132,7 @@ public class CrearCompetenciaNivel {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxNivel = nivelCtl.getNivelById(item.getNivel_id());
-                                setText(auxNivel.getNombre());
+                                setText(item.getNivelNombre());
                             }
                         }
                     });
@@ -144,8 +144,7 @@ public class CrearCompetenciaNivel {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxNivel = nivelCtl.getNivelById(item.getNivel_id());
-                                setText(auxNivel.getNombre());
+                                setText(item.getNivelNombre());
                             }
                         }
                     });
@@ -175,8 +174,7 @@ public class CrearCompetenciaNivel {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxNivel = nivelCtl.getNivelById(item.getNivel_id());
-                                setText(auxNivel.getNombre());
+                                setText(item.getNivelNombre());
                             }
                         }
                     });
@@ -188,8 +186,7 @@ public class CrearCompetenciaNivel {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxNivel = nivelCtl.getNivelById(item.getNivel_id());
-                                setText(auxNivel.getNombre());
+                                setText(item.getNivelNombre());
                             }
                         }
                     });

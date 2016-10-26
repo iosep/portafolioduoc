@@ -7,7 +7,6 @@ package CTL;
 
 import DAL.ObservacionDAL;
 import O.ObservacionO;
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -17,26 +16,30 @@ import javafx.collections.ObservableList;
  */
 public class ObservacionCTL {
 
-    private final ObservacionDAL observacionDal = new ObservacionDAL();
-
-    public ArrayList<ObservacionO> getObservaciones() {
-        return observacionDal.getObservaciones();
-    }
+    private final ObservacionDAL obDal = new ObservacionDAL();
 
     public ObservacionO getObservacionById(int id) {
-        return observacionDal.getObservacionById(id);
+        return obDal.getObservacionById(id);
     }
 
     public ObservableList<ObservacionO> getObservacionesFX() {
         ObservableList<ObservacionO> fxList = FXCollections.observableArrayList();
-        observacionDal.getObservaciones().stream().forEach((each) -> {
+        obDal.getObservaciones().stream().filter((each) -> (each.getActivo() == 1)).forEach((each) -> {
             fxList.add(each);
         });
         return fxList;
     }
 
     public boolean addObservacionCTL(ObservacionO obj) {
-        return observacionDal.addObservacion(obj);
+        return obDal.addObservacion(obj);
+    }
+
+    public boolean modificarObservacionCTL(ObservacionO obj) {
+        return obDal.updateObservacion(obj);
+    }
+
+    public boolean eliminarObservacionCTL(int id) {
+        return obDal.deleteObservacion(id);
     }
 
 }

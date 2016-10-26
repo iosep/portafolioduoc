@@ -5,9 +5,6 @@
  */
 package O;
 
-import CTL.AreaCTL;
-import CTL.CompetenciaCTL;
-
 /**
  *
  * @author iosep
@@ -16,6 +13,9 @@ public class AreaCompetenciaO {
 
     private int area_id;
     private int competencia_id;
+    private String areaNombre;
+    private String compNombre;
+    private int activo;
 
     public AreaCompetenciaO() {
     }
@@ -23,6 +23,14 @@ public class AreaCompetenciaO {
     public AreaCompetenciaO(int area_id, int competencia_id) {
         this.area_id = area_id;
         this.competencia_id = competencia_id;
+    }
+
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
     }
 
     public int getArea_id() {
@@ -42,13 +50,19 @@ public class AreaCompetenciaO {
     }
 
     public String getAreaNombre() {
-        final AreaCTL ac = new AreaCTL();
-        return ac.getAreaById(area_id).getNombre();
+        return areaNombre;
+    }
+
+    public void setAreaNombre(String areaNombre) {
+        this.areaNombre = areaNombre;
     }
 
     public String getCompNombre() {
-        final CompetenciaCTL cc = new CompetenciaCTL();
-        return cc.getCompetenciaById(competencia_id).getNombre();
+        return compNombre;
+    }
+
+    public void setCompNombre(String compNombre) {
+        this.compNombre = compNombre;
     }
 
 }

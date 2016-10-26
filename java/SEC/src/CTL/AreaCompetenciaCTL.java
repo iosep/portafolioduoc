@@ -6,8 +6,6 @@
 package CTL;
 
 import DAL.AreaCompetenciaDAL;
-import DAL.AreaDAL;
-import DAL.CompetenciaDAL;
 import O.AreaCompetenciaO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,14 +16,14 @@ import javafx.collections.ObservableList;
  */
 public class AreaCompetenciaCTL {
 
-    private final AreaCompetenciaDAL areaCompetenciaDal = new AreaCompetenciaDAL();
-    private final CompetenciaDAL competenciaDal = new CompetenciaDAL();
-    private final AreaDAL areaDal = new AreaDAL();
+    private final AreaCompetenciaDAL areaCompDal = new AreaCompetenciaDAL();
+    private final CompetenciaCTL compCtl = new CompetenciaCTL();
+    private final AreaCTL areaCtl = new AreaCTL();
 
     public ObservableList<AreaCompetenciaO> getAreaCompetenciasByAreaIdFX(int id) {
         ObservableList<AreaCompetenciaO> fxList = FXCollections.observableArrayList();
-        areaCompetenciaDal.getAreaCompetencias().stream().forEach((each) -> {
-            if (each.getArea_id() == id) {
+        areaCompDal.getAreaCompetenciasByAreaId(id).stream().forEach((each) -> {
+            if (each.getActivo() == 1) {
                 fxList.add(each);
             }
         });
@@ -34,8 +32,8 @@ public class AreaCompetenciaCTL {
 
     public ObservableList<AreaCompetenciaO> getAreaCompetenciasByCompetenciaIdFX(int id) {
         ObservableList<AreaCompetenciaO> fxList = FXCollections.observableArrayList();
-        areaCompetenciaDal.getAreaCompetencias().stream().forEach((each) -> {
-            if (each.getCompetencia_id() == id) {
+        areaCompDal.getAreaCompetenciasByCompetenciaId(id).stream().forEach((each) -> {
+            if (each.getActivo() == 1) {
                 fxList.add(each);
             }
         });
@@ -44,15 +42,17 @@ public class AreaCompetenciaCTL {
 
     public ObservableList<AreaCompetenciaO> getCompetenciasDisponiblesByAreaFX(int areaId) {
         ObservableList<AreaCompetenciaO> fxList = FXCollections.observableArrayList();
-        competenciaDal.getCompetencias().stream().forEach((competencia) -> {
+        compCtl.getCompetenciasFX().stream().filter((each) -> (each.getActivo() == 1)).forEach((competencia) -> {
             boolean add = true;
-            for (AreaCompetenciaO areaComp : areaCompetenciaDal.getAreaCompetenciasByAreaId(areaId)) {
+            for (AreaCompetenciaO areaComp : this.getAreaCompetenciasByAreaIdFX(areaId)) {
                 if (areaComp.getCompetencia_id() == competencia.getId()) {
                     add = false;
                 }
             }
             if (add) {
-                fxList.add(new AreaCompetenciaO(areaId, competencia.getId()));
+                AreaCompetenciaO ac1 = new AreaCompetenciaO(areaId, competencia.getId());
+                ac1.setCompNombre(competencia.getNombre());
+                fxList.add(ac1);
             }
         });
         return fxList;
@@ -60,26 +60,28 @@ public class AreaCompetenciaCTL {
 
     public ObservableList<AreaCompetenciaO> getAreasDisponiblesByCompetenciaFX(int compId) {
         ObservableList<AreaCompetenciaO> fxList = FXCollections.observableArrayList();
-        areaDal.getAreas().stream().forEach((area) -> {
+        areaCtl.getAreasFX().stream().filter((each) -> (each.getActivo() == 1)).forEach((area) -> {
             boolean add = true;
-            for (AreaCompetenciaO areaComp : areaCompetenciaDal.getAreaCompetenciasByCompetenciaId(compId)) {
+            for (AreaCompetenciaO areaComp : this.getAreaCompetenciasByCompetenciaIdFX(compId)) {
                 if (areaComp.getArea_id() == area.getId()) {
                     add = false;
                 }
             }
             if (add) {
-                fxList.add(new AreaCompetenciaO(area.getId(), compId));
+                AreaCompetenciaO ac1 = new AreaCompetenciaO(area.getId(), compId);
+                ac1.setAreaNombre(area.getNombre());
+                fxList.add(ac1);
             }
         });
         return fxList;
     }
 
     public boolean addAreaCompetenciaCTL(AreaCompetenciaO obj) {
-        return areaCompetenciaDal.addAreaCompetencia(obj);
+        return areaCompDal.addAreaCompetencia(obj);
     }
 
     public boolean removeAreaCompCTL(int idArea, int idCompetencia) {
-        return areaCompetenciaDal.removeAreaCompetencia(idArea, idCompetencia);
+        return areaCompDal.removeAreaCompetencia(idArea, idCompetencia);
     }
 
 }

@@ -75,8 +75,10 @@ public class CrearUsuarioArea {
                 if (empty || item == null) {
                     setText(null);
                 } else {
+                    setText(item.getAreaNombre());
+                    /*
                     auxArea = areaCtl.getAreaById(item.getArea_id());
-                    setText(auxArea.getNombre());
+                    setText(auxArea.getNombre());*/
                 }
             }
         });
@@ -98,8 +100,7 @@ public class CrearUsuarioArea {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    auxArea = areaCtl.getAreaById(item.getArea_id());
-                    setText(auxArea.getNombre());
+                    setText(item.getAreaNombre());
                 }
             }
         });
@@ -132,8 +133,7 @@ public class CrearUsuarioArea {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxArea = areaCtl.getAreaById(item.getArea_id());
-                                setText(auxArea.getNombre());
+                                setText(item.getAreaNombre());
                             }
                         }
                     });
@@ -145,8 +145,7 @@ public class CrearUsuarioArea {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxArea = areaCtl.getAreaById(item.getArea_id());
-                                setText(auxArea.getNombre());
+                                setText(item.getAreaNombre());
                             }
                         }
                     });
@@ -176,8 +175,7 @@ public class CrearUsuarioArea {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxArea = areaCtl.getAreaById(item.getArea_id());
-                                setText(auxArea.getNombre());
+                                setText(item.getAreaNombre());
                             }
                         }
                     });
@@ -189,8 +187,7 @@ public class CrearUsuarioArea {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxArea = areaCtl.getAreaById(item.getArea_id());
-                                setText(auxArea.getNombre());
+                                setText(item.getAreaNombre());
                             }
                         }
                     });

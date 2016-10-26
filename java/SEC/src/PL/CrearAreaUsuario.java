@@ -76,8 +76,10 @@ public class CrearAreaUsuario {
                 if (empty || item == null) {
                     setText(null);
                 } else {
+                    setText(item.getUsuarioRut());
+                    /*
                     auxUser = userCtl.getUsuarioById(item.getUsuario_id());
-                    setText(auxUser.getNombre() + " " + auxUser.getApellido() + " " + auxUser.getRut());
+                    setText(auxUser.getNombre() + " " + auxUser.getApellido() + " " + auxUser.getRut());*/
                 }
             }
         });
@@ -99,8 +101,7 @@ public class CrearAreaUsuario {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    auxUser = userCtl.getUsuarioById(item.getUsuario_id());
-                    setText(auxUser.getNombre() + " " + auxUser.getApellido() + " " + auxUser.getRut());
+                    setText(item.getUsuarioRut());
                 }
             }
         });
@@ -133,8 +134,7 @@ public class CrearAreaUsuario {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxUser = userCtl.getUsuarioById(item.getUsuario_id());
-                                setText(auxUser.getNombre() + " " + auxUser.getApellido() + " " + auxUser.getRut());
+                                setText(item.getUsuarioRut());
                             }
                         }
                     });
@@ -146,8 +146,7 @@ public class CrearAreaUsuario {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxUser = userCtl.getUsuarioById(item.getUsuario_id());
-                                setText(auxUser.getNombre() + " " + auxUser.getApellido() + " " + auxUser.getRut());
+                                setText(item.getUsuarioRut());
                             }
                         }
                     });
@@ -177,8 +176,7 @@ public class CrearAreaUsuario {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxUser = userCtl.getUsuarioById(item.getUsuario_id());
-                                setText(auxUser.getNombre() + " " + auxUser.getApellido() + " " + auxUser.getRut());
+                                setText(item.getUsuarioRut());
                             }
                         }
                     });
@@ -190,8 +188,7 @@ public class CrearAreaUsuario {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxUser = userCtl.getUsuarioById(item.getUsuario_id());
-                                setText(auxUser.getNombre() + " " + auxUser.getApellido() + " " + auxUser.getRut());
+                                setText(item.getUsuarioRut());
                             }
                         }
                     });

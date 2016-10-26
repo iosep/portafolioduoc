@@ -15,21 +15,18 @@ import java.util.ArrayList;
  */
 public class SeleccionCTL {
 
-    public static ArrayList<SeleccionO> getSelecciones() {
-        return SeleccionDAL.getSelecciones();
+    private final SeleccionDAL selDal = new SeleccionDAL();
+
+    public ArrayList<SeleccionO> getSelecciones() {
+        return selDal.getSelecciones();
     }
 
-    public static boolean addSeleccion(SeleccionO obj) {
-        return SeleccionDAL.addSeleccion(obj);
+    public boolean addSeleccion(SeleccionO obj) {
+        return selDal.addSeleccion(obj);
     }
 
-    public static SeleccionO getSeleccionById(int id) {
-        for (SeleccionO item : SeleccionDAL.getSelecciones()) {
-            if (item.getId() == id) {
-                return item;
-            }
-        }
-        return null;
+    public SeleccionO getSeleccionById(int id) {
+        return selDal.getSeleccionById(id);
     }
 
 }

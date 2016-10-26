@@ -8,7 +8,6 @@ package PL;
 import CTL.ObservacionCTL;
 import FN.Validar;
 import O.ObservacionO;
-import java.util.Date;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -29,8 +28,7 @@ import javafx.stage.Stage;
  */
 public class CrearObservacion {
 
-    private final ObservacionCTL observacionCtl = new ObservacionCTL();
-    static boolean vb = false;
+    private final ObservacionCTL obCtl = new ObservacionCTL();
 
     public void display(int id_competencia) {
         Stage window = new Stage();
@@ -119,10 +117,8 @@ public class CrearObservacion {
                     && Integer.parseInt(txtNivelInf.getText().trim()) >= 0 && Integer.parseInt(txtNivelInf.getText().trim()) <= 5
                     && Integer.parseInt(txtNivelSup.getText().trim()) <= 5 && Integer.parseInt(txtNivelSup.getText().trim()) >= 0) {
                 if (Integer.parseInt(txtNivelSup.getText().trim()) > Integer.parseInt(txtNivelInf.getText().trim())) {
-                    Date now = new Date();
-                    vb = observacionCtl.addObservacionCTL(new ObservacionO(Integer.parseInt(txtNivelInf.getText().trim()), Integer.parseInt(txtNivelSup.getText().trim()),
-                            txtMsjInf.getText().trim(), txtMsjSup.getText().trim(), id_competencia, now, null));
-                    if (vb) {
+                    if (obCtl.addObservacionCTL(new ObservacionO(Integer.parseInt(txtNivelInf.getText().trim()), Integer.parseInt(txtNivelSup.getText().trim()),
+                            txtMsjInf.getText().trim(), txtMsjSup.getText().trim(), id_competencia))) {
                         txtNivelInf.clear();
                         txtNivelSup.clear();
                         txtMsjInf.clear();

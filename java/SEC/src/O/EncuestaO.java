@@ -11,18 +11,18 @@ package O;
  */
 public class EncuestaO {
 
-    private final int id;
-    private final int usuario_id;
-    private final int evaluado_id;
-    private final int periodo_id;
+    private int id;
+    private int usuario_id;
+    private int evaluado_id;
+    private int periodo_id;
 
-    static int fakeId = 0;
+    public EncuestaO() {
+    }
 
     public EncuestaO(int usuario_id, int evaluado_id, int periodo_id) {
         this.usuario_id = usuario_id;
         this.evaluado_id = evaluado_id;
         this.periodo_id = periodo_id;
-        this.id = ++fakeId;
     }
 
     public int getId() {
@@ -39,6 +39,22 @@ public class EncuestaO {
 
     public int getPeriodo_id() {
         return periodo_id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUsuario_id(int usuario_id) {
+        this.usuario_id = usuario_id;
+    }
+
+    public void setEvaluado_id(int evaluado_id) {
+        this.evaluado_id = evaluado_id;
+    }
+
+    public void setPeriodo_id(int periodo_id) {
+        this.periodo_id = periodo_id;
     }
 
 }

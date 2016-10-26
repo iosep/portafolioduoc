@@ -76,8 +76,9 @@ public class CrearAreaCompetencia {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
-                    setText(auxComp.getNombre());
+                    setText(item.getCompNombre());
+                    /*auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
+                    setText(auxComp.getNombre());*/
                 }
             }
         });
@@ -99,8 +100,9 @@ public class CrearAreaCompetencia {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
-                    setText(auxComp.getNombre());
+                    setText(item.getCompNombre());
+                    /*auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
+                    setText(auxComp.getNombre());*/
                 }
             }
         });
@@ -133,8 +135,9 @@ public class CrearAreaCompetencia {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
-                                setText(auxComp.getNombre());
+                                setText(item.getCompNombre());
+                                /*auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
+                                setText(auxComp.getNombre());*/
                             }
                         }
                     });
@@ -146,8 +149,9 @@ public class CrearAreaCompetencia {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
-                                auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
-                                setText(auxComp.getNombre());
+                                setText(item.getCompNombre());
+                                /*auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
+                                setText(auxComp.getNombre());*/
                             }
                         }
                     });
@@ -177,8 +181,10 @@ public class CrearAreaCompetencia {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
+                                setText(item.getCompNombre());
+                                /*
                                 auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
-                                setText(auxComp.getNombre());
+                                setText(auxComp.getNombre());*/
                             }
                         }
                     });
@@ -190,8 +196,10 @@ public class CrearAreaCompetencia {
                             if (empty || item == null) {
                                 setText(null);
                             } else {
+                                setText(item.getCompNombre());
+                                /*
                                 auxComp = compCtl.getCompetenciaById(item.getCompetencia_id());
-                                setText(auxComp.getNombre());
+                                setText(auxComp.getNombre());*/
                             }
                         }
                     });

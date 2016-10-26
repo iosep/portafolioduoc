@@ -30,15 +30,15 @@ import javafx.stage.Stage;
  */
 public class ModificarObservacion {
 
-    private final ObservacionCTL observacionCtl = new ObservacionCTL();
-    private ObservacionO auxObservacion;
+    private final ObservacionCTL obCtl = new ObservacionCTL();
+    private ObservacionO auxOb;
 
     public void display(int id_competencia, int id_observacion) {
         Stage window = new Stage();
         window.getIcons().add(new Image(getClass().getResourceAsStream("desk.png")));
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("SEC - Modificar Observacion");
-        auxObservacion = observacionCtl.getObservacionById(id_observacion);
+        auxOb = obCtl.getObservacionById(id_observacion);
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -59,7 +59,7 @@ public class ModificarObservacion {
 
         Label lblNivelInf = new Label("Nivel Inferior:");
         grid.add(lblNivelInf, 0, 4);
-        TextField txtNivelInf = new TextField("" + auxObservacion.getNivel_inf());
+        TextField txtNivelInf = new TextField("" + auxOb.getNivel_inf());
         txtNivelInf.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
@@ -69,7 +69,7 @@ public class ModificarObservacion {
 
         Label lblNivelSup = new Label("Nivel Superior:");
         grid.add(lblNivelSup, 0, 5);
-        TextField txtNivelSup = new TextField("" + auxObservacion.getNivel_sup());
+        TextField txtNivelSup = new TextField("" + auxOb.getNivel_sup());
         txtNivelSup.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
@@ -79,7 +79,7 @@ public class ModificarObservacion {
 
         Label lblMsjInf = new Label("Mensaje Nivel Inferior:");
         grid.add(lblMsjInf, 0, 6);
-        TextField txtMsjInf = new TextField(auxObservacion.getMsj_inf());
+        TextField txtMsjInf = new TextField(auxOb.getMsj_inf());
         txtMsjInf.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
@@ -89,7 +89,7 @@ public class ModificarObservacion {
 
         Label lblMsjSup = new Label("Mensaje Nivel Superior:");
         grid.add(lblMsjSup, 0, 7);
-        TextField txtMsjSup = new TextField(auxObservacion.getMsj_sup());
+        TextField txtMsjSup = new TextField(auxOb.getMsj_sup());
         txtMsjSup.textProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
                 msj.setText("");
@@ -121,10 +121,11 @@ public class ModificarObservacion {
                     && Integer.parseInt(txtNivelInf.getText().trim()) >= 0 && Integer.parseInt(txtNivelInf.getText().trim()) <= 5
                     && Integer.parseInt(txtNivelSup.getText().trim()) <= 5 && Integer.parseInt(txtNivelSup.getText().trim()) >= 0) {
                 if (Integer.parseInt(txtNivelSup.getText().trim()) > Integer.parseInt(txtNivelInf.getText().trim())) {
-                    Date now = new Date();
-                    if (observacionCtl.addObservacionCTL(new ObservacionO(Integer.parseInt(txtNivelInf.getText().trim()),
+                    ObservacionO ob1 = new ObservacionO(Integer.parseInt(txtNivelInf.getText().trim()),
                             Integer.parseInt(txtNivelSup.getText().trim()), txtMsjInf.getText().trim(), txtMsjSup.getText().trim(),
-                            id_competencia, now, null))) {
+                            id_competencia);
+                    ob1.setId(id_observacion);
+                    if (obCtl.modificarObservacionCTL(ob1)) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.initOwner(window);
                         alert.setTitle("Observación Modificada");

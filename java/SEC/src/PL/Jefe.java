@@ -139,12 +139,13 @@ public class Jefe {
         for (UsuarioAreaO usAr : usArCtl.getFuncionarioUserAreaByRutJefeFX(userRut)) {
             if (!funcionarios.contains(userCtl.getUsuarioById(usAr.getUsuario_id()))) {
                 funcionarios.add(userCtl.getUsuarioById(usAr.getUsuario_id()));
-                System.out.println("funcionariosList: " + usAr.getUsuarioString());
+                System.out.println("funcionariosList: " + usAr.getUsuarioRut());
             }
-            tiLayer3 = new TreeItem<>(new ArbolO(usAr.getUsuarioString(), usAr.getUsuario_id()));
+            tiLayer3 = new TreeItem<>(new ArbolO(usAr.getUsuarioRut(), usAr.getUsuario_id()));
+            System.out.println("usar rut for funcionariosbyarea: " + usAr.getUsuarioRut());
             found = false;
             for (TreeItem<ArbolO> treeLayer1 : tiRoot.getChildren()) {
-                if (treeLayer1.getValue().getTexto().contentEquals(usAr.getAreaString())) {
+                if (treeLayer1.getValue().getTexto().contentEquals(usAr.getAreaNombre())) {
                     for (TreeItem<ArbolO> treeLayer2 : treeLayer1.getChildren()) {
                         if (treeLayer2.getValue().getTexto().contentEquals("Funcionarios")) {
                             treeLayer2.getChildren().add(tiLayer3);
@@ -155,9 +156,9 @@ public class Jefe {
                 }
             }
             if (!found) {
-                System.out.println("areasList: " + usAr.getAreaString());
+                System.out.println("areasList: " + usAr.getAreaNombre());
                 areas.add(areaCtl.getAreaById(usAr.getArea_id()));
-                tiLayer1 = new TreeItem<>(new ArbolO(usAr.getAreaString(), usAr.getArea_id()));
+                tiLayer1 = new TreeItem<>(new ArbolO(usAr.getAreaNombre(), usAr.getArea_id()));
                 tiLayer2 = new TreeItem<>(new ArbolO("Funcionarios", 0));
                 tiLayer2.getChildren().add(tiLayer3);
                 tiLayer1.getChildren().add(tiLayer2);

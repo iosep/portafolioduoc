@@ -13,39 +13,42 @@ import java.util.Date;
  */
 public class ObservacionO {
 
-    private static int fakeId = 0;
-
     private int id;
     private int nivel_inf;
     private int nivel_sup;
     private String msj_inf;
     private String msj_sup;
     private int competencia_id;
+    private String compNombre;
     private Date creado;
     private Date modificado;
+    private int activo;
 
     public ObservacionO() {
     }
 
-    public ObservacionO(int nivel_inf, int nivel_sup, String msj_inf, String msj_sup, int competencia_id, Date creado, Date modificado) {
-
-        this.id = ++fakeId;
-
+    public ObservacionO(int nivel_inf, int nivel_sup, String msj_inf, String msj_sup, int competencia_id) {
         this.nivel_inf = nivel_inf;
         this.nivel_sup = nivel_sup;
         this.msj_inf = msj_inf;
         this.msj_sup = msj_sup;
         this.competencia_id = competencia_id;
-        this.creado = creado;
-        this.modificado = modificado;
     }
 
-    public static int getFakeId() {
-        return fakeId;
+    public String getCompNombre() {
+        return compNombre;
     }
 
-    public static void setFakeId(int fakeId) {
-        ObservacionO.fakeId = fakeId;
+    public void setCompNombre(String compNombre) {
+        this.compNombre = compNombre;
+    }
+
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
     }
 
     public int getId() {

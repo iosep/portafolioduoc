@@ -15,30 +15,25 @@ import java.util.ArrayList;
  */
 public class EncuestaCTL {
 
+    private final EncuestaDAL encDal = new EncuestaDAL();
+
     public ArrayList<EncuestaO> getEncuestas() {
-        return EncuestaDAL.getEncuestas();
+        return encDal.getEncuestas();
     }
 
     public boolean addEncuesta(EncuestaO obj) {
-        return EncuestaDAL.addEncuesta(obj);
+        return encDal.addEncuesta(obj);
     }
 
     public EncuestaO findEncuestaById(int id) {
-        for (EncuestaO e : EncuestaDAL.getEncuestas()) {
-            if (e.getId() == id) {
-                return e;
-            }
-        }
-        return null;
+        return encDal.getEncuestaById(id);
     }
 
     public ArrayList<EncuestaO> findEncuestasByPeriodoId(int id) {
         ArrayList<EncuestaO> ens = new ArrayList<>();
-        for (EncuestaO e : EncuestaDAL.getEncuestas()) {
-            if (e.getPeriodo_id() == id) {
-                ens.add(e);
-            }
-        }
+        encDal.getEncuestas().stream().filter((e) -> (e.getPeriodo_id() == id)).forEach((e) -> {
+            ens.add(e);
+        });
         return ens;
     }
 }

@@ -11,15 +11,16 @@ package O;
  */
 public class SeleccionO {
 
-    static int fakeId = 0;
-    private final int id;
-    private final int encuesta_id;
-    private final int respuesta_id;
+    private int id;
+    private int encuesta_id;
+    private int respuesta_id;
+
+    public SeleccionO() {
+    }
 
     public SeleccionO(int encuesta_id, int respuesta_id) {
         this.encuesta_id = encuesta_id;
         this.respuesta_id = respuesta_id;
-        this.id = ++fakeId;
     }
 
     public int getId() {
@@ -32,6 +33,18 @@ public class SeleccionO {
 
     public int getRespuesta_id() {
         return respuesta_id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setEncuesta_id(int encuesta_id) {
+        this.encuesta_id = encuesta_id;
+    }
+
+    public void setRespuesta_id(int respuesta_id) {
+        this.respuesta_id = respuesta_id;
     }
 
 }
