@@ -11,7 +11,7 @@ import FN.Formato;
 import FN.Validar;
 import O.RolO;
 import O.UsuarioO;
-import java.util.Date;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -77,7 +77,7 @@ public class ModificarUsuario {
         TextField txtRun = new TextField(u0.getRut());
         txtRun.setEditable(false);
         grid.add(txtRun, 1, 4);
-
+//FIX PASSWORD!
         Label pw = new Label("Contraseña:");
         grid.add(pw, 0, 5);
         PasswordField pwBox = new PasswordField();
@@ -88,7 +88,8 @@ public class ModificarUsuario {
             }
         });
         grid.add(pwBox, 1, 5);
-
+        pwBox.setVisible(false);
+//FIX PASSWORD!
         Label pw2 = new Label("Repetir Contraseña:");
         grid.add(pw2, 0, 6);
         PasswordField pwBox2 = new PasswordField();
@@ -99,15 +100,11 @@ public class ModificarUsuario {
             }
         });
         grid.add(pwBox2, 1, 6);
+        pwBox2.setVisible(false);
 
         Label rolLbl = new Label("Rol:");
         grid.add(rolLbl, 0, 7);
         ChoiceBox cbRol = new ChoiceBox(rctl.getRolesFX());
-        for (int i = 0; i < cbRol.getItems().size(); i++) {
-            if (((RolO) cbRol.getItems().get(i)).getId() == u0.getRolid()) {
-                cbRol.getSelectionModel().select(i);
-            }
-        }
         grid.add(cbRol, 1, 7);
 
         Label jefaLbl = new Label("Jefe:");
@@ -118,29 +115,39 @@ public class ModificarUsuario {
         });
         grid.add(cbJefa, 1, 8);
 
-        if (u0.getRolid() != 3) {
+        cbRol.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RolO>() {
+            @Override
+            public void changed(ObservableValue<? extends RolO> ov, RolO old_val, RolO new_val) {
+                if (new_val != null && new_val.getNombre().equals("FUNCIONARIO")) {
+                    msj.setText("");
+                    jefaLbl.setVisible(true);
+                    cbJefa.setVisible(true);
+                } else {
+                    msj.setText("");
+                    jefaLbl.setVisible(false);
+                    cbJefa.setVisible(false);
+                }
+            }
+        });
+        //load rol
+        for (int i = 0; i < cbRol.getItems().size(); i++) {
+            if (((RolO) cbRol.getItems().get(i)).getId() == u0.getRolid()) {
+                cbRol.getSelectionModel().select(i);
+            }
+        }
+        //set funcionario jefe
+        //System.out.println("u0.rolNombre(): " + u0.getRol_nombre());
+        if (!u0.getRol_nombre().equals("FUNCIONARIO")) {
             jefaLbl.setVisible(false);
             cbJefa.setVisible(false);
         } else {
             for (int i = 0; i < cbJefa.getItems().size(); i++) {
                 if (((UsuarioO) cbJefa.getItems().get(i)).getRut().equals(u0.getRutjefe())) {
                     cbJefa.getSelectionModel().select(i);
-                    System.out.println(i);
+                    //System.out.println("i cbJefa.items(): " + i);
                 }
             }
         }
-
-        cbRol.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
-            if (new_val.intValue() == 2) {
-                msj.setText("");
-                jefaLbl.setVisible(true);
-                cbJefa.setVisible(true);
-            } else {
-                msj.setText("");
-                jefaLbl.setVisible(false);
-                cbJefa.setVisible(false);
-            }
-        });
 
         Label lblNombre = new Label("Nombre:");
         grid.add(lblNombre, 3, 4);
@@ -226,7 +233,7 @@ public class ModificarUsuario {
                 } else {
                     boolean boo = false;
                     String rut_jefe = "1";
-                    if (cbRol.getSelectionModel().getSelectedIndex() == 2) {
+                    if (((RolO) cbRol.getValue()).getNombre().equals("FUNCIONARIO")) {
                         if (cbJefa.getValue() == null) {
                             msj.setFill(Color.FIREBRICK);
                             msj.setText("Seleccione JEFE");
@@ -238,6 +245,7 @@ public class ModificarUsuario {
                         boo = true;
                     }
                     if (boo) {
+                        //FIX CLAVE
                         String clave = "12345";
                         boolean add = true;
                         if (pwBox.getLength() > 0 || pwBox2.getLength() > 0) {
@@ -256,14 +264,12 @@ public class ModificarUsuario {
                         if (add) {
                             int fono = Integer.parseInt(txtFono.getText());
                             String sSexo = "";
-                            switch (cbSexo.getSelectionModel().getSelectedIndex()) {
-                                case 0:
+                            switch (cbSexo.getValue().toString()) {
+                                case "MASCULINO":
                                     sSexo = "M";
                                     break;
-                                case 1:
+                                case "FEMENINO":
                                     sSexo = "F";
-                                    break;
-                                default:
                                     break;
                             }
                             String rut = Formato.formatoRut(txtRun.getText());

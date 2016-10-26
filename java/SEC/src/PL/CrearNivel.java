@@ -103,9 +103,9 @@ public class CrearNivel {
                 msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Descripción");
             } else if (v.validarInteger(notaTxt.getText().trim()) && Integer.parseInt(notaTxt.getText().trim()) >= 0 && Integer.parseInt(notaTxt.getText().trim()) <= 5) {
-                Date now = new Date();
-                vb = nivelCtl.addNivelCTL(new NivelO(nombreTxt.getText().trim(), Integer.parseInt(notaTxt.getText().trim()), descTxt.getText().trim(), now, null));
-                if (vb) {
+                if (nivelCtl.addNivelCTL(new NivelO(
+                        nombreTxt.getText().trim(), Integer.parseInt(notaTxt.getText().trim()),
+                        descTxt.getText().trim()))) {
                     descTxt.clear();
                     notaTxt.clear();
                     nombreTxt.clear();

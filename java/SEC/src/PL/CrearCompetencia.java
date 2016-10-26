@@ -119,7 +119,7 @@ public class CrearCompetencia {
                 int no = Integer.parseInt(txtNivelOptimo.getText().trim());
                 if (no >= 0 && no <= 5) {
                     Date now = new Date();
-                    vb = compCtl.addCompetenciaCTL(new CompetenciaO(nombreTxt.getText().trim(), descTxt.getText().trim(), siglaTxt.getText().trim(), no, 1, now, null, null));
+                    vb = compCtl.addCompetenciaCTL(new CompetenciaO(nombreTxt.getText().trim(), descTxt.getText().trim(), siglaTxt.getText().trim(), no));
                     if (vb) {
                         nombreTxt.clear();
                         txtNivelOptimo.clear();

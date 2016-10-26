@@ -13,27 +13,22 @@ import java.util.Date;
  */
 public class RespuestaO {
 
-    private static int fakeId = 0;
-
     private int id;
     private String respuesta;
     private int puntos;
     private int pregunta_id;
+    private String preguntaNombre;
     private Date creado;
     private Date modificado;
+    private int activo;
 
     public RespuestaO() {
     }
 
-    public RespuestaO(String respuesta, int puntos, int pregunta_id, Date creado, Date modificado) {
-
-        this.id = ++fakeId;
-
+    public RespuestaO(String respuesta, int puntos, int pregunta_id) {
         this.respuesta = respuesta;
         this.puntos = puntos;
         this.pregunta_id = pregunta_id;
-        this.creado = creado;
-        this.modificado = modificado;
     }
 
     public int getId() {
@@ -82,6 +77,22 @@ public class RespuestaO {
 
     public void setModificado(Date modificado) {
         this.modificado = modificado;
+    }
+
+    public String getPreguntaNombre() {
+        return preguntaNombre;
+    }
+
+    public void setPreguntaNombre(String preguntaNombre) {
+        this.preguntaNombre = preguntaNombre;
+    }
+
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
     }
 
     @Override

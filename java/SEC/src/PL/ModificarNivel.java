@@ -105,8 +105,9 @@ public class ModificarNivel {
                 msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Descripción");
             } else if (v.validarInteger(notaTxt.getText().trim()) && Integer.parseInt(notaTxt.getText().trim()) >= 0 && Integer.parseInt(notaTxt.getText().trim()) <= 5) {
-                Date now = new Date();
-                if (nivelCtl.addNivelCTL(new NivelO(nombreTxt.getText().trim(), Integer.parseInt(notaTxt.getText().trim()), descTxt.getText().trim(), now, null))) {
+                NivelO n1 = new NivelO(nombreTxt.getText().trim(), Integer.parseInt(notaTxt.getText().trim()), descTxt.getText().trim());
+                n1.setId(idNivel);
+                if (nivelCtl.modificarNivel(n1)) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(window);
                     alert.setTitle("Nivel Modificado");

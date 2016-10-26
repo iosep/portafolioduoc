@@ -7,9 +7,10 @@ package DAL;
 
 import FN.Formato;
 import O.UsuarioO;
-import RESTful.Conexion;
+import REST.Conexion;
 import java.util.ArrayList;
 import java.util.Iterator;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -28,22 +29,23 @@ public class UsuarioDAL {
         try {
             String response = cx.post("usuario/json/read_all", jsonPost);
             JSONObject jsonResponse = new JSONObject(response.trim());
-            if (jsonResponse.getJSONArray("usuarios").length() > 0) {
-                for (int i = 0; i < jsonResponse.getJSONArray("usuarios").length(); i++) {
+            if (jsonResponse.getJSONArray("usuario").length() > 0) {
+                JSONArray jsonArray = jsonResponse.getJSONArray("usuario");
+                for (int i = 0; i < jsonArray.length(); i++) {
                     UsuarioO obj = new UsuarioO();
-                    obj.setId(jsonResponse.getJSONArray("usuarios").getJSONObject(i).getInt("ID"));
-                    obj.setRut(jsonResponse.getJSONArray("usuarios").getJSONObject(i).getString("RUT"));
-                    obj.setRutjefe(jsonResponse.getJSONArray("usuarios").getJSONObject(i).getString("RUT_JEFE"));
-                    obj.setNombre(jsonResponse.getJSONArray("usuarios").getJSONObject(i).getString("NOMBRE"));
-                    obj.setApellido(jsonResponse.getJSONArray("usuarios").getJSONObject(i).getString("APELLIDO"));
-                    obj.setEmail(jsonResponse.getJSONArray("usuarios").getJSONObject(i).getString("EMAIL"));
-                    obj.setSexo(jsonResponse.getJSONArray("usuarios").getJSONObject(i).getString("SEXO"));
-                    obj.setFono(jsonResponse.getJSONArray("usuarios").getJSONObject(i).getInt("FONO"));
-                    obj.setRolid(jsonResponse.getJSONArray("usuarios").getJSONObject(i).getInt("ROL_ID"));
-                    obj.setRol_nombre(jsonResponse.getJSONArray("usuarios").getJSONObject(i).getString("ROL_NOMBRE"));
-                    obj.setCreado(Formato.stringToDate(jsonResponse.getJSONArray("usuarios").getJSONObject(i).getString("CREADO")));
-                    obj.setModificado(Formato.stringToDate(jsonResponse.getJSONArray("usuarios").getJSONObject(i).getString("MODIFICADO")));
-                    obj.setActivo(jsonResponse.getJSONArray("usuarios").getJSONObject(i).getInt("ACTIVO"));
+                    obj.setId(jsonArray.getJSONObject(i).getInt("ID"));
+                    obj.setRut(jsonArray.getJSONObject(i).getString("RUT"));
+                    obj.setRutjefe(jsonArray.getJSONObject(i).getString("RUT_JEFE"));
+                    obj.setNombre(jsonArray.getJSONObject(i).getString("NOMBRE"));
+                    obj.setApellido(jsonArray.getJSONObject(i).getString("APELLIDO"));
+                    obj.setEmail(jsonArray.getJSONObject(i).getString("EMAIL"));
+                    obj.setSexo(jsonArray.getJSONObject(i).getString("SEXO"));
+                    obj.setFono(jsonArray.getJSONObject(i).getInt("FONO"));
+                    obj.setRolid(jsonArray.getJSONObject(i).getInt("ROL_ID"));
+                    obj.setRol_nombre(jsonArray.getJSONObject(i).getString("ROL_NOMBRE"));
+                    obj.setCreado(Formato.stringToDate(jsonArray.getJSONObject(i).getString("CREADO")));
+                    obj.setModificado(Formato.stringToDate(jsonArray.getJSONObject(i).getString("MODIFICADO")));
+                    obj.setActivo(jsonArray.getJSONObject(i).getInt("ACTIVO"));
                     list.add(obj);
                 }
                 return list;
@@ -64,19 +66,20 @@ public class UsuarioDAL {
             String response = cx.post("usuario/json/read_id", jsonPost);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("usuario").length() > 0) {
-                obj.setId(jsonResponse.getJSONArray("usuario").getJSONObject(0).getInt("ID"));
-                obj.setRut(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("RUT"));
-                obj.setRutjefe(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("RUT_JEFE"));
-                obj.setNombre(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("NOMBRE"));
-                obj.setApellido(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("APELLIDO"));
-                obj.setEmail(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("EMAIL"));
-                obj.setSexo(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("SEXO"));
-                obj.setFono(jsonResponse.getJSONArray("usuario").getJSONObject(0).getInt("FONO"));
-                obj.setRolid(jsonResponse.getJSONArray("usuario").getJSONObject(0).getInt("ROL_ID"));
-                obj.setRol_nombre(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("ROL_NOMBRE"));
-                obj.setCreado(Formato.stringToDate(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("CREADO")));
-                obj.setModificado(Formato.stringToDate(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("MODIFICADO")));
-                obj.setActivo(jsonResponse.getJSONArray("usuario").getJSONObject(0).getInt("ACTIVO"));
+                JSONArray jsonArray = jsonResponse.getJSONArray("usuario");
+                obj.setId(jsonArray.getJSONObject(0).getInt("ID"));
+                obj.setRut(jsonArray.getJSONObject(0).getString("RUT"));
+                obj.setRutjefe(jsonArray.getJSONObject(0).getString("RUT_JEFE"));
+                obj.setNombre(jsonArray.getJSONObject(0).getString("NOMBRE"));
+                obj.setApellido(jsonArray.getJSONObject(0).getString("APELLIDO"));
+                obj.setEmail(jsonArray.getJSONObject(0).getString("EMAIL"));
+                obj.setSexo(jsonArray.getJSONObject(0).getString("SEXO"));
+                obj.setFono(jsonArray.getJSONObject(0).getInt("FONO"));
+                obj.setRolid(jsonArray.getJSONObject(0).getInt("ROL_ID"));
+                obj.setRol_nombre(jsonArray.getJSONObject(0).getString("ROL_NOMBRE"));
+                obj.setCreado(Formato.stringToDate(jsonArray.getJSONObject(0).getString("CREADO")));
+                obj.setModificado(Formato.stringToDate(jsonArray.getJSONObject(0).getString("MODIFICADO")));
+                obj.setActivo(jsonArray.getJSONObject(0).getInt("ACTIVO"));
                 return obj;
             }
         } catch (Exception e) {
@@ -95,19 +98,20 @@ public class UsuarioDAL {
             String response = cx.post("usuario/json/read_rut", jsonPost);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("usuario").length() > 0) {
-                obj.setId(jsonResponse.getJSONArray("usuario").getJSONObject(0).getInt("ID"));
-                obj.setRut(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("RUT"));
-                obj.setRutjefe(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("RUT_JEFE"));
-                obj.setNombre(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("NOMBRE"));
-                obj.setApellido(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("APELLIDO"));
-                obj.setEmail(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("EMAIL"));
-                obj.setSexo(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("SEXO"));
-                obj.setFono(jsonResponse.getJSONArray("usuario").getJSONObject(0).getInt("FONO"));
-                obj.setRolid(jsonResponse.getJSONArray("usuario").getJSONObject(0).getInt("ROL_ID"));
-                obj.setRol_nombre(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("ROL_NOMBRE"));
-                obj.setCreado(Formato.stringToDate(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("CREADO")));
-                obj.setModificado(Formato.stringToDate(jsonResponse.getJSONArray("usuario").getJSONObject(0).getString("MODIFICADO")));
-                obj.setActivo(jsonResponse.getJSONArray("usuario").getJSONObject(0).getInt("ACTIVO"));
+                JSONArray jsonArray = jsonResponse.getJSONArray("usuario");
+                obj.setId(jsonArray.getJSONObject(0).getInt("ID"));
+                obj.setRut(jsonArray.getJSONObject(0).getString("RUT"));
+                obj.setRutjefe(jsonArray.getJSONObject(0).getString("RUT_JEFE"));
+                obj.setNombre(jsonArray.getJSONObject(0).getString("NOMBRE"));
+                obj.setApellido(jsonArray.getJSONObject(0).getString("APELLIDO"));
+                obj.setEmail(jsonArray.getJSONObject(0).getString("EMAIL"));
+                obj.setSexo(jsonArray.getJSONObject(0).getString("SEXO"));
+                obj.setFono(jsonArray.getJSONObject(0).getInt("FONO"));
+                obj.setRolid(jsonArray.getJSONObject(0).getInt("ROL_ID"));
+                obj.setRol_nombre(jsonArray.getJSONObject(0).getString("ROL_NOMBRE"));
+                obj.setCreado(Formato.stringToDate(jsonArray.getJSONObject(0).getString("CREADO")));
+                obj.setModificado(Formato.stringToDate(jsonArray.getJSONObject(0).getString("MODIFICADO")));
+                obj.setActivo(jsonArray.getJSONObject(0).getInt("ACTIVO"));
                 return obj;
             }
         } catch (Exception e) {
@@ -149,7 +153,6 @@ public class UsuarioDAL {
         jsonPut.put("id", obj.getId());
         jsonPut.put("rut", obj.getRut());
         jsonPut.put("rutjefe", obj.getRutjefe());
-        jsonPut.put("clave", obj.getClave());
         jsonPut.put("nombre", obj.getNombre());
         jsonPut.put("apellido", obj.getApellido());
         jsonPut.put("email", obj.getEmail());
@@ -158,7 +161,7 @@ public class UsuarioDAL {
         jsonPut.put("rolid", obj.getRolid());
         try {
             String response = cx.put("usuario/json/update", jsonPut);
-            System.out.println("updateUser response: " + response);
+            //System.out.println("updateUser response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("usuario").length() > 0) {
                 return true;
@@ -175,10 +178,10 @@ public class UsuarioDAL {
         jsonDelete.put("idusuario", VariablesDAL.idUsuario);
         jsonDelete.put("token", VariablesDAL.token);
         jsonDelete.put("id", id);
-        System.out.println("jsonPost deleteUser: " + jsonDelete);
+        //System.out.println("jsonPost deleteUser: " + jsonDelete);
         try {
             String response = cx.delete("usuario/json/delete", jsonDelete);
-            System.out.println("jsonReponse deleteUser: " + response);
+            //System.out.println("jsonReponse deleteUser: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("usuario").length() > 0) {
                 return true;
@@ -222,24 +225,25 @@ public class UsuarioDAL {
         jsonPost.put("token", VariablesDAL.token);
         try {
             String response = cx.post("usuario/json/read_jefes", jsonPost);
-            System.out.println("getJefes response: " + response);
+            //System.out.println("getJefes response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
-            if (jsonResponse.getJSONArray("jefes").length() > 0) {
-                for (int i = 0; i < jsonResponse.getJSONArray("jefes").length(); i++) {
+            if (jsonResponse.getJSONArray("usuario").length() > 0) {
+                JSONArray jsonArray = jsonResponse.getJSONArray("usuario");
+                for (int i = 0; i < jsonArray.length(); i++) {
                     UsuarioO obj = new UsuarioO();
-                    obj.setId(jsonResponse.getJSONArray("jefes").getJSONObject(i).getInt("ID"));
-                    obj.setRut(jsonResponse.getJSONArray("jefes").getJSONObject(i).getString("RUT"));
-                    obj.setRutjefe(jsonResponse.getJSONArray("jefes").getJSONObject(i).getString("RUT_JEFE"));
-                    obj.setNombre(jsonResponse.getJSONArray("jefes").getJSONObject(i).getString("NOMBRE"));
-                    obj.setApellido(jsonResponse.getJSONArray("jefes").getJSONObject(i).getString("APELLIDO"));
-                    obj.setEmail(jsonResponse.getJSONArray("jefes").getJSONObject(i).getString("EMAIL"));
-                    obj.setSexo(jsonResponse.getJSONArray("jefes").getJSONObject(i).getString("SEXO"));
-                    obj.setFono(jsonResponse.getJSONArray("jefes").getJSONObject(i).getInt("FONO"));
-                    obj.setRolid(jsonResponse.getJSONArray("jefes").getJSONObject(i).getInt("ROL_ID"));
-                    obj.setRol_nombre(jsonResponse.getJSONArray("jefes").getJSONObject(i).getString("ROL_NOMBRE"));
-                    obj.setCreado(Formato.stringToDate(jsonResponse.getJSONArray("jefes").getJSONObject(i).getString("CREADO")));
-                    obj.setModificado(Formato.stringToDate(jsonResponse.getJSONArray("jefes").getJSONObject(i).getString("MODIFICADO")));
-                    obj.setActivo(jsonResponse.getJSONArray("jefes").getJSONObject(i).getInt("ACTIVO"));
+                    obj.setId(jsonArray.getJSONObject(i).getInt("ID"));
+                    obj.setRut(jsonArray.getJSONObject(i).getString("RUT"));
+                    obj.setRutjefe(jsonArray.getJSONObject(i).getString("RUT_JEFE"));
+                    obj.setNombre(jsonArray.getJSONObject(i).getString("NOMBRE"));
+                    obj.setApellido(jsonArray.getJSONObject(i).getString("APELLIDO"));
+                    obj.setEmail(jsonArray.getJSONObject(i).getString("EMAIL"));
+                    obj.setSexo(jsonArray.getJSONObject(i).getString("SEXO"));
+                    obj.setFono(jsonArray.getJSONObject(i).getInt("FONO"));
+                    obj.setRolid(jsonArray.getJSONObject(i).getInt("ROL_ID"));
+                    obj.setRol_nombre(jsonArray.getJSONObject(i).getString("ROL_NOMBRE"));
+                    obj.setCreado(Formato.stringToDate(jsonArray.getJSONObject(i).getString("CREADO")));
+                    obj.setModificado(Formato.stringToDate(jsonArray.getJSONObject(i).getString("MODIFICADO")));
+                    obj.setActivo(jsonArray.getJSONObject(i).getInt("ACTIVO"));
                     list.add(obj);
                 }
                 return list;

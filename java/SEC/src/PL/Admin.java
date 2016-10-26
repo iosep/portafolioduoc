@@ -447,7 +447,8 @@ public class Admin {
             });
             activarMenuItem.setOnAction(event -> {
                 if (row.getItem().getActivo() == 0) {
-
+                    areasCtl.activaArea(row.getItem().getId());
+                    btnArea.fire();
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(primaryStage);
@@ -603,6 +604,7 @@ public class Admin {
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
             final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
+            final MenuItem activarMenuItem = new MenuItem("Activar");
             final MenuItem crearPreguntaMenu = new MenuItem("Crear Pregunta");
             final MenuItem crearCommentMenu = new MenuItem("Crear Observación");
             final MenuItem verAreasMenu = new MenuItem("Ver Áreas");
@@ -614,8 +616,31 @@ public class Admin {
                 btnCompetencia.fire();
             });
             //desactivar
+            activarMenuItem.setOnAction(v -> {
+                if (row.getItem().getActivo() == 0) {
+                    compCtl.activarCompetencia(row.getItem().getId());
+                    btnCompetencia.fire();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Información");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Competencia ya se encuentra Activada");
+                    alert.showAndWait();
+                }
+            });
             desactivarMenuItem.setOnAction(event -> {
-                System.out.println("Desactivar Competencia Id: " + row.getItem().getId());
+                if (row.getItem().getActivo() == 1) {
+                    compCtl.desactivarCompetencia(row.getItem().getId());
+                    btnCompetencia.fire();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Información");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Competencia ya se encuentra Desactivada");
+                    alert.showAndWait();
+                }
             });
             crearPreguntaMenu.setOnAction(event -> {
                 int id_competencia = row.getItem().getId();
@@ -638,7 +663,7 @@ public class Admin {
                 CrearCompetenciaNivel ccnw = new CrearCompetenciaNivel();
                 ccnw.display(row.getItem().getId());
             });
-            contextMenu.getItems().addAll(modificarMenuItem, desactivarMenuItem, new SeparatorMenuItem(), crearPreguntaMenu, crearCommentMenu,
+            contextMenu.getItems().addAll(activarMenuItem, modificarMenuItem, desactivarMenuItem, new SeparatorMenuItem(), crearPreguntaMenu, crearCommentMenu,
                     new SeparatorMenuItem(), verAreasMenu, verNivelMenu);
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
@@ -670,13 +695,13 @@ public class Admin {
                     } else {
                         switch (item) {
                             case 0:
-                                setText("Inactivo");
+                                setText("INACTIVO");
                                 break;
                             case 1:
-                                setText("Activo");
+                                setText("ACTIVO");
                                 break;
                             default:
-                                setText("Estado Desconocido");
+                                setText("");
                                 break;
                         }
                     }
@@ -787,7 +812,8 @@ public class Admin {
             });
             //desactivar
             eliminarMenuItem.setOnAction(event -> {
-                System.out.println("Desactivar Nivel Id: " + row.getItem().getId());
+                nivelCtl.eliminarNivel(row.getItem().getId());
+                btnNivel.fire();
             });
             verCompMenu.setOnAction(ev -> {
                 CrearNivelCompetencia cnc = new CrearNivelCompetencia();
@@ -881,7 +907,7 @@ public class Admin {
             final TableRow<PreguntaO> row = new TableRow<>();
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
-            final MenuItem desactivarMenuItem = new MenuItem("Eliminar");
+            final MenuItem eliminarMenuItem = new MenuItem("Eliminar");
             final MenuItem crearRespuestaMenu = new MenuItem("Crear Respuesta");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
@@ -889,9 +915,9 @@ public class Admin {
                 mp.display(row.getItem().getCompetencia_id(), row.getItem().getId());
                 btnPregunta.fire();
             });
-            //desactivar
-            desactivarMenuItem.setOnAction(event -> {
-                System.out.println("Desactivar Pregunta Id: " + row.getItem().getId());
+            eliminarMenuItem.setOnAction(event -> {
+                questionCtl.eliminarPregunta(row.getItem().getId());
+                btnPregunta.fire();
             });
             //crear respuesta
             crearRespuestaMenu.setOnAction(event -> {
@@ -900,7 +926,7 @@ public class Admin {
                 cpw.display(id_pregunta);
                 btnRespuesta.fire();
             });
-            contextMenu.getItems().addAll(modificarMenuItem, desactivarMenuItem, crearRespuestaMenu);
+            contextMenu.getItems().addAll(modificarMenuItem, eliminarMenuItem, crearRespuestaMenu);
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                     .then((ContextMenu) null)
@@ -912,8 +938,8 @@ public class Admin {
         questionPreguntaCol = new TableColumn<>("Pregunta");
         questionPreguntaCol.setCellValueFactory(new PropertyValueFactory<>("pregunta"));
         questionCompetenciaCol = new TableColumn<>("Competencia");
-        questionCompetenciaCol.setCellValueFactory(new PropertyValueFactory<>("competencia_id"));
-        questionCompetenciaCol.setCellFactory(column -> {
+        questionCompetenciaCol.setCellValueFactory(new PropertyValueFactory<>("competenciaNombre"));
+        /*questionCompetenciaCol.setCellFactory(column -> {
             return new TableCell<PreguntaO, Integer>() {
                 @Override
                 protected void updateItem(Integer item, boolean empty) {
@@ -925,7 +951,7 @@ public class Admin {
                     }
                 }
             };
-        });
+        });*/
         questionCreadoCol = new TableColumn<>("Creado");
         questionCreadoCol.setCellValueFactory(new PropertyValueFactory<>("creado"));
         questionCreadoCol.setCellFactory(column -> {
@@ -1007,7 +1033,8 @@ public class Admin {
             });
             //desactivar
             desactivarMenuItem.setOnAction(event -> {
-                System.out.println("Desactivar Respuesta Id: " + row.getItem().getId());
+                answerCtl.eliminaRespuesta(row.getItem().getId());
+                btnRespuesta.fire();
             });
             contextMenu.getItems().add(modificarMenuItem);
             contextMenu.getItems().add(desactivarMenuItem);
@@ -1024,8 +1051,8 @@ public class Admin {
         answerPuntosCol = new TableColumn<>("Puntos");
         answerPuntosCol.setCellValueFactory(new PropertyValueFactory<>("puntos"));
         answerPreguntaCol = new TableColumn<>("Pregunta");
-        answerPreguntaCol.setCellValueFactory(new PropertyValueFactory<>("pregunta_id"));
-        answerPreguntaCol.setCellFactory(column -> {
+        answerPreguntaCol.setCellValueFactory(new PropertyValueFactory<>("preguntaNombre"));
+        /*answerPreguntaCol.setCellFactory(column -> {
             return new TableCell<RespuestaO, Integer>() {
                 @Override
                 protected void updateItem(Integer item, boolean empty) {
@@ -1037,7 +1064,7 @@ public class Admin {
                     }
                 }
             };
-        });
+        });*/
         answerCreadoCol = new TableColumn<>("Creado");
         answerCreadoCol.setCellValueFactory(new PropertyValueFactory<>("creado"));
         answerCreadoCol.setCellFactory(column -> {
@@ -1238,18 +1265,41 @@ public class Admin {
             final ContextMenu contextMenu = new ContextMenu();
             final MenuItem modificarMenuItem = new MenuItem("Modificar");
             final MenuItem desactivarMenuItem = new MenuItem("Desactivar");
+            final MenuItem activarMenuItem = new MenuItem("Activar");
             //modificar            
             modificarMenuItem.setOnAction(event -> {
                 ModificarPeriodo mp = new ModificarPeriodo();
                 mp.display(row.getItem().getId());
                 btnPeriodo.fire();
             });
+            activarMenuItem.setOnAction(event -> {
+                if (row.getItem().getActivo() == 0) {
+                    periodoCtl.activarPeriodo(row.getItem().getId());
+                    btnPeriodo.fire();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Información");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Periodo ya se encuentra Activado");
+                    alert.showAndWait();
+                }
+            });
             //desactivar
             desactivarMenuItem.setOnAction(event -> {
-                System.out.println("Desactivar Periodo Id: " + row.getItem().getId());
+                if (row.getItem().getActivo() == 1) {
+                    periodoCtl.desactivarPeriodo(row.getItem().getId());
+                    btnPeriodo.fire();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Información");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Periodo ya se encuentra Desactivado");
+                    alert.showAndWait();
+                }
             });
-            contextMenu.getItems().add(modificarMenuItem);
-            contextMenu.getItems().add(desactivarMenuItem);
+            contextMenu.getItems().addAll(activarMenuItem, modificarMenuItem, desactivarMenuItem);
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                     .then((ContextMenu) null)
@@ -1306,13 +1356,13 @@ public class Admin {
                     } else {
                         switch (item) {
                             case 0:
-                                setText("Inactivo");
+                                setText("INACTIVO");
                                 break;
                             case 1:
-                                setText("Activo");
+                                setText("ACTIVO");
                                 break;
                             default:
-                                setText("Estado Desconocido");
+                                setText("");
                                 break;
                         }
                     }

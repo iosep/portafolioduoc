@@ -38,4 +38,8 @@ public class AreaCTL {
     public boolean desactivarArea(int id) {
         return ad.deleteArea(id);
     }
+
+    public boolean activaArea(int id) {
+        return ad.activaArea(id);
+    }
 }

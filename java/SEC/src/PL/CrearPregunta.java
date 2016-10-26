@@ -76,17 +76,13 @@ public class CrearPregunta {
             if (txtPregunta.getText().isEmpty()) {
                 msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Pregunta");
+            } else if (preguntaCtl.addPreguntaCTL(new PreguntaO(txtPregunta.getText().trim(), id_competencia))) {
+                txtPregunta.clear();
+                msj.setFill(Color.GREEN);
+                msj.setText("Pregunta Creada Exitosamente");
             } else {
-                Date now = new Date();
-                vb = preguntaCtl.addPreguntaCTL(new PreguntaO(txtPregunta.getText().trim(), id_competencia, now, null));
-                if (vb) {
-                    txtPregunta.clear();
-                    msj.setFill(Color.GREEN);
-                    msj.setText("Pregunta Creada Exitosamente");
-                } else {
-                    msj.setFill(Color.FIREBRICK);
-                    msj.setText("Error Al Crear Pregunta");
-                }
+                msj.setFill(Color.FIREBRICK);
+                msj.setText("Error Al Crear Pregunta");
             }
         });
 

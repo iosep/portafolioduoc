@@ -19,32 +19,36 @@ public class PreguntaCTL {
 
     private final PreguntaDAL preguntaDal = new PreguntaDAL();
 
-    public ArrayList<PreguntaO> getPreguntas() {
-        return preguntaDal.getPreguntas();
-    }
-
     public PreguntaO getPreguntaById(int id) {
         return preguntaDal.getPreguntaById(id);
     }
 
     public ObservableList<PreguntaO> getPreguntasFX() {
-        ObservableList<PreguntaO> fxList = FXCollections.observableArrayList();
-        preguntaDal.getPreguntas().stream().forEach((each) -> {
-            fxList.add(each);
+        ObservableList<PreguntaO> obList = FXCollections.observableArrayList();
+        preguntaDal.getPreguntas().stream().filter((each) -> (each.getActivo() == 1)).forEach((each) -> {
+            obList.add(each);
         });
-        return fxList;
+        return obList;
     }
 
     public boolean addPreguntaCTL(PreguntaO obj) {
         return preguntaDal.addPregunta(obj);
     }
 
+    public boolean modificarPreguntaCTL(PreguntaO obj) {
+        return preguntaDal.updatePregunta(obj);
+    }
+    
     public ArrayList<PreguntaO> getPreguntasByCompetenciaId(int idComp) {
         ArrayList<PreguntaO> preByComp = new ArrayList<>();
-        preguntaDal.getPreguntas().stream().filter((p) -> (p.getCompetencia_id() == idComp)).forEach((p) -> {
+        preguntaDal.getPreguntas().stream().filter((p) -> (p.getActivo() == 1 && p.getCompetencia_id() == idComp)).forEach((p) -> {
             preByComp.add(p);
         });
         return preByComp;
     }
 
+    public boolean eliminarPregunta(int id) {
+        return preguntaDal.deletePregunta(id);
+    }
+    
 }

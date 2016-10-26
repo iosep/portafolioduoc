@@ -28,10 +28,7 @@ public class PeriodoCTL {
     }
 
     public ObservableList<PeriodoO> getPeriodosFX() {
-        ObservableList<PeriodoO> fxList = FXCollections.observableArrayList();
-        periodoDal.getPeriodos().stream().forEach((each) -> {
-            fxList.add(each);
-        });
+        ObservableList<PeriodoO> fxList = FXCollections.observableArrayList(periodoDal.getPeriodos());
         return fxList;
     }
 
@@ -39,4 +36,15 @@ public class PeriodoCTL {
         return periodoDal.addPeriodo(obj);
     }
 
+    public boolean desactivarPeriodo(int id) {
+        return periodoDal.deletePeriodo(id);
+    }
+
+    public boolean activarPeriodo(int id) {
+        return periodoDal.activaPeriodo(id);
+    }
+
+    public boolean modificarPeriodo(PeriodoO obj) {
+        return periodoDal.updatePeriodo(obj);
+    }
 }

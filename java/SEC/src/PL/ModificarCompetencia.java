@@ -122,9 +122,9 @@ public class ModificarCompetencia {
             } else {
                 int no = Integer.parseInt(txtNivelOptimo.getText());
                 if (no >= 0 && no <= 5) {
-                    Date now = new Date();
-                    vb = compCtl.addCompetenciaCTL(new CompetenciaO(nombreTxt.getText().trim(), descTxt.getText().trim(), siglaTxt.getText().trim(), no, 1, now, null, null));
-                    if (vb) {
+                    CompetenciaO c1=new CompetenciaO(nombreTxt.getText().trim(), descTxt.getText().trim(), siglaTxt.getText().trim(), no);
+                    c1.setId(idComp);
+                    if (compCtl.modificarCompetencia(c1)) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.initOwner(window);
                         alert.setTitle("Competencia Modificada");

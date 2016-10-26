@@ -13,8 +13,6 @@ import java.util.Date;
  */
 public class PeriodoO {
 
-    private static int fakeId = 0;
-
     private int id;
     private Date inicio;
     private Date fin;
@@ -28,26 +26,12 @@ public class PeriodoO {
     public PeriodoO() {
     }
 
-    public PeriodoO(Date inicio, Date fin, int jefe_porc, int auto_porc, int activo, Date creado, Date modificado, Date desactivado) {
-
-        this.id = ++fakeId;
+    public PeriodoO(Date inicio, Date fin, int jefe_porc, int auto_porc) {
 
         this.inicio = inicio;
         this.fin = fin;
         this.jefe_porc = jefe_porc;
         this.auto_porc = auto_porc;
-        this.activo = activo;
-        this.creado = creado;
-        this.modificado = modificado;
-        this.desactivado = desactivado;
-    }
-
-    public static int getFakeId() {
-        return fakeId;
-    }
-
-    public static void setFakeId(int fakeId) {
-        PeriodoO.fakeId = fakeId;
     }
 
     public int getId() {

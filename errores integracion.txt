@@ -1,0 +1,42 @@
+updateArea put: {"descripcion":"AREA","sigla":"N1","id":7,"nombre":"llll","idusuario":2,"token":"OZ13799DXI96N9REEVYQS0OIX"}
+updateArea response: {
+"area":[
+]
+}
+
+
+addNivel post: {"descrip":"muchas buenas","nota":4,"nombre":"bien","idusuario":2,"token":"3LNU6VK58CQUS5ULVVBIBX1XL"}
+addNivel response: {
+"nivel":[
+{
+"ID":2
+,"NOTA":4
+,"NOMBRE":"BIEN"
+,"DESCRIPCION":"MUCHAS BUENAS"
+,"CREADO":"2016-10-26T05:50:54Z"
+,"MODIFICADO":"2016-10-26T05:50:54Z"
+,"ACTIVO":1
+,"ID":2
+}
+]
+}
+
+addNivelDAL catch: Duplicate key "ID"
+
+
+getRespuestas response: {
+"respuesta":[
+{
+"ID":1
+,"RESPUESTA":"WERTYU"
+,"PUNTOS":3
+,"PREGUNTA_ID":2
+,"PREGUNTA_PREGUNTA":"CUAL ES SON?"
+,"MODIFICADO":"2016-10-26T06:49:32Z"
+,"ACTIVO":1
+}
+,{
+"ID":2
+//falta campo creado
+
+

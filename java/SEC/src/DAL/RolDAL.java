@@ -5,11 +5,10 @@
  */
 package DAL;
 
-import FN.Formato;
 import O.RolO;
-import O.UsuarioO;
-import RESTful.Conexion;
+import REST.Conexion;
 import java.util.ArrayList;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -21,18 +20,19 @@ public class RolDAL {
     private final Conexion cx = new Conexion();
 
     public ArrayList<RolO> getRoles() {
+        ArrayList<RolO> list = new ArrayList<>();
         JSONObject jsonPost = new JSONObject();
         jsonPost.put("idusuario", VariablesDAL.idUsuario);
         jsonPost.put("token", VariablesDAL.token);
         try {
             String response = cx.post("rol/json/read_all", jsonPost);
             JSONObject jsonResponse = new JSONObject(response.trim());
-            if (jsonResponse.getJSONArray("roles").length() > 0) {
-                ArrayList<RolO> list = new ArrayList<>();
-                for (int i = 0; i < jsonResponse.getJSONArray("roles").length(); i++) {
+            if (jsonResponse.getJSONArray("rol").length() > 0) {
+                JSONArray jsonArray = jsonResponse.getJSONArray("rol");
+                for (int i = 0; i < jsonArray.length(); i++) {
                     RolO obj = new RolO();
-                    obj.setId(jsonResponse.getJSONArray("roles").getJSONObject(i).getInt("ID"));
-                    obj.setNombre(jsonResponse.getJSONArray("roles").getJSONObject(i).getString("NOMBRE"));
+                    obj.setId(jsonArray.getJSONObject(i).getInt("ID"));
+                    obj.setNombre(jsonArray.getJSONObject(i).getString("NOMBRE"));
                     list.add(obj);
                 }
                 return list;
@@ -40,7 +40,7 @@ public class RolDAL {
         } catch (Exception e) {
             System.out.println("getRolesDAL catch: " + e.getMessage());
         }
-        return null;
+        return list;
     }
 
 }

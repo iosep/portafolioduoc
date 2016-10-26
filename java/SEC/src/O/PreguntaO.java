@@ -18,25 +18,20 @@ import javafx.scene.text.Text;
  */
 public class PreguntaO {
 
-    private static int fakeId = 0;
-
     private int id;
     private String pregunta;
     private int competencia_id;
+    private String competenciaNombre;
     private Date creado;
     private Date modificado;
+    private int activo;
 
     public PreguntaO() {
     }
 
-    public PreguntaO(String pregunta, int competencia_id, Date creado, Date modificado) {
-
-        this.id = ++fakeId;
-
+    public PreguntaO(String pregunta, int competencia_id) {
         this.pregunta = pregunta;
         this.competencia_id = competencia_id;
-        this.creado = creado;
-        this.modificado = modificado;
     }
 
     public int getId() {
@@ -63,6 +58,14 @@ public class PreguntaO {
         this.competencia_id = competencia_id;
     }
 
+    public String getCompetenciaNombre() {
+        return competenciaNombre;
+    }
+
+    public void setCompetenciaNombre(String competenciaNombre) {
+        this.competenciaNombre = competenciaNombre;
+    }
+
     public Date getCreado() {
         return creado;
     }
@@ -77,6 +80,14 @@ public class PreguntaO {
 
     public void setModificado(Date modificado) {
         this.modificado = modificado;
+    }
+
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
     }
 
     @Override

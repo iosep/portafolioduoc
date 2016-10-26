@@ -19,17 +19,13 @@ public class RespuestaCTL {
 
     private final RespuestaDAL respuestaDal = new RespuestaDAL();
 
-    public ArrayList<RespuestaO> getRespuestas() {
-        return respuestaDal.getRespuestas();
-    }
-
     public RespuestaO getRespuestaById(int id) {
         return respuestaDal.getRespuestaById(id);
     }
 
     public ObservableList<RespuestaO> getRespuestasFX() {
         ObservableList<RespuestaO> fxList = FXCollections.observableArrayList();
-        respuestaDal.getRespuestas().stream().forEach((each) -> {
+        respuestaDal.getRespuestas().stream().filter((each) -> (each.getActivo() == 1)).forEach((each) -> {
             fxList.add(each);
         });
         return fxList;
@@ -39,12 +35,19 @@ public class RespuestaCTL {
         return respuestaDal.addRespuesta(obj);
     }
 
+    public boolean modificarRespuestaCTL(RespuestaO obj) {
+        return respuestaDal.updateRespuesta(obj);
+    }
+
     public ArrayList<RespuestaO> getRespuestasByPreguntaId(int idPregunta) {
         ArrayList<RespuestaO> respuestas = new ArrayList<>();
-        respuestaDal.getRespuestas().stream().filter((r) -> (r.getPregunta_id() == idPregunta)).forEach((r) -> {
+        respuestaDal.getRespuestas().stream().filter((r) -> (r.getActivo() == 1 && r.getPregunta_id() == idPregunta)).forEach((r) -> {
             respuestas.add(r);
         });
         return respuestas;
     }
 
+    public boolean eliminaRespuesta(int id) {
+        return respuestaDal.deleteRespuesta(id);
+    }
 }

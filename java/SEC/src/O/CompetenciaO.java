@@ -13,8 +13,6 @@ import java.util.Date;
  */
 public class CompetenciaO {
 
-    private static int fakeId = 0;
-
     private int id;
     private String nombre;
     private String descripcion;
@@ -24,22 +22,16 @@ public class CompetenciaO {
     private Date creado;
     private Date modificado;
     private Date desactivado;
-        
+
     public CompetenciaO() {
     }
 
-    public CompetenciaO(String nombre, String descripcion, String sigla, int nivelOptimo, int activo, Date creado, Date modificado, Date desactivado) {
-
-        this.id = ++fakeId;
-
+    public CompetenciaO(String nombre, String descripcion, String sigla, int nivelOptimo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.sigla = sigla;
         this.nivelOptimo = nivelOptimo;
-        this.activo = activo;
-        this.creado = creado;
-        this.modificado = modificado;
-        this.desactivado = desactivado;
+
     }
 
     public int getId() {

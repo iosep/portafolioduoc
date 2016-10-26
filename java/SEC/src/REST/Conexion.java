@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package RESTful;
+package REST;
 
 import java.io.IOException;
 import java.net.URI;
@@ -24,6 +24,17 @@ import org.json.JSONObject;
  */
 public class Conexion {
 
+    private String ip = "192.168.99.100";
+    private String port = "8080";
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
     /**
      * Performs HTTP post.
      *
@@ -35,7 +46,7 @@ public class Conexion {
         HttpClient httpClient = new DefaultHttpClient();
         String responseBody = null;
         try {
-            HttpPost httpPost = new HttpPost("http://192.168.99.100:8080/ords/wfbs/" + command);
+            HttpPost httpPost = new HttpPost("http://" + ip + ":" + port + "/ords/wfbs/" + command);
             StringEntity stringEntity = new StringEntity(json.toString());
             httpPost.setEntity(stringEntity);
             httpPost.setHeader("Content-type", "application/json");
@@ -53,7 +64,7 @@ public class Conexion {
         HttpClient httpClient = new DefaultHttpClient();
         String responseBody = null;
         try {
-            HttpPut httpPut = new HttpPut("http://192.168.99.100:8080/ords/wfbs/" + command);
+            HttpPut httpPut = new HttpPut("http://" + ip + ":" + port + "/ords/wfbs/" + command);
             StringEntity stringEntity = new StringEntity(json.toString());
             httpPut.setEntity(stringEntity);
             httpPut.setHeader("Content-type", "application/json");
@@ -71,7 +82,7 @@ public class Conexion {
         HttpClient httpClient = new DefaultHttpClient();
         String responseBody = null;
         try {
-            HttpDeleteWithBody httpDelete = new HttpDeleteWithBody("http://192.168.99.100:8080/ords/wfbs/" + command);
+            HttpDeleteWithBody httpDelete = new HttpDeleteWithBody("http://" + ip + ":" + port + "/ords/wfbs/" + command);
             StringEntity stringEntity = new StringEntity(json.toString());
             httpDelete.setEntity(stringEntity);
             httpDelete.setHeader("Content-type", "application/json");

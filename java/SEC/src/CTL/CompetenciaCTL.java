@@ -7,7 +7,6 @@ package CTL;
 
 import DAL.CompetenciaDAL;
 import O.CompetenciaO;
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -18,11 +17,6 @@ import javafx.collections.ObservableList;
 public class CompetenciaCTL {
 
     private final CompetenciaDAL compDal = new CompetenciaDAL();
-
-    public ArrayList<CompetenciaO> getCompetencias() {
-        ArrayList<CompetenciaO> array = new ArrayList<>();
-        return array;
-    }
 
     public CompetenciaO getCompetenciaById(int id) {
         return compDal.getCompetenciaById(id);
@@ -38,15 +32,24 @@ public class CompetenciaCTL {
     }
 
     public ObservableList<CompetenciaO> getCompetenciasFX() {
-        ObservableList<CompetenciaO> fxList = FXCollections.observableArrayList();
-        compDal.getCompetencias().stream().forEach((each) -> {
-            fxList.add(each);
-        });
+        ObservableList<CompetenciaO> fxList = FXCollections.observableArrayList(compDal.getCompetencias());
         return fxList;
     }
 
     public boolean addCompetenciaCTL(CompetenciaO obj) {
         return compDal.addCompetencia(obj);
+    }
+
+    public boolean modificarCompetencia(CompetenciaO obj) {
+        return compDal.updateCompetencia(obj);
+    }
+
+    public boolean activarCompetencia(int id) {
+        return compDal.activaCompetencia(id);
+    }
+
+    public boolean desactivarCompetencia(int id) {
+        return compDal.deleteCompetencia(id);
     }
 
 }

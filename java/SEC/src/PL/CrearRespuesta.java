@@ -8,7 +8,6 @@ package PL;
 import CTL.RespuestaCTL;
 import FN.Validar;
 import O.RespuestaO;
-import java.util.Date;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -30,7 +29,6 @@ import javafx.stage.Stage;
 public class CrearRespuesta {
 
     private final RespuestaCTL respuestaCtl = new RespuestaCTL();
-    static boolean vb = false;
 
     public void display(int id_pregunta) {
         Stage window = new Stage();
@@ -90,9 +88,7 @@ public class CrearRespuesta {
                 msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Puntos");
             } else if (v.validarInteger(txtPuntos.getText().trim()) && Integer.parseInt(txtPuntos.getText().trim()) >= 0 && Integer.parseInt(txtPuntos.getText().trim()) <= 5) {
-                Date now = new Date();
-                vb = respuestaCtl.addRespuestaCTL(new RespuestaO(txtRespuesta.getText().trim(), Integer.parseInt(txtPuntos.getText().trim()), id_pregunta, now, null));
-                if (vb) {
+                if (respuestaCtl.addRespuestaCTL(new RespuestaO(txtRespuesta.getText().trim(), Integer.parseInt(txtPuntos.getText().trim()), id_pregunta))) {
                     txtRespuesta.clear();
                     txtPuntos.clear();
                     msj.setFill(Color.GREEN);

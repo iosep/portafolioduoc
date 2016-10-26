@@ -13,27 +13,21 @@ import java.util.Date;
  */
 public class NivelO {
 
-    private static int fakeId = 0;
-
     private int id;
     private String nombre;
     private int nota;
     private String descripcion;
     private Date creado;
     private Date modificado;
+    private int activo;
 
     public NivelO() {
     }
 
-    public NivelO(String nombre, int nota, String descripcion, Date creado, Date modificado) {
-
-        this.id = ++fakeId;
-
+    public NivelO(String nombre, int nota, String descripcion) {
         this.nombre = nombre;
         this.nota = nota;
         this.descripcion = descripcion;
-        this.creado = creado;
-        this.modificado = modificado;
     }
 
     public int getId() {
@@ -83,5 +77,13 @@ public class NivelO {
     public void setModificado(Date modificado) {
         this.modificado = modificado;
     }
-    
+
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
+    }
+
 }

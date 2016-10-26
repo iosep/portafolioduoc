@@ -18,9 +18,6 @@ import O.RespuestaO;
 import O.RolO;
 import O.SeleccionO;
 import O.UsuarioAreaO;
-import O.UsuarioO;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -42,75 +39,14 @@ public class AInitLoad {
 //area
     static ArrayList<AreaO> areas;
 //competencia
-    final CompetenciaO competencia1 = new CompetenciaO("Liderazgo", "Ser líder", "ldr", 4, 1, fecha, null, null);
-    final CompetenciaO competencia2 = new CompetenciaO("Cognitiva", "Ser cognitivo", "cgn", 4, 1, fecha, null, null);
-    final CompetenciaO competencia3 = new CompetenciaO("Pensamiento científico", "Ser científico", "pcn", 4, 1, fecha, null, null);
-    final CompetenciaO competencia4 = new CompetenciaO("Perspicacia", "Ser perspicaz", "ppc", 4, 1, fecha, null, null);
-    final CompetenciaO competencia5 = new CompetenciaO("Orientación a las personas", "Ser personal", "oap", 4, 1, fecha, null, null);
-    final CompetenciaO competencia6 = new CompetenciaO("Trabajo en equipo", "Ser equipo", "tee", 4, 1, fecha, null, null);
-    final CompetenciaO competencia7 = new CompetenciaO("Comunicación", "Ser comunicativo", "cmc", 4, 1, fecha, null, null);
-    final CompetenciaO competencia8 = new CompetenciaO("Autocontrol", "Ser zen", "atc", 4, 1, fecha, null, null);
-    final CompetenciaO competencia9 = new CompetenciaO("Evaluación", "Ser evaluativo", "evl", 4, 1, fecha, null, null);
-    final CompetenciaO competencia10 = new CompetenciaO("Análisis y síntesis", "Ser analítico", "ays", 4, 1, fecha, null, null);
-    final CompetenciaO competencia11 = new CompetenciaO("Habilidad descriptiva", "Ser descriptivo", "hdc", 4, 1, fecha, null, null);
-    final CompetenciaO competencia12 = new CompetenciaO("Concentración", "Ser concentrado", "cnt", 4, 1, fecha, null, null);
-    final CompetenciaO competencia13 = new CompetenciaO("Organización y planificación", "Ser organizado", "oyp", 4, 1, fecha, null, null);
-    final ArrayList<CompetenciaO> competenciasFinal = new ArrayList<>(Arrays.asList(competencia1, competencia2, competencia3, competencia4, competencia5, competencia6, competencia7, competencia8, competencia9, competencia10, competencia11, competencia12, competencia13));
     static ArrayList<CompetenciaO> competencias;
 //nivel    
-    final NivelO nivel1 = new NivelO("Nulo", 0, "Todo malo", fecha, null);
-    final NivelO nivel2 = new NivelO("Muy Malo", 1, "Casi todo malo", fecha, null);
-    final NivelO nivel3 = new NivelO("Malo", 2, "Muchas malas", fecha, null);
-    final NivelO nivel4 = new NivelO("Regular", 3, "Algunas malas", fecha, null);
-    final NivelO nivel5 = new NivelO("Bien", 4, "Casi todo bien", fecha, null);
-    final NivelO nivel6 = new NivelO("Muy Bien", 5, "Todo bien", fecha, null);
-    final ArrayList<NivelO> nivelFinal = new ArrayList<>(Arrays.asList(nivel1, nivel2, nivel3, nivel4, nivel5, nivel6));
+    
     static ArrayList<NivelO> niveles;
 //pregunta
     private static ArrayList<PreguntaO> preguntas;
-    final PreguntaO pre1 = new PreguntaO("¿qué es liderazgo?", 1, fecha, null);
-    final PreguntaO pre2 = new PreguntaO("¿qué es cognitivo?", 2, fecha, null);
-    final PreguntaO pre3 = new PreguntaO("¿qué es pensamiento científico?", 3, fecha, null);
-    final PreguntaO pre4 = new PreguntaO("¿qué es perspicacia?", 4, fecha, null);
-    final PreguntaO pre5 = new PreguntaO("¿qué es orientación a las personas?", 5, fecha, null);
-    final PreguntaO pre6 = new PreguntaO("¿qué es trabajo en equipo?", 6, fecha, null);
-    final PreguntaO pre7 = new PreguntaO("¿qué es comunicación?", 7, fecha, null);
-    final PreguntaO pre8 = new PreguntaO("¿qué es autocontrol?", 8, fecha, null);
-    final PreguntaO pre9 = new PreguntaO("¿qué es evaluación?", 9, fecha, null);
-    final PreguntaO pre10 = new PreguntaO("¿qué es análisis y síntesis?", 10, fecha, null);
-    final PreguntaO pre11 = new PreguntaO("¿qué es habilidad descriptiva?", 11, fecha, null);
-    final PreguntaO pre12 = new PreguntaO("¿qué es concentración?", 12, fecha, null);
-    final PreguntaO pre13 = new PreguntaO("¿qué es organización y planificación?", 13, fecha, null);
-    final ArrayList<PreguntaO> preguntasFinal = new ArrayList<>(Arrays.asList(pre1, pre2, pre3, pre4, pre5, pre6, pre7, pre8, pre9, pre10, pre11, pre12, pre13));
-//respuesta
+    //respuesta
     private static ArrayList<RespuestaO> respuestas;
-    final RespuestaO res1 = new RespuestaO("liderar", 5, 1, fecha, null);
-    final RespuestaO res2 = new RespuestaO("ser líder", 3, 1, fecha, null);
-    final RespuestaO res3 = new RespuestaO("cognicear", 5, 2, fecha, null);
-    final RespuestaO res4 = new RespuestaO("ser cognito", 3, 2, fecha, null);
-    final RespuestaO res5 = new RespuestaO("pensar científicamente", 5, 3, fecha, null);
-    final RespuestaO res6 = new RespuestaO("ser pensador científico", 3, 3, fecha, null);
-    final RespuestaO res7 = new RespuestaO("perspicar", 5, 4, fecha, null);
-    final RespuestaO res8 = new RespuestaO("ser perspicaz", 3, 4, fecha, null);
-    final RespuestaO res9 = new RespuestaO("orientarse a las personas", 5, 5, fecha, null);
-    final RespuestaO res10 = new RespuestaO("ser orientado a las personas", 3, 5, fecha, null);
-    final RespuestaO res11 = new RespuestaO("trabajar en equipo", 5, 6, fecha, null);
-    final RespuestaO res12 = new RespuestaO("ser trabajador de equipo", 3, 6, fecha, null);
-    final RespuestaO res13 = new RespuestaO("comunicar", 5, 7, fecha, null);
-    final RespuestaO res14 = new RespuestaO("ser comunicador", 3, 7, fecha, null);
-    final RespuestaO res15 = new RespuestaO("autocontrolarse", 5, 8, fecha, null);
-    final RespuestaO res16 = new RespuestaO("ser autocontrolado", 3, 8, fecha, null);
-    final RespuestaO res17 = new RespuestaO("evaluar", 5, 9, fecha, null);
-    final RespuestaO res18 = new RespuestaO("ser evaluado o evaluador", 3, 9, fecha, null);
-    final RespuestaO res19 = new RespuestaO("analizar y sintetizar", 5, 10, fecha, null);
-    final RespuestaO res20 = new RespuestaO("ser analítico y sintético", 3, 10, fecha, null);
-    final RespuestaO res21 = new RespuestaO("describir habilmente", 5, 11, fecha, null);
-    final RespuestaO res22 = new RespuestaO("ser un hábil descriptor", 3, 11, fecha, null);
-    final RespuestaO res23 = new RespuestaO("concentrarse", 5, 12, fecha, null);
-    final RespuestaO res24 = new RespuestaO("ser concentrado", 3, 12, fecha, null);
-    final RespuestaO res25 = new RespuestaO("organizar y planificar", 5, 13, fecha, null);
-    final RespuestaO res26 = new RespuestaO("ser organizado y planificado", 3, 13, fecha, null);
-    final ArrayList<RespuestaO> respuestaFinal = new ArrayList<>(Arrays.asList(res1, res2, res3, res4, res5, res6, res7, res8, res9, res10, res11, res12, res13, res14, res15, res16, res17, res18, res19, res20, res21, res22, res23, res24, res25, res26));
 //observacion
     private static ArrayList<ObservacionO> observaciones;
     final ObservacionO ob1 = new ObservacionO(3, 4, "muy mal", "muy bien", 1, fecha, null);
@@ -129,10 +65,6 @@ public class AInitLoad {
     final ArrayList<ObservacionO> obserFinal = new ArrayList<>(Arrays.asList(ob1, ob2, ob3, ob4, ob5, ob6, ob7, ob8, ob9, ob10, ob11, ob12, ob13));
 //periodo
     private static ArrayList<PeriodoO> periodos;
-    final PeriodoO pe1 = new PeriodoO(fecha, Date.from(LocalDate.now().plusWeeks(1).atStartOfDay(ZoneId.systemDefault()).toInstant()), 70, 30, 1, fecha, null, null);
-    final PeriodoO pe2 = new PeriodoO(Date.from(LocalDate.now().plusWeeks(3).atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(LocalDate.now().plusWeeks(4).atStartOfDay(ZoneId.systemDefault()).toInstant()), 70, 30, 1, fecha, null, null);
-    final PeriodoO pe3 = new PeriodoO(Date.from(LocalDate.now().plusWeeks(6).atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(LocalDate.now().plusWeeks(7).atStartOfDay(ZoneId.systemDefault()).toInstant()), 70, 30, 1, fecha, null, null);
-    final ArrayList<PeriodoO> perFinal = new ArrayList<>(Arrays.asList(pe1, pe2, pe3));
 //usuarioArea
     static ArrayList<UsuarioAreaO> rUserAreas;
     final UsuarioAreaO usAr1 = new UsuarioAreaO(4, 1);
@@ -199,10 +131,9 @@ public class AInitLoad {
 
         competencias = new ArrayList<>();
 //        competencias.removeAll(competenciasFinal);
-        competencias.addAll(competenciasFinal);
         niveles = new ArrayList<>();
 //        niveles.removeAll(nivelFinal);
-        niveles.addAll(nivelFinal);
+        
         rUserAreas = new ArrayList<>();
 //        rUserAreas.removeAll(userAreaFinal);
         rUserAreas.addAll(userAreaFinal);
@@ -214,13 +145,11 @@ public class AInitLoad {
         rCompetenciaNiveles.addAll(comNiFinal);
 //        
         preguntas = new ArrayList<>();
-        preguntas.addAll(preguntasFinal);
         respuestas = new ArrayList<>();
-        respuestas.addAll(respuestaFinal);
         observaciones = new ArrayList<>();
         observaciones.addAll(obserFinal);
         periodos = new ArrayList<>();
-        periodos.addAll(perFinal);
+
     }
 
 

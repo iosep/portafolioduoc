@@ -11,6 +11,7 @@ import FN.Formato;
 import FN.Validar;
 import O.RolO;
 import O.UsuarioO;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -113,15 +114,18 @@ public class CrearUsuario {
         jefaLbl.setVisible(false);
         cbJefa.setVisible(false);
 
-        cbRol.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
-            if (new_val.intValue() == 2) {
-                msj.setText("");
-                jefaLbl.setVisible(true);
-                cbJefa.setVisible(true);
-            } else {
-                msj.setText("");
-                jefaLbl.setVisible(false);
-                cbJefa.setVisible(false);
+        cbRol.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RolO>() {
+            @Override
+            public void changed(ObservableValue<? extends RolO> ov, RolO old_val, RolO new_val) {
+                if (new_val != null && new_val.getNombre().equals("FUNCIONARIO")) {
+                    msj.setText("");
+                    jefaLbl.setVisible(true);
+                    cbJefa.setVisible(true);
+                } else {
+                    msj.setText("");
+                    jefaLbl.setVisible(false);
+                    cbJefa.setVisible(false);
+                }
             }
         });
 
@@ -205,7 +209,7 @@ public class CrearUsuario {
                     } else {
                         boolean boo = false;
                         String rut_jefe = "1";
-                        if (cbRol.getSelectionModel().getSelectedIndex() == 2) {
+                        if (((RolO) cbRol.getValue()).getNombre().equals("FUNCIONARIO")) {
                             if (cbJefa.getValue() == null) {
                                 msj.setFill(Color.FIREBRICK);
                                 msj.setText("Seleccione JEFE");
@@ -219,14 +223,12 @@ public class CrearUsuario {
                         if (boo) {
                             int fono = Integer.parseInt(txtFono.getText());
                             String sSexo = "";
-                            switch (cbSexo.getSelectionModel().getSelectedIndex()) {
-                                case 0:
+                            switch (cbSexo.getValue().toString()) {
+                                case "MASCULINO":
                                     sSexo = "M";
                                     break;
-                                case 1:
+                                case "FEMENINO":
                                     sSexo = "F";
-                                    break;
-                                default:
                                     break;
                             }
                             String rut = Formato.formatoRut(txtRun.getText());

@@ -8,7 +8,6 @@ package PL;
 import CTL.RespuestaCTL;
 import FN.Validar;
 import O.RespuestaO;
-import java.util.Date;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -92,8 +91,9 @@ public class ModificarRespuesta {
                 msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Puntos");
             } else if (v.validarInteger(txtPuntos.getText().trim()) && Integer.parseInt(txtPuntos.getText().trim()) >= 0 && Integer.parseInt(txtPuntos.getText().trim()) <= 5) {
-                Date now = new Date();
-                if (respuestaCtl.addRespuestaCTL(new RespuestaO(txtRespuesta.getText().trim(), Integer.parseInt(txtPuntos.getText().trim()), id_pregunta, now, null))) {
+                RespuestaO r1 = new RespuestaO(txtRespuesta.getText().trim(), Integer.parseInt(txtPuntos.getText().trim()), id_pregunta);
+                r1.setId(id_respuesta);
+                if (respuestaCtl.modificarRespuestaCTL(r1)) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(window);
                     alert.setTitle("Respuesta Modificada");

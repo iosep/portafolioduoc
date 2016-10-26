@@ -79,8 +79,9 @@ public class ModificarPregunta {
                 msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Pregunta");
             } else {
-                Date now = new Date();
-                if (preguntaCtl.addPreguntaCTL(new PreguntaO(txtPregunta.getText().trim(), id_competencia, now, null))) {
+                PreguntaO p1 = new PreguntaO(txtPregunta.getText().trim(), id_competencia);
+                p1.setId(id_pregunta);
+                if (preguntaCtl.modificarPreguntaCTL(p1)) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(window);
                     alert.setTitle("Pregunta Modificada");

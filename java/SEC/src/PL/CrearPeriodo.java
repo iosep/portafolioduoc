@@ -35,7 +35,6 @@ import javafx.util.Callback;
 public class CrearPeriodo {
 
     private final PeriodoCTL periodoCtl = new PeriodoCTL();
-    static boolean vb = false;
 
     public void display() {
         Stage window = new Stage();
@@ -120,12 +119,12 @@ public class CrearPeriodo {
 
         Label lblPorcJefe = new Label("Porcentaje Jefe Evaluación:");
         grid.add(lblPorcJefe, 0, 6);
-        TextField txtPorcJefe = new TextField();
+        TextField txtPorcJefe = new TextField("70");
         grid.add(txtPorcJefe, 1, 6);
 
         Label lblPorcAuto = new Label("Porcentaje Autoevaluación:");
         grid.add(lblPorcAuto, 0, 7);
-        TextField txtPorcAuto = new TextField();
+        TextField txtPorcAuto = new TextField("30");
         grid.add(txtPorcAuto, 1, 7);
 
         Validar v = new Validar();
@@ -185,11 +184,9 @@ public class CrearPeriodo {
             } else if (dpFechaInicio.getValue().isBefore(dpFechaFinal.getValue())) {
                 Date inicio = Date.from(dpFechaInicio.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
                 Date fin = Date.from(dpFechaFinal.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-                Date now = new Date();
-                vb = periodoCtl.addPeriodoCTL(new PeriodoO(inicio, fin, Integer.parseInt(txtPorcJefe.getText()), Integer.parseInt(txtPorcAuto.getText()),
-                        1, now, null, null));
-
-                if (vb) {
+                if (periodoCtl.addPeriodoCTL(new PeriodoO(inicio, fin,
+                        Integer.parseInt(txtPorcJefe.getText()),
+                        Integer.parseInt(txtPorcAuto.getText())))) {
                     dpFechaInicio.setValue(null);
                     dpFechaFinal.setValue(null);
                     txtPorcJefe.clear();

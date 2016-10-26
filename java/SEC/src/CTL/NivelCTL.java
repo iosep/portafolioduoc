@@ -21,6 +21,9 @@ public class NivelCTL {
 
     public ArrayList<NivelO> getNiveles() {
         ArrayList<NivelO> array = new ArrayList<>();
+        nivelDal.getNiveles().stream().filter((n) -> (n.getActivo() == 1)).forEach((n) -> {
+            array.add(n);
+        });
         return array;
     }
 
@@ -29,15 +32,22 @@ public class NivelCTL {
     }
 
     public ObservableList<NivelO> getNivelesFX() {
-        ObservableList<NivelO> fxList = FXCollections.observableArrayList();
-        nivelDal.getNiveles().stream().forEach((each) -> {
-            fxList.add(each);
+        ObservableList<NivelO> obList = FXCollections.observableArrayList();
+        nivelDal.getNiveles().stream().filter((n) -> (n.getActivo() == 1)).forEach((n) -> {
+            obList.add(n);
         });
-        return fxList;
+        return obList;
     }
 
     public boolean addNivelCTL(NivelO obj) {
         return nivelDal.addNivel(obj);
     }
 
+    public boolean modificarNivel(NivelO obj) {
+        return nivelDal.updateNivel(obj);
+    }
+
+    public boolean eliminarNivel(int id) {
+        return nivelDal.deleteNivel(id);
+    }
 }

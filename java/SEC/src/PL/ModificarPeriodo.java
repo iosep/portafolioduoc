@@ -184,11 +184,9 @@ public class ModificarPeriodo {
             } else if (dpFechaInicio.getValue().isBefore(dpFechaFinal.getValue())) {
                 Date inicio = Date.from(dpFechaInicio.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
                 Date fin = Date.from(dpFechaFinal.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-                Date now = new Date();
-                vb = periodoCtl.addPeriodoCTL(new PeriodoO(inicio, fin, Integer.parseInt(txtPorcJefe.getText()), Integer.parseInt(txtPorcAuto.getText()),
-                        1, now, null, null));
-
-                if (vb) {
+                PeriodoO p1 =new PeriodoO(inicio, fin, Integer.parseInt(txtPorcJefe.getText()), Integer.parseInt(txtPorcAuto.getText()));
+                p1.setId(idPeriodo);
+                if (periodoCtl.modificarPeriodo(p1)) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(window);
                     alert.setTitle("Periodo Modificado");
