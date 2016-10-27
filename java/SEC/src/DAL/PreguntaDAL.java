@@ -82,7 +82,7 @@ public class PreguntaDAL {
         jsonPost.put("idusuario", VariablesDAL.idUsuario);
         jsonPost.put("token", VariablesDAL.token);
         jsonPost.put("pregunta", obj.getPregunta());
-        jsonPost.put("idcomp", obj.getCompetencia_id());
+        jsonPost.put("competenciaid", obj.getCompetencia_id());
         //System.out.println("addPregunta post: " + jsonPost);
         try {
             String response = cx.post("pregunta/json/create", jsonPost);
@@ -104,7 +104,7 @@ public class PreguntaDAL {
         jsonPut.put("token", VariablesDAL.token);
         jsonPut.put("id", obj.getId());
         jsonPut.put("pregunta", obj.getPregunta());
-        jsonPut.put("idcomp", obj.getCompetencia_id());
+        jsonPut.put("competenciaid", obj.getCompetencia_id());
         //System.out.println("updatePregunta put: " + jsonPut);
         try {
             String response = cx.put("pregunta/json/update", jsonPut);

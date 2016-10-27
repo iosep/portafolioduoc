@@ -14,6 +14,7 @@ import O.UsuarioO;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -33,9 +34,7 @@ import javafx.stage.Stage;
 public class CrearUsuarioArea {
 
     private final UsuarioAreaCTL usuarioAreaCtl = new UsuarioAreaCTL();
-    private final AreaCTL areaCtl = new AreaCTL();
     private final UsuarioCTL userCtl = new UsuarioCTL();
-    private static AreaO auxArea;
     private static UsuarioAreaO auxUserArea;
 
     public void display(String userRut) {
@@ -46,9 +45,9 @@ public class CrearUsuarioArea {
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.setHgap(3);
-        grid.setVgap(3);
-        grid.setPadding(new Insets(0, 25, 5, 25));
+        grid.setHgap(7);
+        grid.setVgap(7);
+        grid.setPadding(new Insets(0, 20, 20, 20));
 
         Text scenetitle = new Text("SEC - Asignar");
         scenetitle.getStyleClass().add("title");
@@ -57,10 +56,6 @@ public class CrearUsuarioArea {
         Label lblUser = new Label("Usuario RUT: " + userRut);
         lblUser.getStyleClass().add("subtitle");
         grid.add(lblUser, 0, 1, 3, 1);
-
-        final Text msj = new Text();
-        msj.getStyleClass().add("action");
-        grid.add(msj, 0, 5, 2, 1);
 
         UsuarioO userO = userCtl.getUsuarioByRut(userRut);
         Label lblListaAreas = new Label("Áreas disponibles:");
@@ -83,11 +78,7 @@ public class CrearUsuarioArea {
             }
         });
         grid.add(listaAreas, 0, 4);
-        listaAreas.getSelectionModel().selectedItemProperty().addListener((ob, ol, ne) -> {
-            if (ne != null) {
-                msj.setText("");
-            }
-        });
+
         Label lblAreasSeleccionadas = new Label("Áreas del Usuario:");
 //        lblAreasSeleccionadas.getStyleClass().add("subtitle");
         grid.add(lblAreasSeleccionadas, 3, 3);
@@ -105,11 +96,6 @@ public class CrearUsuarioArea {
             }
         });
         grid.add(areasSeleccionadas, 3, 4);
-        areasSeleccionadas.getSelectionModel().selectedItemProperty().addListener((ob, ol, ne) -> {
-            if (ne != null) {
-                msj.setText("");
-            }
-        });
 
         VBox vbButtons = new VBox();
         vbButtons.setAlignment(Pos.CENTER);
@@ -123,8 +109,12 @@ public class CrearUsuarioArea {
             if (listaAreas.getSelectionModel().getSelectedItem() != null) {
                 auxUserArea = (UsuarioAreaO) listaAreas.getSelectionModel().getSelectedItem();
                 if (usuarioAreaCtl.addUsuarioAreaCTL(auxUserArea)) {
-                    msj.setFill(Color.GREEN);
-                    msj.setText("Área Agregada Exitosamente");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(window);
+                    alert.setTitle("Área a Usuario");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Área Agregada");
+                    alert.showAndWait();
                     areasSeleccionadas.setItems(usuarioAreaCtl.getUsuarioAreasByUserIdFX(userO.getId()));
                     areasSeleccionadas.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
                         @Override
@@ -152,12 +142,20 @@ public class CrearUsuarioArea {
                     areasSeleccionadas.getSelectionModel().clearSelection();
                     listaAreas.getSelectionModel().clearSelection();
                 } else {
-                    msj.setFill(Color.FIREBRICK);
-                    msj.setText("Ha ocurrido un error");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.initOwner(window);
+                    alert.setTitle("Área a Usuario");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Error!");
+                    alert.showAndWait();
                 }
             } else {
-                msj.setFill(Color.FIREBRICK);
-                msj.setText("Seleccione un Área");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(window);
+                alert.setTitle("Área a Usuario");
+                alert.setHeaderText(null);
+                alert.setContentText("Seleccione un Área");
+                alert.showAndWait();
             }
         });
 
@@ -165,8 +163,12 @@ public class CrearUsuarioArea {
             if (areasSeleccionadas.getSelectionModel().getSelectedItem() != null) {
                 auxUserArea = (UsuarioAreaO) areasSeleccionadas.getSelectionModel().getSelectedItem();
                 if (usuarioAreaCtl.removeUserAreaCTL(auxUserArea.getUsuario_id(), auxUserArea.getArea_id())) {
-                    msj.setFill(Color.GREEN);
-                    msj.setText("Área Eliminada Exitosamente");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(window);
+                    alert.setTitle("Área a Usuario");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Área Eliminada");
+                    alert.showAndWait();
                     areasSeleccionadas.setItems(usuarioAreaCtl.getUsuarioAreasByUserIdFX(userO.getId()));
                     areasSeleccionadas.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
                         @Override
@@ -194,16 +196,24 @@ public class CrearUsuarioArea {
                     areasSeleccionadas.getSelectionModel().clearSelection();
                     listaAreas.getSelectionModel().clearSelection();
                 } else {
-                    msj.setFill(Color.FIREBRICK);
-                    msj.setText("Ha ocurrido un error");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.initOwner(window);
+                    alert.setTitle("Área a Usuario");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Error!");
+                    alert.showAndWait();
                 }
             } else {
-                msj.setFill(Color.FIREBRICK);
-                msj.setText("Seleccione un Área");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(window);
+                alert.setTitle("Área a Usuario");
+                alert.setHeaderText(null);
+                alert.setContentText("Seleccione un Área");
+                alert.showAndWait();
             }
         });
 
-        Scene display = new Scene(grid, 650, 500);
+        Scene display = new Scene(grid);
         window.setScene(display);
         display.getStylesheets().add(CrearUsuarioArea.class.getResource("Style.css").toExternalForm());
         window.showAndWait();

@@ -7,6 +7,7 @@ package CTL;
 
 import DAL.CompetenciaNivelDAL;
 import O.CompetenciaNivelO;
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -19,6 +20,10 @@ public class CompetenciaNivelCTL {
     private final CompetenciaNivelDAL compNivelDal = new CompetenciaNivelDAL();
     private final CompetenciaCTL competenciaCtl = new CompetenciaCTL();
     private final NivelCTL nivelCtl = new NivelCTL();
+
+    public ArrayList<CompetenciaNivelO> getCompetenciaNiveles() {
+        return compNivelDal.getCompetenciaNiveles();
+    }
 
     public ObservableList<CompetenciaNivelO> getCompetenciaNivelesByNivelIdFX(int id) {
         ObservableList<CompetenciaNivelO> fxList = FXCollections.observableArrayList();

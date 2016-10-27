@@ -6,7 +6,6 @@
 package DAL;
 
 import O.SeleccionO;
-import O.SeleccionO;
 import REST.Conexion;
 import java.util.ArrayList;
 import org.json.JSONArray;
@@ -71,7 +70,8 @@ public class SeleccionDAL {
         JSONObject jsonPost = new JSONObject();
         jsonPost.put("idusuario", VariablesDAL.idUsuario);
         jsonPost.put("token", VariablesDAL.token);
-
+        jsonPost.put("encuestaid", obj.getEncuesta_id());
+        jsonPost.put("respuestaid", obj.getRespuesta_id());
         System.out.println("addSeleccion post: " + jsonPost);
         try {
             String response = cx.post("seleccion/json/create", jsonPost);

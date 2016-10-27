@@ -105,12 +105,15 @@ public class PreguntaO {
             ArrayList<RadioButton> rbs = new ArrayList<>();
             for (RespuestaO r : respCtl.getRespuestasByPreguntaId(p.getId())) {
                 RadioButton rb = new RadioButton(r.getRespuesta());
+                rb.setWrapText(true);
+                rb.setMaxWidth(550);
                 rb.setUserData(r);
                 rb.setToggleGroup(tg);
 //                rb.getStyleClass().add("label");
                 rbs.add(rb);
             }
             Text t = new Text(++count + ".- " + p.getPregunta());
+            t.setWrappingWidth(550);
             t.getStyleClass().add("label");
             questions.add(new ObjQuestion(t, tg, rbs));
         }

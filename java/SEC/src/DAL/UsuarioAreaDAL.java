@@ -43,7 +43,7 @@ public class UsuarioAreaDAL {
                 }
                 return list;
             }
-        } catch (IOException | JSONException e) {
+        } catch (Exception e ) {
             System.out.println("getUserAreasDAL catch: " + e.getMessage());
         }
         return list;
@@ -72,7 +72,7 @@ public class UsuarioAreaDAL {
                 }
                 return list;
             }
-        } catch (IOException | JSONException e) {
+        } catch (Exception e ) {
             System.out.println("getUserAreasByUserIdDAL catch: " + e.getMessage());
         }
         return list;
@@ -101,7 +101,7 @@ public class UsuarioAreaDAL {
                 }
                 return list;
             }
-        } catch (IOException | JSONException e) {
+        } catch (Exception e ) {
             System.out.println("getUserAreasByAreaIdDAL catch: " + e.getMessage());
         }
         return list;
@@ -123,7 +123,7 @@ public class UsuarioAreaDAL {
             }else{
                 System.out.println("activar area");
             }
-        } catch (IOException | JSONException e) {
+        } catch (Exception e ) {
             System.out.println("addUsuarioAreaDAL catch: " + e.getMessage());
             return false;
         }
@@ -144,7 +144,7 @@ public class UsuarioAreaDAL {
             if (jsonResponse.getJSONArray("usuario_area").length() > 0) {
                 return true;
             }
-        } catch (IOException | JSONException e) {
+        } catch (Exception e ) {
             System.out.println("updateUsuarioAreaDAL catch: " + e.getMessage());
             return false;
         }
@@ -165,7 +165,7 @@ public class UsuarioAreaDAL {
             if (jsonResponse.getJSONArray("usuario_area").length() > 0) {
                 return true;
             }
-        } catch (IOException | JSONException e) {
+        } catch (Exception e ) {
             System.out.println("removeUsuarioAreaDAL catch: " + e.getMessage());
             return false;
         }

@@ -5,6 +5,8 @@
  */
 package O;
 
+import java.util.Date;
+
 /**
  *
  * @author iosep
@@ -15,6 +17,7 @@ public class EncuestaO {
     private int usuario_id;
     private int evaluado_id;
     private int periodo_id;
+    private Date fecha;
 
     public EncuestaO() {
     }
@@ -23,6 +26,8 @@ public class EncuestaO {
         this.usuario_id = usuario_id;
         this.evaluado_id = evaluado_id;
         this.periodo_id = periodo_id;
+        Date now = new Date();
+        this.fecha = now;
     }
 
     public int getId() {
@@ -55,6 +60,14 @@ public class EncuestaO {
 
     public void setPeriodo_id(int periodo_id) {
         this.periodo_id = periodo_id;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
 }

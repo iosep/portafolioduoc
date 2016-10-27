@@ -7,6 +7,7 @@ package CTL;
 
 import DAL.AreaCompetenciaDAL;
 import O.AreaCompetenciaO;
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -19,6 +20,10 @@ public class AreaCompetenciaCTL {
     private final AreaCompetenciaDAL areaCompDal = new AreaCompetenciaDAL();
     private final CompetenciaCTL compCtl = new CompetenciaCTL();
     private final AreaCTL areaCtl = new AreaCTL();
+
+    public ArrayList<AreaCompetenciaO> getAreaCompetencias() {
+        return areaCompDal.getAreaCompetencias();
+    }
 
     public ObservableList<AreaCompetenciaO> getAreaCompetenciasByAreaIdFX(int id) {
         ObservableList<AreaCompetenciaO> fxList = FXCollections.observableArrayList();

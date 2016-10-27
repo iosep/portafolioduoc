@@ -21,7 +21,7 @@ public class EncuestaCTL {
         return encDal.getEncuestas();
     }
 
-    public boolean addEncuesta(EncuestaO obj) {
+    public int addEncuesta(EncuestaO obj) {
         return encDal.addEncuesta(obj);
     }
 
@@ -30,10 +30,11 @@ public class EncuestaCTL {
     }
 
     public ArrayList<EncuestaO> findEncuestasByPeriodoId(int id) {
-        ArrayList<EncuestaO> ens = new ArrayList<>();
-        encDal.getEncuestas().stream().filter((e) -> (e.getPeriodo_id() == id)).forEach((e) -> {
-            ens.add(e);
-        });
-        return ens;
+        return encDal.getEncuestasByPeriodo(id);
     }
+
+    public boolean eliminarEncuesta(int id) {
+        return encDal.deleteEncuesta(id);
+    }
+
 }

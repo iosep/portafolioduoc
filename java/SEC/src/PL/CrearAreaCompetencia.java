@@ -7,13 +7,12 @@ package PL;
 
 import CTL.AreaCTL;
 import CTL.AreaCompetenciaCTL;
-import CTL.CompetenciaCTL;
 import O.AreaCompetenciaO;
 import O.AreaO;
-import O.CompetenciaO;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -21,7 +20,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -33,9 +31,7 @@ import javafx.stage.Stage;
 public class CrearAreaCompetencia {
 
     private final AreaCompetenciaCTL areaCompetenciaCtl = new AreaCompetenciaCTL();
-    private final CompetenciaCTL compCtl = new CompetenciaCTL();
     private final AreaCTL areaCtl = new AreaCTL();
-    private static CompetenciaO auxComp;
     private static AreaO auxArea;
     private static AreaCompetenciaO auxAreaComp;
 
@@ -47,9 +43,9 @@ public class CrearAreaCompetencia {
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.setHgap(3);
-        grid.setVgap(3);
-        grid.setPadding(new Insets(0, 25, 5, 25));
+        grid.setHgap(7);
+        grid.setVgap(7);
+        grid.setPadding(new Insets(0, 20, 20, 20));
 
         Text scenetitle = new Text("SEC - Asignar");
         scenetitle.getStyleClass().add("title");
@@ -59,10 +55,6 @@ public class CrearAreaCompetencia {
         Label lblUser = new Label("Área: " + auxArea.getNombre());
         lblUser.getStyleClass().add("subtitle");
         grid.add(lblUser, 0, 1, 3, 1);
-
-        final Text msj = new Text();
-        msj.getStyleClass().add("action");
-        grid.add(msj, 0, 5, 2, 1);
 
         Label lblListaDisponible = new Label("Competencias disponibles:");
         //lblListaDisponible.getStyleClass().add("subtitle");
@@ -83,11 +75,6 @@ public class CrearAreaCompetencia {
             }
         });
         grid.add(listaDisponible, 0, 4);
-        listaDisponible.getSelectionModel().selectedItemProperty().addListener((ob, ol, ne) -> {
-            if (ne != null) {
-                msj.setText("");
-            }
-        });
         Label lblSeleccionadas = new Label("Competencias del Área:");
         //lblSeleccionadas.getStyleClass().add("subtitle");
         grid.add(lblSeleccionadas, 3, 3);
@@ -107,11 +94,6 @@ public class CrearAreaCompetencia {
             }
         });
         grid.add(listSeleccionadas, 3, 4);
-        listSeleccionadas.getSelectionModel().selectedItemProperty().addListener((ob, ol, ne) -> {
-            if (ne != null) {
-                msj.setText("");
-            }
-        });
 
         VBox vbButtons = new VBox();
         vbButtons.setAlignment(Pos.CENTER);
@@ -125,8 +107,12 @@ public class CrearAreaCompetencia {
             if (listaDisponible.getSelectionModel().getSelectedItem() != null) {
                 auxAreaComp = (AreaCompetenciaO) listaDisponible.getSelectionModel().getSelectedItem();
                 if (areaCompetenciaCtl.addAreaCompetenciaCTL(auxAreaComp)) {
-                    msj.setFill(Color.GREEN);
-                    msj.setText("Competencia Agregada Exitosamente");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(window);
+                    alert.setTitle("Competencia a Área");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Competencia Agregada");
+                    alert.showAndWait();
                     listSeleccionadas.setItems(areaCompetenciaCtl.getAreaCompetenciasByAreaIdFX(areaId));
                     listSeleccionadas.setCellFactory(param -> new ListCell<AreaCompetenciaO>() {
                         @Override
@@ -158,12 +144,20 @@ public class CrearAreaCompetencia {
                     listSeleccionadas.getSelectionModel().clearSelection();
                     listaDisponible.getSelectionModel().clearSelection();
                 } else {
-                    msj.setFill(Color.FIREBRICK);
-                    msj.setText("Ha ocurrido un error");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.initOwner(window);
+                    alert.setTitle("Competencia a Área");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Error");
+                    alert.showAndWait();
                 }
             } else {
-                msj.setFill(Color.FIREBRICK);
-                msj.setText("Seleccione una Competencia");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(window);
+                alert.setTitle("Competencia a Área");
+                alert.setHeaderText(null);
+                alert.setContentText("Seleccione una Competencia");
+                alert.showAndWait();
             }
         });
 
@@ -171,8 +165,12 @@ public class CrearAreaCompetencia {
             if (listSeleccionadas.getSelectionModel().getSelectedItem() != null) {
                 auxAreaComp = (AreaCompetenciaO) listSeleccionadas.getSelectionModel().getSelectedItem();
                 if (areaCompetenciaCtl.removeAreaCompCTL(areaId, auxAreaComp.getCompetencia_id())) {
-                    msj.setFill(Color.GREEN);
-                    msj.setText("Competencia Eliminada Exitosamente");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(window);
+                    alert.setTitle("Competencia a Área");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Competencia Eliminada");
+                    alert.showAndWait();
                     listSeleccionadas.setItems(areaCompetenciaCtl.getAreaCompetenciasByAreaIdFX(areaId));
                     listSeleccionadas.setCellFactory(param -> new ListCell<AreaCompetenciaO>() {
                         @Override
@@ -206,16 +204,24 @@ public class CrearAreaCompetencia {
                     listSeleccionadas.getSelectionModel().clearSelection();
                     listaDisponible.getSelectionModel().clearSelection();
                 } else {
-                    msj.setFill(Color.FIREBRICK);
-                    msj.setText("Ha ocurrido un error");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.initOwner(window);
+                    alert.setTitle("Competencia a Área");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Error!");
+                    alert.showAndWait();
                 }
             } else {
-                msj.setFill(Color.FIREBRICK);
-                msj.setText("Seleccione una Competencia");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(window);
+                alert.setTitle("Competencia a Área");
+                alert.setHeaderText(null);
+                alert.setContentText("Seleccione una Competencia");
+                alert.showAndWait();
             }
         });
 
-        Scene display = new Scene(grid, 650, 500);
+        Scene display = new Scene(grid);
         window.setScene(display);
         display.getStylesheets().add(CrearAreaCompetencia.class.getResource("Style.css").toExternalForm());
         window.showAndWait();

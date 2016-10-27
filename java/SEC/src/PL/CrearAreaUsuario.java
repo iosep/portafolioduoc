@@ -14,6 +14,7 @@ import O.UsuarioO;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -47,9 +48,9 @@ public class CrearAreaUsuario {
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+        grid.setHgap(7);
+        grid.setVgap(7);
+        grid.setPadding(new Insets(0, 20, 20, 20));
 
         Text scenetitle = new Text("SEC - Asignar");
         scenetitle.getStyleClass().add("title");
@@ -59,10 +60,6 @@ public class CrearAreaUsuario {
         Label lblUser = new Label("Área: " + auxArea.getNombre());
         lblUser.getStyleClass().add("subtitle");
         grid.add(lblUser, 0, 1, 3, 1);
-
-        final Text msj = new Text();
-        msj.getStyleClass().add("action");
-        grid.add(msj, 0, 5, 2, 1);
 
         Label lblDisponible = new Label("Usuarios disponibles:");
 //        lblDisponible.getStyleClass().add("subtitle");
@@ -84,11 +81,7 @@ public class CrearAreaUsuario {
             }
         });
         grid.add(listDisponible, 0, 4);
-        listDisponible.getSelectionModel().selectedItemProperty().addListener((ob, ol, ne) -> {
-            if (ne != null) {
-                msj.setText("");
-            }
-        });
+
         Label lblSeleccionada = new Label("Usuarios del Área:");
 //        lblSeleccionada.getStyleClass().add("subtitle");
         grid.add(lblSeleccionada, 3, 3);
@@ -106,11 +99,6 @@ public class CrearAreaUsuario {
             }
         });
         grid.add(listSeleccion, 3, 4);
-        listSeleccion.getSelectionModel().selectedItemProperty().addListener((ob, ol, ne) -> {
-            if (ne != null) {
-                msj.setText("");
-            }
-        });
 
         VBox vbButtons = new VBox();
         vbButtons.setAlignment(Pos.CENTER);
@@ -124,8 +112,12 @@ public class CrearAreaUsuario {
             if (listDisponible.getSelectionModel().getSelectedItem() != null) {
                 auxUserArea = (UsuarioAreaO) listDisponible.getSelectionModel().getSelectedItem();
                 if (usuarioAreaCtl.addUsuarioAreaCTL(auxUserArea)) {
-                    msj.setFill(Color.GREEN);
-                    msj.setText("Usuario Agregado Exitosamente");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(window);
+                    alert.setTitle("Usuario a Área");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Usuario Agregado");
+                    alert.showAndWait();
                     listSeleccion.setItems(usuarioAreaCtl.getUsuarioAreasByAreaIdFX(idArea));
                     listSeleccion.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
                         @Override
@@ -153,12 +145,20 @@ public class CrearAreaUsuario {
                     listSeleccion.getSelectionModel().clearSelection();
                     listDisponible.getSelectionModel().clearSelection();
                 } else {
-                    msj.setFill(Color.FIREBRICK);
-                    msj.setText("Ha ocurrido un error");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.initOwner(window);
+                    alert.setTitle("Usuario a Área");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Error!");
+                    alert.showAndWait();
                 }
             } else {
-                msj.setFill(Color.FIREBRICK);
-                msj.setText("Seleccione un Usuario");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(window);
+                alert.setTitle("Usuario a Área");
+                alert.setHeaderText(null);
+                alert.setContentText("Seleccione un Usuario");
+                alert.showAndWait();
             }
         });
 
@@ -166,8 +166,12 @@ public class CrearAreaUsuario {
             if (listSeleccion.getSelectionModel().getSelectedItem() != null) {
                 auxUserArea = (UsuarioAreaO) listSeleccion.getSelectionModel().getSelectedItem();
                 if (usuarioAreaCtl.removeUserAreaCTL(auxUserArea.getUsuario_id(), auxUserArea.getArea_id())) {
-                    msj.setFill(Color.GREEN);
-                    msj.setText("Usuario Eliminado Exitosamente");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(window);
+                    alert.setTitle("Usuario a Área");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Usuario Eliminado");
+                    alert.showAndWait();
                     listSeleccion.setItems(usuarioAreaCtl.getUsuarioAreasByAreaIdFX(idArea));
                     listSeleccion.setCellFactory(param -> new ListCell<UsuarioAreaO>() {
                         @Override
@@ -195,12 +199,20 @@ public class CrearAreaUsuario {
                     listSeleccion.getSelectionModel().clearSelection();
                     listDisponible.getSelectionModel().clearSelection();
                 } else {
-                    msj.setFill(Color.FIREBRICK);
-                    msj.setText("Ha ocurrido un error");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.initOwner(window);
+                    alert.setTitle("Usuario a Área");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Error!");
+                    alert.showAndWait();
                 }
             } else {
-                msj.setFill(Color.FIREBRICK);
-                msj.setText("Seleccione un Usuario");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(window);
+                alert.setTitle("Usuario a Área");
+                alert.setHeaderText(null);
+                alert.setContentText("Seleccione un Usuario");
+                alert.showAndWait();
             }
         });
 

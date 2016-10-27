@@ -11,6 +11,7 @@ import CTL.PreguntaCTL;
 import CTL.SeleccionCTL;
 import CTL.UsuarioAreaCTL;
 import CTL.UsuarioCTL;
+import DAL.VariablesDAL;
 import O.AreaCompetenciaO;
 import O.EncuestaO;
 import O.PreguntaO;
@@ -18,7 +19,6 @@ import O.PreguntaO.ObjQuestion;
 import O.RespuestaO;
 import O.SeleccionO;
 import O.UsuarioAreaO;
-import O.UsuarioO;
 import java.util.ArrayList;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -28,6 +28,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.Toggle;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -174,11 +176,11 @@ public class EncuestaJefe {
                 alert.setContentText("Faltan por responder las preguntas N°: " + missing);
                 alert.showAndWait();
             } else {
-                UsuarioO jefe = usCtl.getUsuarioByRut(userRut);
-                EncuestaO enc = new EncuestaO(jefe.getId(), funcId, idPer);
-                if (enCtl.addEncuesta(enc)) {
+                EncuestaO enc = new EncuestaO(VariablesDAL.getIdUsuario(), funcId, idPer);
+                int encId = enCtl.addEncuesta(enc);
+                if (encId > 0) {
                     for (RespuestaO r : respuestas) {
-                        if (seCtl.addSeleccion(new SeleccionO(enc.getId(), r.getId()))) {
+                        if (seCtl.addSeleccion(new SeleccionO(encId, r.getId()))) {
                             well = true;
                         } else {
                             well = false;
@@ -193,12 +195,20 @@ public class EncuestaJefe {
                     alert.setContentText("Encuesta guardada con éxito");
                     alert.showAndWait();
                     window.close();
+                } else if (enCtl.eliminarEncuesta(encId)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.initOwner(window);
+                    alert.setTitle("ERROR Encuesta");
+                    alert.setHeaderText(null);
+                    alert.setContentText("ERROR al guardar Encuesta, Encuesta eliminada");
+                    alert.showAndWait();
+                    window.close();
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.initOwner(window);
                     alert.setTitle("ERROR Encuesta");
                     alert.setHeaderText(null);
-                    alert.setContentText("ERROR al guardar Encuesta");
+                    alert.setContentText("ERROR al guardar Encuesta, ERROR al eliminar encuesta");
                     alert.showAndWait();
                     window.close();
                 }
@@ -208,7 +218,11 @@ public class EncuestaJefe {
         borderPane = new BorderPane();
         borderPane.setTop(vbTop);
 //        borderPane.setBottom(hbCopyright);
-        borderPane.setCenter(vbCenter);
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(vbCenter);
+        sp.setHbarPolicy(ScrollBarPolicy.NEVER);
+        sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+        borderPane.setCenter(sp);
 //scene & window
         Scene scene = new Scene(borderPane);
         scene.getStylesheets().add(EncuestaJefe.class.getResource("Style.css").toExternalForm());

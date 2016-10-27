@@ -14,6 +14,7 @@ import O.NivelO;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -47,9 +48,9 @@ public class CrearCompetenciaNivel {
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.setHgap(3);
-        grid.setVgap(3);
-        grid.setPadding(new Insets(0, 25, 5, 25));
+        grid.setHgap(7);
+        grid.setVgap(7);
+        grid.setPadding(new Insets(0, 20, 20, 20));
 
         Text scenetitle = new Text("SEC - Asignar");
         scenetitle.getStyleClass().add("title");
@@ -59,10 +60,6 @@ public class CrearCompetenciaNivel {
         Label lblUser = new Label("Competencia: " + auxComp.getNombre());
         lblUser.getStyleClass().add("subtitle");
         grid.add(lblUser, 0, 1, 3, 1);
-
-        final Text msj = new Text();
-        msj.getStyleClass().add("action");
-        grid.add(msj, 0, 5, 2, 1);
 
         Label lblListaDisponible = new Label("Niveles disponibles:");
         grid.add(lblListaDisponible, 0, 3);
@@ -83,11 +80,7 @@ public class CrearCompetenciaNivel {
             }
         });
         grid.add(listaDisponible, 0, 4);
-        listaDisponible.getSelectionModel().selectedItemProperty().addListener((ob, ol, ne) -> {
-            if (ne != null) {
-                msj.setText("");
-            }
-        });
+        
         Label lblSeleccionadas = new Label("Niveles de la Competencia:");
         grid.add(lblSeleccionadas, 3, 3);
         ListView listSeleccionadas = new ListView();
@@ -104,12 +97,7 @@ public class CrearCompetenciaNivel {
             }
         });
         grid.add(listSeleccionadas, 3, 4);
-        listSeleccionadas.getSelectionModel().selectedItemProperty().addListener((ob, ol, ne) -> {
-            if (ne != null) {
-                msj.setText("");
-            }
-        });
-
+        
         VBox vbButtons = new VBox();
         vbButtons.setAlignment(Pos.CENTER);
         Button btnAgregar = new Button("Agregar");
@@ -122,8 +110,12 @@ public class CrearCompetenciaNivel {
             if (listaDisponible.getSelectionModel().getSelectedItem() != null) {
                 auxCompNivel = (CompetenciaNivelO) listaDisponible.getSelectionModel().getSelectedItem();
                 if (compNivelCtl.addCompetenciaNivelCTL(auxCompNivel)) {
-                    msj.setFill(Color.GREEN);
-                    msj.setText("Nivel Agregado Exitosamente");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(window);
+                    alert.setTitle("Nivel a Competencia");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Nivel Agregado");
+                    alert.showAndWait();
                     listSeleccionadas.setItems(compNivelCtl.getCompetenciaNivelesByCompetenciaIdFX(compId));
                     listSeleccionadas.setCellFactory(param -> new ListCell<CompetenciaNivelO>() {
                         @Override
@@ -151,12 +143,20 @@ public class CrearCompetenciaNivel {
                     listSeleccionadas.getSelectionModel().clearSelection();
                     listaDisponible.getSelectionModel().clearSelection();
                 } else {
-                    msj.setFill(Color.FIREBRICK);
-                    msj.setText("Ha ocurrido un error");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.initOwner(window);
+                    alert.setTitle("Nivel a Competencia");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Error!");
+                    alert.showAndWait();
                 }
             } else {
-                msj.setFill(Color.FIREBRICK);
-                msj.setText("Seleccione un Nivel");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(window);
+                alert.setTitle("Nivel a Competencia");
+                alert.setHeaderText(null);
+                alert.setContentText("Seleccione un Nivel");
+                alert.showAndWait();
             }
         });
 
@@ -164,8 +164,12 @@ public class CrearCompetenciaNivel {
             if (listSeleccionadas.getSelectionModel().getSelectedItem() != null) {
                 auxCompNivel = (CompetenciaNivelO) listSeleccionadas.getSelectionModel().getSelectedItem();
                 if (compNivelCtl.removeAreaCompCTL(compId, auxCompNivel.getNivel_id())) {
-                    msj.setFill(Color.GREEN);
-                    msj.setText("Nivel Eliminado Exitosamente");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(window);
+                    alert.setTitle("Nivel a Competencia");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Nivel Eliminado");
+                    alert.showAndWait();
                     listSeleccionadas.setItems(compNivelCtl.getCompetenciaNivelesByCompetenciaIdFX(compId));
                     listSeleccionadas.setCellFactory(param -> new ListCell<CompetenciaNivelO>() {
                         @Override
@@ -193,16 +197,24 @@ public class CrearCompetenciaNivel {
                     listSeleccionadas.getSelectionModel().clearSelection();
                     listaDisponible.getSelectionModel().clearSelection();
                 } else {
-                    msj.setFill(Color.FIREBRICK);
-                    msj.setText("Ha ocurrido un error");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.initOwner(window);
+                    alert.setTitle("Nivel a Competencia");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Error!");
+                    alert.showAndWait();
                 }
             } else {
-                msj.setFill(Color.FIREBRICK);
-                msj.setText("Seleccione un Nivel");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(window);
+                alert.setTitle("Nivel a Competencia");
+                alert.setHeaderText(null);
+                alert.setContentText("Seleccione un Nivel");
+                alert.showAndWait();
             }
         });
 
-        Scene display = new Scene(grid, 650, 500);
+        Scene display = new Scene(grid);
         window.setScene(display);
         display.getStylesheets().add(CrearCompetenciaNivel.class.getResource("Style.css").toExternalForm());
         window.showAndWait();

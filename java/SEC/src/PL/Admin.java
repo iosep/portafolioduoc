@@ -52,6 +52,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -486,6 +487,7 @@ public class Admin {
         areaSiglaColumn.setCellValueFactory(new PropertyValueFactory<>("sigla"));
         areaDescColumn = new TableColumn<>("Descripción");
         areaDescColumn.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        areaDescColumn.setMaxWidth(250);
         areaActivoColumn = new TableColumn<>("Estado");
         areaActivoColumn.setCellValueFactory(new PropertyValueFactory<>("activo"));
         areaActivoColumn.setCellFactory(column -> {
@@ -681,6 +683,7 @@ public class Admin {
         compSiglaCol.setCellValueFactory(new PropertyValueFactory<>("sigla"));
         compDescCol = new TableColumn<>("Descripción");
         compDescCol.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        compDescCol.setMaxWidth(250);
         compNiOpCol = new TableColumn<>("Nivel Óptimo");
         compNiOpCol.setCellValueFactory(new PropertyValueFactory<>("nivelOptimo"));
         compActivoCol = new TableColumn<>("Estado");
@@ -834,6 +837,7 @@ public class Admin {
         notaNivelCol.setCellValueFactory(new PropertyValueFactory<>("nota"));
         descNivelCol = new TableColumn<>("Descripción");
         descNivelCol.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        descNivelCol.setMaxWidth(250);
         creadoNivelCol = new TableColumn<>("Creado");
         creadoNivelCol.setCellValueFactory(new PropertyValueFactory<>("creado"));
         creadoNivelCol.setCellFactory(column -> {
@@ -937,6 +941,7 @@ public class Admin {
 //setting PREGUNTA table columns data and headers
         questionPreguntaCol = new TableColumn<>("Pregunta");
         questionPreguntaCol.setCellValueFactory(new PropertyValueFactory<>("pregunta"));
+        questionPreguntaCol.setMaxWidth(250);
         questionCompetenciaCol = new TableColumn<>("Competencia");
         questionCompetenciaCol.setCellValueFactory(new PropertyValueFactory<>("competenciaNombre"));
         /*questionCompetenciaCol.setCellFactory(column -> {
@@ -993,6 +998,7 @@ public class Admin {
             filterField.clear();
             titleMantenedores.setText("SEC - Mantenedor Respuestas");
             answerTable.setItems(answerCtl.getRespuestasFX());
+            
             //filtrar por respuesta
             FilteredList<RespuestaO> filteredData = new FilteredList<>(answerCtl.getRespuestasFX(), p -> true);
             filterField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -1048,10 +1054,12 @@ public class Admin {
 //setting RESPUESTA table columns data and headers
         answerRespuestaCol = new TableColumn<>("Respuesta");
         answerRespuestaCol.setCellValueFactory(new PropertyValueFactory<>("respuesta"));
+        answerRespuestaCol.setMaxWidth(250);
         answerPuntosCol = new TableColumn<>("Puntos");
         answerPuntosCol.setCellValueFactory(new PropertyValueFactory<>("puntos"));
         answerPreguntaCol = new TableColumn<>("Pregunta");
         answerPreguntaCol.setCellValueFactory(new PropertyValueFactory<>("preguntaNombre"));
+        answerPreguntaCol.setMaxWidth(250);
         /*answerPreguntaCol.setCellFactory(column -> {
             return new TableCell<RespuestaO, Integer>() {
                 @Override
@@ -1167,8 +1175,10 @@ public class Admin {
         commentNivelSupCol.setCellValueFactory(new PropertyValueFactory<>("nivel_sup"));
         commentMsjInfCol = new TableColumn<>("Mensaje Nivel Inferior");
         commentMsjInfCol.setCellValueFactory(new PropertyValueFactory<>("msj_inf"));
+        commentMsjInfCol.setMaxWidth(250);
         commentMsjSupCol = new TableColumn<>("Mensaje Nivel Superior");
         commentMsjSupCol.setCellValueFactory(new PropertyValueFactory<>("msj_sup"));
+        commentMsjSupCol.setMaxWidth(250);
         commentCompetenciaCol = new TableColumn<>("Competencia");
         commentCompetenciaCol.setCellValueFactory(new PropertyValueFactory<>("compNombre"));
         /*commentCompetenciaCol.setCellFactory(column -> {

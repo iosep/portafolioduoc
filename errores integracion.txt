@@ -56,7 +56,7 @@ addObservacion response: {
 ]
 }
 
-///////////////////////////////////// 2 /create, mismo ID, guarda 1 registro, diferente post, mismo response
+///////////////////////////////////// 2 create, mismo ID, guarda 1 registro, diferente post, mismo response
 ///////////////////////////////////// still 26 2113
 
 
@@ -100,5 +100,14 @@ getCompetenciaNivelesByCompetenciaId read_competencia response: {
 }
 ]
 }
-///////////////////////////////////// devuelve registros duplicados (4) / bdd ok (2)
+///////////////////////////////////// devuelve registros duplicados (4), bdd ok (2)
 ///////////////////////////////////// still 26 2334
+
+
+addEncuesta post: {"fecha":"2016-10-27","evaluadoid":5,"periodoid":1,"usuarioid":4,"idusuario":4,"token":"DWMF6R3ZD0NUHM0PNR60DRG4P"}
+addEncuesta response: {
+"encuesta":[
+]
+}
+///////////////////////////////////// arreglo vacío, no crea encuesta, idusuario y usuarioid siempre será el mismo
+///////////////////////////////////// still 27 1303

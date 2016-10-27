@@ -97,6 +97,7 @@ public class Jefe {
      * @param userRut
      */
     public void start(String userRut) {
+        long startTime = System.nanoTime();
         tTitle = new Text("SEC - Jefe");
         tTitle.getStyleClass().add("title");
         lblActiveUser = new Label("Usuario Activo:");
@@ -172,66 +173,72 @@ public class Jefe {
                 tiRoot.getChildren().add(tiLayer1);
             }
         }
-//Competencias By Área        
+//Competencias By Área
+        ArrayList<AreaCompetenciaO> arComList = arComCtl.getAreaCompetencias();
         for (TreeItem<ArbolO> treeLayer1 : tiRoot.getChildren()) {
-            for (AreaCompetenciaO arCom : arComCtl.getAreaCompetenciasByAreaIdFX(treeLayer1.getValue().getId())) {
-                boolean ffvv = false;
-                for (CompetenciaO co : competencias) {
-                    if (co.getId() == arCom.getCompetencia_id()) {
-                        ffvv = true;
-                        break;
+            for (AreaCompetenciaO arCom : arComList) {//arComCtl.getAreaCompetenciasByAreaIdFX(treeLayer1.getValue().getId())
+                if (arCom.getArea_id() == treeLayer1.getValue().getId()) {
+                    boolean ffvv = false;
+                    for (CompetenciaO co : competencias) {
+                        if (co.getId() == arCom.getCompetencia_id()) {
+                            ffvv = true;
+                            break;
+                        }
                     }
-                }
-                if (!ffvv) {
-                    competencias.add(compCtl.getCompetenciaById(arCom.getCompetencia_id()));
-                    System.out.println("competenciasList: " + arCom.getCompNombre());
-                }
-                tiLayer3 = new TreeItem<>(new ArbolO(arCom.getCompNombre(), arCom.getCompetencia_id()));
-                found = false;
-                for (TreeItem<ArbolO> treeLayer2 : treeLayer1.getChildren()) {
-                    if (treeLayer2.getValue().getTexto().contentEquals("Competencias")) {
-                        treeLayer2.getChildren().add(tiLayer3);
-                        found = true;
-                        break;
+                    if (!ffvv) {
+                        competencias.add(compCtl.getCompetenciaById(arCom.getCompetencia_id()));
+                        System.out.println("competenciasList: " + arCom.getCompNombre());
                     }
-                }
-                if (!found) {
-                    tiLayer2 = new TreeItem<>(new ArbolO("Competencias", 0));
-                    tiLayer2.getChildren().add(tiLayer3);
-                    treeLayer1.getChildren().add(tiLayer2);
+                    tiLayer3 = new TreeItem<>(new ArbolO(arCom.getCompNombre(), arCom.getCompetencia_id()));
+                    found = false;
+                    for (TreeItem<ArbolO> treeLayer2 : treeLayer1.getChildren()) {
+                        if (treeLayer2.getValue().getTexto().contentEquals("Competencias")) {
+                            treeLayer2.getChildren().add(tiLayer3);
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        tiLayer2 = new TreeItem<>(new ArbolO("Competencias", 0));
+                        tiLayer2.getChildren().add(tiLayer3);
+                        treeLayer1.getChildren().add(tiLayer2);
+                    }
                 }
             }
         }
 //Niveles By Competencia
+        ArrayList<CompetenciaNivelO> compNiList = new ArrayList<>();
         for (TreeItem<ArbolO> treeLayer1 : tiRoot.getChildren()) {
             for (TreeItem<ArbolO> treeLayer2 : treeLayer1.getChildren()) {
                 if (treeLayer2.getValue().getTexto().contentEquals("Competencias")) {
                     for (TreeItem<ArbolO> treeLayer3 : treeLayer2.getChildren()) {
-                        for (CompetenciaNivelO comNi : comNiCtl.getCompetenciaNivelesByCompetenciaIdFX(treeLayer3.getValue().getId())) {
-                            boolean ffvv = false;
-                            for (NivelO ni : niveles) {
-                                if (ni.getId() == comNi.getNivel_id()) {
-                                    ffvv = true;
-                                    break;
+                        for (CompetenciaNivelO comNi : compNiList) {//comNiCtl.getCompetenciaNivelesByCompetenciaIdFX(treeLayer3.getValue().getId())
+                            if (comNi.getCompetencia_id() == treeLayer3.getValue().getId()) {
+                                boolean ffvv = false;
+                                for (NivelO ni : niveles) {
+                                    if (ni.getId() == comNi.getNivel_id()) {
+                                        ffvv = true;
+                                        break;
+                                    }
                                 }
-                            }
-                            if (!ffvv) {
-                                niveles.add(nivelCtl.getNivelById(comNi.getNivel_id()));
-                                System.out.println("nivelesList: " + comNi.getNivelNombre());
-                            }
-                            tiLayer5 = new TreeItem<>(new ArbolO(comNi.getNivelNombre(), comNi.getNivel_id()));
-                            found = false;
-                            for (TreeItem<ArbolO> treeLayer4 : treeLayer3.getChildren()) {
-                                if (treeLayer4.getValue().getTexto().contentEquals("Niveles")) {
-                                    treeLayer4.getChildren().add(tiLayer5);
-                                    found = true;
-                                    break;
+                                if (!ffvv) {
+                                    niveles.add(nivelCtl.getNivelById(comNi.getNivel_id()));
+                                    System.out.println("nivelesList: " + comNi.getNivelNombre());
                                 }
-                            }
-                            if (!found) {
-                                tiLayer4 = new TreeItem<>(new ArbolO("Niveles", 0));
-                                tiLayer4.getChildren().add(tiLayer5);
-                                treeLayer3.getChildren().add(tiLayer4);
+                                tiLayer5 = new TreeItem<>(new ArbolO(comNi.getNivelNombre(), comNi.getNivel_id()));
+                                found = false;
+                                for (TreeItem<ArbolO> treeLayer4 : treeLayer3.getChildren()) {
+                                    if (treeLayer4.getValue().getTexto().contentEquals("Niveles")) {
+                                        treeLayer4.getChildren().add(tiLayer5);
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                                if (!found) {
+                                    tiLayer4 = new TreeItem<>(new ArbolO("Niveles", 0));
+                                    tiLayer4.getChildren().add(tiLayer5);
+                                    treeLayer3.getChildren().add(tiLayer4);
+                                }
                             }
                         }
                     }
@@ -241,11 +248,12 @@ public class Jefe {
 //create treeview
         TreeView<ArbolO> tvTree = new TreeView<>(tiRoot);
         tvTree.getStyleClass().add("tree");
+        tvTree.setMaxWidth(200);
+        this.getPendientes();
         tvTree.getSelectionModel().selectedItemProperty().addListener((ob, ol, ne) -> {
             if (ne != null) {
-                this.getPendientes();
                 TreeItem<ArbolO> select = (TreeItem<ArbolO>) ne;
-                System.out.println("Selected Text : " + select.getValue());
+                //System.out.println("Selected Text : " + select.getValue());
                 if (select.getParent() != null) {
                     switch (select.getParent().getValue().getTexto()) {
                         case "Áreas":
@@ -341,6 +349,7 @@ public class Jefe {
         this.window.setMaximized(!window.isMaximized());
         this.window.addEventHandler(KeyEvent.KEY_PRESSED, this::handleKey);
         this.window.show();
+        System.out.println((System.nanoTime() - startTime) + "ns per million");
     }
 
     /**
@@ -362,9 +371,10 @@ public class Jefe {
             if (now.after(p.getInicio()) && now.before(p.getFin())) {
                 idPeriodo = p.getId();
                 for (UsuarioO u : funcionarios) {
-                    if (enCtl.findEncuestasByPeriodoId(idPeriodo).size() > 0) {
+                    ArrayList<EncuestaO> encByPeriod = enCtl.findEncuestasByPeriodoId(idPeriodo);
+                    if (encByPeriod.size() > 0) {
                         esta = false;
-                        for (EncuestaO e : enCtl.findEncuestasByPeriodoId(idPeriodo)) {
+                        for (EncuestaO e : encByPeriod) {
                             if (e.getEvaluado_id() == u.getId()) {
                                 esta = true;
                             }

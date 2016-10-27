@@ -7,10 +7,8 @@ package DAL;
 
 import O.CompetenciaNivelO;
 import REST.Conexion;
-import java.io.IOException;
 import java.util.ArrayList;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -43,7 +41,7 @@ public class CompetenciaNivelDAL {
                 }
                 return list;
             }
-        } catch (IOException | JSONException e) {
+        } catch (Exception e ) {
             System.out.println("getCompetenciaNivelesDAL catch: " + e.getMessage());
         }
         return list;
@@ -73,7 +71,7 @@ public class CompetenciaNivelDAL {
                 }
                 return list;
             }
-        } catch (IOException | JSONException e) {
+        } catch (Exception e ) {
             System.out.println("getCompetenciaNivelesByCompetenciaIdDAL catch: " + e.getMessage());
         }
         return list;
@@ -102,7 +100,7 @@ public class CompetenciaNivelDAL {
                 }
                 return list;
             }
-        } catch (IOException | JSONException e) {
+        } catch (Exception e ) {
             System.out.println("getCompetenciaNivelesByNivelIdDAL catch: " + e.getMessage());
         }
         return list;
@@ -124,7 +122,7 @@ public class CompetenciaNivelDAL {
             } else {
                 System.out.println("activar nivelComp");
             }
-        } catch (IOException | JSONException e) {
+        } catch (Exception e ) {
             System.out.println("addCompetenciaNivelDAL catch: " + e.getMessage());
             return false;
         }
@@ -145,7 +143,7 @@ public class CompetenciaNivelDAL {
             if (jsonResponse.getJSONArray("competencia_nivel").length() > 0) {
                 return true;
             }
-        } catch (IOException | JSONException e) {
+        } catch (Exception e ) {
             System.out.println("updateCompetenciaNivelDAL catch: " + e.getMessage());
             return false;
         }
@@ -166,7 +164,7 @@ public class CompetenciaNivelDAL {
             if (jsonResponse.getJSONArray("competencia_nivel").length() > 0) {
                 return true;
             }
-        } catch (IOException | JSONException e) {
+        } catch (Exception e ) {
             System.out.println("removeCompetenciaNivelDAL catch: " + e.getMessage());
             return false;
         }

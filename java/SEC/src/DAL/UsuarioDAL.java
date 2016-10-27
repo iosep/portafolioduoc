@@ -234,7 +234,7 @@ public class UsuarioDAL {
                     return jsonResp.getJSONArray("RESPUESTA").getJSONObject(0).getString("ADVERTENCIA");
                 }
             }
-        } catch (IOException | JSONException e) {
+        } catch (Exception e ) {
             System.out.println("logInDAL catch: " + e.getMessage());
             return "Error de conexión, inténtelo nuevamente";
         }
