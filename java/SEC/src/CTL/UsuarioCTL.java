@@ -7,6 +7,7 @@ package CTL;
 
 import DAL.UsuarioDAL;
 import O.UsuarioO;
+import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -54,7 +55,7 @@ public class UsuarioCTL {
         return funcionarios;
     }
 
-    public String logInCtl(String rut, String clave) {
+    public String logInCtl(String rut, String clave) throws IOException {
         return ud.logIn(rut, clave);
     }
 
@@ -73,4 +74,9 @@ public class UsuarioCTL {
     public boolean updateUser(UsuarioO obj) {
         return ud.updateUser(obj);
     }
+    
+    public boolean updatePass(UsuarioO obj) {
+        return ud.updatePass(obj);
+    }
+    
 }

@@ -10,17 +10,24 @@ import DAL.VariablesDAL;
 import FN.Formato;
 import FN.Validar;
 import O.UsuarioO;
+import REST.Conexion;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -31,10 +38,50 @@ import javafx.stage.Stage;
 public class Login extends Application {
 
     private final UsuarioCTL userCtl = new UsuarioCTL();
-    private static UsuarioO user;
+    private static boolean load = true;
+    HBox hbTop = new HBox();
+    Label l1 = new Label("IP:");
+    TextField tf1 = new TextField();
+    Label l2 = new Label("Port:");
+    TextField tf2 = new TextField();
+    BorderPane bp = new BorderPane();
+    Button bServer = new Button("Set Server");
+    Stage primaryStage;
+
+    public Login() {
+        if (load) {
+            load = false;
+            hbTop.getChildren().addAll(l1, tf1, l2, tf2, bServer);
+            hbTop.getStyleClass().add("vbox");
+            bp.setTop(hbTop);
+            bServer.setOnAction(v -> {
+                Validar va = new Validar();
+                if (va.validateIpv4(tf1.getText()) && va.validatePort(tf2.getText())) {
+                    Conexion.setIp(tf1.getText());
+                    Conexion.setPort(tf2.getText());
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Set Server");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Set Server Exitoso");
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("ERROR Set Server");
+                    alert.setHeaderText(null);
+                    alert.setContentText("ERROR IP o Port No Válido");
+                    alert.showAndWait();
+                }
+            });
+        } else {
+            bp.getChildren().clear();
+        }
+    }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage stage) {
+        primaryStage = stage;
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("desk.png")));
         primaryStage.setTitle("SEC - Login");
 
@@ -43,6 +90,7 @@ public class Login extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
+        bp.setCenter(grid);
 
         Text scenetitle = new Text("SEC");
         scenetitle.getStyleClass().add("title");
@@ -85,37 +133,41 @@ public class Login extends Application {
         btn.setOnAction(e -> {
             Validar v = new Validar();
             if (v.validarRut(txtRun.getText())) {
-                String login = userCtl.logInCtl(Formato.formatoRut(txtRun.getText()), pwBox.getText());
-                if (login.equals("login exitoso")) {
-                    user = userCtl.getUsuarioById(VariablesDAL.getIdUsuario());
-                    switch (user.getRol_nombre()) {
-                        case "ADMINISTRADOR":
-                            Admin a = new Admin();
-                            a.display(user.getRut());
-                            primaryStage.close();
-                            break;
-                        case "JEFE":
-                            Jefe j = new Jefe();
-                            j.start(user.getRut());
-                            primaryStage.close();
-                            break;
-                        case "FUNCIONARIO":
-                            Funcionario f = new Funcionario();
-                            f.start(user.getRut());
-                            primaryStage.close();
-                            break;
-                        default:
-                            break;
+                try {
+                    String login = userCtl.logInCtl(Formato.formatoRut(txtRun.getText()), pwBox.getText());
+                    if (login.equals("login exitoso")) {
+                        UsuarioO user = userCtl.getUsuarioById(VariablesDAL.getIdUsuario());
+                        switch (user.getRol_nombre()) {
+                            case "ADMINISTRADOR":
+                                Admin a = new Admin();
+                                a.display(user.getRut());
+                                primaryStage.close();
+                                break;
+                            case "JEFE":
+                                Jefe j = new Jefe();
+                                j.start(user.getRut());
+                                primaryStage.close();
+                                break;
+                            case "FUNCIONARIO":
+                                Funcionario f = new Funcionario();
+                                f.start(user.getRut());
+                                primaryStage.close();
+                                break;
+                            default:
+                                break;
+                        }
+                    } else {
+                        msj.setText(login);
                     }
-                } else {
-                    msj.setText(login);
+                } catch (IOException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 msj.setText("RUT No Válido");
             }
         });
 
-        Scene display = new Scene(grid, 700, 500);
+        Scene display = new Scene(bp, 700, 500);
         primaryStage.setScene(display);
         display.getStylesheets().add(Login.class.getResource("Style.css").toExternalForm());
         primaryStage.show();

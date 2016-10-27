@@ -78,29 +78,12 @@ public class ModificarUsuario {
         txtRun.setEditable(false);
         grid.add(txtRun, 1, 4);
 //FIX PASSWORD!
-        Label pw = new Label("Contraseña:");
-        grid.add(pw, 0, 5);
-        PasswordField pwBox = new PasswordField();
-        pwBox.setText("12345");
-        pwBox.textProperty().addListener((ob, ol, ne) -> {
-            if (ne != null) {
-                msj.setText("");
-            }
+        Button bChangePass = new Button("Cambiar Clave");
+        grid.add(bChangePass, 0, 5, 2, 2);
+        bChangePass.setOnAction(v -> {
+            CambiarClave cc = new CambiarClave();
+            cc.display(idUser);
         });
-        grid.add(pwBox, 1, 5);
-        pwBox.setVisible(false);
-//FIX PASSWORD!
-        Label pw2 = new Label("Repetir Contraseña:");
-        grid.add(pw2, 0, 6);
-        PasswordField pwBox2 = new PasswordField();
-        pwBox2.setText("12345");
-        pwBox2.textProperty().addListener((ob, ol, ne) -> {
-            if (ne != null) {
-                msj.setText("");
-            }
-        });
-        grid.add(pwBox2, 1, 6);
-        pwBox2.setVisible(false);
 
         Label rolLbl = new Label("Rol:");
         grid.add(rolLbl, 0, 7);
@@ -245,57 +228,40 @@ public class ModificarUsuario {
                         boo = true;
                     }
                     if (boo) {
-                        //FIX CLAVE
-                        String clave = "12345";
-                        boolean add = true;
-                        if (pwBox.getLength() > 0 || pwBox2.getLength() > 0) {
-                            add = false;
-                            if (pwBox.getLength() >= 5 && pwBox2.getLength() >= 5) {
-                                if (pwBox.getText().equals(pwBox2.getText())) {
-                                    clave = pwBox.getText().trim();
-                                    add = true;
-                                } else {
-                                    msj.setText("Contraseñas no coinciden");
-                                }
-                            } else {
-                                msj.setText("Contraseña mínimo 5 caractéres");
-                            }
+                        int fono = Integer.parseInt(txtFono.getText());
+                        String sSexo = "";
+                        switch (cbSexo.getValue().toString()) {
+                            case "MASCULINO":
+                                sSexo = "M";
+                                break;
+                            case "FEMENINO":
+                                sSexo = "F";
+                                break;
                         }
-                        if (add) {
-                            int fono = Integer.parseInt(txtFono.getText());
-                            String sSexo = "";
-                            switch (cbSexo.getValue().toString()) {
-                                case "MASCULINO":
-                                    sSexo = "M";
-                                    break;
-                                case "FEMENINO":
-                                    sSexo = "F";
-                                    break;
-                            }
-                            String rut = Formato.formatoRut(txtRun.getText());
-                            UsuarioO u1 = new UsuarioO(rut, clave,
-                                    ((RolO) cbRol.getSelectionModel().getSelectedItem()).getId(),
-                                    rut_jefe, txtNombre.getText().trim(), txtApellido.getText().trim(),
-                                    txtEmail.getText(), sSexo, fono);
-                            u1.setId(u0.getId());
-                            if (uctl.updateUser(u1)) {
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.initOwner(window);
-                                alert.setTitle("Usuario Modificado");
-                                alert.setHeaderText(null);
-                                alert.setContentText("Usuario Modificado Exitosamente");
-                                alert.showAndWait();
-                                window.close();
-                            } else {
-                                Alert alert = new Alert(Alert.AlertType.ERROR);
-                                alert.initOwner(window);
-                                alert.setTitle("ERROR - Modificar Usuario");
-                                alert.setHeaderText(null);
-                                alert.setContentText("ERROR al Modificar Usuario");
-                                alert.showAndWait();
-                                window.close();
-                            }
+                        String rut = Formato.formatoRut(txtRun.getText());
+                        UsuarioO u1 = new UsuarioO(rut, "12345",
+                                ((RolO) cbRol.getSelectionModel().getSelectedItem()).getId(),
+                                rut_jefe, txtNombre.getText().trim(), txtApellido.getText().trim(),
+                                txtEmail.getText(), sSexo, fono);
+                        u1.setId(u0.getId());
+                        if (uctl.updateUser(u1)) {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.initOwner(window);
+                            alert.setTitle("Usuario Modificado");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Usuario Modificado Exitosamente");
+                            alert.showAndWait();
+                            window.close();
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.initOwner(window);
+                            alert.setTitle("ERROR - Modificar Usuario");
+                            alert.setHeaderText(null);
+                            alert.setContentText("ERROR al Modificar Usuario");
+                            alert.showAndWait();
+                            window.close();
                         }
+
                     }
                 }
             } else {

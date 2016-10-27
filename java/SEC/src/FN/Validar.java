@@ -14,8 +14,19 @@ import java.util.regex.Pattern;
  */
 public class Validar {
 
-    private static final String PATTERN_EMAIL
+    private final String PATTERN_EMAIL
             = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    private final Pattern PATTERN_IPV4 = Pattern.compile(
+            "^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
+
+    public boolean validateIpv4(final String ip) {
+        return PATTERN_IPV4.matcher(ip).matches();
+    }
+
+    public boolean validatePort(String port) {
+        return this.validarInteger(port) && Integer.parseInt(port) < 65536;
+    }
 
     /**
      * Validate given email with regular expression.

@@ -26,7 +26,7 @@ public class AreaCompetenciaDAL {
         jsonPost.put("token", VariablesDAL.token);
         try {
             String response = cx.post("area_competencia/json/read_all", jsonPost);
-            System.out.println("getAreaCompetencias response: " + response);
+            //System.out.println("getAreaCompetencias response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("area_competencia").length() > 0) {
                 JSONArray jsonArray = jsonResponse.getJSONArray("area_competencia");
@@ -55,7 +55,7 @@ public class AreaCompetenciaDAL {
         jsonPost.put("comptid", id);
         try {
             String response = cx.post("area_competencia/json/read_competencia", jsonPost);
-            System.out.println("getAreaCompetenciasByCompetenciaId response: " + response);
+            //System.out.println("getAreaCompetenciasByCompetenciaId response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("area_competencia").length() > 0) {
                 JSONArray jsonArray = jsonResponse.getJSONArray("area_competencia");
@@ -84,7 +84,7 @@ public class AreaCompetenciaDAL {
         jsonPost.put("areaid", id);
         try {
             String response = cx.post("area_competencia/json/read_area", jsonPost);
-            System.out.println("getAreaCompetenciasByAreaId response: " + response);
+            //System.out.println("getAreaCompetenciasByAreaId response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("area_competencia").length() > 0) {
                 JSONArray jsonArray = jsonResponse.getJSONArray("area_competencia");

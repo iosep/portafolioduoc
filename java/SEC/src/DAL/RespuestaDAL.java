@@ -27,7 +27,7 @@ public class RespuestaDAL {
         jsonPost.put("token", VariablesDAL.token);
         try {
             String response = cx.post("respuesta/json/read_all", jsonPost);
-            System.out.println("getRespuestas response: " + response);
+            //System.out.println("getRespuestas response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("respuesta").length() > 0) {
                 JSONArray jsonArray = jsonResponse.getJSONArray("respuesta");

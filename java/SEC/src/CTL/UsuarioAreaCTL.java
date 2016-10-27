@@ -47,6 +47,7 @@ public class UsuarioAreaCTL {
             for (UsuarioAreaO userArea : this.getUsuarioAreasByUserIdFX(userId)) {
                 if (userArea.getArea_id() == area.getId()) {
                     add = false;
+                    break;
                 }
             }
             if (add) {
@@ -65,6 +66,7 @@ public class UsuarioAreaCTL {
             for (UsuarioAreaO userArea : this.getUsuarioAreasByAreaIdFX(areaId)) {
                 if (userArea.getUsuario_id() == user.getId()) {
                     add = false;
+                    break;
                 }
             }
             if (add) {

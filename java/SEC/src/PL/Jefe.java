@@ -137,12 +137,19 @@ public class Jefe {
 
 //Funcionarios By Áreas
         for (UsuarioAreaO usAr : usArCtl.getFuncionarioUserAreaByRutJefeFX(userRut)) {
-            if (!funcionarios.contains(userCtl.getUsuarioById(usAr.getUsuario_id()))) {
+            boolean ffvv = false;
+            for (UsuarioO uf : funcionarios) {
+                if (uf.getId() == usAr.getUsuario_id()) {
+                    ffvv = true;
+                    break;
+                }
+            }
+            if (!ffvv) {
                 funcionarios.add(userCtl.getUsuarioById(usAr.getUsuario_id()));
                 System.out.println("funcionariosList: " + usAr.getUsuarioRut());
             }
             tiLayer3 = new TreeItem<>(new ArbolO(usAr.getUsuarioRut(), usAr.getUsuario_id()));
-            System.out.println("usar rut for funcionariosbyarea: " + usAr.getUsuarioRut());
+            //System.out.println("usAr.getUsuarioRut: " + usAr.getUsuarioRut());
             found = false;
             for (TreeItem<ArbolO> treeLayer1 : tiRoot.getChildren()) {
                 if (treeLayer1.getValue().getTexto().contentEquals(usAr.getAreaNombre())) {
@@ -168,9 +175,16 @@ public class Jefe {
 //Competencias By Área        
         for (TreeItem<ArbolO> treeLayer1 : tiRoot.getChildren()) {
             for (AreaCompetenciaO arCom : arComCtl.getAreaCompetenciasByAreaIdFX(treeLayer1.getValue().getId())) {
-                if (!competencias.contains(compCtl.getCompetenciaById(arCom.getCompetencia_id()))) {
+                boolean ffvv = false;
+                for (CompetenciaO co : competencias) {
+                    if (co.getId() == arCom.getCompetencia_id()) {
+                        ffvv = true;
+                        break;
+                    }
+                }
+                if (!ffvv) {
                     competencias.add(compCtl.getCompetenciaById(arCom.getCompetencia_id()));
-//                    System.out.println("competenciasList: " + arCom.getCompNombre());
+                    System.out.println("competenciasList: " + arCom.getCompNombre());
                 }
                 tiLayer3 = new TreeItem<>(new ArbolO(arCom.getCompNombre(), arCom.getCompetencia_id()));
                 found = false;
@@ -194,9 +208,16 @@ public class Jefe {
                 if (treeLayer2.getValue().getTexto().contentEquals("Competencias")) {
                     for (TreeItem<ArbolO> treeLayer3 : treeLayer2.getChildren()) {
                         for (CompetenciaNivelO comNi : comNiCtl.getCompetenciaNivelesByCompetenciaIdFX(treeLayer3.getValue().getId())) {
-                            if (!niveles.contains(nivelCtl.getNivelById(comNi.getNivel_id()))) {
+                            boolean ffvv = false;
+                            for (NivelO ni : niveles) {
+                                if (ni.getId() == comNi.getNivel_id()) {
+                                    ffvv = true;
+                                    break;
+                                }
+                            }
+                            if (!ffvv) {
                                 niveles.add(nivelCtl.getNivelById(comNi.getNivel_id()));
-//                                System.out.println("nivelesList: " + comNi.getNivelNombre());
+                                System.out.println("nivelesList: " + comNi.getNivelNombre());
                             }
                             tiLayer5 = new TreeItem<>(new ArbolO(comNi.getNivelNombre(), comNi.getNivel_id()));
                             found = false;

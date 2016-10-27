@@ -47,6 +47,7 @@ public class AreaCompetenciaCTL {
             for (AreaCompetenciaO areaComp : this.getAreaCompetenciasByAreaIdFX(areaId)) {
                 if (areaComp.getCompetencia_id() == competencia.getId()) {
                     add = false;
+                    break;
                 }
             }
             if (add) {
@@ -65,6 +66,7 @@ public class AreaCompetenciaCTL {
             for (AreaCompetenciaO areaComp : this.getAreaCompetenciasByCompetenciaIdFX(compId)) {
                 if (areaComp.getArea_id() == area.getId()) {
                     add = false;
+                    break;
                 }
             }
             if (add) {

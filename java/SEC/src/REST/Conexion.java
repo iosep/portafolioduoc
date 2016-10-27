@@ -8,14 +8,14 @@ package REST;
 import java.io.IOException;
 import java.net.URI;
 import org.apache.http.annotation.NotThreadSafe;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
 
 /**
@@ -24,15 +24,15 @@ import org.json.JSONObject;
  */
 public class Conexion {
 
-    private String ip = "192.168.99.100";
-    private String port = "8080";
+    private static String ip = "192.168.99.100";
+    private static String port = "8080";
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public static void setIp(String ip) {
+        Conexion.ip = ip;
     }
 
-    public void setPort(String port) {
-        this.port = port;
+    public static void setPort(String port) {
+        Conexion.port = port;
     }
 
     /**
@@ -41,9 +41,10 @@ public class Conexion {
      * @param command resource to post
      * @param json resource to post
      * @return string response
+     * @throws java.io.IOException
      */
-    public String post(String command, JSONObject json) {
-        HttpClient httpClient = new DefaultHttpClient();
+    public String post(String command, JSONObject json) throws IOException {
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         String responseBody = null;
         try {
             HttpPost httpPost = new HttpPost("http://" + ip + ":" + port + "/ords/wfbs/" + command);
@@ -55,13 +56,13 @@ public class Conexion {
         } catch (IOException e) {
             System.out.println("IOException Conexion: " + e.getMessage());
         } finally {
-            httpClient.getConnectionManager().shutdown();
+            httpClient.close();
         }
         return responseBody;
     }
 
-    public String put(String command, JSONObject json) {
-        HttpClient httpClient = new DefaultHttpClient();
+    public String put(String command, JSONObject json) throws IOException {
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         String responseBody = null;
         try {
             HttpPut httpPut = new HttpPut("http://" + ip + ":" + port + "/ords/wfbs/" + command);
@@ -73,13 +74,13 @@ public class Conexion {
         } catch (IOException e) {
             System.out.println("IOException Conexion: " + e.getMessage());
         } finally {
-            httpClient.getConnectionManager().shutdown();
+            httpClient.close();
         }
         return responseBody;
     }
 
-    public String delete(String command, JSONObject json) {
-        HttpClient httpClient = new DefaultHttpClient();
+    public String delete(String command, JSONObject json) throws IOException {
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         String responseBody = null;
         try {
             HttpDeleteWithBody httpDelete = new HttpDeleteWithBody("http://" + ip + ":" + port + "/ords/wfbs/" + command);
@@ -91,7 +92,7 @@ public class Conexion {
         } catch (IOException e) {
             System.out.println("IOException Conexion: " + e.getMessage());
         } finally {
-            httpClient.getConnectionManager().shutdown();
+            httpClient.close();
         }
         return responseBody;
     }

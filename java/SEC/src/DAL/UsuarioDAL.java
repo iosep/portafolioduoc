@@ -8,9 +8,11 @@ package DAL;
 import FN.Formato;
 import O.UsuarioO;
 import REST.Conexion;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -18,9 +20,9 @@ import org.json.JSONObject;
  * @author iosep
  */
 public class UsuarioDAL {
-
+    
     private final Conexion cx = new Conexion();
-
+    
     public ArrayList<UsuarioO> getUsuarios() {
         ArrayList<UsuarioO> list = new ArrayList<>();
         JSONObject jsonPost = new JSONObject();
@@ -55,7 +57,7 @@ public class UsuarioDAL {
         }
         return list;
     }
-
+    
     public UsuarioO getUsuarioById(int id) {
         UsuarioO obj = new UsuarioO();
         JSONObject jsonPost = new JSONObject();
@@ -87,7 +89,7 @@ public class UsuarioDAL {
         }
         return obj;
     }
-
+    
     public UsuarioO getUsuarioByRut(String rut) {
         UsuarioO obj = new UsuarioO();
         JSONObject jsonPost = new JSONObject();
@@ -119,7 +121,7 @@ public class UsuarioDAL {
         }
         return obj;
     }
-
+    
     public boolean addUsuario(UsuarioO obj) {
         JSONObject jsonPost = new JSONObject();
         jsonPost.put("idusuario", VariablesDAL.idUsuario);
@@ -145,7 +147,7 @@ public class UsuarioDAL {
         }
         return false;
     }
-
+    
     public boolean updateUser(UsuarioO obj) {
         JSONObject jsonPut = new JSONObject();
         jsonPut.put("idusuario", VariablesDAL.idUsuario);
@@ -172,7 +174,28 @@ public class UsuarioDAL {
         }
         return false;
     }
-
+    
+    public boolean updatePass(UsuarioO obj) {
+        JSONObject jsonPut = new JSONObject();
+        jsonPut.put("idusuario", VariablesDAL.idUsuario);
+        jsonPut.put("token", VariablesDAL.token);
+        jsonPut.put("id", obj.getId());
+        jsonPut.put("clave", obj.getClave());
+        try {
+            String response = cx.put("usuario/json/update_clave", jsonPut);
+            System.out.println("updatePass response: " + response);
+            JSONObject jsonResponse = new JSONObject(response.trim());
+            if (jsonResponse.getJSONArray("RESPUESTA").length() > 0) {
+                System.out.println("MENSAJE: " + jsonResponse.getJSONArray("RESPUESTA").getJSONObject(0).getString("MENSAJE"));
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("updatePassDAL catch: " + e.getMessage());
+            return false;
+        }
+        return false;
+    }
+    
     public boolean deleteUser(int id) {
         JSONObject jsonDelete = new JSONObject();
         jsonDelete.put("idusuario", VariablesDAL.idUsuario);
@@ -192,13 +215,13 @@ public class UsuarioDAL {
         }
         return false;
     }
-
-    public String logIn(String rut, String clave) {
+    
+    public String logIn(String rut, String clave) throws IOException {
         JSONObject jsonPost = new JSONObject();
         jsonPost.put("rut", rut);
         jsonPost.put("clave", clave);
-        String response = cx.post("usuario/json/login", jsonPost);
         try {
+            String response = cx.post("usuario/json/login", jsonPost);
             JSONObject jsonResp = new JSONObject(response.trim());
             Iterator<?> keys = jsonResp.keys();
             while (keys.hasNext()) {
@@ -211,13 +234,13 @@ public class UsuarioDAL {
                     return jsonResp.getJSONArray("RESPUESTA").getJSONObject(0).getString("ADVERTENCIA");
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException | JSONException e) {
             System.out.println("logInDAL catch: " + e.getMessage());
             return "Error de conexión, inténtelo nuevamente";
         }
         return "Error de conexión, inténtelo nuevamente";
     }
-
+    
     public ArrayList<UsuarioO> getJefes() {
         ArrayList<UsuarioO> list = new ArrayList<>();
         JSONObject jsonPost = new JSONObject();

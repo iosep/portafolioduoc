@@ -43,6 +43,7 @@ public class CompetenciaNivelCTL {
             for (CompetenciaNivelO compNivel : compNivelDal.getCompetenciaNivelesByNivelId(nivelId)) {
                 if (compNivel.getCompetencia_id() == competencia.getId()) {
                     add = false;
+                    break;
                 }
             }
             if (add) {
@@ -61,6 +62,7 @@ public class CompetenciaNivelCTL {
             for (CompetenciaNivelO compNivel : compNivelDal.getCompetenciaNivelesByCompetenciaId(compId)) {
                 if (compNivel.getNivel_id() == nivel.getId()) {
                     add = false;
+                    break;
                 }
             }
             if (add) {

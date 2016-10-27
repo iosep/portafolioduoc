@@ -16,22 +16,8 @@ addNivel response: {
 }
 
 addNivelDAL catch: Duplicate key "ID"
-
-
-getRespuestas response: {
-"respuesta":[
-{
-"ID":1
-,"RESPUESTA":"WERTYU"
-,"PUNTOS":3
-,"PREGUNTA_ID":2
-,"PREGUNTA_PREGUNTA":"CUAL ES SON?"
-,"MODIFICADO":"2016-10-26T06:49:32Z"
-,"ACTIVO":1
-}
-,{
-"ID":2
-//falta campo creado
+/////////////////////////////////////still 26 2045
+/////////////////////////////////////
 
 
 addObservacion post: {"nivelsup":4,"nivelinf":2,"msginf":"inf","idcomp":10,"msgsup":"sup","idusuario":2,"token":"ZFE8GZYRDGQAUQ3JGFUENJVAR"}
@@ -70,5 +56,49 @@ addObservacion response: {
 ]
 }
 
-//2 create distintos same id
+///////////////////////////////////// 2 /create, mismo ID, guarda 1 registro, diferente post, mismo response
+///////////////////////////////////// still 26 2113
 
+
+getCompetenciaNivelesByCompetenciaId read_competencia response: {
+"competencia_nivel":[
+{
+"COMPETENCIA_ID":10
+,"COMPETENCIA_NOMBRE":"AN\u00C1LISIS Y S\u00CDNTESIS"
+,"NIVEL_ID":1
+,"NIVEL_NOMBRE":"MUY BIEN"
+,"MODIFICADO":"2016-10-27T04:15:32Z"
+,"DESACTIVADO":"1900-01-01T00:00:00Z"
+,"ACTIVO":1
+}
+,{
+"COMPETENCIA_ID":10
+,"COMPETENCIA_NOMBRE":"AN\u00C1LISIS Y S\u00CDNTESIS"
+,"NIVEL_ID":1
+,"NIVEL_NOMBRE":"BIEN"
+,"MODIFICADO":"2016-10-27T04:15:32Z"
+,"DESACTIVADO":"1900-01-01T00:00:00Z"
+,"ACTIVO":1
+}
+,{
+"COMPETENCIA_ID":10
+,"COMPETENCIA_NOMBRE":"AN\u00C1LISIS Y S\u00CDNTESIS"
+,"NIVEL_ID":2
+,"NIVEL_NOMBRE":"MUY BIEN"
+,"MODIFICADO":"2016-10-27T04:15:35Z"
+,"DESACTIVADO":"1900-01-01T00:00:00Z"
+,"ACTIVO":1
+}
+,{
+"COMPETENCIA_ID":10
+,"COMPETENCIA_NOMBRE":"AN\u00C1LISIS Y S\u00CDNTESIS"
+,"NIVEL_ID":2
+,"NIVEL_NOMBRE":"BIEN"
+,"MODIFICADO":"2016-10-27T04:15:35Z"
+,"DESACTIVADO":"1900-01-01T00:00:00Z"
+,"ACTIVO":1
+}
+]
+}
+///////////////////////////////////// devuelve registros duplicados (4) / bdd ok (2)
+///////////////////////////////////// still 26 2334
