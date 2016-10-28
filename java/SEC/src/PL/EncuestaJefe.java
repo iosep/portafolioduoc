@@ -76,6 +76,7 @@ public class EncuestaJefe {
      *
      * @param userRut
      * @param funcId
+     * @param idPer
      */
     public void start(String userRut, int funcId, int idPer) {
         window.initModality(Modality.APPLICATION_MODAL);
@@ -179,36 +180,40 @@ public class EncuestaJefe {
                 EncuestaO enc = new EncuestaO(VariablesDAL.getIdUsuario(), funcId, idPer);
                 int encId = enCtl.addEncuesta(enc);
                 if (encId > 0) {
-                    for (RespuestaO r : respuestas) {
-                        if (seCtl.addSeleccion(new SeleccionO(encId, r.getId()))) {
-                            well = true;
-                        } else {
-                            well = false;
-                        }
+                    respuestas.stream().forEach((r) -> {
+                        well = seCtl.addSeleccion(new SeleccionO(encId, r.getId()));
+                    });
+                    if (well) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.initOwner(window);
+                        alert.setTitle("Éxito Encuesta");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Encuesta y Selecciones Guardadas");
+                        alert.showAndWait();
+                        window.close();
+                    } else if (enCtl.eliminarEncuesta(encId)) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.initOwner(window);
+                        alert.setTitle("Error Encuesta");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Error al Guardar Selecciones, Encuesta Eliminada");
+                        alert.showAndWait();
+                        window.close();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.initOwner(window);
+                        alert.setTitle("Error Encuesta");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Error al guardar Selecciones, Error al Eliminar Encuesta");
+                        alert.showAndWait();
+                        window.close();
                     }
-                }
-                if (well) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.initOwner(window);
-                    alert.setTitle("Éxito Encuesta");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Encuesta guardada con éxito");
-                    alert.showAndWait();
-                    window.close();
-                } else if (enCtl.eliminarEncuesta(encId)) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.initOwner(window);
-                    alert.setTitle("ERROR Encuesta");
-                    alert.setHeaderText(null);
-                    alert.setContentText("ERROR al guardar Encuesta, Encuesta eliminada");
-                    alert.showAndWait();
-                    window.close();
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.initOwner(window);
-                    alert.setTitle("ERROR Encuesta");
+                    alert.setTitle("Error Encuesta");
                     alert.setHeaderText(null);
-                    alert.setContentText("ERROR al guardar Encuesta, ERROR al eliminar encuesta");
+                    alert.setContentText("Error al Crear Encuesta");
                     alert.showAndWait();
                     window.close();
                 }
