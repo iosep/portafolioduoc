@@ -13,6 +13,7 @@ import CTL.PeriodoCTL;
 import CTL.PreguntaCTL;
 import CTL.RespuestaCTL;
 import CTL.UsuarioCTL;
+import DAL.VariablesDAL;
 import O.AreaO;
 import O.CompetenciaO;
 import O.NivelO;
@@ -25,13 +26,18 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Optional;
 import javafx.beans.binding.Bindings;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -52,7 +58,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -282,8 +287,25 @@ public class Admin {
             });
             //desactivar
             eliminarMenuItem.setOnAction(event -> {
-                usersCtl.deleteUser(row.getItem().getId());
-                btnUsuario.fire();
+                if (row.getItem().getId() == VariablesDAL.getIdUsuario()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("No se permite Auto-Eliminación");
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Confirmar Eliminar");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Confirma Eliminar Usuario " + row.getItem().getRut());
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        usersCtl.deleteUser(row.getItem().getId());
+                        btnUsuario.fire();
+                    }
+                }
             });
             agregarAreaMenu.setOnAction(ev -> {
                 if (row.getItem().getRolid() == 3) {
@@ -442,14 +464,30 @@ public class Admin {
                     alert.setContentText("Área ya se encuentra desactivada");
                     alert.showAndWait();
                 } else {
-                    areasCtl.desactivarArea(row.getItem().getId());
-                    btnArea.fire();
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Confirmar Desactivar");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Confirma Desactivar?");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        areasCtl.desactivarArea(row.getItem().getId());
+                        btnArea.fire();
+                    }
                 }
             });
             activarMenuItem.setOnAction(event -> {
                 if (row.getItem().getActivo() == 0) {
-                    areasCtl.activaArea(row.getItem().getId());
-                    btnArea.fire();
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Confirmar Activar");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Confirma Activar?");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        areasCtl.activaArea(row.getItem().getId());
+                        btnArea.fire();
+                    }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(primaryStage);
@@ -620,8 +658,16 @@ public class Admin {
             //desactivar
             activarMenuItem.setOnAction(v -> {
                 if (row.getItem().getActivo() == 0) {
-                    compCtl.activarCompetencia(row.getItem().getId());
-                    btnCompetencia.fire();
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Confirmar Activar");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Confirma Activar?");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        compCtl.activarCompetencia(row.getItem().getId());
+                        btnCompetencia.fire();
+                    }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(primaryStage);
@@ -633,8 +679,16 @@ public class Admin {
             });
             desactivarMenuItem.setOnAction(event -> {
                 if (row.getItem().getActivo() == 1) {
-                    compCtl.desactivarCompetencia(row.getItem().getId());
-                    btnCompetencia.fire();
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Confirmar Desactivar");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Confirma Desactivar?");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        compCtl.desactivarCompetencia(row.getItem().getId());
+                        btnCompetencia.fire();
+                    }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(primaryStage);
@@ -815,8 +869,16 @@ public class Admin {
             });
             //desactivar
             eliminarMenuItem.setOnAction(event -> {
-                nivelCtl.eliminarNivel(row.getItem().getId());
-                btnNivel.fire();
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.initOwner(primaryStage);
+                alert.setTitle("Confirmar Eliminar");
+                alert.setHeaderText(null);
+                alert.setContentText("Confirma Eliminar?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    nivelCtl.eliminarNivel(row.getItem().getId());
+                    btnNivel.fire();
+                }
             });
             verCompMenu.setOnAction(ev -> {
                 CrearNivelCompetencia cnc = new CrearNivelCompetencia();
@@ -920,8 +982,16 @@ public class Admin {
                 btnPregunta.fire();
             });
             eliminarMenuItem.setOnAction(event -> {
-                questionCtl.eliminarPregunta(row.getItem().getId());
-                btnPregunta.fire();
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.initOwner(primaryStage);
+                alert.setTitle("Confirmar Eliminar");
+                alert.setHeaderText(null);
+                alert.setContentText("Confirma Eliminar?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    questionCtl.eliminarPregunta(row.getItem().getId());
+                    btnPregunta.fire();
+                }
             });
             //crear respuesta
             crearRespuestaMenu.setOnAction(event -> {
@@ -998,7 +1068,7 @@ public class Admin {
             filterField.clear();
             titleMantenedores.setText("SEC - Mantenedor Respuestas");
             answerTable.setItems(answerCtl.getRespuestasFX());
-            
+
             //filtrar por respuesta
             FilteredList<RespuestaO> filteredData = new FilteredList<>(answerCtl.getRespuestasFX(), p -> true);
             filterField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -1039,8 +1109,16 @@ public class Admin {
             });
             //desactivar
             desactivarMenuItem.setOnAction(event -> {
-                answerCtl.eliminaRespuesta(row.getItem().getId());
-                btnRespuesta.fire();
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.initOwner(primaryStage);
+                alert.setTitle("Confirmar Eliminar");
+                alert.setHeaderText(null);
+                alert.setContentText("Confirma Eliminar?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    answerCtl.eliminaRespuesta(row.getItem().getId());
+                    btnRespuesta.fire();
+                }
             });
             contextMenu.getItems().add(modificarMenuItem);
             contextMenu.getItems().add(desactivarMenuItem);
@@ -1156,8 +1234,16 @@ public class Admin {
             });
             //desactivar
             desactivarMenuItem.setOnAction(event -> {
-                commentCtl.eliminarObservacionCTL(row.getItem().getId());
-                btnComment.fire();
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.initOwner(primaryStage);
+                alert.setTitle("Confirmar Eliminar");
+                alert.setHeaderText(null);
+                alert.setContentText("Confirma Eliminar?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    commentCtl.eliminarObservacionCTL(row.getItem().getId());
+                    btnComment.fire();
+                }
             });
             contextMenu.getItems().add(modificarMenuItem);
             contextMenu.getItems().add(desactivarMenuItem);
@@ -1285,8 +1371,16 @@ public class Admin {
             });
             activarMenuItem.setOnAction(event -> {
                 if (row.getItem().getActivo() == 0) {
-                    periodoCtl.activarPeriodo(row.getItem().getId());
-                    btnPeriodo.fire();
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Confirmar Activar");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Confirma Activar?");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        periodoCtl.activarPeriodo(row.getItem().getId());
+                        btnPeriodo.fire();
+                    }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(primaryStage);
@@ -1299,8 +1393,16 @@ public class Admin {
             //desactivar
             desactivarMenuItem.setOnAction(event -> {
                 if (row.getItem().getActivo() == 1) {
-                    periodoCtl.desactivarPeriodo(row.getItem().getId());
-                    btnPeriodo.fire();
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Confirmar Desactivar");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Confirma Desactivar?");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        periodoCtl.desactivarPeriodo(row.getItem().getId());
+                        btnPeriodo.fire();
+                    }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(primaryStage);

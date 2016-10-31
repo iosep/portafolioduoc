@@ -11,13 +11,16 @@ import FN.Formato;
 import FN.Validar;
 import O.RolO;
 import O.UsuarioO;
+import java.util.Optional;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -186,8 +189,21 @@ public class CrearUsuario {
 
         btn.setOnAction(e -> {
             Validar v = new Validar();
-            if (v.validarRut(txtRun.getText())) {
-                if (pwBox.getText().equals(pwBox2.getText())) {
+            if (v.validarRut(txtRun.getText().trim())) {
+                String rut = Formato.formatoRut(txtRun.getText());
+                if (uctl.checkUsuarioByRut(rut)) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.initOwner(window);
+                    alert.setTitle("Confirmar Activar");
+                    alert.setHeaderText("Usuario " + rut + " fue Eliminado previamente");
+                    alert.setContentText("No es posible volver a Crear, desea Re-Activar?");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        window.close();
+                    } else {
+                        window.close();
+                    }
+                } else if (pwBox.getText().equals(pwBox2.getText())) {
                     if (pwBox.getText().length() < 5) {
                         msj.setFill(Color.FIREBRICK);
                         msj.setText("Contraseña mínimo 5 caractéres");
@@ -231,7 +247,6 @@ public class CrearUsuario {
                                     sSexo = "F";
                                     break;
                             }
-                            String rut = Formato.formatoRut(txtRun.getText());
                             if (uctl.addUsuarioCTL(new UsuarioO(rut, pwBox.getText().trim(),
                                     ((RolO) cbRol.getSelectionModel().getSelectedItem()).getId(),
                                     rut_jefe, txtNombre.getText().trim(), txtApellido.getText().trim(),

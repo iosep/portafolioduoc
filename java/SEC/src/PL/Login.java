@@ -11,9 +11,6 @@ import FN.Formato;
 import FN.Validar;
 import O.UsuarioO;
 import REST.Conexion;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -27,7 +24,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -137,32 +133,43 @@ public class Login extends Application {
                     String login = userCtl.logInCtl(Formato.formatoRut(txtRun.getText()), pwBox.getText());
                     if (login.equals("login exitoso")) {
                         UsuarioO user = userCtl.getUsuarioById(VariablesDAL.getIdUsuario());
-                        switch (user.getRol_nombre()) {
-                            case "ADMINISTRADOR":
-                                Admin a = new Admin();
-                                a.display(user.getRut());
-                                primaryStage.close();
-                                break;
-                            case "JEFE":
-                                Jefe j = new Jefe();
-                                j.start(user.getRut());
-                                primaryStage.close();
-                                break;
-                            case "FUNCIONARIO":
-                                Funcionario f = new Funcionario();
-                                f.start(user.getRut());
-                                primaryStage.close();
-                                break;
-                            default:
-                                break;
+                        if (user.getActivo() == 1) {
+                            switch (user.getRol_nombre()) {
+                                case "ADMINISTRADOR":
+                                    Admin a = new Admin();
+                                    a.display(user.getRut());
+                                    primaryStage.close();
+                                    break;
+                                case "JEFE":
+                                    Jefe j = new Jefe();
+                                    j.start(user.getRut());
+                                    primaryStage.close();
+                                    break;
+                                case "FUNCIONARIO":
+                                    Funcionario f = new Funcionario();
+                                    f.start(user.getRut());
+                                    primaryStage.close();
+                                    break;
+                            }
+                        } else {
+                            pwBox.setText("");
+                            txtRun.setText("");
+                            txtRun.requestFocus();
+                            msj.setText("Usuario fue Eliminado");
                         }
                     } else {
+                        pwBox.setText("");
+                        txtRun.setText("");
+                        txtRun.requestFocus();
                         msj.setText(login);
                     }
-                } catch (IOException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    System.out.println("Login catch: " + ex.getMessage());
                 }
             } else {
+                pwBox.setText("");
+                txtRun.setText("");
+                txtRun.requestFocus();
                 msj.setText("RUT No Válido");
             }
         });

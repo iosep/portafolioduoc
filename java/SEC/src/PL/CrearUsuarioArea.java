@@ -5,10 +5,8 @@
  */
 package PL;
 
-import CTL.AreaCTL;
 import CTL.UsuarioAreaCTL;
 import CTL.UsuarioCTL;
-import O.AreaO;
 import O.UsuarioAreaO;
 import O.UsuarioO;
 import javafx.geometry.Insets;
@@ -22,7 +20,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
