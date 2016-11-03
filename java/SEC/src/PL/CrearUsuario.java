@@ -39,16 +39,16 @@ import javafx.stage.Stage;
  * @author iosep
  */
 public class CrearUsuario {
-
+    
     private final UsuarioCTL uctl = new UsuarioCTL();
     private final RolCTL rctl = new RolCTL();
-
+    
     public void display() {
         Stage window = new Stage();
         window.getIcons().add(new Image(getClass().getResourceAsStream("desk.png")));
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("SEC - Crear Nuevo Usuario");
-
+        
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(5);
@@ -60,18 +60,18 @@ public class CrearUsuario {
         ColumnConstraints col3 = new ColumnConstraints(60);
         ColumnConstraints col4 = new ColumnConstraints(180);
         grid.getColumnConstraints().addAll(col0, col1, col2, col3, col4);
-
+        
         Text scenetitle = new Text("SEC");
         scenetitle.getStyleClass().add("title");
         grid.add(scenetitle, 0, 0, 2, 1);
         Label subtitle = new Label("Crear Nuevo Usuario");
         subtitle.getStyleClass().add("subtitle");
         grid.add(subtitle, 0, 1, 2, 1);
-
+        
         final Text msj = new Text();
         msj.getStyleClass().add("action");
         grid.add(msj, 0, 10, 2, 1);
-
+        
         Label rutLbl = new Label("RUT:");
         grid.add(rutLbl, 0, 4);
         TextField txtRun = new TextField();
@@ -81,7 +81,7 @@ public class CrearUsuario {
             }
         });
         grid.add(txtRun, 1, 4);
-
+        
         Label pw = new Label("Contraseña:");
         grid.add(pw, 0, 5);
         PasswordField pwBox = new PasswordField();
@@ -91,7 +91,7 @@ public class CrearUsuario {
             }
         });
         grid.add(pwBox, 1, 5);
-
+        
         Label pw2 = new Label("Repetir Contraseña:");
         grid.add(pw2, 0, 6);
         PasswordField pwBox2 = new PasswordField();
@@ -101,12 +101,12 @@ public class CrearUsuario {
             }
         });
         grid.add(pwBox2, 1, 6);
-
+        
         Label rolLbl = new Label("Rol:");
         grid.add(rolLbl, 0, 7);
         ChoiceBox cbRol = new ChoiceBox(rctl.getRolesFX());
         grid.add(cbRol, 1, 7);
-
+        
         Label jefaLbl = new Label("Jefe:");
         grid.add(jefaLbl, 0, 8);
         ChoiceBox cbJefa = new ChoiceBox(uctl.getJefesFX());
@@ -116,7 +116,7 @@ public class CrearUsuario {
         grid.add(cbJefa, 1, 8);
         jefaLbl.setVisible(false);
         cbJefa.setVisible(false);
-
+        
         cbRol.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RolO>() {
             @Override
             public void changed(ObservableValue<? extends RolO> ov, RolO old_val, RolO new_val) {
@@ -131,7 +131,7 @@ public class CrearUsuario {
                 }
             }
         });
-
+        
         Label lblNombre = new Label("Nombre:");
         grid.add(lblNombre, 3, 4);
         TextField txtNombre = new TextField();
@@ -141,7 +141,7 @@ public class CrearUsuario {
             }
         });
         grid.add(txtNombre, 4, 4);
-
+        
         Label lblApellido = new Label("Apellido:");
         grid.add(lblApellido, 3, 5);
         TextField txtApellido = new TextField();
@@ -151,7 +151,7 @@ public class CrearUsuario {
             }
         });
         grid.add(txtApellido, 4, 5);
-
+        
         Label lblEmail = new Label("Email:");
         grid.add(lblEmail, 3, 6);
         TextField txtEmail = new TextField();
@@ -161,7 +161,7 @@ public class CrearUsuario {
             }
         });
         grid.add(txtEmail, 4, 6);
-
+        
         Label lblSexo = new Label("Sexo:");
         grid.add(lblSexo, 3, 7);
         ChoiceBox cbSexo = new ChoiceBox(FXCollections.observableArrayList("MASCULINO", "FEMENINO"));
@@ -169,7 +169,7 @@ public class CrearUsuario {
             msj.setText("");
         });
         grid.add(cbSexo, 4, 7);
-
+        
         Label lblFono = new Label("Teléfono:");
         grid.add(lblFono, 3, 8);
         TextField txtFono = new TextField();
@@ -186,7 +186,7 @@ public class CrearUsuario {
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 1, 11);
-
+        
         btn.setOnAction(e -> {
             Validar v = new Validar();
             if (v.validarRut(txtRun.getText().trim())) {
@@ -251,6 +251,7 @@ public class CrearUsuario {
                                     ((RolO) cbRol.getSelectionModel().getSelectedItem()).getId(),
                                     rut_jefe, txtNombre.getText().trim(), txtApellido.getText().trim(),
                                     txtEmail.getText(), sSexo, fono))) {
+                                cbJefa.setItems(uctl.getJefesFX());
                                 txtRun.clear();
                                 pwBox.clear();
                                 pwBox2.clear();
@@ -278,11 +279,11 @@ public class CrearUsuario {
                 msj.setText("RUT No Válido");
             }
         });
-
+        
         Scene display = new Scene(grid);
         window.setScene(display);
         display.getStylesheets().add(CrearUsuario.class.getResource("Style.css").toExternalForm());
         window.showAndWait();
-
+        
     }
 }

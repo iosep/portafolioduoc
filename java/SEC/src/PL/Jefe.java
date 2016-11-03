@@ -8,12 +8,12 @@ package PL;
 import CTL.AreaCTL;
 import CTL.AreaCompetenciaCTL;
 import CTL.CompetenciaCTL;
-import CTL.CompetenciaNivelCTL;
 import CTL.EncuestaCTL;
 import CTL.NivelCTL;
 import CTL.PeriodoCTL;
 import CTL.UsuarioAreaCTL;
 import CTL.UsuarioCTL;
+import DAL.VariablesDAL;
 import O.ArbolO;
 import O.AreaCompetenciaO;
 import O.AreaO;
@@ -53,7 +53,6 @@ public class Jefe {
 
     private final UsuarioAreaCTL usArCtl = new UsuarioAreaCTL();
     private final AreaCompetenciaCTL arComCtl = new AreaCompetenciaCTL();
-    private final CompetenciaNivelCTL comNiCtl = new CompetenciaNivelCTL();
     private final AreaCTL areaCtl = new AreaCTL();
     private final UsuarioCTL userCtl = new UsuarioCTL();
     private final CompetenciaCTL compCtl = new CompetenciaCTL();
@@ -321,8 +320,6 @@ public class Jefe {
             int seIn = tvTree.getSelectionModel().getSelectedIndex();
             tvTree.getSelectionModel().select(1);
             tvTree.getSelectionModel().select(seIn);
-            System.out.println("encuesta realizada o cerrada");
-            System.out.println("index:" + seIn);
         });
         tArea.getStyleClass().add("plane");
         tArea.setWrappingWidth(500);
@@ -375,7 +372,7 @@ public class Jefe {
                     if (encByPeriod.size() > 0) {
                         esta = false;
                         for (EncuestaO e : encByPeriod) {
-                            if (e.getEvaluado_id() == u.getId()) {
+                            if (e.getEvaluado_id() == u.getId() && e.getUsuario_id() == VariablesDAL.getIdUsuario()) {
                                 esta = true;
                             }
                         }

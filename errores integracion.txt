@@ -109,7 +109,7 @@ addEncuesta response: {
 "encuesta":[
 ]
 }
-///////////////////////////////////// arreglo vacío, no crea encuesta, idusuario y usuarioid siempre será el mismo
+///////////////////////////////////// 2da encuesta creada jefe (mismo usuarioid), arreglo vacío, no crea encuesta
 ///////////////////////////////////// still 27 1303
 
 
@@ -119,3 +119,4 @@ AGREGAR
 ###############################################
 ###############################################
 ACTIVAR USUARIO
+ACTIVAR RELACIONES M:N
