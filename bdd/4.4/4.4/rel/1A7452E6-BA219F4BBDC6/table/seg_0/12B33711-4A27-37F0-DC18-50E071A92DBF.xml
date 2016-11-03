@@ -1,0 +1,150 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="12B33711-4A27-37F0-DC18-50E071A92DBF" name="encuesta">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:56:23 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<ordsAlias>table_19</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="A3B83C4B-D4B7-2D71-F1F5-6285F8BA614E">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:56:52 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="usuario_id" id="42F2F83E-A573-745D-27ED-090297320A9D">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:57:07 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6AA67E9F-8F90-6DFB-67F2-A1311F2270B6" referredColumn="DCC795C5-D223-3A0D-316B-2CF12940D98F"/>
+</associations>
+</Column>
+<Column name="evaluado_id" id="6D112A27-6E26-3B9E-05C1-7A58959BD8E9">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 17:17:25 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha" id="6C286793-85F5-A062-17D8-98D452165B7F">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 17:32:10 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="periodo_id" id="75D2FC1D-7386-FA6D-E423-4081FA0667E3">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:59:27 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6A982637-A90C-3F54-05D2-4E90FB17920D" referredColumn="5893DD82-9006-CC2E-E183-6A77B236DB82"/>
+</associations>
+</Column>
+<Column name="creado" id="8EFC5D5B-899E-2050-B432-FF05AD5032F7">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-27 19:03:26 UTC</createdTime>
+<ownerDesignName>4.3</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="modificado" id="7B84E0AA-BB5D-58FB-B038-F41F9ABFC164">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-27 19:03:26 UTC</createdTime>
+<ownerDesignName>4.3</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="desactivado" id="1FE46C1C-A0DB-F5EC-BE3A-C6620FBEAEB3">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-27 19:03:26 UTC</createdTime>
+<ownerDesignName>4.3</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="activo" id="2FF66A08-C46B-41C5-6F3B-ACACC862FF4C">
+<createdBy>duoc</createdBy>
+<createdTime>2016-09-27 19:03:26 UTC</createdTime>
+<ownerDesignName>4.3</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<usesDefaultValue>true</usesDefaultValue>
+<defaultValue>1</defaultValue>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F06C98D0-0CA4-45E8-D3E3-56A263179B2A" name="encuesta_PK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:56:52 UTC</createdTime>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A3B83C4B-D4B7-2D71-F1F5-6285F8BA614E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C77A266E-C1E6-77AB-C23F-DEA3E9086822" name="encuesta_usuario_FK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:57:07 UTC</createdTime>
+<generatorID>59009F02-3119-0A07-D63E-E0BF711CC763</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="42F2F83E-A573-745D-27ED-090297320A9D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9A013ACA-67DF-B127-BA57-64468D9EB43E" name="encuesta_periodo_FK">
+<createdBy>iosep</createdBy>
+<createdTime>2016-09-23 16:59:27 UTC</createdTime>
+<generatorID>A6D0EA8B-73F8-E9CF-0C65-C94B567CCE44</generatorID>
+<ownerDesignName>bdd-4.2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="75D2FC1D-7386-FA6D-E423-4081FA0667E3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
