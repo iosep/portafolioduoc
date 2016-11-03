@@ -195,8 +195,8 @@ public class CrearUsuario {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.initOwner(window);
                     alert.setTitle("Confirmar Activar");
-                    alert.setHeaderText("Usuario " + rut + " fue Eliminado previamente");
-                    alert.setContentText("No es posible volver a Crear, desea Re-Activar?");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Usuario " + rut + " fue Eliminado previamente, desea Re-Activar?");
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
                         window.close();
