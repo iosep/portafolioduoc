@@ -108,6 +108,19 @@
 <colAssociation fkAssociation="A16B0DF0-92C4-BE7B-0648-C9436C789980" referredColumn="5893DD82-9006-CC2E-E183-6A77B236DB82"/>
 </associations>
 </Column>
+<Column name="competencia_id" id="E9B5E25D-8BD7-E333-B339-6FD5434EE994">
+<createdBy>duoc</createdBy>
+<createdTime>2016-11-03 23:13:29 UTC</createdTime>
+<ownerDesignName>4.5</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E35F52CD-8D5F-9882-8112-B7766E23637B" referredColumn="AEE6F505-652A-D154-FE9C-DFFCD2369FB1"/>
+</associations>
+</Column>
 <Column name="creado" id="3B5732D2-C352-9B7C-EAC7-A71D832CD450">
 <createdBy>duoc</createdBy>
 <createdTime>2016-09-27 18:07:12 UTC</createdTime>
@@ -175,6 +188,16 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="D957DA25-3094-7B33-D7E0-FD235B3BB124"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DDB94D45-5FCF-6229-088C-3FEAFF2FB1E5" name="evaluacion_competencia_FK">
+<createdBy>duoc</createdBy>
+<createdTime>2016-11-03 23:13:29 UTC</createdTime>
+<ownerDesignName>4.5</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E9B5E25D-8BD7-E333-B339-6FD5434EE994"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

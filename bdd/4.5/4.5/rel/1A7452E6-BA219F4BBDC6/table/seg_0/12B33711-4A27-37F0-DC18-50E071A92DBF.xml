@@ -111,17 +111,6 @@
 <ownDataTypeParameters>,1,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="nota" id="80B02AC0-74B0-8C2B-5D2B-AD3876B8D439">
-<createdBy>iosep</createdBy>
-<createdTime>2016-11-03 22:21:38 UTC</createdTime>
-<ownerDesignName>4.4</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="F06C98D0-0CA4-45E8-D3E3-56A263179B2A" name="encuesta_PK">
