@@ -43,16 +43,6 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="fecha" id="6C286793-85F5-A062-17D8-98D452165B7F">
-<createdBy>iosep</createdBy>
-<createdTime>2016-09-23 17:32:10 UTC</createdTime>
-<ownerDesignName>bdd-4.2</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT007</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 <Column name="periodo_id" id="75D2FC1D-7386-FA6D-E423-4081FA0667E3">
 <createdBy>iosep</createdBy>
 <createdTime>2016-09-23 16:59:27 UTC</createdTime>

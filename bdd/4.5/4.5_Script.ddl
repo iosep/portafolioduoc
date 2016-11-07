@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 4.1.3.901
---   en:        2016-11-04 01:57:36 BRST
+--   en:        2016-11-07 10:47:13 BRST
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -78,7 +78,6 @@ CREATE TABLE encuesta
     id          INTEGER NOT NULL ,
     usuario_id  INTEGER NOT NULL ,
     evaluado_id INTEGER NOT NULL ,
-    fecha       DATE NOT NULL ,
     periodo_id  INTEGER NOT NULL ,
     creado      DATE NOT NULL ,
     modificado  DATE NOT NULL ,
