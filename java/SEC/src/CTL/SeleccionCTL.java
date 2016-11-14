@@ -29,4 +29,8 @@ public class SeleccionCTL {
         return selDal.getSeleccionById(id);
     }
 
+    public ArrayList<SeleccionO> getSeleccionesByEncuestaId(int id) {
+        return selDal.getSeleccionesByEncuestaId(id);
+    }
+
 }

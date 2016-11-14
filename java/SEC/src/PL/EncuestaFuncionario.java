@@ -7,12 +7,14 @@ package PL;
 
 import CTL.AreaCompetenciaCTL;
 import CTL.EncuestaCTL;
+import CTL.EvaluacionCTL;
 import CTL.PreguntaCTL;
 import CTL.SeleccionCTL;
 import CTL.UsuarioAreaCTL;
 import CTL.UsuarioCTL;
 import DAL.VariablesDAL;
 import O.AreaCompetenciaO;
+import O.CompPregId;
 import O.EncuestaO;
 import O.PreguntaO;
 import O.PreguntaO.ObjQuestion;
@@ -51,9 +53,9 @@ public class EncuestaFuncionario {
     private final UsuarioAreaCTL usArCtl = new UsuarioAreaCTL();
     private final AreaCompetenciaCTL arComCtl = new AreaCompetenciaCTL();
     private final PreguntaCTL preCtl = new PreguntaCTL();
-    private final UsuarioCTL usCtl = new UsuarioCTL();
     private final EncuestaCTL enCtl = new EncuestaCTL();
     private final SeleccionCTL seCtl = new SeleccionCTL();
+    private final EvaluacionCTL evCtl = new EvaluacionCTL();
 
     Stage window = new Stage();
     BorderPane borderPane = new BorderPane();
@@ -75,9 +77,9 @@ public class EncuestaFuncionario {
      * launch main window jefe
      *
      * @param userRut
-     * @param idPer
+     * @param perId
      */
-    public void start(String userRut, int idPer) {
+    public void start(String userRut, int perId) {
         window.initModality(Modality.APPLICATION_MODAL);
         tTitle = new Text("SEC - Encuesta");
         tTitle.getStyleClass().add("title");
@@ -112,6 +114,8 @@ public class EncuestaFuncionario {
         hbCopyright.setAlignment(Pos.CENTER);
          */
         ArrayList<PreguntaO> preguntas = new ArrayList<>();
+        ArrayList<Integer> compIds = new ArrayList<>();
+        ArrayList<CompPregId> compPre = new ArrayList<>();
         for (UsuarioAreaO ua : usArCtl.getUsuarioAreasByUserIdFX(VariablesDAL.getIdUsuario())) {
             for (AreaCompetenciaO ac : arComCtl.getAreaCompetenciasByAreaIdFX(ua.getArea_id())) {
                 for (PreguntaO p : preCtl.getPreguntasByCompetenciaId(ac.getCompetencia_id())) {
@@ -123,6 +127,8 @@ public class EncuestaFuncionario {
                     }
                     if (!dupli) {
                         preguntas.add(p);
+                        compIds.add(ac.getCompetencia_id());
+                        compPre.add(new CompPregId(ac.getCompetencia_id(), p.getId()));
                     }
                 }
             }
@@ -174,7 +180,7 @@ public class EncuestaFuncionario {
                 alert.setContentText("Faltan por responder las preguntas N°: " + missing);
                 alert.showAndWait();
             } else {
-                EncuestaO enc = new EncuestaO(VariablesDAL.getIdUsuario(), VariablesDAL.getIdUsuario(), idPer);
+                EncuestaO enc = new EncuestaO(VariablesDAL.getIdUsuario(), VariablesDAL.getIdUsuario(), perId);
                 int encId = enCtl.addEncuesta(enc);
                 if (encId > 0) {
                     respuestas.stream().forEach((r) -> {
@@ -187,6 +193,7 @@ public class EncuestaFuncionario {
                         alert.setHeaderText(null);
                         alert.setContentText("Encuesta y Selecciones Guardadas");
                         alert.showAndWait();
+                        evCtl.crearEvaluacion(perId, VariablesDAL.getIdUsuario(), compIds, compPre);
                         window.close();
                     } else if (enCtl.eliminarEncuesta(encId)) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);

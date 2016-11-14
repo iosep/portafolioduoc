@@ -57,6 +57,7 @@ public class RespuestaDAL {
         jsonPost.put("idusuario", VariablesDAL.idUsuario);
         jsonPost.put("token", VariablesDAL.token);
         jsonPost.put("id", id);
+        System.out.println("getRespuestaById post: " + jsonPost);
         try {
             String response = cx.post("respuesta/json/read_id", jsonPost);
             System.out.println("respuestaById response: " + response);

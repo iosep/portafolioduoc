@@ -16,6 +16,6 @@ Funcionarios
 ----------------
 {"rut":"867405003","clave":"toyota"}
 ----------------
-{"rut":"59040480-2","clave":"hyundai"}
+{"rut":"590404802","clave":"hyundai"}
 ----------------
-{"rut":"96931150-K","clave":"kiachile"}
+{"rut":"96931150K","clave":"kiachile"}

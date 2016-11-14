@@ -5,7 +5,6 @@
  */
 package DAL;
 
-import FN.Formato;
 import O.EncuestaO;
 import REST.Conexion;
 import java.util.ArrayList;
@@ -78,11 +77,10 @@ public class EncuestaDAL {
         jsonPost.put("usuarioid", obj.getUsuario_id());
         jsonPost.put("evaluadoid", obj.getEvaluado_id());
         jsonPost.put("periodoid", obj.getPeriodo_id());
-        jsonPost.put("fecha", Formato.dateToString(obj.getFecha()));
-        System.out.println("addEncuesta post: " + jsonPost);
+        //System.out.println("addEncuesta post: " + jsonPost);
         try {
             String response = cx.post("encuesta/json/create", jsonPost);
-            System.out.println("addEncuesta response: " + response);
+            //System.out.println("addEncuesta response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("encuesta").length() > 0) {
                 return jsonResponse.getJSONArray("encuesta").getJSONObject(0).getInt("ID");
@@ -121,7 +119,7 @@ public class EncuestaDAL {
         jsonPost.put("periodoid", idPeriodo);
         try {
             String response = cx.post("encuesta/json/read_periodo", jsonPost);
-            System.out.println("getEncuestasByPeriodo response: " + response);
+            //System.out.println("getEncuestasByPeriodo response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("encuesta").length() > 0) {
                 JSONArray jsonArray = jsonResponse.getJSONArray("encuesta");

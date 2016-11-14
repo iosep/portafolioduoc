@@ -128,7 +128,7 @@ public class Funcionario {
                 }
             }
             if (!found) {
-                System.out.println("areasList: " + usAr.getAreaNombre());
+                //System.out.println("areasList: " + usAr.getAreaNombre());
                 areas.add(areaCtl.getAreaById(usAr.getArea_id()));
                 tiLayer1 = new TreeItem<>(new ArbolO(usAr.getAreaNombre(), usAr.getArea_id()));
                 tiRoot.getChildren().add(tiLayer1);
@@ -148,7 +148,7 @@ public class Funcionario {
                     }
                     if (!found) {
                         competencias.add(compCtl.getCompetenciaById(arCom.getCompetencia_id()));
-                        System.out.println("competenciasList: " + arCom.getCompNombre());
+                        //System.out.println("competenciasList: " + arCom.getCompNombre());
                     }
                     tiLayer3 = new TreeItem<>(new ArbolO(arCom.getCompNombre(), arCom.getCompetencia_id()));
                     found = false;

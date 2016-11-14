@@ -26,8 +26,6 @@ public class EncuestaO {
         this.usuario_id = usuario_id;
         this.evaluado_id = evaluado_id;
         this.periodo_id = periodo_id;
-        Date now = new Date();
-        this.fecha = now;
     }
 
     public int getId() {

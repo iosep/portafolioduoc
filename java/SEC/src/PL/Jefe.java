@@ -146,7 +146,7 @@ public class Jefe {
             }
             if (!ffvv) {
                 funcionarios.add(userCtl.getUsuarioById(usAr.getUsuario_id()));
-                System.out.println("funcionariosList: " + usAr.getUsuarioRut());
+                //System.out.println("funcionariosList: " + usAr.getUsuarioRut());
             }
             tiLayer3 = new TreeItem<>(new ArbolO(usAr.getUsuarioRut(), usAr.getUsuario_id()));
             //System.out.println("usAr.getUsuarioRut: " + usAr.getUsuarioRut());
@@ -163,7 +163,7 @@ public class Jefe {
                 }
             }
             if (!found) {
-                System.out.println("areasList: " + usAr.getAreaNombre());
+                //System.out.println("areasList: " + usAr.getAreaNombre());
                 areas.add(areaCtl.getAreaById(usAr.getArea_id()));
                 tiLayer1 = new TreeItem<>(new ArbolO(usAr.getAreaNombre(), usAr.getArea_id()));
                 tiLayer2 = new TreeItem<>(new ArbolO("Funcionarios", 0));
@@ -186,7 +186,7 @@ public class Jefe {
                     }
                     if (!ffvv) {
                         competencias.add(compCtl.getCompetenciaById(arCom.getCompetencia_id()));
-                        System.out.println("competenciasList: " + arCom.getCompNombre());
+                        //System.out.println("competenciasList: " + arCom.getCompNombre());
                     }
                     tiLayer3 = new TreeItem<>(new ArbolO(arCom.getCompNombre(), arCom.getCompetencia_id()));
                     found = false;

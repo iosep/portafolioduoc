@@ -33,7 +33,8 @@ public class SeleccionDAL {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     SeleccionO obj = new SeleccionO();
                     obj.setId(jsonArray.getJSONObject(i).getInt("ID"));
-
+                    obj.setEncuesta_id(jsonArray.getJSONObject(i).getInt("ENCUESTA_ID"));
+                    obj.setRespuesta_id(jsonArray.getJSONObject(i).getInt("RESPUESTA_ID"));
                     list.add(obj);
                 }
                 return list;
@@ -57,7 +58,8 @@ public class SeleccionDAL {
             if (jsonResponse.getJSONArray("seleccion").length() > 0) {
                 JSONArray jsonArray = jsonResponse.getJSONArray("seleccion");
                 obj.setId(jsonArray.getJSONObject(0).getInt("ID"));
-
+                obj.setEncuesta_id(jsonArray.getJSONObject(0).getInt("ENCUESTA_ID"));
+                obj.setRespuesta_id(jsonArray.getJSONObject(0).getInt("RESPUESTA_ID"));
                 return obj;
             }
         } catch (Exception e) {
@@ -72,10 +74,10 @@ public class SeleccionDAL {
         jsonPost.put("token", VariablesDAL.token);
         jsonPost.put("encuestaid", obj.getEncuesta_id());
         jsonPost.put("respuestaid", obj.getRespuesta_id());
-        System.out.println("addSeleccion post: " + jsonPost);
+        //System.out.println("addSeleccion post: " + jsonPost);
         try {
             String response = cx.post("seleccion/json/create", jsonPost);
-            System.out.println("addSeleccion response: " + response);
+            //System.out.println("addSeleccion response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("seleccion").length() > 0) {
                 return true;
@@ -85,6 +87,33 @@ public class SeleccionDAL {
             return false;
         }
         return false;
+    }
+
+    public ArrayList<SeleccionO> getSeleccionesByEncuestaId(int id) {
+        ArrayList<SeleccionO> list = new ArrayList<>();
+        JSONObject jsonPost = new JSONObject();
+        jsonPost.put("idusuario", VariablesDAL.idUsuario);
+        jsonPost.put("token", VariablesDAL.token);
+        jsonPost.put("encuestaid", id);
+        try {
+            String response = cx.post("seleccion/json/read_encuesta", jsonPost);
+            //System.out.println("getSeleccionesByEncuestaId response: " + response);
+            JSONObject jsonResponse = new JSONObject(response.trim());
+            if (jsonResponse.getJSONArray("seleccion").length() > 0) {
+                JSONArray jsonArray = jsonResponse.getJSONArray("seleccion");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    SeleccionO obj = new SeleccionO();
+                    obj.setId(jsonArray.getJSONObject(i).getInt("ID"));
+                    obj.setEncuesta_id(jsonArray.getJSONObject(i).getInt("ENCUESTA_ID"));
+                    obj.setRespuesta_id(jsonArray.getJSONObject(i).getInt("RESPUESTA_ID"));
+                    list.add(obj); 
+                }
+                return list;
+            }
+        } catch (Exception e) {
+            System.out.println("getSeleccionesByEncuestaIdDAL catch: " + e.getMessage());
+        }
+        return list;
     }
 
 }

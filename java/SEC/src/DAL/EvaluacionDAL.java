@@ -6,7 +6,7 @@
 package DAL;
 
 import FN.Formato;
-import O.EncuestaO;
+import O.EvaluacionO;
 import REST.Conexion;
 import java.util.ArrayList;
 import org.json.JSONArray;
@@ -16,127 +16,125 @@ import org.json.JSONObject;
  *
  * @author iosep
  */
-public class EncuestaDAL {
+public class EvaluacionDAL {
 
     private final Conexion cx = new Conexion();
 
-    public ArrayList<EncuestaO> getEncuestas() {
-        ArrayList<EncuestaO> list = new ArrayList<>();
+    public ArrayList<EvaluacionO> getEvaluaciones() {
+        ArrayList<EvaluacionO> list = new ArrayList<>();
         JSONObject jsonPost = new JSONObject();
         jsonPost.put("idusuario", VariablesDAL.idUsuario);
         jsonPost.put("token", VariablesDAL.token);
         try {
-            String response = cx.post("encuesta/json/read_all", jsonPost);
-            System.out.println("getEncuestas response: " + response);
+            String response = cx.post("evaluacion/json/read_all", jsonPost);
+            System.out.println("getEvaluaciones response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
-            if (jsonResponse.getJSONArray("encuesta").length() > 0) {
-                JSONArray jsonArray = jsonResponse.getJSONArray("encuesta");
+            if (jsonResponse.getJSONArray("evaluacion").length() > 0) {
+                JSONArray jsonArray = jsonResponse.getJSONArray("evaluacion");
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    EncuestaO obj = new EncuestaO();
+                    EvaluacionO obj = new EvaluacionO();
                     obj.setId(jsonArray.getJSONObject(i).getInt("ID"));
-                    obj.setUsuario_id(jsonArray.getJSONObject(i).getInt("USUARIO_ID"));
-                    obj.setEvaluado_id(jsonArray.getJSONObject(i).getInt("EVALUADO_ID"));
-                    obj.setPeriodo_id(jsonArray.getJSONObject(i).getInt("PERIODO_ID"));
+                    obj.setId(jsonArray.getJSONObject(i).getInt("ID"));
+
                     list.add(obj);
                 }
                 return list;
             }
         } catch (Exception e) {
-            System.out.println("getEncuestasDAL catch: " + e.getMessage());
+            System.out.println("getEvaluacionesDAL catch: " + e.getMessage());
         }
         return list;
     }
 
-    public EncuestaO getEncuestaById(int id) {
-        EncuestaO obj = new EncuestaO();
+    public EvaluacionO getEvaluacionById(int id) {
+        EvaluacionO obj = new EvaluacionO();
         JSONObject jsonPost = new JSONObject();
         jsonPost.put("idusuario", VariablesDAL.idUsuario);
         jsonPost.put("token", VariablesDAL.token);
         jsonPost.put("id", id);
         try {
-            String response = cx.post("encuesta/json/read_id", jsonPost);
-            //System.out.println("encuestaById response: " + response);
+            String response = cx.post("evaluacion/json/read_id", jsonPost);
+            System.out.println("evaluacionById response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
-            if (jsonResponse.getJSONArray("encuesta").length() > 0) {
-                JSONArray jsonArray = jsonResponse.getJSONArray("encuesta");
+            if (jsonResponse.getJSONArray("evaluacion").length() > 0) {
+                JSONArray jsonArray = jsonResponse.getJSONArray("evaluacion");
                 obj.setId(jsonArray.getJSONObject(0).getInt("ID"));
-                obj.setUsuario_id(jsonArray.getJSONObject(0).getInt("USUARIO_ID"));
-                obj.setEvaluado_id(jsonArray.getJSONObject(0).getInt("EVALUADO_ID"));
-                obj.setPeriodo_id(jsonArray.getJSONObject(0).getInt("PERIODO_ID"));
+
                 return obj;
             }
         } catch (Exception e) {
-            System.out.println("getEncuestaByIdDAL catch: " + e.getMessage());
+            System.out.println("getEvaluacionByIdDAL catch: " + e.getMessage());
         }
         return obj;
     }
 
-    public int addEncuesta(EncuestaO obj) {
+    public boolean addEvaluacion(EvaluacionO obj) {
         JSONObject jsonPost = new JSONObject();
         jsonPost.put("idusuario", VariablesDAL.idUsuario);
         jsonPost.put("token", VariablesDAL.token);
-        jsonPost.put("usuarioid", obj.getUsuario_id());
-        jsonPost.put("evaluadoid", obj.getEvaluado_id());
-        jsonPost.put("periodoid", obj.getPeriodo_id());
-        jsonPost.put("fecha", Formato.dateToString(obj.getFecha()));
-        System.out.println("addEncuesta post: " + jsonPost);
+        jsonPost.put("rut", obj.getRut());
+        jsonPost.put("rutjefe", obj.getRutJefe());
+        jsonPost.put("notaauto", obj.getNotaAuto());
+        jsonPost.put("notajefe", obj.getNotaJefe());
+        jsonPost.put("brecha", obj.getBrecha());
+        jsonPost.put("periodoid", obj.getPeriodoId());
+        jsonPost.put("competenciaid", obj.getCompId());
+        System.out.println("addEvaluacion post: " + jsonPost);
         try {
-            String response = cx.post("encuesta/json/create", jsonPost);
-            System.out.println("addEncuesta response: " + response);
+            String response = cx.post("evaluacion/json/create", jsonPost);
+            System.out.println("addEvaluacion response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
-            if (jsonResponse.getJSONArray("encuesta").length() > 0) {
-                return jsonResponse.getJSONArray("encuesta").getJSONObject(0).getInt("ID");
-            }
-        } catch (Exception e) {
-            System.out.println("addEncuestaDAL catch: " + e.getMessage());
-            return 0;
-        }
-        return 0;
-    }
-
-    public boolean deleteEncuesta(int id) {
-        JSONObject jsonDelete = new JSONObject();
-        jsonDelete.put("idusuario", VariablesDAL.idUsuario);
-        jsonDelete.put("token", VariablesDAL.token);
-        jsonDelete.put("id", id);
-        try {
-            String response = cx.delete("encuesta/json/delete", jsonDelete);
-            System.out.println("jsonReponse deleteEncuesta: " + response);
-            JSONObject jsonResponse = new JSONObject(response.trim());
-            if (jsonResponse.getJSONArray("encuesta").length() > 0) {
+            if (jsonResponse.getJSONArray("evaluacion").length() > 0) {
                 return true;
             }
         } catch (Exception e) {
-            System.out.println("deleteEncuestaDAL catch: " + e.getMessage());
+            System.out.println("addEvaluacionDAL catch: " + e.getMessage());
             return false;
         }
         return false;
     }
 
-    public ArrayList<EncuestaO> getEncuestasByPeriodo(int idPeriodo) {
-        ArrayList<EncuestaO> list = new ArrayList<>();
+    public boolean deleteEvaluacion(int id) {
+        JSONObject jsonDelete = new JSONObject();
+        jsonDelete.put("idusuario", VariablesDAL.idUsuario);
+        jsonDelete.put("token", VariablesDAL.token);
+        jsonDelete.put("id", id);
+        try {
+            String response = cx.delete("evaluacion/json/delete", jsonDelete);
+            System.out.println("jsonReponse deleteEvaluacion: " + response);
+            JSONObject jsonResponse = new JSONObject(response.trim());
+            if (jsonResponse.getJSONArray("evaluacion").length() > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("deleteEvaluacionDAL catch: " + e.getMessage());
+            return false;
+        }
+        return false;
+    }
+
+    public ArrayList<EvaluacionO> getEvaluacionesByPeriodo(int idPeriodo) {
+        ArrayList<EvaluacionO> list = new ArrayList<>();
         JSONObject jsonPost = new JSONObject();
         jsonPost.put("idusuario", VariablesDAL.idUsuario);
         jsonPost.put("token", VariablesDAL.token);
         jsonPost.put("periodoid", idPeriodo);
         try {
-            String response = cx.post("encuesta/json/read_periodo", jsonPost);
-            System.out.println("getEncuestasByPeriodo response: " + response);
+            String response = cx.post("evaluacion/json/read_periodo", jsonPost);
+            System.out.println("getEvaluacionesByPeriodo response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
-            if (jsonResponse.getJSONArray("encuesta").length() > 0) {
-                JSONArray jsonArray = jsonResponse.getJSONArray("encuesta");
+            if (jsonResponse.getJSONArray("evaluacion").length() > 0) {
+                JSONArray jsonArray = jsonResponse.getJSONArray("evaluacion");
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    EncuestaO obj = new EncuestaO();
+                    EvaluacionO obj = new EvaluacionO();
                     obj.setId(jsonArray.getJSONObject(i).getInt("ID"));
-                    obj.setUsuario_id(jsonArray.getJSONObject(i).getInt("USUARIO_ID"));
-                    obj.setEvaluado_id(jsonArray.getJSONObject(i).getInt("EVALUADO_ID"));
-                    obj.setPeriodo_id(jsonArray.getJSONObject(i).getInt("PERIODO_ID"));
+
                     list.add(obj);
                 }
                 return list;
             }
         } catch (Exception e) {
-            System.out.println("getEncuestasByPeriodoDAL catch: " + e.getMessage());
+            System.out.println("getEvaluacionesByPeriodoDAL catch: " + e.getMessage());
         }
         return list;
     }
