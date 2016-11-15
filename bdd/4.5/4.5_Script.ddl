@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 4.1.3.901
---   en:        2016-11-07 10:47:13 BRST
+--   en:        2016-11-14 22:03:23 BRST
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -90,8 +90,8 @@ ALTER TABLE encuesta ADD CONSTRAINT encuesta_PK PRIMARY KEY ( id ) ;
 CREATE TABLE evaluacion
   (
     id             INTEGER NOT NULL ,
-    rut            INTEGER ,
-    rut_jefe       INTEGER ,
+    rut            VARCHAR2 (255) ,
+    rut_jefe       VARCHAR2 (255) ,
     nota_auto      INTEGER ,
     nota_jefe      INTEGER ,
     nota           INTEGER ,
