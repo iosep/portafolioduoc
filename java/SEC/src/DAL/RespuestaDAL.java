@@ -57,10 +57,10 @@ public class RespuestaDAL {
         jsonPost.put("idusuario", VariablesDAL.idUsuario);
         jsonPost.put("token", VariablesDAL.token);
         jsonPost.put("id", id);
-        System.out.println("getRespuestaById post: " + jsonPost);
+        //System.out.println("getRespuestaById post: " + jsonPost);
         try {
             String response = cx.post("respuesta/json/read_id", jsonPost);
-            System.out.println("respuestaById response: " + response);
+            //System.out.println("respuestaById response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("respuesta").length() > 0) {
                 JSONArray jsonArray = jsonResponse.getJSONArray("respuesta");

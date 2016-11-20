@@ -9,25 +9,24 @@ import CTL.AreaCTL;
 import CTL.AreaCompetenciaCTL;
 import CTL.CompetenciaCTL;
 import CTL.EncuestaCTL;
+import CTL.EvaluacionCTL;
 import CTL.NivelCTL;
 import CTL.PeriodoCTL;
 import CTL.UsuarioAreaCTL;
-import CTL.UsuarioCTL;
 import DAL.VariablesDAL;
 import O.ArbolO;
 import O.AreaCompetenciaO;
 import O.AreaO;
 import O.CompetenciaNivelO;
 import O.CompetenciaO;
-import O.EncuestaO;
+import O.EvaluacionO;
 import O.NivelO;
-import O.PeriodoO;
 import O.UsuarioAreaO;
-import O.UsuarioO;
 import java.util.ArrayList;
 import java.util.Date;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -50,7 +49,7 @@ import javafx.stage.Stage;
  * @author iosep
  */
 public class Funcionario {
-    
+
     Stage window = new Stage();
     BorderPane borderPane = new BorderPane();
     Text tTitle = new Text("SEC - Funcionario");
@@ -69,23 +68,24 @@ public class Funcionario {
     Text tTree2 = new Text();
     Text tDesc = new Text();
     Button bRealizarEncuesta = new Button("Realizar Encuesta");
+    Button bVerEvaluaciones = new Button("Ver Evaluaciones");
     int idPeriodo;
     Date now = new Date();
     boolean esta;
-    
+
     private final ArrayList<AreaO> areas = new ArrayList<>();
     private final ArrayList<CompetenciaO> competencias = new ArrayList<>();
     private final ArrayList<NivelO> niveles = new ArrayList<>();
-    
+
     private final UsuarioAreaCTL usArCtl = new UsuarioAreaCTL();
     private final AreaCompetenciaCTL arComCtl = new AreaCompetenciaCTL();
     private final AreaCTL areaCtl = new AreaCTL();
-    private final UsuarioCTL userCtl = new UsuarioCTL();
     private final CompetenciaCTL compCtl = new CompetenciaCTL();
     private final NivelCTL nivelCtl = new NivelCTL();
     private final PeriodoCTL peCtl = new PeriodoCTL();
     private final EncuestaCTL enCtl = new EncuestaCTL();
-    
+    private final EvaluacionCTL evCtl = new EvaluacionCTL();
+
     public void start(String userRut) {
         tTitle.getStyleClass().add("title");
         lblActiveUserRut = new Label("  " + userRut);
@@ -226,7 +226,7 @@ public class Funcionario {
                                     tArea.setText("Área:   " + a.getNombre());
                                     tDesc.setText("Descripción del Área:   " + a.getDescripcion());
                                     vbCenter.getChildren().clear();
-                                    vbCenter.getChildren().addAll(tArea, tDesc, bRealizarEncuesta);
+                                    vbCenter.getChildren().addAll(tArea, tDesc, bRealizarEncuesta, bVerEvaluaciones);
                                 }
                             }
                             break;
@@ -237,7 +237,7 @@ public class Funcionario {
                                     tTree1.setText("Competencia:   " + c.getNombre());
                                     tDesc.setText("Descripción de la Competencia:   " + c.getDescripcion());
                                     vbCenter.getChildren().clear();
-                                    vbCenter.getChildren().addAll(tArea, tTree1, tDesc, bRealizarEncuesta);
+                                    vbCenter.getChildren().addAll(tArea, tTree1, tDesc, bRealizarEncuesta, bVerEvaluaciones);
                                 }
                             }
                             break;
@@ -249,7 +249,7 @@ public class Funcionario {
                                     tTree2.setText("Nivel:   " + n.getNombre());
                                     tDesc.setText("Descripción del Nivel:   " + n.getDescripcion());
                                     vbCenter.getChildren().clear();
-                                    vbCenter.getChildren().addAll(tArea, tTree1, tTree2, tDesc, bRealizarEncuesta);
+                                    vbCenter.getChildren().addAll(tArea, tTree1, tTree2, tDesc, bRealizarEncuesta, bVerEvaluaciones);
                                 }
                             }
                             break;
@@ -257,6 +257,7 @@ public class Funcionario {
                 }
             }
         });
+//botones
         bRealizarEncuesta.setOnAction(value -> {
             EncuestaFuncionario ef = new EncuestaFuncionario();
             ef.start(userRut, idPeriodo);
@@ -269,6 +270,25 @@ public class Funcionario {
                 bRealizarEncuesta.setVisible(false);
             }
         });
+        bVerEvaluaciones.setOnAction(value -> {
+            ArrayList<EvaluacionO> evList = evCtl.findEvaluacionesByRut(userRut);
+            if (evList.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(window);
+                alert.setTitle("Sin Evaluaciones");
+                alert.setHeaderText(null);
+                alert.setContentText("Sin Evaluaciones");
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(window);
+                alert.setTitle("Con Datos");
+                alert.setHeaderText(null);
+                alert.setContentText("Con Evaluaciones");
+                alert.showAndWait();
+            }
+        });
+//textos format        
         tArea.getStyleClass().add("plane");
         tArea.setWrappingWidth(500);
         tTree1.getStyleClass().add("plane");
@@ -293,7 +313,7 @@ public class Funcionario {
         this.window.addEventHandler(KeyEvent.KEY_PRESSED, this::handleKey);
         this.window.show();
     }
-    
+
     private void handleKey(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case F11:
@@ -301,12 +321,12 @@ public class Funcionario {
                 break;
         }
     }
-    
+
     private boolean notPend() {
         return peCtl.getPeriodos().stream().filter((p) -> (now.after(p.getInicio()) && now.before(p.getFin()))).map((p) -> {
             idPeriodo = p.getId();
             return p;
         }).map((_item) -> enCtl.findEncuestasByPeriodoId(idPeriodo)).filter((encByPeriod) -> (encByPeriod.size() > 0)).anyMatch((encByPeriod) -> (encByPeriod.stream().anyMatch((e) -> (e.getUsuario_id() == VariablesDAL.getIdUsuario()))));
     }
-    
+
 }

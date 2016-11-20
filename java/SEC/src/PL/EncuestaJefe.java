@@ -195,7 +195,7 @@ public class EncuestaJefe {
                         alert.initOwner(window);
                         alert.setTitle("Éxito Encuesta");
                         alert.setHeaderText(null);
-                        alert.setContentText("Encuesta y Selecciones Guardadas, ESPERE UN MOMENTO POR FAVOR");
+                        alert.setContentText("Encuesta y Selecciones Guardadas");
                         alert.showAndWait();
                         evCtl.crearEvaluacion(perId, funcId, compIds, compPre);
                         window.close();

@@ -114,51 +114,50 @@ public class AreaCompetenciaDAL {
         //System.out.println("addAreaCompetencia post: " + jsonPost);
         try {
             String response = cx.post("area_competencia/json/create", jsonPost);
-            System.out.println("addAreaCompetencia response: " + response);
+            //System.out.println("addAreaCompetencia response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("area_competencia").length() > 0) {
                 return true;
             } else {
-                System.out.println("activar areaComp");
+                return this.activaAreaCompetencia(obj);
             }
         } catch (Exception e) {
             System.out.println("addAreaCompetenciaDAL catch: " + e.getMessage());
             return false;
         }
-        return false;
     }
 
-    public boolean updateAreaCompetencia(AreaCompetenciaO obj) {
+    public boolean activaAreaCompetencia(AreaCompetenciaO obj) {//not use
         JSONObject jsonPut = new JSONObject();
         jsonPut.put("idusuario", VariablesDAL.idUsuario);
         jsonPut.put("token", VariablesDAL.token);
-        jsonPut.put("comptid", obj.getCompetencia_id());
         jsonPut.put("areaid", obj.getArea_id());
-        //System.out.println("updateAreaCompetencia put: " + jsonPut);
+        jsonPut.put("comptid", obj.getCompetencia_id());
+        //System.out.println("activaAreaCompetencia put: " + jsonPut);
         try {
-            String response = cx.put("area_competencia/json/update", jsonPut);
-            System.out.println("updateAreaCompetencia response: " + response);
+            String response = cx.put("area_competencia/json/activa", jsonPut);
+            //System.out.println("activaAreaCompetencia response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("area_competencia").length() > 0) {
                 return true;
             }
         } catch (Exception e) {
-            System.out.println("updateAreaCompetenciaDAL catch: " + e.getMessage());
+            System.out.println("activaAreaCompetenciaDAL catch: " + e.getMessage());
             return false;
         }
         return false;
     }
 
-    public boolean removeAreaCompetencia(int idComp, int idArea) {
+    public boolean removeAreaCompetencia(int idArea, int idComp) {
         JSONObject jsonDelete = new JSONObject();
         jsonDelete.put("idusuario", VariablesDAL.idUsuario);
         jsonDelete.put("token", VariablesDAL.token);
-        jsonDelete.put("comptid", idComp);
         jsonDelete.put("areaid", idArea);
+        jsonDelete.put("comptid", idComp);
         //System.out.println("jsonPost removeAreaCompetencia: " + jsonDelete);
         try {
             String response = cx.delete("area_competencia/json/delete", jsonDelete);
-            System.out.println("jsonReponse removeAreaCompetencia: " + response);
+            //System.out.println("jsonReponse removeAreaCompetencia: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("area_competencia").length() > 0) {
                 return true;

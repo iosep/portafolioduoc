@@ -56,7 +56,7 @@ public class CompetenciaNivelDAL {
         System.out.println("getCompetenciaNivelesByCompetenciaId post: " + jsonPost);
         try {
             String response = cx.post("competencia_nivel/json/read_competencia", jsonPost);
-            //System.out.println("getCompetenciaNivelesByCompetenciaId read_competencia response: " + response);
+            System.out.println("getCompetenciaNivelesByCompetenciaId read_competencia response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("competencia_nivel").length() > 0) {
                 JSONArray jsonArray = jsonResponse.getJSONArray("competencia_nivel");
@@ -120,31 +120,30 @@ public class CompetenciaNivelDAL {
             if (jsonResponse.getJSONArray("competencia_nivel").length() > 0) {
                 return true;
             } else {
-                System.out.println("activar nivelComp");
+                return this.activaCompetenciaNivel(obj);
             }
         } catch (Exception e ) {
             System.out.println("addCompetenciaNivelDAL catch: " + e.getMessage());
             return false;
         }
-        return false;
     }
 
-    public boolean updateCompetenciaNivel(CompetenciaNivelO obj) {
+    public boolean activaCompetenciaNivel(CompetenciaNivelO obj) {
         JSONObject jsonPut = new JSONObject();
         jsonPut.put("idusuario", VariablesDAL.idUsuario);
         jsonPut.put("token", VariablesDAL.token);
         jsonPut.put("comptid", obj.getCompetencia_id());
         jsonPut.put("nivelid", obj.getNivel_id());
-        //System.out.println("updateCompetenciaNivel put: " + jsonPut);
+        //System.out.println("activaCompetenciaNivel put: " + jsonPut);
         try {
-            String response = cx.put("competencia_nivel/json/update", jsonPut);
-            System.out.println("updateCompetenciaNivel response: " + response);
+            String response = cx.put("competencia_nivel/json/activa", jsonPut);
+            System.out.println("activaCompetenciaNivel response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("competencia_nivel").length() > 0) {
                 return true;
             }
         } catch (Exception e ) {
-            System.out.println("updateCompetenciaNivelDAL catch: " + e.getMessage());
+            System.out.println("activaCompetenciaNivelDAL catch: " + e.getMessage());
             return false;
         }
         return false;

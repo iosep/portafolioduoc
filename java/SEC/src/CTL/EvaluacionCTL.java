@@ -11,13 +11,11 @@ import O.CompetenciaO;
 import O.EncuestaO;
 import O.EvaluacionO;
 import O.PeriodoO;
-import O.RespuestaO;
 import O.SeleccionO;
 import O.UsuarioO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import javafx.collections.ObservableList;
 
 /**
  *
@@ -41,6 +39,14 @@ public class EvaluacionCTL {
 
     public ArrayList<EvaluacionO> findEvaluacionesByPeriodoId(int id) {
         return evaDal.getEvaluacionesByPeriodo(id);
+    }
+
+    public ArrayList<EvaluacionO> findEvaluacionesByRut(String rut) {
+        ArrayList<EvaluacionO> list = new ArrayList<>();
+        this.getEvaluaciones().stream().filter((e) -> (e.getRut().equals(rut))).forEach((e) -> {
+            list.add(e);
+        });
+        return list;
     }
 
     public boolean eliminarEvaluacion(int id) {
@@ -68,7 +74,6 @@ public class EvaluacionCTL {
             PeriodoCTL perCtl = new PeriodoCTL();
             PeriodoO per = perCtl.getPeriodoById(perId);
             SeleccionCTL selCtl = new SeleccionCTL();
-            RespuestaCTL resCtl = new RespuestaCTL();
             CompetenciaCTL comCtl = new CompetenciaCTL();
             Collections.sort(compPre, new Comparator<CompPregId>() {
                 @Override
@@ -81,46 +86,46 @@ public class EvaluacionCTL {
             ArrayList<SeleccionO> seleccionesAuto = selCtl.getSeleccionesByEncuestaId(autoEncId);
             boolean add = false;
             for (CompetenciaO c : comCtl.getCompetenciasFX()) {
-                System.out.println("competencias: " + c.getNombre());
+                //System.out.println("competencia: " + c.getNombre());
                 if (compIds.contains(c.getId())) {
-                    System.out.println("competencia en compIds: " + c.getNombre());
+                    //System.out.println("competencia en compIds: " + c.getNombre());
                     int sumAuto = 0;
-                    int canAuto = 0;
+                    float canAuto = 0.00f;
                     int sumJefe = 0;
-                    int canJefe = 0;
+                    float canJefe = 0.00f;
                     for (CompPregId cp : compPre) {
-                        System.out.println("compPre compId: " + cp.getCompId());
+                        //System.out.println("compPre compId: " + cp.getCompId());
                         if (cp.getCompId() == c.getId()) {
                             for (SeleccionO s : seleccionesAuto) {
-                                RespuestaO r = resCtl.getRespuestaById(s.getRespuesta_id());
-                                System.out.println("respuesta auto: " + r.getRespuesta());
-                                if (r.getPregunta_id() == cp.getPregId()) {
-                                    sumAuto += r.getPuntos();
+                                if (s.getPregunta_id() == cp.getPregId()) {
+                                    sumAuto += s.getPuntos();
                                     canAuto++;
-                                    System.out.println("sum auto: " + sumAuto);
+                                    //System.out.println("sum auto: " + sumAuto);
                                 }
                             }
                             for (SeleccionO s : seleccionesJefe) {
-                                RespuestaO r = resCtl.getRespuestaById(s.getRespuesta_id());
-                                System.out.println("respuesta jefe: " + r.getRespuesta());
-                                if (r.getPregunta_id() == cp.getPregId()) {
-                                    sumJefe += r.getPuntos();
+                                if (s.getPregunta_id() == cp.getPregId()) {
+                                    sumJefe += s.getPuntos();
                                     canJefe++;
-                                    System.out.println("sum jefe: " + sumJefe);
+                                    //System.out.println("sum jefe: " + sumJefe);
                                 }
                             }
-                        } else if (canAuto > 0 && canJefe > 0) {
+                        } else if (canAuto > 0 && canJefe > 0 && cp.getCompId() != -5) {
                             int notaAuto = Math.round(sumAuto / canAuto);
                             int notaJefe = Math.round(sumJefe / canJefe);
-                            int nota = Math.round((notaAuto * (per.getAuto_porc() / 100)) + (notaJefe * (per.getJefe_porc() / 100)));
+                            int nota = Math.round((notaAuto * (per.getAuto_porc() / 100.00f)) + (notaJefe * (per.getJefe_porc() / 100.00f)));
                             int brecha = nota - c.getNivelOptimo();
-                            System.out.println("nivel optimo: " + c.getNivelOptimo());
+                            //System.out.println("nivel optimo: " + c.getNivelOptimo());
                             add = this.addEvaluacion(new EvaluacionO(evaluado.getRut(), evaluado.getRutjefe(), notaAuto, notaJefe, nota, brecha, perId, c.getId()));
                         }
                     }
                 }
             }
-            System.out.println("agregadas evaluaciones por competencias");
+            if (add) {
+                System.out.println("Agregadas evaluación por competencias");
+            } else {
+                System.out.println("Error! al agregar evaluación por competencias");
+            }
             return add;
         }
         return false;

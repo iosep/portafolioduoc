@@ -5,7 +5,6 @@
  */
 package DAL;
 
-import FN.Formato;
 import O.EvaluacionO;
 import REST.Conexion;
 import java.util.ArrayList;
@@ -34,8 +33,14 @@ public class EvaluacionDAL {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     EvaluacionO obj = new EvaluacionO();
                     obj.setId(jsonArray.getJSONObject(i).getInt("ID"));
-                    obj.setId(jsonArray.getJSONObject(i).getInt("ID"));
-
+                    obj.setRut(jsonArray.getJSONObject(i).getString("RUT"));
+                    obj.setRutJefe(jsonArray.getJSONObject(i).getString("RUT_JEFE"));
+                    obj.setNotaAuto(jsonArray.getJSONObject(i).getInt("NOTA_AUTO"));
+                    obj.setNotaJefe(jsonArray.getJSONObject(i).getInt("NOTA_JEFE"));
+                    obj.setNota(jsonArray.getJSONObject(i).getInt("NOTA"));
+                    obj.setBrecha(jsonArray.getJSONObject(i).getInt("BRECHA"));
+                    obj.setPeriodoId(jsonArray.getJSONObject(i).getInt("PERIODO_ID"));
+                    obj.setCompId(jsonArray.getJSONObject(i).getInt("COMPETENCIA_ID"));
                     list.add(obj);
                 }
                 return list;
@@ -128,7 +133,14 @@ public class EvaluacionDAL {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     EvaluacionO obj = new EvaluacionO();
                     obj.setId(jsonArray.getJSONObject(i).getInt("ID"));
-
+                    obj.setRut(jsonArray.getJSONObject(i).getString("RUT"));
+                    obj.setRutJefe(jsonArray.getJSONObject(i).getString("RUT_JEFE"));
+                    obj.setNotaAuto(jsonArray.getJSONObject(i).getInt("NOTA_AUTO"));
+                    obj.setNotaJefe(jsonArray.getJSONObject(i).getInt("NOTA_JEFE"));
+                    obj.setNota(jsonArray.getJSONObject(i).getInt("NOTA"));
+                    obj.setBrecha(jsonArray.getJSONObject(i).getInt("BRECHA"));
+                    obj.setPeriodoId(jsonArray.getJSONObject(i).getInt("PERIODO_ID"));
+                    obj.setCompId(jsonArray.getJSONObject(i).getInt("COMPETENCIA_ID"));
                     list.add(obj);
                 }
                 return list;

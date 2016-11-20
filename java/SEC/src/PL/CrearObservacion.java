@@ -11,6 +11,7 @@ import O.ObservacionO;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -119,15 +120,21 @@ public class CrearObservacion {
                 if (Integer.parseInt(txtNivelSup.getText().trim()) > Integer.parseInt(txtNivelInf.getText().trim())) {
                     if (obCtl.addObservacionCTL(new ObservacionO(Integer.parseInt(txtNivelInf.getText().trim()), Integer.parseInt(txtNivelSup.getText().trim()),
                             txtMsjInf.getText().trim(), txtMsjSup.getText().trim(), id_competencia))) {
-                        txtNivelInf.clear();
-                        txtNivelSup.clear();
-                        txtMsjInf.clear();
-                        txtMsjSup.clear();
-                        msj.setFill(Color.GREEN);
-                        msj.setText("Observación Creada Exitosamente");
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.initOwner(window);
+                        alert.setTitle("Observación Creada");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Observación Creada Exitosamente");
+                        alert.showAndWait();
+                        window.close();
                     } else {
-                        msj.setFill(Color.FIREBRICK);
-                        msj.setText("Error Al Crear Observación");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.initOwner(window);
+                        alert.setTitle("Observación Error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Error Al Crear Observación");
+                        alert.showAndWait();
+                        window.close();
                     }
                 } else {
                     msj.setFill(Color.FIREBRICK);

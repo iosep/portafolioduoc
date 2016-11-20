@@ -7,10 +7,8 @@ package DAL;
 
 import O.UsuarioAreaO;
 import REST.Conexion;
-import java.io.IOException;
 import java.util.ArrayList;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -116,36 +114,35 @@ public class UsuarioAreaDAL {
         //System.out.println("addUsuarioArea post: " + jsonPost);
         try {
             String response = cx.post("usuario_area/json/create", jsonPost);
-            System.out.println("addUsuarioArea response: " + response);
+            //System.out.println("addUsuarioArea response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("usuario_area").length() > 0) {
                 return true;
             }else{
-                System.out.println("activar area");
+                return this.activaUsuarioArea(obj);
             }
         } catch (Exception e ) {
             System.out.println("addUsuarioAreaDAL catch: " + e.getMessage());
             return false;
         }
-        return false;
     }
 
-    public boolean updateUsuarioArea(UsuarioAreaO obj) {
+    public boolean activaUsuarioArea(UsuarioAreaO obj) {
         JSONObject jsonPut = new JSONObject();
         jsonPut.put("idusuario", VariablesDAL.idUsuario);
         jsonPut.put("token", VariablesDAL.token);
         jsonPut.put("usuarioid", obj.getUsuario_id());
         jsonPut.put("areaid", obj.getArea_id());
-        //System.out.println("updateUsuarioArea put: " + jsonPut);
+        //System.out.println("activaUsuarioArea put: " + jsonPut);
         try {
-            String response = cx.put("usuario_area/json/update", jsonPut);
-            //System.out.println("updateUsuarioArea response: " + response);
+            String response = cx.put("usuario_area/json/activa", jsonPut);
+            //System.out.println("activaUsuarioArea response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("usuario_area").length() > 0) {
                 return true;
             }
         } catch (Exception e ) {
-            System.out.println("updateUsuarioAreaDAL catch: " + e.getMessage());
+            System.out.println("activaUsuarioAreaDAL catch: " + e.getMessage());
             return false;
         }
         return false;
@@ -160,7 +157,7 @@ public class UsuarioAreaDAL {
         //System.out.println("jsonPost removeUsuarioArea: " + jsonDelete);
         try {
             String response = cx.delete("usuario_area/json/delete", jsonDelete);
-            System.out.println("jsonReponse removeUsuarioArea: " + response);
+            //System.out.println("jsonReponse removeUsuarioArea: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("usuario_area").length() > 0) {
                 return true;

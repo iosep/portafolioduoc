@@ -14,6 +14,8 @@ public class SeleccionO {
     private int id;
     private int encuesta_id;
     private int respuesta_id;
+    private int puntos;
+    private int pregunta_id;
 
     public SeleccionO() {
     }
@@ -45,6 +47,22 @@ public class SeleccionO {
 
     public void setRespuesta_id(int respuesta_id) {
         this.respuesta_id = respuesta_id;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+
+    public int getPregunta_id() {
+        return pregunta_id;
+    }
+
+    public void setPregunta_id(int pregunta_id) {
+        this.pregunta_id = pregunta_id;
     }
 
 }

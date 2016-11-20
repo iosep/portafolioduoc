@@ -97,7 +97,7 @@ public class SeleccionDAL {
         jsonPost.put("encuestaid", id);
         try {
             String response = cx.post("seleccion/json/read_encuesta", jsonPost);
-            //System.out.println("getSeleccionesByEncuestaId response: " + response);
+            System.out.println("getSeleccionesByEncuestaId response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("seleccion").length() > 0) {
                 JSONArray jsonArray = jsonResponse.getJSONArray("seleccion");
@@ -106,6 +106,8 @@ public class SeleccionDAL {
                     obj.setId(jsonArray.getJSONObject(i).getInt("ID"));
                     obj.setEncuesta_id(jsonArray.getJSONObject(i).getInt("ENCUESTA_ID"));
                     obj.setRespuesta_id(jsonArray.getJSONObject(i).getInt("RESPUESTA_ID"));
+                    obj.setPuntos(jsonArray.getJSONObject(i).getInt("PUNTOS"));
+                    obj.setPregunta_id(jsonArray.getJSONObject(i).getInt("PREGUNTA_ID"));
                     list.add(obj); 
                 }
                 return list;
