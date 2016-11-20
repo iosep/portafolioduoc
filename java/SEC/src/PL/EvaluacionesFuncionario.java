@@ -13,16 +13,21 @@ import CTL.PeriodoCTL;
 import CTL.PreguntaCTL;
 import CTL.SeleccionCTL;
 import CTL.UsuarioAreaCTL;
+import FN.Excel;
 import FN.Formato;
 import O.CompetenciaO;
 import O.EvaluacionO;
-import O.ObservacionO;
 import O.PeriodoO;
 import O.Reporte1O;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -42,8 +47,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -159,6 +166,23 @@ public class EvaluacionesFuncionario {
                     }
                 }
                 tvEvComp.setItems(FXCollections.observableArrayList(rep1));
+            }
+        });
+//buttons
+        bExport1.setOnAction(value -> {
+            FileChooser fileChooser = new FileChooser();
+            //Set extension filter
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
+            fileChooser.getExtensionFilters().add(extFilter);
+            //Show save file dialog
+            File file = fileChooser.showSaveDialog(window);
+            Excel xls = new Excel();
+            if (file != null) {
+                try {
+                    xls.writeExcelRep1(rep1, file.getAbsolutePath());
+                } catch (IOException ex) {
+                    Logger.getLogger(EvaluacionesFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 //borderPane
