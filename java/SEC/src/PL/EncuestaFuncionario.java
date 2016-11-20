@@ -11,7 +11,6 @@ import CTL.EvaluacionCTL;
 import CTL.PreguntaCTL;
 import CTL.SeleccionCTL;
 import CTL.UsuarioAreaCTL;
-import CTL.UsuarioCTL;
 import DAL.VariablesDAL;
 import O.AreaCompetenciaO;
 import O.CompPregId;

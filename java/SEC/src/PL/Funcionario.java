@@ -280,12 +280,8 @@ public class Funcionario {
                 alert.setContentText("Sin Evaluaciones");
                 alert.showAndWait();
             } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.initOwner(window);
-                alert.setTitle("Con Datos");
-                alert.setHeaderText(null);
-                alert.setContentText("Con Evaluaciones");
-                alert.showAndWait();
+                EvaluacionesFuncionario ef = new EvaluacionesFuncionario();
+                ef.start(evList, userRut);
             }
         });
 //textos format        
