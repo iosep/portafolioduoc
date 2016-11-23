@@ -5,20 +5,17 @@
  */
 package PL;
 
-import CTL.AreaCompetenciaCTL;
 import CTL.CompetenciaCTL;
-import CTL.EncuestaCTL;
-import CTL.EvaluacionCTL;
+import CTL.ObservacionCTL;
 import CTL.PeriodoCTL;
-import CTL.PreguntaCTL;
-import CTL.SeleccionCTL;
-import CTL.UsuarioAreaCTL;
 import FN.Excel;
 import FN.Formato;
 import O.CompetenciaO;
 import O.EvaluacionO;
+import O.ObservacionO;
 import O.PeriodoO;
 import O.Reporte1O;
+import O.Reporte2O;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,7 +24,6 @@ import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -50,7 +46,6 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -58,14 +53,9 @@ import javax.imageio.ImageIO;
  */
 public class EvaluacionesFuncionario {
 
-    private final UsuarioAreaCTL usArCtl = new UsuarioAreaCTL();
-    private final AreaCompetenciaCTL arComCtl = new AreaCompetenciaCTL();
-    private final PreguntaCTL preCtl = new PreguntaCTL();
-    private final EncuestaCTL enCtl = new EncuestaCTL();
-    private final SeleccionCTL seCtl = new SeleccionCTL();
-    private final EvaluacionCTL evCtl = new EvaluacionCTL();
     private final PeriodoCTL perCtl = new PeriodoCTL();
     private final CompetenciaCTL compCtl = new CompetenciaCTL();
+    private final ObservacionCTL obsCtl = new ObservacionCTL();
 
     Stage window = new Stage();
     BorderPane borderPane = new BorderPane();
@@ -127,6 +117,7 @@ public class EvaluacionesFuncionario {
         vbLeft.getStyleClass().add("vbox");
 //centerPane
         ArrayList<Reporte1O> rep1 = new ArrayList<>();
+        ArrayList<Reporte2O> rep2 = new ArrayList<>();
         Label lEv = new Label("Resultados Evaluación: ");
         TableView tvEvComp = new TableView();
         tvEvComp.setMinWidth(400);
@@ -143,6 +134,13 @@ public class EvaluacionesFuncionario {
         Button bExport1 = new Button("Exportar a Excel");
         TableView tvEvObs = new TableView();
         tvEvObs.setMinWidth(400);
+        TableColumn<Reporte2O, String> rep2Comp = new TableColumn<>("Competencia");
+        rep2Comp.setCellValueFactory(new PropertyValueFactory<>("comp"));
+        rep2Comp.setMinWidth(150);
+        TableColumn<Reporte2O, String> rep2Obs = new TableColumn<>("Observaciones");
+        rep2Obs.setCellValueFactory(new PropertyValueFactory<>("obs"));
+        rep2Obs.setMinWidth(250);
+        tvEvObs.getColumns().addAll(rep2Comp, rep2Obs);
         Button bExport2 = new Button("Exportar a Excel");
         VBox vbTablas = new VBox(tvEvComp, bExport1, tvEvObs, bExport2);
         vbTablas.getStyleClass().add("vbox");
@@ -159,13 +157,21 @@ public class EvaluacionesFuncionario {
             public void changed(ObservableValue<? extends PeriodoO> ov,
                     PeriodoO old_val, PeriodoO new_val) {
                 rep1.clear();
+                rep2.clear();
                 for (EvaluacionO e : evList) {
                     if (e.getPeriodoId() == new_val.getId()) {
                         CompetenciaO auxComp = compCtl.getCompetenciaById(e.getCompId());
+                        ObservacionO auxObs = obsCtl.getObservacionByComp(e.getCompId());
+                        if (e.getNota() <= auxObs.getNivel_inf()) {
+                            rep2.add(new Reporte2O(auxComp.getNombre() + " (" + e.getNota() + ") ", auxObs.getMsj_inf()));
+                        } else {
+                            rep2.add(new Reporte2O(auxComp.getNombre() + " (" + e.getNota() + ") ", auxObs.getMsj_sup()));
+                        }
                         rep1.add(new Reporte1O(auxComp.getNombre(), e.getNota(), auxComp.getNivelOptimo(), e.getBrecha()));
                     }
                 }
                 tvEvComp.setItems(FXCollections.observableArrayList(rep1));
+                tvEvObs.setItems(FXCollections.observableArrayList(rep2));
             }
         });
 //buttons

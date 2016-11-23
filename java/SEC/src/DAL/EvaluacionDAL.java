@@ -81,7 +81,6 @@ public class EvaluacionDAL {
         jsonPost.put("rutjefe", obj.getRutJefe());
         jsonPost.put("notaauto", obj.getNotaAuto());
         jsonPost.put("notajefe", obj.getNotaJefe());
-        jsonPost.put("brecha", obj.getBrecha());
         jsonPost.put("periodoid", obj.getPeriodoId());
         jsonPost.put("competenciaid", obj.getCompId());
         System.out.println("addEvaluacion post: " + jsonPost);

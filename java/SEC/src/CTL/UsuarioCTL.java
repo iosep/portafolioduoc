@@ -29,6 +29,12 @@ public class UsuarioCTL {
     }
 
     public UsuarioO getUsuarioById(int id) {
+        /*UsuarioO u = ud.getUsuarioById(id);
+        if (u.getActivo() == 1) {
+            return u;
+        } else {
+            return null;
+        }*/
         return ud.getUsuarioById(id);
     }
 

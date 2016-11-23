@@ -25,6 +25,14 @@ public class AreaCompetenciaCTL {
         return areaCompDal.getAreaCompetencias();
     }
 
+    public ArrayList<AreaCompetenciaO> getAreaCompetenciaActivas() {
+        ArrayList<AreaCompetenciaO> list = new ArrayList<>();
+        this.getAreaCompetencias().stream().filter((ac) -> (ac.getActivo() == 1)).forEach((ac) -> {
+            list.add(ac);
+        });
+        return list;
+    }
+
     public ObservableList<AreaCompetenciaO> getAreaCompetenciasByAreaIdFX(int id) {
         ObservableList<AreaCompetenciaO> fxList = FXCollections.observableArrayList();
         areaCompDal.getAreaCompetenciasByAreaId(id).stream().forEach((each) -> {
@@ -47,10 +55,11 @@ public class AreaCompetenciaCTL {
 
     public ObservableList<AreaCompetenciaO> getCompetenciasDisponiblesByAreaFX(int areaId) {
         ObservableList<AreaCompetenciaO> fxList = FXCollections.observableArrayList();
+        ArrayList<AreaCompetenciaO> aCs = this.getAreaCompetencias();
         compCtl.getCompetenciasFX().stream().filter((each) -> (each.getActivo() == 1)).forEach((competencia) -> {
             boolean add = true;
-            for (AreaCompetenciaO areaComp : this.getAreaCompetenciasByAreaIdFX(areaId)) {
-                if (areaComp.getCompetencia_id() == competencia.getId()) {
+            for (AreaCompetenciaO areaComp : aCs) {
+                if (areaComp.getActivo() == 1 && areaComp.getArea_id() == areaId && areaComp.getCompetencia_id() == competencia.getId()) {
                     add = false;
                     break;
                 }
@@ -66,10 +75,11 @@ public class AreaCompetenciaCTL {
 
     public ObservableList<AreaCompetenciaO> getAreasDisponiblesByCompetenciaFX(int compId) {
         ObservableList<AreaCompetenciaO> fxList = FXCollections.observableArrayList();
+        ArrayList<AreaCompetenciaO> aCs = this.getAreaCompetencias();
         areaCtl.getAreasFX().stream().filter((each) -> (each.getActivo() == 1)).forEach((area) -> {
             boolean add = true;
-            for (AreaCompetenciaO areaComp : this.getAreaCompetenciasByCompetenciaIdFX(compId)) {
-                if (areaComp.getArea_id() == area.getId()) {
+            for (AreaCompetenciaO areaComp : aCs) {
+                if (areaComp.getActivo() == 1 && areaComp.getCompetencia_id() == compId && areaComp.getArea_id() == area.getId()) {
                     add = false;
                     break;
                 }

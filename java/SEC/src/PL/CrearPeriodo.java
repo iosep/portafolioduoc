@@ -136,12 +136,11 @@ public class CrearPeriodo {
                     txtPorcAuto.setText("" + auto);
                 } else {
                     msj.setFill(Color.FIREBRICK);
-                    msj.setText("Porcentaje > 0 y < 100");
                     txtPorcJefe.clear();
                 }
             } else {
                 msj.setFill(Color.FIREBRICK);
-                msj.setText("Porcentaje Sólo Números");
+                msj.setText("Porcentaje > 0 y < 100");
                 txtPorcJefe.clear();
             }
         });
@@ -152,12 +151,11 @@ public class CrearPeriodo {
                     txtPorcJefe.setText("" + jefe);
                 } else {
                     msj.setFill(Color.FIREBRICK);
-                    msj.setText("Porcentaje > 0 y < 100");
                     txtPorcAuto.clear();
                 }
             } else {
                 msj.setFill(Color.FIREBRICK);
-                msj.setText("Porcentaje Sólo Números");
+                msj.setText("Porcentaje > 0 y < 100");
                 txtPorcAuto.clear();
             }
         });

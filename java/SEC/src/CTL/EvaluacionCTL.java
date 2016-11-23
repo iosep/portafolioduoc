@@ -16,6 +16,7 @@ import O.UsuarioO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -75,27 +76,36 @@ public class EvaluacionCTL {
             PeriodoO per = perCtl.getPeriodoById(perId);
             SeleccionCTL selCtl = new SeleccionCTL();
             CompetenciaCTL comCtl = new CompetenciaCTL();
-            Collections.sort(compPre, new Comparator<CompPregId>() {
+            /*Collections.sort(compPre, new Comparator<CompPregId>() {
                 @Override
                 public int compare(CompPregId cp1, CompPregId cp2) {
                     return Integer.compare(cp1.getCompId(), cp2.getCompId());
                 }
-            });
+            });*/
             compPre.add(new CompPregId(-5, -5));
             ArrayList<SeleccionO> seleccionesJefe = selCtl.getSeleccionesByEncuestaId(jefeEncId);
             ArrayList<SeleccionO> seleccionesAuto = selCtl.getSeleccionesByEncuestaId(autoEncId);
             boolean add = false;
-            for (CompetenciaO c : comCtl.getCompetenciasFX()) {
-                //System.out.println("competencia: " + c.getNombre());
+            ObservableList<CompetenciaO> comps = comCtl.getCompetenciasFX();
+            /*Collections.sort(comps, new Comparator<CompetenciaO>() {
+                @Override
+                public int compare(CompetenciaO c1, CompetenciaO c2) {
+                    return Integer.compare(c1.getId(), c2.getId());
+                }
+            });*/
+            for (CompetenciaO c : comps) {
+                System.out.println("competencia: " + c.getNombre() + " id: " + c.getId());
                 if (compIds.contains(c.getId())) {
                     //System.out.println("competencia en compIds: " + c.getNombre());
                     int sumAuto = 0;
                     float canAuto = 0.00f;
                     int sumJefe = 0;
                     float canJefe = 0.00f;
+                    boolean match = false;
                     for (CompPregId cp : compPre) {
                         //System.out.println("compPre compId: " + cp.getCompId());
                         if (cp.getCompId() == c.getId()) {
+                            match = true;
                             for (SeleccionO s : seleccionesAuto) {
                                 if (s.getPregunta_id() == cp.getPregId()) {
                                     sumAuto += s.getPuntos();
@@ -110,12 +120,14 @@ public class EvaluacionCTL {
                                     //System.out.println("sum jefe: " + sumJefe);
                                 }
                             }
-                        } else if (canAuto > 0 && canJefe > 0 && cp.getCompId() != -5) {
+                            //System.out.println("canauto: " + canAuto);
+                            //System.out.println("canjefe: " + canJefe);
+                        } else if (canAuto > 0 && canJefe > 0 && match) {
                             int notaAuto = Math.round(sumAuto / canAuto);
                             int notaJefe = Math.round(sumJefe / canJefe);
                             int nota = Math.round((notaAuto * (per.getAuto_porc() / 100.00f)) + (notaJefe * (per.getJefe_porc() / 100.00f)));
                             int brecha = nota - c.getNivelOptimo();
-                            //System.out.println("nivel optimo: " + c.getNivelOptimo());
+                            match = false;
                             add = this.addEvaluacion(new EvaluacionO(evaluado.getRut(), evaluado.getRutjefe(), notaAuto, notaJefe, nota, brecha, perId, c.getId()));
                         }
                     }

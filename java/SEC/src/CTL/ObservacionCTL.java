@@ -42,4 +42,8 @@ public class ObservacionCTL {
         return obDal.deleteObservacion(id);
     }
 
+    public ObservacionO getObservacionByComp(int id) {
+        return obDal.getObservacionByCompetencia(id);
+    }
+    
 }

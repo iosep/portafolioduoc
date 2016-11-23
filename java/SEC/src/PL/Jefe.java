@@ -8,6 +8,7 @@ package PL;
 import CTL.AreaCTL;
 import CTL.AreaCompetenciaCTL;
 import CTL.CompetenciaCTL;
+import CTL.CompetenciaNivelCTL;
 import CTL.EncuestaCTL;
 import CTL.NivelCTL;
 import CTL.PeriodoCTL;
@@ -53,6 +54,7 @@ public class Jefe {
 
     private final UsuarioAreaCTL usArCtl = new UsuarioAreaCTL();
     private final AreaCompetenciaCTL arComCtl = new AreaCompetenciaCTL();
+    private final CompetenciaNivelCTL comNiCtl = new CompetenciaNivelCTL();
     private final AreaCTL areaCtl = new AreaCTL();
     private final UsuarioCTL userCtl = new UsuarioCTL();
     private final CompetenciaCTL compCtl = new CompetenciaCTL();
@@ -173,7 +175,7 @@ public class Jefe {
             }
         }
 //Competencias By Área
-        ArrayList<AreaCompetenciaO> arComList = arComCtl.getAreaCompetencias();
+        ArrayList<AreaCompetenciaO> arComList = arComCtl.getAreaCompetenciaActivas();
         for (TreeItem<ArbolO> treeLayer1 : tiRoot.getChildren()) {
             for (AreaCompetenciaO arCom : arComList) {//arComCtl.getAreaCompetenciasByAreaIdFX(treeLayer1.getValue().getId())
                 if (arCom.getArea_id() == treeLayer1.getValue().getId()) {
@@ -206,7 +208,7 @@ public class Jefe {
             }
         }
 //Niveles By Competencia
-        ArrayList<CompetenciaNivelO> compNiList = new ArrayList<>();
+        ArrayList<CompetenciaNivelO> compNiList = comNiCtl.getCompetenciaNivelActivos();
         for (TreeItem<ArbolO> treeLayer1 : tiRoot.getChildren()) {
             for (TreeItem<ArbolO> treeLayer2 : treeLayer1.getChildren()) {
                 if (treeLayer2.getValue().getTexto().contentEquals("Competencias")) {

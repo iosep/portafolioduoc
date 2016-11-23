@@ -8,6 +8,7 @@ package PL;
 import CTL.AreaCTL;
 import CTL.AreaCompetenciaCTL;
 import CTL.CompetenciaCTL;
+import CTL.CompetenciaNivelCTL;
 import CTL.EncuestaCTL;
 import CTL.EvaluacionCTL;
 import CTL.NivelCTL;
@@ -79,6 +80,7 @@ public class Funcionario {
 
     private final UsuarioAreaCTL usArCtl = new UsuarioAreaCTL();
     private final AreaCompetenciaCTL arComCtl = new AreaCompetenciaCTL();
+    private final CompetenciaNivelCTL comNiCtl = new CompetenciaNivelCTL();
     private final AreaCTL areaCtl = new AreaCTL();
     private final CompetenciaCTL compCtl = new CompetenciaCTL();
     private final NivelCTL nivelCtl = new NivelCTL();
@@ -135,7 +137,7 @@ public class Funcionario {
             }
         }
 //Competencias By Área
-        ArrayList<AreaCompetenciaO> arComList = arComCtl.getAreaCompetencias();
+        ArrayList<AreaCompetenciaO> arComList = arComCtl.getAreaCompetenciaActivas();
         for (TreeItem<ArbolO> treeLayer1 : tiRoot.getChildren()) {
             for (AreaCompetenciaO arCom : arComList) {
                 if (arCom.getArea_id() == treeLayer1.getValue().getId()) {
@@ -168,7 +170,7 @@ public class Funcionario {
             }
         }
 //Niveles By Competencia
-        ArrayList<CompetenciaNivelO> compNiList = new ArrayList<>();
+        ArrayList<CompetenciaNivelO> compNiList = comNiCtl.getCompetenciaNivelActivos();
         for (TreeItem<ArbolO> treeLayer1 : tiRoot.getChildren()) {
             for (TreeItem<ArbolO> treeLayer2 : treeLayer1.getChildren()) {
                 if (treeLayer2.getValue().getTexto().contentEquals("Competencias")) {
@@ -184,7 +186,7 @@ public class Funcionario {
                                 }
                                 if (!found) {
                                     niveles.add(nivelCtl.getNivelById(comNi.getNivel_id()));
-                                    System.out.println("nivelesList: " + comNi.getNivelNombre());
+                                    //System.out.println("nivelesList: " + comNi.getNivelNombre());
                                 }
                                 tiLayer5 = new TreeItem<>(new ArbolO(comNi.getNivelNombre(), comNi.getNivel_id()));
                                 found = false;
@@ -210,7 +212,7 @@ public class Funcionario {
         TreeView<ArbolO> tvTree = new TreeView<>(tiRoot);
         tvTree.getStyleClass().add("tree");
         tvTree.setMaxWidth(200);
-        if (!this.notPend()) {
+        if (!this.notPend() && idPeriodo > 0) {
             bRealizarEncuesta.setVisible(true);
         } else {
             bRealizarEncuesta.setVisible(false);
@@ -264,7 +266,7 @@ public class Funcionario {
             int seIn = tvTree.getSelectionModel().getSelectedIndex();
             tvTree.getSelectionModel().select(1);
             tvTree.getSelectionModel().select(seIn);
-            if (!this.notPend()) {
+            if (!this.notPend() && idPeriodo > 0) {
                 bRealizarEncuesta.setVisible(true);
             } else {
                 bRealizarEncuesta.setVisible(false);

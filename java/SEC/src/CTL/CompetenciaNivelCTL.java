@@ -25,6 +25,14 @@ public class CompetenciaNivelCTL {
         return compNivelDal.getCompetenciaNiveles();
     }
 
+    public ArrayList<CompetenciaNivelO> getCompetenciaNivelActivos() {
+        ArrayList<CompetenciaNivelO> list = new ArrayList<>();
+        this.getCompetenciaNiveles().stream().filter((cn) -> (cn.getActivo() == 1)).forEach((cn) -> {
+            list.add(cn);
+        });
+        return list;
+    }
+
     public ObservableList<CompetenciaNivelO> getCompetenciaNivelesByNivelIdFX(int id) {
         ObservableList<CompetenciaNivelO> fxList = FXCollections.observableArrayList();
         compNivelDal.getCompetenciaNivelesByNivelId(id).stream().filter((each) -> (each.getActivo() == 1)).forEach((each) -> {
@@ -43,10 +51,11 @@ public class CompetenciaNivelCTL {
 
     public ObservableList<CompetenciaNivelO> getCompetenciasDisponiblesByNivelFX(int nivelId) {
         ObservableList<CompetenciaNivelO> fxList = FXCollections.observableArrayList();
+        ArrayList<CompetenciaNivelO> cNs = this.getCompetenciaNiveles();
         competenciaCtl.getCompetenciasFX().stream().filter((each) -> (each.getActivo() == 1)).forEach((competencia) -> {
             boolean add = true;
-            for (CompetenciaNivelO compNivel : compNivelDal.getCompetenciaNivelesByNivelId(nivelId)) {
-                if (compNivel.getCompetencia_id() == competencia.getId()) {
+            for (CompetenciaNivelO compNivel : cNs) {
+                if (compNivel.getActivo() == 1 && compNivel.getNivel_id() == nivelId && compNivel.getCompetencia_id() == competencia.getId()) {
                     add = false;
                     break;
                 }
@@ -62,10 +71,11 @@ public class CompetenciaNivelCTL {
 
     public ObservableList<CompetenciaNivelO> getNivelesDisponiblesByCompetenciaFX(int compId) {
         ObservableList<CompetenciaNivelO> fxList = FXCollections.observableArrayList();
+        ArrayList<CompetenciaNivelO> cNs = this.getCompetenciaNiveles();
         nivelCtl.getNiveles().stream().forEach((nivel) -> {
             boolean add = true;
-            for (CompetenciaNivelO compNivel : compNivelDal.getCompetenciaNivelesByCompetenciaId(compId)) {
-                if (compNivel.getNivel_id() == nivel.getId()) {
+            for (CompetenciaNivelO compNivel : cNs) {
+                if (compNivel.getActivo() == 1 && compNivel.getCompetencia_id() == compId && compNivel.getNivel_id() == nivel.getId()) {
                     add = false;
                     break;
                 }

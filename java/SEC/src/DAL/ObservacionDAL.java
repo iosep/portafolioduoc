@@ -152,4 +152,34 @@ public class ObservacionDAL {
         return false;
     }
 
+    public ObservacionO getObservacionByCompetencia(int id) {
+        ObservacionO obj = new ObservacionO();
+        JSONObject jsonPost = new JSONObject();
+        jsonPost.put("idusuario", VariablesDAL.idUsuario);
+        jsonPost.put("token", VariablesDAL.token);
+        jsonPost.put("idcomp", id);
+        try {
+            String response = cx.post("observacion/json/read_competencia", jsonPost);
+            System.out.println("observacionByCompetencia response: " + response);
+            JSONObject jsonResponse = new JSONObject(response.trim());
+            if (jsonResponse.getJSONArray("observacion").length() > 0) {
+                JSONArray jsonArray = jsonResponse.getJSONArray("observacion");
+                obj.setId(jsonArray.getJSONObject(0).getInt("ID"));
+                obj.setNivel_inf(jsonArray.getJSONObject(0).getInt("NIVEL_INF"));
+                obj.setNivel_sup(jsonArray.getJSONObject(0).getInt("NIVEL_SUP"));
+                obj.setMsj_inf(jsonArray.getJSONObject(0).getString("MSJ_INF"));
+                obj.setMsj_sup(jsonArray.getJSONObject(0).getString("MSJ_SUP"));
+                obj.setCompetencia_id(jsonArray.getJSONObject(0).getInt("COMPETENCIA_ID"));
+                obj.setCompNombre(jsonArray.getJSONObject(0).getString("COMPETENCIA_NOMBRE"));
+                obj.setCreado(Formato.stringToDate(jsonArray.getJSONObject(0).getString("CREADO")));
+                obj.setModificado(Formato.stringToDate(jsonArray.getJSONObject(0).getString("MODIFICADO")));
+                obj.setActivo(jsonArray.getJSONObject(0).getInt("ACTIVO"));
+                return obj;
+            }
+        } catch (Exception e) {
+            System.out.println("getObservacionByCompetenciaDAL catch: " + e.getMessage());
+        }
+        return obj;
+    }
+
 }

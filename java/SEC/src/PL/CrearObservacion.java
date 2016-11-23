@@ -74,6 +74,44 @@ public class CrearObservacion {
         });
         grid.add(txtNivelSup, 1, 5);
 
+        Validar v = new Validar();
+
+        txtNivelInf.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                if (v.validarInteger(newValue)) {
+                    if (Integer.parseInt(newValue) < 5 && Integer.parseInt(newValue) >= 0) {
+                        int n = Integer.parseInt(newValue) + 1;
+                        txtNivelSup.setText("" + n);
+                    } else {
+                        msj.setFill(Color.FIREBRICK);
+                        txtNivelInf.clear();
+                    }
+                } else {
+                    msj.setFill(Color.FIREBRICK);
+                    msj.setText("Nivel Inferior >= 0 y < 5");
+                    txtNivelInf.clear();
+                }
+            }
+        });
+
+        txtNivelSup.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                if (v.validarInteger(newValue)) {
+                    if (Integer.parseInt(newValue) <= 5 && Integer.parseInt(newValue) > 0) {
+                        int n = Integer.parseInt(newValue) - 1;
+                        txtNivelInf.setText("" + n);
+                    } else {
+                        msj.setFill(Color.FIREBRICK);
+                        txtNivelSup.clear();
+                    }
+                } else {
+                    msj.setFill(Color.FIREBRICK);
+                    msj.setText("Nivel Superior > 0 y <= 5");
+                    txtNivelSup.clear();
+                }
+            }
+        });
+
         Label lblMsjInf = new Label("Mensaje Nivel Inferior:");
         grid.add(lblMsjInf, 0, 6);
         TextField txtMsjInf = new TextField();
@@ -101,7 +139,6 @@ public class CrearObservacion {
         grid.add(hbBtn, 1, 10, 1, 4);
 
         btn.setOnAction(e -> {
-            Validar v = new Validar();
             if (txtNivelInf.getText().isEmpty()) {
                 msj.setFill(Color.FIREBRICK);
                 msj.setText("Ingrese Nivel Inferior");
