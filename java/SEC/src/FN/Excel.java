@@ -10,7 +10,7 @@ package FN;
  * @author iosep
  */
 import O.Reporte1O;
-import java.awt.print.Book;
+import O.Reporte2O;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -34,12 +34,12 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 public class Excel {
 
-    public void writeExcelRep1(ArrayList<Reporte1O> rep1, String excelFilePath) throws IOException {
+    public void writeExcelRep1(ArrayList<Reporte1O> rep1, String excelFilePath, String funcRut, String per) throws IOException {
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet();
-        this.createHeaderRowRep1(sheet);
+        this.createHeaderRowRep1(sheet, funcRut, per);
 
-        int rowCount = 0;
+        int rowCount = 4;
 
         for (Reporte1O r1 : rep1) {
             Row row = sheet.createRow(++rowCount);
@@ -65,7 +65,7 @@ public class Excel {
         cell.setCellValue(r1.getBrecha());
     }
 
-    private void createHeaderRowRep1(Sheet sheet) {
+    private void createHeaderRowRep1(Sheet sheet, String funcRut, String per) {
 
         CellStyle cellStyle = sheet.getWorkbook().createCellStyle();
         Font font = sheet.getWorkbook().createFont();
@@ -73,7 +73,24 @@ public class Excel {
         font.setFontHeightInPoints((short) 11);
         cellStyle.setFont(font);
 
-        Row row = sheet.createRow(0);
+        Row row1 = sheet.createRow(0);
+        Row row2 = sheet.createRow(1);
+        Row row3 = sheet.createRow(2);
+
+        Date now = new Date();
+        Cell c0 = row1.createCell(0);
+        c0.setCellStyle(cellStyle);
+        c0.setCellValue("Fecha: " + Formato.dateToString(now));
+
+        Cell c01 = row2.createCell(0);
+        c01.setCellStyle(cellStyle);
+        c01.setCellValue("Funcionario: " + funcRut);
+
+        Cell c02 = row3.createCell(0);
+        c02.setCellStyle(cellStyle);
+        c02.setCellValue("Periodo: " + per);
+
+        Row row = sheet.createRow(4);
 
         Cell c1 = row.createCell(0);
         c1.setCellStyle(cellStyle);
@@ -90,6 +107,68 @@ public class Excel {
         Cell c4 = row.createCell(3);
         c4.setCellStyle(cellStyle);
         c4.setCellValue("Brecha");
+
+    }
+
+    public void writeExcelRep2(ArrayList<Reporte2O> rep2, String excelFilePath, String funcRut, String per) throws IOException {
+        Workbook workbook = new HSSFWorkbook();
+        Sheet sheet = workbook.createSheet();
+        this.createHeaderRowRep2(sheet, funcRut, per);
+
+        int rowCount = 4;
+
+        for (Reporte2O r2 : rep2) {
+            Row row = sheet.createRow(++rowCount);
+            writeRep2(r2, row);
+        }
+
+        try (FileOutputStream outputStream = new FileOutputStream(excelFilePath)) {
+            workbook.write(outputStream);
+        }
+    }
+
+    private void writeRep2(Reporte2O r2, Row row) {
+        Cell cell = row.createCell(0);
+        cell.setCellValue(r2.getComp());
+
+        cell = row.createCell(1);
+        cell.setCellValue(r2.getObs());
+    }
+
+    private void createHeaderRowRep2(Sheet sheet, String funcRut, String per) {
+
+        CellStyle cellStyle = sheet.getWorkbook().createCellStyle();
+        Font font = sheet.getWorkbook().createFont();
+        font.setBold(true);
+        font.setFontHeightInPoints((short) 11);
+        cellStyle.setFont(font);
+
+        Row row1 = sheet.createRow(0);
+        Row row2 = sheet.createRow(1);
+        Row row3 = sheet.createRow(2);
+
+        Date now = new Date();
+        Cell c0 = row1.createCell(0);
+        c0.setCellStyle(cellStyle);
+        c0.setCellValue("Fecha: " + Formato.dateToString(now));
+
+        Cell c01 = row2.createCell(0);
+        c01.setCellStyle(cellStyle);
+        c01.setCellValue("Funcionario: " + funcRut);
+
+        Cell c02 = row3.createCell(0);
+        c02.setCellStyle(cellStyle);
+        c02.setCellValue("Periodo: " + per);
+
+        Row row = sheet.createRow(4);
+
+        Cell c1 = row.createCell(0);
+        c1.setCellStyle(cellStyle);
+        c1.setCellValue("Competencia");
+
+        Cell c2 = row.createCell(1);
+        c2.setCellStyle(cellStyle);
+        c2.setCellValue("Observaciones");
 
     }
 

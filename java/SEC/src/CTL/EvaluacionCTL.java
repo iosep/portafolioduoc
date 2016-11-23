@@ -76,12 +76,12 @@ public class EvaluacionCTL {
             PeriodoO per = perCtl.getPeriodoById(perId);
             SeleccionCTL selCtl = new SeleccionCTL();
             CompetenciaCTL comCtl = new CompetenciaCTL();
-            /*Collections.sort(compPre, new Comparator<CompPregId>() {
+            Collections.sort(compPre, new Comparator<CompPregId>() {
                 @Override
                 public int compare(CompPregId cp1, CompPregId cp2) {
                     return Integer.compare(cp1.getCompId(), cp2.getCompId());
                 }
-            });*/
+            });
             compPre.add(new CompPregId(-5, -5));
             ArrayList<SeleccionO> seleccionesJefe = selCtl.getSeleccionesByEncuestaId(jefeEncId);
             ArrayList<SeleccionO> seleccionesAuto = selCtl.getSeleccionesByEncuestaId(autoEncId);
@@ -122,7 +122,7 @@ public class EvaluacionCTL {
                             }
                             //System.out.println("canauto: " + canAuto);
                             //System.out.println("canjefe: " + canJefe);
-                        } else if (canAuto > 0 && canJefe > 0 && match) {
+                        } else if (match) {
                             int notaAuto = Math.round(sumAuto / canAuto);
                             int notaJefe = Math.round(sumJefe / canJefe);
                             int nota = Math.round((notaAuto * (per.getAuto_porc() / 100.00f)) + (notaJefe * (per.getJefe_porc() / 100.00f)));

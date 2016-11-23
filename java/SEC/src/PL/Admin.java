@@ -195,10 +195,11 @@ public class Admin {
         Button btnRespuesta = new Button("Respuestas");
         Button btnComment = new Button("Observaciones");
         Button btnPeriodo = new Button("Periodos");
-        Arrays.asList(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta, btnRespuesta, btnComment, btnPeriodo).stream().forEach((btn) -> {
+        Button btnReportes = new Button("Reportes");
+        Arrays.asList(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta, btnRespuesta, btnComment, btnPeriodo, btnReportes).stream().forEach((btn) -> {
             btn.getStyleClass().add("topbutton");
         });
-        hbTopButtons.getChildren().addAll(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta, btnRespuesta, btnComment, btnPeriodo);
+        hbTopButtons.getChildren().addAll(btnUsuario, btnArea, btnCompetencia, btnNivel, btnPregunta, btnRespuesta, btnComment, btnPeriodo, btnReportes);
         hbTopButtons.getStyleClass().add("hboxtop");
         VBox vbTopOrder = new VBox();
         vbTopOrder.getChildren().addAll(hbTopBox, hbTopButtons);

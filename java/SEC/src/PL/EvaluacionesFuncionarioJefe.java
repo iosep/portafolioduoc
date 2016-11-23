@@ -51,7 +51,7 @@ import javafx.stage.Stage;
  *
  * @author iosep
  */
-public class EvaluacionesFuncionario {
+public class EvaluacionesFuncionarioJefe {
 
     private final PeriodoCTL perCtl = new PeriodoCTL();
     private final CompetenciaCTL compCtl = new CompetenciaCTL();
@@ -72,8 +72,9 @@ public class EvaluacionesFuncionario {
      *
      * @param evList
      * @param userRut
+     * @param funcRut
      */
-    public void start(ArrayList<EvaluacionO> evList, String userRut) {
+    public void start(ArrayList<EvaluacionO> evList, String userRut, String funcRut) {
         window.initModality(Modality.APPLICATION_MODAL);
         tTitle = new Text("SEC - Evaluaciones");
         tTitle.getStyleClass().add("title");
@@ -87,10 +88,12 @@ public class EvaluacionesFuncionario {
         hbTop0 = new HBox();
         hbTop0.getChildren().addAll(tTitle, gpSesion);
         HBox.setHgrow(gpSesion, Priority.ALWAYS);
+        Text funcionario = new Text("Evaluaciones de Funcionario: " + funcRut);
+        funcionario.getStyleClass().add("subtitle");
         vbTop = new VBox();
         vbTop.getStyleClass().add("vbox");
 //add top vbox children
-        vbTop.getChildren().addAll(hbTop0);
+        vbTop.getChildren().addAll(hbTop0, funcionario);
 //leftPane
         Label lPer = new Label("Periodos: ");
         ArrayList<PeriodoO> pers = new ArrayList<>();
@@ -188,9 +191,9 @@ public class EvaluacionesFuncionario {
             Excel xls = new Excel();
             if (file != null) {
                 try {
-                    xls.writeExcelRep1(rep1, file.getAbsolutePath(), userRut, per);
+                    xls.writeExcelRep1(rep1, file.getAbsolutePath(), funcRut, per);
                 } catch (IOException ex) {
-                    Logger.getLogger(EvaluacionesFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(EvaluacionesFuncionarioJefe.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -204,9 +207,9 @@ public class EvaluacionesFuncionario {
             Excel xls = new Excel();
             if (file != null) {
                 try {
-                    xls.writeExcelRep2(rep2, file.getAbsolutePath(), userRut, per);
+                    xls.writeExcelRep2(rep2, file.getAbsolutePath(), funcRut, per);
                 } catch (IOException ex) {
-                    Logger.getLogger(EvaluacionesFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(EvaluacionesFuncionarioJefe.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -217,7 +220,7 @@ public class EvaluacionesFuncionario {
         borderPane.setLeft(vbLeft);
 //scene & window
         Scene scene = new Scene(borderPane);
-        scene.getStylesheets().add(EvaluacionesFuncionario.class.getResource("Style.css").toExternalForm());
+        scene.getStylesheets().add(EvaluacionesFuncionarioJefe.class.getResource("Style.css").toExternalForm());
         this.window.getIcons().add(new Image(getClass().getResourceAsStream("desk.png")));
         this.window.setTitle("SEC");
         this.window.setScene(scene);

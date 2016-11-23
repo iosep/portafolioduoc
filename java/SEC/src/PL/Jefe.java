@@ -10,6 +10,7 @@ import CTL.AreaCompetenciaCTL;
 import CTL.CompetenciaCTL;
 import CTL.CompetenciaNivelCTL;
 import CTL.EncuestaCTL;
+import CTL.EvaluacionCTL;
 import CTL.NivelCTL;
 import CTL.PeriodoCTL;
 import CTL.UsuarioAreaCTL;
@@ -21,6 +22,7 @@ import O.AreaO;
 import O.CompetenciaNivelO;
 import O.CompetenciaO;
 import O.EncuestaO;
+import O.EvaluacionO;
 import O.NivelO;
 import O.PeriodoO;
 import O.UsuarioAreaO;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -61,6 +64,7 @@ public class Jefe {
     private final NivelCTL nivelCtl = new NivelCTL();
     private final PeriodoCTL peCtl = new PeriodoCTL();
     private final EncuestaCTL enCtl = new EncuestaCTL();
+    private final EvaluacionCTL evCtl = new EvaluacionCTL();
 
     private final ArrayList<AreaO> areas = new ArrayList<>();
     private final ArrayList<UsuarioO> funcionarios = new ArrayList<>();
@@ -85,6 +89,7 @@ public class Jefe {
     Text tTree2 = new Text();
     Text tDesc = new Text();
     Button bRealizarEncuesta = new Button("Realizar Encuesta");
+    Button bVerEvaluaciones = new Button("Ver Evaluaciones");
     Text tPendientes = new Text();
     int idPeriodo;
     int funcSelecId = 0;
@@ -276,14 +281,15 @@ public class Jefe {
                                     for (Integer i : funcPendId) {
                                         if (i == f.getId()) {
                                             vbCenter.getChildren().clear();
-                                            vbCenter.getChildren().addAll(tPendientes, tArea, tTree1, bRealizarEncuesta);
+                                            vbCenter.getChildren().addAll(tPendientes, tArea, tTree1, bRealizarEncuesta, bVerEvaluaciones);
                                             funcSelecId = f.getId();
                                             esta = true;
                                         }
                                     }
                                     if (!esta) {
                                         vbCenter.getChildren().clear();
-                                        vbCenter.getChildren().addAll(tPendientes, tArea, tTree1);
+                                        vbCenter.getChildren().addAll(tPendientes, tArea, tTree1, bVerEvaluaciones);
+                                        funcSelecId = f.getId();
                                     }
                                 }
                             }
@@ -315,6 +321,7 @@ public class Jefe {
                 }
             }
         });
+//botones        
         bRealizarEncuesta.setOnAction(value -> {
             EncuestaJefe ej = new EncuestaJefe();
             ej.start(userRut, funcSelecId, idPeriodo);
@@ -322,6 +329,21 @@ public class Jefe {
             int seIn = tvTree.getSelectionModel().getSelectedIndex();
             tvTree.getSelectionModel().select(1);
             tvTree.getSelectionModel().select(seIn);
+        });
+        bVerEvaluaciones.setOnAction(value -> {
+            UsuarioO userSelected = userCtl.getUsuarioById(funcSelecId);
+            ArrayList<EvaluacionO> evList = evCtl.findEvaluacionesByRut(userSelected.getRut());
+            if (evList.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initOwner(window);
+                alert.setTitle("Sin Evaluaciones");
+                alert.setHeaderText(null);
+                alert.setContentText("Sin Evaluaciones");
+                alert.showAndWait();
+            } else {
+                EvaluacionesFuncionarioJefe efj = new EvaluacionesFuncionarioJefe();
+                efj.start(evList, userRut, userSelected.getRut());
+            }
         });
         tArea.getStyleClass().add("plane");
         tArea.setWrappingWidth(500);
