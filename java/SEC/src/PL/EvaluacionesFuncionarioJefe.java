@@ -173,7 +173,15 @@ public class EvaluacionesFuncionarioJefe {
                         } else {
                             rep2.add(new Reporte2O(auxComp.getNombre() + " (" + e.getNota() + ") ", auxObs.getMsj_sup()));
                         }
-                        rep1.add(new Reporte1O(auxComp.getNombre(), e.getNota(), auxComp.getNivelOptimo(), e.getBrecha()));
+                        String bre = "";
+                        if (e.getBrecha() < 0) {
+                            bre = "Sobre " + (e.getBrecha() * -1);
+                        } else if (e.getBrecha() > 0) {
+                            bre = "Bajo " + e.getBrecha();
+                        } else if (e.getBrecha() == 0) {
+                            bre = "0";
+                        }
+                        rep1.add(new Reporte1O(auxComp.getNombre(), e.getNota(), auxComp.getNivelOptimo(), bre));
                     }
                 }
                 tvEvComp.setItems(FXCollections.observableArrayList(rep1));

@@ -13,9 +13,9 @@ public class Reporte1O {
     private final String comp;
     private final int result;
     private final int nopt;
-    private final int brecha;
+    private final String brecha;
 
-    public Reporte1O(String comp, int result, int nopt, int brecha) {
+    public Reporte1O(String comp, int result, int nopt, String brecha) {
         this.comp = comp;
         this.result = result;
         this.nopt = nopt;
@@ -34,7 +34,7 @@ public class Reporte1O {
         return nopt;
     }
 
-    public int getBrecha() {
+    public String getBrecha() {
         return brecha;
     }
     
