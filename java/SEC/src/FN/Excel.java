@@ -9,28 +9,27 @@ package FN;
  *
  * @author iosep
  */
+import CTL.CompetenciaCTL;
+import CTL.EvaluacionCTL;
+import O.EvaluacionO;
 import O.Reporte1O;
 import O.Reporte2O;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
-import org.apache.poi.hssf.usermodel.HSSFHeader;
-import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.usermodel.HeaderFooter;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.Footer;
-import org.apache.poi.ss.usermodel.Header;
-import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 
 public class Excel {
 
@@ -171,5 +170,145 @@ public class Excel {
         c2.setCellValue("Observaciones");
 
     }
-    
+
+    public void reporteFinal(int perId, String per, String excelFilePath) throws IOException {
+        EvaluacionCTL evCtl = new EvaluacionCTL();
+        ArrayList<EvaluacionO> evList = evCtl.findEvaluacionesByPeriodoId(perId);
+        Collections.sort(evList, new Comparator<EvaluacionO>() {
+            @Override
+            public int compare(EvaluacionO e1, EvaluacionO e2) {
+                return Integer.compare(e1.getCompId(), e2.getCompId());
+            }
+        });
+        int maxCanCom = 0;
+        int auxCanCom = 0;
+        int comId = evList.get(0).getCompId();
+        for (EvaluacionO e : evList) {
+            if (comId != e.getCompId()) {
+                if (auxCanCom > maxCanCom) {
+                    maxCanCom = auxCanCom;
+                }
+                auxCanCom = 0;
+            }
+            auxCanCom++;
+            comId = e.getCompId();
+        }
+
+        Workbook workbook = new HSSFWorkbook();
+        Sheet sheet = workbook.createSheet();
+
+        CellStyle cs = workbook.createCellStyle();
+        cs.setBorderLeft(BorderStyle.THIN);
+        cs.setBorderRight(BorderStyle.THIN);
+        cs.setBorderTop(BorderStyle.THIN);
+        cs.setBorderBottom(BorderStyle.THIN);
+
+        comId = evList.get(0).getCompId();
+        int sumComp = 0;
+        float canComp = 0.0f;
+        int rowN = 4;
+        Row row = sheet.createRow(rowN);
+        int cellN = 0;
+        Cell cell = row.createCell(cellN);
+        CompetenciaCTL comCtl = new CompetenciaCTL();
+        cell.setCellValue(comCtl.getCompetenciaById(evList.get(0).getCompId()).getNombre());
+        evList.add(new EvaluacionO("", "", 0, 0, 0, 0, 0, -5));
+        for (EvaluacionO e : evList) {
+            System.out.println("e.compId: " + e.getCompId());
+            if (comId != e.getCompId()) {
+                System.out.println("if (compId != e.compId)");
+                int promedio = Math.round(sumComp / canComp);
+                cell = row.createCell(maxCanCom + 1);
+                cell.setCellValue(promedio);
+                sumComp = 0;
+                canComp = 0.0f;
+                if (e.getCompId() != -5) {
+                    System.out.println("if if (compId != -5)");
+                    row = sheet.createRow(++rowN);
+                    cellN = 0;
+                    cell = row.createCell(cellN);
+                    cell.setCellValue(comCtl.getCompetenciaById(e.getCompId()).getNombre());
+                }
+            }
+            if (e.getCompId() != -5) {
+                System.out.println("else if (e.compId != -5)");
+                cell = row.createCell(++cellN);
+                cell.setCellValue(e.getNota());
+                sumComp += e.getNota();
+                canComp++;
+            }
+            comId = e.getCompId();
+        }
+
+        for (int i = 3; i <= rowN; i++) {
+            if (sheet.getRow(i) != null) {
+                row = sheet.getRow(i);
+            } else {
+                row = sheet.createRow(i);
+            }
+            for (int j = 0; j <= maxCanCom + 1; j++) {
+                if (row.getCell(j) != null) {
+                    row.getCell(j).setCellStyle(cs);
+                } else {
+                    row.createCell(j).setCellStyle(cs);
+                }
+            }
+        }
+
+        this.createHeaderRowRepFinal(sheet, per, maxCanCom);
+
+        try (FileOutputStream outputStream = new FileOutputStream(excelFilePath)) {
+            workbook.write(outputStream);
+        }
+    }
+
+    private void createHeaderRowRepFinal(Sheet sheet, String per, int maxComp) {
+
+        CellStyle cellStyle = sheet.getWorkbook().createCellStyle();
+        CellStyle cellS = sheet.getWorkbook().createCellStyle();
+        Font font = sheet.getWorkbook().createFont();
+        font.setBold(true);
+        font.setFontHeightInPoints((short) 11);
+        cellStyle.setFont(font);
+        cellS.setFont(font);
+        cellS.setBorderLeft(BorderStyle.THIN);
+        cellS.setBorderRight(BorderStyle.THIN);
+        cellS.setBorderTop(BorderStyle.THIN);
+        cellS.setBorderBottom(BorderStyle.THIN);
+
+        Row row1 = sheet.createRow(0);
+        Row row2 = sheet.createRow(1);
+
+        Date now = new Date();
+        Cell c0 = row1.createCell(0);
+        c0.setCellStyle(cellStyle);
+        c0.setCellValue("Fecha: " + Formato.dateToString(now));
+
+        Cell c02 = row2.createCell(0);
+        c02.setCellStyle(cellStyle);
+        c02.setCellValue("Periodo: " + per);
+
+        Row row = sheet.getRow(3);
+
+        Cell c1 = row.getCell(0);
+        c1.setCellStyle(cellS);
+        c1.setCellValue("Competencia");
+
+        Cell c2 = row.getCell(1);
+        c2.setCellStyle(cellS);
+        c2.setCellValue("Resultados Funcionarios");
+
+        Cell c3 = row.getCell(maxComp + 1);
+        c3.setCellStyle(cellS);
+        c3.setCellValue("Promedio");
+
+        sheet.addMergedRegion(new CellRangeAddress(
+                3, //first row (0-based)
+                3, //last row  (0-based)
+                1, //first column (0-based)
+                maxComp //last column  (0-based)
+        ));
+
+    }
+
 }

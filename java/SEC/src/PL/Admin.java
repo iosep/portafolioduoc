@@ -7,6 +7,7 @@ package PL;
 
 import CTL.AreaCTL;
 import CTL.CompetenciaCTL;
+import CTL.EvaluacionCTL;
 import CTL.NivelCTL;
 import CTL.ObservacionCTL;
 import CTL.PeriodoCTL;
@@ -14,20 +15,29 @@ import CTL.PreguntaCTL;
 import CTL.RespuestaCTL;
 import CTL.UsuarioCTL;
 import DAL.VariablesDAL;
+import FN.Excel;
+import FN.Formato;
 import O.AreaO;
 import O.CompetenciaO;
+import O.EvaluacionO;
 import O.NivelO;
 import O.ObservacionO;
 import O.PeriodoO;
 import O.PreguntaO;
 import O.RespuestaO;
 import O.UsuarioO;
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.geometry.Pos;
@@ -39,6 +49,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TableCell;
@@ -59,6 +71,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -153,7 +166,12 @@ public class Admin {
     private TableColumn<PeriodoO, Date> periodoCreadoCol;
     private TableColumn<PeriodoO, Date> periodoModificadoCol;
     private TableColumn<PeriodoO, Date> periodoDesactivadoCol;
-
+//variables REPORTE final
+    private final EvaluacionCTL evaluacionCtl = new EvaluacionCTL();
+    String per = "";
+    int perIdRep = 0;
+    Button bExportarExcel = new Button("Exportar a Excel");
+//stage    
     Stage primaryStage = new Stage();
 
     /**
@@ -1529,7 +1547,65 @@ public class Admin {
 //load PERIODO columns
         periodoTable.getColumns().addAll(periodoInicioCol, periodoFinCol, periodoPorcJefeCol, periodoPorcAutoCol,
                 periodoActivoCol, periodoCreadoCol, periodoModificadoCol, periodoDesactivadoCol);
-
+//reporte final button
+        btnReportes.setOnAction(value -> {
+            Label lPer = new Label("Periodos: ");
+            ArrayList<PeriodoO> pers = new ArrayList<>();
+            int perId = 0;
+            ArrayList<EvaluacionO> evList = evaluacionCtl.getEvaluaciones();
+            for (EvaluacionO e : evList) {
+                if (perId != e.getPeriodoId()) {
+                    pers.add(periodoCtl.getPeriodoById(e.getPeriodoId()));
+                }
+                perId = e.getPeriodoId();
+            }
+            ListView lvPer = new ListView(FXCollections.observableArrayList(pers));
+            lvPer.setCellFactory(param -> new ListCell<PeriodoO>() {
+                @Override
+                protected void updateItem(PeriodoO item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        per = Formato.dateToString(item.getInicio()) + "  hasta  " + Formato.dateToString(item.getFin());
+                        setText(per);
+                        perIdRep = item.getId();
+                    }
+                }
+            });
+            VBox vbPerRep = new VBox(lPer, lvPer);
+            vbPerRep.getStyleClass().add("vbox");
+            Label l = new Label();
+            VBox vbExport = new VBox(l, bExportarExcel);
+            vbExport.getStyleClass().add("vbox");
+            HBox hbReport = new HBox(vbPerRep, vbExport);
+            hbReport.getStyleClass().add("hbox");
+            vbDisplay.getChildren().clear();
+            vbDisplay.getChildren().addAll(hbReport);
+        });
+        bExportarExcel.setOnAction(value -> {
+            if (perIdRep == 0) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(primaryStage);
+                alert.setTitle("Exportar Error!");
+                alert.setHeaderText(null);
+                alert.setContentText("Seleccione Periodo");
+                alert.showAndWait();
+            } else {
+                FileChooser fileChooser = new FileChooser();
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
+                fileChooser.getExtensionFilters().add(extFilter);
+                File file = fileChooser.showSaveDialog(primaryStage);
+                Excel xls = new Excel();
+                if (file != null) {
+                    try {
+                        xls.reporteFinal(perIdRep, per, file.getAbsolutePath());
+                    } catch (IOException ex) {
+                        Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
 //
 //GENERAL LOAD
 //

@@ -26,7 +26,7 @@ public class EvaluacionDAL {
         jsonPost.put("token", VariablesDAL.token);
         try {
             String response = cx.post("evaluacion/json/read_all", jsonPost);
-            System.out.println("getEvaluaciones response: " + response);
+            //System.out.println("getEvaluaciones response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("evaluacion").length() > 0) {
                 JSONArray jsonArray = jsonResponse.getJSONArray("evaluacion");
@@ -59,7 +59,7 @@ public class EvaluacionDAL {
         jsonPost.put("id", id);
         try {
             String response = cx.post("evaluacion/json/read_id", jsonPost);
-            System.out.println("evaluacionById response: " + response);
+            //System.out.println("evaluacionById response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("evaluacion").length() > 0) {
                 JSONArray jsonArray = jsonResponse.getJSONArray("evaluacion");
@@ -83,10 +83,10 @@ public class EvaluacionDAL {
         jsonPost.put("notajefe", obj.getNotaJefe());
         jsonPost.put("periodoid", obj.getPeriodoId());
         jsonPost.put("competenciaid", obj.getCompId());
-        System.out.println("addEvaluacion post: " + jsonPost);
+        //System.out.println("addEvaluacion post: " + jsonPost);
         try {
             String response = cx.post("evaluacion/json/create", jsonPost);
-            System.out.println("addEvaluacion response: " + response);
+            //System.out.println("addEvaluacion response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("evaluacion").length() > 0) {
                 return true;
@@ -105,7 +105,7 @@ public class EvaluacionDAL {
         jsonDelete.put("id", id);
         try {
             String response = cx.delete("evaluacion/json/delete", jsonDelete);
-            System.out.println("jsonReponse deleteEvaluacion: " + response);
+            //System.out.println("jsonReponse deleteEvaluacion: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("evaluacion").length() > 0) {
                 return true;
@@ -125,7 +125,7 @@ public class EvaluacionDAL {
         jsonPost.put("periodoid", idPeriodo);
         try {
             String response = cx.post("evaluacion/json/read_periodo", jsonPost);
-            System.out.println("getEvaluacionesByPeriodo response: " + response);
+            //System.out.println("getEvaluacionesByPeriodo response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("evaluacion").length() > 0) {
                 JSONArray jsonArray = jsonResponse.getJSONArray("evaluacion");

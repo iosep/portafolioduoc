@@ -157,6 +157,10 @@ public class EvaluacionesFuncionarioJefe {
         VBox vbCenter = new VBox(lEv, sp);
         vbCenter.setMaxHeight(500);
         vbCenter.getStyleClass().add("vbox");
+//tamaños maximos        
+        sp.setMaxHeight(400);
+        tvEvComp.setMaxHeight(350);
+        tvEvObs.setMaxHeight(350);
 //listener
         lvPer.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<PeriodoO>() {

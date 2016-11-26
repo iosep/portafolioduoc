@@ -92,10 +92,10 @@ public class ObservacionDAL {
         jsonPost.put("msginf", obj.getMsj_inf());
         jsonPost.put("msgsup", obj.getMsj_sup());
         jsonPost.put("idcomp", obj.getCompetencia_id());
-        System.out.println("addObservacion post: " + jsonPost);
+        //System.out.println("addObservacion post: " + jsonPost);
         try {
             String response = cx.post("observacion/json/create", jsonPost);
-            System.out.println("addObservacion response: " + response);
+            //System.out.println("addObservacion response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("observacion").length() > 0) {
                 return true;
@@ -160,7 +160,7 @@ public class ObservacionDAL {
         jsonPost.put("idcomp", id);
         try {
             String response = cx.post("observacion/json/read_competencia", jsonPost);
-            System.out.println("observacionByCompetencia response: " + response);
+            //System.out.println("observacionByCompetencia response: " + response);
             JSONObject jsonResponse = new JSONObject(response.trim());
             if (jsonResponse.getJSONArray("observacion").length() > 0) {
                 JSONArray jsonArray = jsonResponse.getJSONArray("observacion");
