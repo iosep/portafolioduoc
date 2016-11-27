@@ -302,13 +302,14 @@ public class Excel {
         c3.setCellStyle(cellS);
         c3.setCellValue("Promedio");
 
-        sheet.addMergedRegion(new CellRangeAddress(
-                3, //first row (0-based)
-                3, //last row  (0-based)
-                1, //first column (0-based)
-                maxComp //last column  (0-based)
-        ));
-
+        if (maxComp > 1) {
+            sheet.addMergedRegion(new CellRangeAddress(
+                    3, //first row (0-based)
+                    3, //last row  (0-based)
+                    1, //first column (0-based)
+                    maxComp //last column  (0-based)
+            ));
+        }
     }
 
 }
