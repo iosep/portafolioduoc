@@ -19,16 +19,6 @@
 <autoIncrementColumn>true</autoIncrementColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="fecha" id="69AAC880-EDB2-D390-2AA0-9BF170BF0E25">
-<createdBy>iosep</createdBy>
-<createdTime>2016-09-23 17:24:55 UTC</createdTime>
-<ownerDesignName>bdd-4.2</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT007</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 <Column name="ip" id="0BA9BC44-D8F7-18C2-9009-16114DDE6A8B">
 <createdBy>iosep</createdBy>
 <createdTime>2016-09-23 17:23:47 UTC</createdTime>

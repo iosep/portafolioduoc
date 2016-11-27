@@ -1,5 +1,5 @@
 -- Generado por Oracle SQL Developer Data Modeler 4.1.3.901
---   en:        2016-11-14 22:03:23 BRST
+--   en:        2016-11-26 23:48:58 CLST
 --   sitio:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -35,7 +35,6 @@ ALTER TABLE area_competencia ADD CONSTRAINT area_competencia_PK PRIMARY KEY ( ar
 CREATE TABLE audit_log
   (
     id          INTEGER NOT NULL ,
-    fecha       DATE NOT NULL ,
     ip          VARCHAR2 (255) ,
     usuario_id  INTEGER NOT NULL ,
     creado      DATE NOT NULL ,
