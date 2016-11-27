@@ -11,6 +11,7 @@ package FN;
  */
 import CTL.CompetenciaCTL;
 import CTL.EvaluacionCTL;
+import O.CompetenciaO;
 import O.EvaluacionO;
 import O.Reporte1O;
 import O.Reporte2O;
@@ -26,6 +27,7 @@ import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -213,17 +215,27 @@ public class Excel {
         CompetenciaCTL comCtl = new CompetenciaCTL();
         cell.setCellValue(comCtl.getCompetenciaById(evList.get(0).getCompId()).getNombre());
         evList.add(new EvaluacionO("", "", 0, 0, 0, 0, 0, -5));
+        int nO = 0;
         for (EvaluacionO e : evList) {
-            System.out.println("e.compId: " + e.getCompId());
+            //System.out.println("e.compId: " + e.getCompId());
             if (comId != e.getCompId()) {
-                System.out.println("if (compId != e.compId)");
+                //System.out.println("if (compId != e.compId)");
                 int promedio = Math.round(sumComp / canComp);
                 cell = row.createCell(maxCanCom + 1);
                 cell.setCellValue(promedio);
                 sumComp = 0;
                 canComp = 0.0f;
+                cell = row.createCell(maxCanCom + 2);
+                int brecha = promedio - nO;
+                if (brecha < 0) {
+                    cell.setCellValue("Bajo " + brecha * -1);
+                } else if (brecha == 0) {
+                    cell.setCellValue(0);
+                } else if (brecha > 0) {
+                    cell.setCellValue("Sobre " + brecha);
+                }
                 if (e.getCompId() != -5) {
-                    System.out.println("if if (compId != -5)");
+                    //System.out.println("if if (compId != -5)");
                     row = sheet.createRow(++rowN);
                     cellN = 0;
                     cell = row.createCell(cellN);
@@ -231,24 +243,45 @@ public class Excel {
                 }
             }
             if (e.getCompId() != -5) {
-                System.out.println("else if (e.compId != -5)");
+                //System.out.println("else if (e.compId != -5)");
                 cell = row.createCell(++cellN);
                 cell.setCellValue(e.getNota());
                 sumComp += e.getNota();
                 canComp++;
             }
             comId = e.getCompId();
+            nO = e.getBrecha() + e.getNota();
         }
+
+        boolean paint = false;
+        CellStyle otro = workbook.createCellStyle();
+        otro.setBorderLeft(BorderStyle.THIN);
+        otro.setBorderRight(BorderStyle.THIN);
+        otro.setBorderTop(BorderStyle.THIN);
+        otro.setBorderBottom(BorderStyle.THIN);
+        otro.setFillForegroundColor(IndexedColors.LIGHT_YELLOW.getIndex());
+        otro.setFillPattern(CellStyle.SOLID_FOREGROUND);
 
         for (int i = 3; i <= rowN; i++) {
             if (sheet.getRow(i) != null) {
                 row = sheet.getRow(i);
+                String[] brecha = row.getCell(maxCanCom + 2).toString().split(" ");
+                paint = false;
+                if (brecha[0].equals("Bajo")) {
+                    paint = true;
+                }
             } else {
                 row = sheet.createRow(i);
             }
-            for (int j = 0; j <= maxCanCom + 1; j++) {
+            for (int j = 0; j <= maxCanCom + 2; j++) {
                 if (row.getCell(j) != null) {
-                    row.getCell(j).setCellStyle(cs);
+                    if (paint) {
+                        row.getCell(j).setCellStyle(otro);
+                    } else {
+                        row.getCell(j).setCellStyle(cs);
+                    }
+                } else if (paint) {
+                    row.createCell(j).setCellStyle(otro);
                 } else {
                     row.createCell(j).setCellStyle(cs);
                 }
@@ -301,6 +334,10 @@ public class Excel {
         Cell c3 = row.getCell(maxComp + 1);
         c3.setCellStyle(cellS);
         c3.setCellValue("Promedio");
+
+        Cell c4 = row.getCell(maxComp + 2);
+        c4.setCellStyle(cellS);
+        c4.setCellValue("Brecha");
 
         if (maxComp > 1) {
             sheet.addMergedRegion(new CellRangeAddress(
