@@ -101,4 +101,24 @@ public class AreaCompetenciaCTL {
         return areaCompDal.removeAreaCompetencia(idArea, idCompetencia);
     }
 
+    public boolean deleteByArea(int areaId) {
+        boolean del = false;
+        for (AreaCompetenciaO ac : this.getAreaCompetenciaActivas()) {
+            if (areaId == ac.getArea_id()) {
+                del = this.removeAreaCompCTL(ac.getArea_id(), ac.getCompetencia_id());
+            }
+        }
+        return del;
+    }
+    
+    public boolean deleteByComp(int compId) {
+        boolean del = false;
+        for (AreaCompetenciaO ac : this.getAreaCompetenciaActivas()) {
+            if (compId == ac.getCompetencia_id()) {
+                del = this.removeAreaCompCTL(ac.getArea_id(), ac.getCompetencia_id());
+            }
+        }
+        return del;
+    }
+
 }

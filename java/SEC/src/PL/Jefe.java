@@ -11,11 +11,13 @@ import CTL.CompetenciaCTL;
 import CTL.CompetenciaNivelCTL;
 import CTL.EncuestaCTL;
 import CTL.EvaluacionCTL;
+import CTL.LogCTL;
 import CTL.NivelCTL;
 import CTL.PeriodoCTL;
 import CTL.UsuarioAreaCTL;
 import CTL.UsuarioCTL;
 import DAL.VariablesDAL;
+import FN.GetIP;
 import O.ArbolO;
 import O.AreaCompetenciaO;
 import O.AreaO;
@@ -27,8 +29,11 @@ import O.NivelO;
 import O.PeriodoO;
 import O.UsuarioAreaO;
 import O.UsuarioO;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -323,6 +328,12 @@ public class Jefe {
         });
 //botones        
         bRealizarEncuesta.setOnAction(value -> {
+            LogCTL l = new LogCTL();
+            try {
+                l.addLog(GetIP.get());
+            } catch (IOException ex) {
+                System.out.println("addLog catch: " + ex);
+            }
             EncuestaJefe ej = new EncuestaJefe();
             ej.start(userRut, funcSelecId, idPeriodo);
             this.getPendientes();

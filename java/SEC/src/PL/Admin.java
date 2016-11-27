@@ -6,13 +6,16 @@
 package PL;
 
 import CTL.AreaCTL;
+import CTL.AreaCompetenciaCTL;
 import CTL.CompetenciaCTL;
+import CTL.CompetenciaNivelCTL;
 import CTL.EvaluacionCTL;
 import CTL.NivelCTL;
 import CTL.ObservacionCTL;
 import CTL.PeriodoCTL;
 import CTL.PreguntaCTL;
 import CTL.RespuestaCTL;
+import CTL.UsuarioAreaCTL;
 import CTL.UsuarioCTL;
 import DAL.VariablesDAL;
 import FN.Excel;
@@ -173,6 +176,10 @@ public class Admin {
     Button bExportarExcel = new Button("Exportar a Excel");
 //stage    
     Stage primaryStage = new Stage();
+//relaciones N:M
+    private final UsuarioAreaCTL uaCtl = new UsuarioAreaCTL();
+    private final AreaCompetenciaCTL acCtl = new AreaCompetenciaCTL();
+    private final CompetenciaNivelCTL cnCtl = new CompetenciaNivelCTL();
 
     /**
      * starts primary stage ADMIN
@@ -319,6 +326,7 @@ public class Admin {
                     alert.setContentText("Confirma Eliminar Usuario " + row.getItem().getRut());
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
+                        uaCtl.deleteByUser(row.getItem().getId());
                         usersCtl.deleteUser(row.getItem().getId());
                         btnUsuario.fire();
                     }
@@ -488,6 +496,8 @@ public class Admin {
                     alert.setContentText("Confirma Desactivar?");
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
+                        uaCtl.deleteByArea(row.getItem().getId());
+                        acCtl.deleteByArea(row.getItem().getId());
                         areasCtl.desactivarArea(row.getItem().getId());
                         btnArea.fire();
                     }
@@ -515,14 +525,32 @@ public class Admin {
                 }
             });
             verCompetenciasMenu.setOnAction(ee -> {
-                CrearAreaCompetencia acw = new CrearAreaCompetencia();
-                acw.display(row.getItem().getId());
-                btnArea.fire();
+                if (row.getItem().getActivo() == 1) {
+                    CrearAreaCompetencia acw = new CrearAreaCompetencia();
+                    acw.display(row.getItem().getId());
+                    btnArea.fire();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Información");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Área se encuentra Desactivada");
+                    alert.showAndWait();
+                }
             });
             verUsuariosMenu.setOnAction(ee -> {
-                CrearAreaUsuario auw = new CrearAreaUsuario();
-                auw.display(row.getItem().getId());
-                btnArea.fire();
+                if (row.getItem().getActivo() == 1) {
+                    CrearAreaUsuario auw = new CrearAreaUsuario();
+                    auw.display(row.getItem().getId());
+                    btnArea.fire();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Información");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Área se encuentra Desactivada");
+                    alert.showAndWait();
+                }
             });
             contextMenu.getItems().addAll(activarMenuItem, modificarMenuItem, desactivarMenuItem, new SeparatorMenuItem(), verCompetenciasMenu, verUsuariosMenu);
             // Set context menu on row, but use a binding to make it only show for non-empty rows:
@@ -703,6 +731,8 @@ public class Admin {
                     alert.setContentText("Confirma Desactivar?");
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
+                        acCtl.deleteByComp(row.getItem().getId());
+                        cnCtl.deleteByComp(row.getItem().getId());
                         compCtl.desactivarCompetencia(row.getItem().getId());
                         btnCompetencia.fire();
                     }
@@ -728,13 +758,31 @@ public class Admin {
                 btnComment.fire();
             });
             verAreasMenu.setOnAction(ev -> {
-                int id_competencia = row.getItem().getId();
-                CrearCompetenciaArea ccaw = new CrearCompetenciaArea();
-                ccaw.display(id_competencia);
+                if (row.getItem().getActivo() == 1) {
+                    int id_competencia = row.getItem().getId();
+                    CrearCompetenciaArea ccaw = new CrearCompetenciaArea();
+                    ccaw.display(id_competencia);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Información");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Competencia se encuentra Desactivada");
+                    alert.showAndWait();
+                }
             });
             verNivelMenu.setOnAction(ev -> {
-                CrearCompetenciaNivel ccnw = new CrearCompetenciaNivel();
-                ccnw.display(row.getItem().getId());
+                if (row.getItem().getActivo() == 1) {
+                    CrearCompetenciaNivel ccnw = new CrearCompetenciaNivel();
+                    ccnw.display(row.getItem().getId());
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(primaryStage);
+                    alert.setTitle("Información");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Competencia se encuentra Desactivada");
+                    alert.showAndWait();
+                }
             });
             contextMenu.getItems().addAll(activarMenuItem, modificarMenuItem, desactivarMenuItem, new SeparatorMenuItem(), crearPreguntaMenu, crearCommentMenu,
                     new SeparatorMenuItem(), verAreasMenu, verNivelMenu);
@@ -893,6 +941,7 @@ public class Admin {
                 alert.setContentText("Confirma Eliminar?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
+                    cnCtl.deleteByNivel(row.getItem().getId());
                     nivelCtl.eliminarNivel(row.getItem().getId());
                     btnNivel.fire();
                 }
@@ -1587,7 +1636,7 @@ public class Admin {
             if (perIdRep == 0) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.initOwner(primaryStage);
-                alert.setTitle("Exportar Error!");
+                alert.setTitle("Exportar");
                 alert.setHeaderText(null);
                 alert.setContentText("Seleccione Periodo");
                 alert.showAndWait();

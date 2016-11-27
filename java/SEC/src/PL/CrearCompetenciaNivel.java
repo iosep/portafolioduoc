@@ -163,7 +163,7 @@ public class CrearCompetenciaNivel {
         btnQuitar.setOnAction(e -> {
             if (listSeleccionadas.getSelectionModel().getSelectedItem() != null) {
                 auxCompNivel = (CompetenciaNivelO) listSeleccionadas.getSelectionModel().getSelectedItem();
-                if (compNivelCtl.removeAreaCompCTL(compId, auxCompNivel.getNivel_id())) {
+                if (compNivelCtl.removeCompNivelCTL(compId, auxCompNivel.getNivel_id())) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.initOwner(window);
                     alert.setTitle("Nivel a Competencia");

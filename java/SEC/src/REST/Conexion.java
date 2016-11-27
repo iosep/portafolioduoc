@@ -48,9 +48,10 @@ public class Conexion {
         String responseBody = null;
         try {
             HttpPost httpPost = new HttpPost("http://" + ip + ":" + port + "/ords/wfbs/" + command);
-            StringEntity stringEntity = new StringEntity(json.toString());
+            StringEntity stringEntity = new StringEntity(json.toString(), "UTF-8");
             httpPost.setEntity(stringEntity);
             httpPost.setHeader("Content-type", "application/json");
+            //httpPost.addHeader("charset", "UTF-8");
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             responseBody = httpClient.execute(httpPost, responseHandler);
         } catch (IOException e) {
@@ -66,9 +67,10 @@ public class Conexion {
         String responseBody = null;
         try {
             HttpPut httpPut = new HttpPut("http://" + ip + ":" + port + "/ords/wfbs/" + command);
-            StringEntity stringEntity = new StringEntity(json.toString());
+            StringEntity stringEntity = new StringEntity(json.toString(), "UTF-8");
             httpPut.setEntity(stringEntity);
             httpPut.setHeader("Content-type", "application/json");
+            //httpPut.addHeader("charset", "UTF-8");
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             responseBody = httpClient.execute(httpPut, responseHandler);
         } catch (IOException e) {
@@ -84,9 +86,10 @@ public class Conexion {
         String responseBody = null;
         try {
             HttpDeleteWithBody httpDelete = new HttpDeleteWithBody("http://" + ip + ":" + port + "/ords/wfbs/" + command);
-            StringEntity stringEntity = new StringEntity(json.toString());
+            StringEntity stringEntity = new StringEntity(json.toString(), "UTF-8");
             httpDelete.setEntity(stringEntity);
             httpDelete.setHeader("Content-type", "application/json");
+            //httpDelete.addHeader("charset", "UTF-8");
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             responseBody = httpClient.execute(httpDelete, responseHandler);
         } catch (IOException e) {

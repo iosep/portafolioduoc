@@ -93,8 +93,28 @@ public class CompetenciaNivelCTL {
         return compNivelDal.addCompetenciaNivel(obj);
     }
 
-    public boolean removeAreaCompCTL(int idCompetencia, int idNivel) {
+    public boolean removeCompNivelCTL(int idCompetencia, int idNivel) {
         return compNivelDal.removeCompetenciaNivel(idCompetencia, idNivel);
+    }
+
+    public boolean deleteByComp(int compId) {
+        boolean del = false;
+        for (CompetenciaNivelO item : this.getCompetenciaNivelActivos()) {
+            if (compId == item.getCompetencia_id()) {
+                del = this.removeCompNivelCTL(item.getCompetencia_id(), item.getNivel_id());
+            }
+        }
+        return del;
+    }
+
+    public boolean deleteByNivel(int nivelId) {
+        boolean del = false;
+        for (CompetenciaNivelO item : this.getCompetenciaNivelActivos()) {
+            if (nivelId == item.getNivel_id()) {
+                del = this.removeCompNivelCTL(item.getCompetencia_id(), item.getNivel_id());
+            }
+        }
+        return del;
     }
 
 }

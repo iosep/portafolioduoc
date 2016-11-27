@@ -6,6 +6,7 @@
 package CTL;
 
 import DAL.UsuarioAreaDAL;
+import O.CompetenciaNivelO;
 import O.UsuarioAreaO;
 import O.UsuarioO;
 import java.util.ArrayList;
@@ -112,4 +113,24 @@ public class UsuarioAreaCTL {
         return fxList;
     }
 
+    public boolean deleteByUser(int userId) {
+        boolean del = false;
+        for (UsuarioAreaO item : this.getUserAreaActivas()) {
+            if (userId == item.getUsuario_id()) {
+                del = this.removeUserAreaCTL(item.getUsuario_id(), item.getArea_id());
+            }
+        }
+        return del;
+    }
+
+    public boolean deleteByArea(int areaId) {
+        boolean del = false;
+        for (UsuarioAreaO item : this.getUserAreaActivas()) {
+            if (areaId == item.getArea_id()) {
+                del = this.removeUserAreaCTL(item.getUsuario_id(), item.getArea_id());
+            }
+        }
+        return del;
+    }
+    
 }

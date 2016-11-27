@@ -11,10 +11,12 @@ import CTL.CompetenciaCTL;
 import CTL.CompetenciaNivelCTL;
 import CTL.EncuestaCTL;
 import CTL.EvaluacionCTL;
+import CTL.LogCTL;
 import CTL.NivelCTL;
 import CTL.PeriodoCTL;
 import CTL.UsuarioAreaCTL;
 import DAL.VariablesDAL;
+import FN.GetIP;
 import O.ArbolO;
 import O.AreaCompetenciaO;
 import O.AreaO;
@@ -23,6 +25,7 @@ import O.CompetenciaO;
 import O.EvaluacionO;
 import O.NivelO;
 import O.UsuarioAreaO;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import javafx.geometry.Pos;
@@ -261,6 +264,12 @@ public class Funcionario {
         });
 //botones
         bRealizarEncuesta.setOnAction(value -> {
+            LogCTL l = new LogCTL();
+            try {
+                l.addLog(GetIP.get());
+            } catch (IOException ex) {
+                System.out.println("addLog catch: " + ex);
+            }
             EncuestaFuncionario ef = new EncuestaFuncionario();
             ef.start(userRut, idPeriodo);
             int seIn = tvTree.getSelectionModel().getSelectedIndex();
