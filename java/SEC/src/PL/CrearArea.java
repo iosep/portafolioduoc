@@ -107,6 +107,7 @@ public class CrearArea {
                 if (vb) {
                     nombreTxt.clear();
                     siglaTxt.clear();
+                    descTxt.clear();
                     msj.setFill(Color.GREEN);
                     msj.setText("Área Creada Exitosamente");
                 } else {

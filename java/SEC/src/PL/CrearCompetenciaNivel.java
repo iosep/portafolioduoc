@@ -22,7 +22,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -35,9 +34,7 @@ public class CrearCompetenciaNivel {
 
     private final CompetenciaNivelCTL compNivelCtl = new CompetenciaNivelCTL();
     private final CompetenciaCTL compCtl = new CompetenciaCTL();
-    private final NivelCTL nivelCtl = new NivelCTL();
     private static CompetenciaO auxComp;
-    private static NivelO auxNivel;
     private static CompetenciaNivelO auxCompNivel;
 
     public void display(int compId) {

@@ -28,6 +28,7 @@ import O.ObservacionO;
 import O.PeriodoO;
 import O.PreguntaO;
 import O.RespuestaO;
+import O.UsuarioAreaO;
 import O.UsuarioO;
 import java.io.File;
 import java.io.IOException;
@@ -171,9 +172,9 @@ public class Admin {
     private TableColumn<PeriodoO, Date> periodoDesactivadoCol;
 //variables REPORTE final
     private final EvaluacionCTL evaluacionCtl = new EvaluacionCTL();
-    String per = "";
-    int perIdRep = 0;
+    PeriodoO per;
     Button bExportarExcel = new Button("Exportar a Excel");
+    ListView lvPer;
 //stage    
     Stage primaryStage = new Stage();
 //relaciones N:M
@@ -1022,6 +1023,8 @@ public class Admin {
             SortedList<PreguntaO> sortedData = new SortedList<>(filteredData);
             sortedData.comparatorProperty().bind(questionTable.comparatorProperty());
             questionTable.setItems(sortedData);
+            questionCompetenciaCol.setSortType(TableColumn.SortType.ASCENDING);
+            questionTable.getSortOrder().add(questionCompetenciaCol);
             //filter hbox
             filterLabel.setText("Filtrar: ");
             hbBottomBox.getStyleClass().add("hbox");
@@ -1066,7 +1069,7 @@ public class Admin {
                 cpw.display(id_pregunta);
                 btnRespuesta.fire();
             });
-            contextMenu.getItems().addAll(modificarMenuItem, eliminarMenuItem, crearRespuestaMenu);
+            contextMenu.getItems().addAll(modificarMenuItem, eliminarMenuItem, new SeparatorMenuItem(), crearRespuestaMenu);
             row.contextMenuProperty().bind(
                     Bindings.when(row.emptyProperty())
                     .then((ContextMenu) null)
@@ -1274,6 +1277,8 @@ public class Admin {
             SortedList<ObservacionO> sortedData = new SortedList<>(filteredData);
             sortedData.comparatorProperty().bind(commentTable.comparatorProperty());
             commentTable.setItems(sortedData);
+            commentCompetenciaCol.setSortType(TableColumn.SortType.ASCENDING);
+            commentTable.getSortOrder().add(commentCompetenciaCol);
             //filter hbox
             filterLabel.setText("Filtrar: ");
             hbBottomBox.getStyleClass().add("hbox");
@@ -1608,7 +1613,7 @@ public class Admin {
                 }
                 perId = e.getPeriodoId();
             }
-            ListView lvPer = new ListView(FXCollections.observableArrayList(pers));
+            lvPer = new ListView(FXCollections.observableArrayList(pers));
             lvPer.setCellFactory(param -> new ListCell<PeriodoO>() {
                 @Override
                 protected void updateItem(PeriodoO item, boolean empty) {
@@ -1616,9 +1621,7 @@ public class Admin {
                     if (empty || item == null) {
                         setText(null);
                     } else {
-                        per = Formato.dateToString(item.getInicio()) + "  hasta  " + Formato.dateToString(item.getFin());
-                        setText(per);
-                        perIdRep = item.getId();
+                        setText(Formato.dateToString(item.getInicio()) + "  hasta  " + Formato.dateToString(item.getFin()));
                     }
                 }
             });
@@ -1633,7 +1636,8 @@ public class Admin {
             vbDisplay.getChildren().addAll(hbReport);
         });
         bExportarExcel.setOnAction(value -> {
-            if (perIdRep == 0) {
+            per = (PeriodoO) lvPer.getSelectionModel().getSelectedItem();
+            if (per == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.initOwner(primaryStage);
                 alert.setTitle("Exportar");
@@ -1648,7 +1652,7 @@ public class Admin {
                 Excel xls = new Excel();
                 if (file != null) {
                     try {
-                        xls.reporteFinal(perIdRep, per, file.getAbsolutePath());
+                        xls.reporteFinal(per.getId(), Formato.dateToString(per.getInicio()) + "  hasta  " + Formato.dateToString(per.getFin()), file.getAbsolutePath());
                     } catch (IOException ex) {
                         Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
                     }

@@ -23,11 +23,12 @@ public class UsuarioCTL {
         return ud.getUsuarioByRut(rut);
     }
 
+    /*
     public boolean checkUsuarioByRut(String rut) {
         UsuarioO uRut = ud.getUsuarioByRut(rut);
         return uRut.getId() > 0;
     }
-
+     */
     public UsuarioO getUsuarioById(int id) {
         /*UsuarioO u = ud.getUsuarioById(id);
         if (u.getActivo() == 1) {
@@ -90,4 +91,7 @@ public class UsuarioCTL {
         return ud.updatePass(obj);
     }
 
+    public boolean activaUsuario(int id) {
+        return ud.activaUser(id);
+    }
 }

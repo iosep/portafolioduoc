@@ -26,6 +26,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -65,7 +66,7 @@ public class EvaluacionesFuncionarioJefe {
     GridPane gpSesion = new GridPane();
     HBox hbTop0 = new HBox();
     VBox vbTop = new VBox();
-    String per = "";
+    PeriodoO per;
 
     /**
      * launch main window jefe
@@ -113,8 +114,7 @@ public class EvaluacionesFuncionarioJefe {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    per = Formato.dateToString(item.getInicio()) + "  hasta  " + Formato.dateToString(item.getFin());
-                    setText(per);
+                    setText(Formato.dateToString(item.getInicio()) + "  hasta  " + Formato.dateToString(item.getFin()));
                 }
             }
         });
@@ -194,34 +194,54 @@ public class EvaluacionesFuncionarioJefe {
         });
 //buttons
         bExport1.setOnAction(value -> {
-            FileChooser fileChooser = new FileChooser();
-            //Set extension filter
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
-            fileChooser.getExtensionFilters().add(extFilter);
-            //Show save file dialog
-            File file = fileChooser.showSaveDialog(window);
-            Excel xls = new Excel();
-            if (file != null) {
-                try {
-                    xls.writeExcelRep1(rep1, file.getAbsolutePath(), funcRut, per);
-                } catch (IOException ex) {
-                    Logger.getLogger(EvaluacionesFuncionarioJefe.class.getName()).log(Level.SEVERE, null, ex);
+            if (rep1.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(window);
+                alert.setTitle("Exportar");
+                alert.setHeaderText(null);
+                alert.setContentText("Seleccione Periodo");
+                alert.showAndWait();
+            } else {
+                FileChooser fileChooser = new FileChooser();
+                //Set extension filter
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
+                fileChooser.getExtensionFilters().add(extFilter);
+                //Show save file dialog
+                File file = fileChooser.showSaveDialog(window);
+                Excel xls = new Excel();
+                per = (PeriodoO) lvPer.getSelectionModel().getSelectedItem();
+                if (file != null) {
+                    try {
+                        xls.writeExcelRep1(rep1, file.getAbsolutePath(), funcRut, Formato.dateToString(per.getInicio()) + "  hasta  " + Formato.dateToString(per.getFin()));
+                    } catch (IOException ex) {
+                        Logger.getLogger(EvaluacionesFuncionarioJefe.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });
         bExport2.setOnAction(value -> {
-            FileChooser fileChooser = new FileChooser();
-            //Set extension filter
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
-            fileChooser.getExtensionFilters().add(extFilter);
-            //Show save file dialog
-            File file = fileChooser.showSaveDialog(window);
-            Excel xls = new Excel();
-            if (file != null) {
-                try {
-                    xls.writeExcelRep2(rep2, file.getAbsolutePath(), funcRut, per);
-                } catch (IOException ex) {
-                    Logger.getLogger(EvaluacionesFuncionarioJefe.class.getName()).log(Level.SEVERE, null, ex);
+            if (rep2.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(window);
+                alert.setTitle("Exportar");
+                alert.setHeaderText(null);
+                alert.setContentText("Seleccione Periodo");
+                alert.showAndWait();
+            } else {
+                FileChooser fileChooser = new FileChooser();
+                //Set extension filter
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
+                fileChooser.getExtensionFilters().add(extFilter);
+                //Show save file dialog
+                File file = fileChooser.showSaveDialog(window);
+                Excel xls = new Excel();
+                per = (PeriodoO) lvPer.getSelectionModel().getSelectedItem();
+                if (file != null) {
+                    try {
+                        xls.writeExcelRep2(rep2, file.getAbsolutePath(), funcRut, Formato.dateToString(per.getInicio()) + "  hasta  " + Formato.dateToString(per.getFin()));
+                    } catch (IOException ex) {
+                        Logger.getLogger(EvaluacionesFuncionarioJefe.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });

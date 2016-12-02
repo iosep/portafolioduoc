@@ -22,7 +22,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -35,9 +34,7 @@ public class CrearAreaUsuario {
 
     private final UsuarioAreaCTL usuarioAreaCtl = new UsuarioAreaCTL();
     private final AreaCTL areaCtl = new AreaCTL();
-    private final UsuarioCTL userCtl = new UsuarioCTL();
     private static AreaO auxArea;
-    private static UsuarioO auxUser;
     private static UsuarioAreaO auxUserArea;
 
     public void display(int idArea) {

@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -20,9 +19,9 @@ import org.json.JSONObject;
  * @author iosep
  */
 public class UsuarioDAL {
-    
+
     private final Conexion cx = new Conexion();
-    
+
     public ArrayList<UsuarioO> getUsuarios() {
         ArrayList<UsuarioO> list = new ArrayList<>();
         JSONObject jsonPost = new JSONObject();
@@ -57,7 +56,7 @@ public class UsuarioDAL {
         }
         return list;
     }
-    
+
     public UsuarioO getUsuarioById(int id) {
         UsuarioO obj = new UsuarioO();
         JSONObject jsonPost = new JSONObject();
@@ -89,7 +88,7 @@ public class UsuarioDAL {
         }
         return obj;
     }
-    
+
     public UsuarioO getUsuarioByRut(String rut) {
         UsuarioO obj = new UsuarioO();
         JSONObject jsonPost = new JSONObject();
@@ -121,7 +120,7 @@ public class UsuarioDAL {
         }
         return obj;
     }
-    
+
     public boolean addUsuario(UsuarioO obj) {
         JSONObject jsonPost = new JSONObject();
         jsonPost.put("idusuario", VariablesDAL.idUsuario);
@@ -147,7 +146,7 @@ public class UsuarioDAL {
         }
         return false;
     }
-    
+
     public boolean updateUser(UsuarioO obj) {
         JSONObject jsonPut = new JSONObject();
         jsonPut.put("idusuario", VariablesDAL.idUsuario);
@@ -174,7 +173,7 @@ public class UsuarioDAL {
         }
         return false;
     }
-    
+
     public boolean updatePass(UsuarioO obj) {
         JSONObject jsonPut = new JSONObject();
         jsonPut.put("idusuario", VariablesDAL.idUsuario);
@@ -195,7 +194,26 @@ public class UsuarioDAL {
         }
         return false;
     }
-    
+
+    public boolean activaUser(int id) {
+        JSONObject jsonPut = new JSONObject();
+        jsonPut.put("idusuario", VariablesDAL.idUsuario);
+        jsonPut.put("token", VariablesDAL.token);
+        jsonPut.put("id", id);
+        try {
+            String response = cx.put("usuario/json/activa", jsonPut);
+            System.out.println("activaUser response: " + response);
+            JSONObject jsonResponse = new JSONObject(response.trim());
+            if (jsonResponse.getJSONArray("usuario").length() > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("activaUserDAL catch: " + e.getMessage());
+            return false;
+        }
+        return false;
+    }
+
     public boolean deleteUser(int id) {
         JSONObject jsonDelete = new JSONObject();
         jsonDelete.put("idusuario", VariablesDAL.idUsuario);
@@ -215,7 +233,7 @@ public class UsuarioDAL {
         }
         return false;
     }
-    
+
     public String logIn(String rut, String clave) throws IOException {
         JSONObject jsonPost = new JSONObject();
         jsonPost.put("rut", rut);
@@ -234,13 +252,13 @@ public class UsuarioDAL {
                     return jsonResp.getJSONArray("RESPUESTA").getJSONObject(0).getString("ADVERTENCIA");
                 }
             }
-        } catch (Exception e ) {
+        } catch (Exception e) {
             System.out.println("logInDAL catch: " + e.getMessage());
             return "Error de conexión, inténtelo nuevamente";
         }
         return "Error de conexión, inténtelo nuevamente";
     }
-    
+
     public ArrayList<UsuarioO> getJefes() {
         ArrayList<UsuarioO> list = new ArrayList<>();
         JSONObject jsonPost = new JSONObject();
