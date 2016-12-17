@@ -1,1 +1,0 @@
-EL SISTEMA se bloquea y no permite modificaciones en cargo competencia nivel y preguntas durante el periodo de evaluacion

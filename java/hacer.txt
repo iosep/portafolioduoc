@@ -1,2 +1,0 @@
-- validar fecha periodo
-- modificar periodo
